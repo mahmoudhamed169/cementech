@@ -1,5 +1,17 @@
 import { ReactNode } from "react";
+import { Cairo, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
+
+const cairo = Cairo({
+  subsets: ["latin", "arabic"],
+  variable: "--font-cairo",
+});
+
+const ibm = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-ibm",
+});
 
 /**
  * RootLayout is the top-level layout component for the application.
@@ -11,5 +23,9 @@ import "./globals.css";
 export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  return children;
+  return (
+    <html lang="en" className={`${cairo.variable} ${ibm.variable}`}>
+      <body>{children}</body>
+    </html>
+  );
 }
