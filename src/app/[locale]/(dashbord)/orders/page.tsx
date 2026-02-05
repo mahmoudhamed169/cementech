@@ -1,9 +1,12 @@
-import React from "react";
+"use client";
+import { useTranslations } from "next-intl";
 
-export default function page() {
+export default function OrderPage() {
+  const t = useTranslations();
+
   return (
     <div>
-      <h1>the order page</h1>
+      <h1>{t("orderPage")}</h1>
     </div>
   );
 }

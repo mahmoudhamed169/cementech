@@ -1,9 +1,34 @@
 {
   "hello": "مرحبا",
-  "welcome": "مرحبًا بك في تطبيقنا!",
   "title": "Cementech - شريكك في تكنولوجيا البناء",
 
   "Metadata": {
     "title": "Cementech - شريكك في تكنولوجيا البناء"
-  }
+  },
+  "sidebar": {
+    "home": "الصفحة الرئيسية",
+    "orders": "الطلبات",
+    "drivers": "السائقين",
+    "users": "المستخدمين",
+    "payments": "المدفوعات",
+    "settings": "الإعدادات"
+  },
+  "welcome": {
+    "title": "مرحبًا بك، {name}!",
+    "subtitle": "إليك ما يحدث مع منصة التوصيل الخاصة بكم اليوم."
+  },
+  "statistics": {
+    "totalRevenue": "مجموع الأرباح",
+    "totalOrders": "مجموع الطلبات",
+    "activeUsers": "المستخدمين النشطين",
+    "activeDrivers": "السائقين النشطين"
+  },
+  "driversStatus": {
+    "title": "حالة السائقين",
+    "available": "متاح",
+    "inDelivery": "في طلبات توصيل",
+    "unavailable": "غير متاح",
+    "totalDrivers": "إجمالي السائقين"
+  },
+  "orderPage": "اهلا بكم في صفحة الطلبات"
 }

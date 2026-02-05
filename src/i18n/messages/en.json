@@ -1,8 +1,35 @@
 {
   "hello": "Hello",
-  "welcome": "Welcome to our application!",
+
   "title": "Cementech - Your Partner in Construction Technology",
   "Metadata": {
     "title": "Cementech - Your Partner in Construction Technology"
-  }
+  },
+  "sidebar": {
+    "home": "Dashboard",
+    "orders": "Orders",
+    "drivers": "Drivers",
+    "users": "Users",
+    "payments": "Payments",
+    "settings": "Settings"
+  },
+  "welcome": {
+    "title": "Welcome, {name}!",
+    "subtitle": "Here’s what’s happening with your delivery platform today."
+  },
+  "statistics": {
+    "totalRevenue": "Total Revenue",
+    "totalOrders": "Total Orders",
+    "activeUsers": "Active Users",
+    "activeDrivers": "Active Drivers"
+  },
+  "driversStatus": {
+    "title": "Drivers Status",
+    "available": "Available",
+    "inDelivery": "On Delivery",
+    "unavailable": "Unavailable",
+    "totalDrivers": "Total Drivers"
+  },
+
+  "orderPage": "Welcome in the order page"
 }

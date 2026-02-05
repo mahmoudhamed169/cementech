@@ -1,5 +1,6 @@
 import { Bell } from "lucide-react";
 import SearchInput from "./search-input";
+import LanguageSwitcher from "./language-switcher";
 
 export default function Header() {
   return (
@@ -7,9 +8,12 @@ export default function Header() {
       <SearchInput />
 
       <div className="flex items-center gap-4">
- 
+        <LanguageSwitcher />
+
         <Bell />
-        <h2 className="text-sm font-medium text-zinc-700 font-ibm">تسجيل الخروج</h2>
+        <h2 className="text-sm font-medium text-zinc-700 font-ibm">
+          تسجيل الخروج
+        </h2>
       </div>
     </header>
   );

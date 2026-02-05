@@ -1,4 +1,6 @@
-import { Link } from "@/src/i18n/navigation";
+"use client";
+import { useTranslations } from "next-intl";
+import SidebarLinkItem from "./sidebar-item";
 import {
   CarFront,
   CircleDollarSign,
@@ -7,43 +9,43 @@ import {
   ShoppingBag,
   Users,
 } from "lucide-react";
-import SidebarLinkItem from "./sidebar-item";
 
 const SidebarLinks = [
   {
     href: "/",
-    label: "الصفحة الرئيسية",
+    labelKey: "home",
     icon: <LayoutDashboard size={24} strokeWidth={1.75} />,
   },
   {
     href: "/orders",
-    label: "الطلبات",
+    labelKey: "orders",
     icon: <ShoppingBag size={24} strokeWidth={1.75} />,
   },
-
   {
     href: "/drivers",
-    label: "السائقين",
+    labelKey: "drivers",
     icon: <CarFront size={24} strokeWidth={1.75} />,
   },
   {
     href: "/users",
-    label: "المستخدمين",
+    labelKey: "users",
     icon: <Users size={24} strokeWidth={1.75} />,
   },
   {
     href: "/payments",
-    label: "المدفوعات",
+    labelKey: "payments",
     icon: <CircleDollarSign size={24} strokeWidth={1.75} />,
   },
   {
     href: "/settings",
-    label: "الاعدادات",
+    labelKey: "settings",
     icon: <Settings size={24} strokeWidth={1.75} />,
   },
 ];
 
 export default function SideBarNavigation() {
+  const t = useTranslations("sidebar");
+
   return (
     <nav className="py-4 px-3">
       <ul>
@@ -51,7 +53,7 @@ export default function SideBarNavigation() {
           <SidebarLinkItem
             key={link.href}
             href={link.href}
-            label={link.label}
+            label={t(link.labelKey)}
             Icon={link.icon}
           />
         ))}
@@ -59,4 +61,3 @@ export default function SideBarNavigation() {
     </nav>
   );
 }
-

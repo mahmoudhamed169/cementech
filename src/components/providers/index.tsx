@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import ReactQueryProvider from "./shared/_components/react-query.prodvider";
 import NextAuthProvider from "./shared/_components/next-auth.provider";
