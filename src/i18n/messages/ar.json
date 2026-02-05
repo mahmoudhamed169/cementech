@@ -30,5 +30,8 @@
     "unavailable": "غير متاح",
     "totalDrivers": "إجمالي السائقين"
   },
+  "common": {
+    "logout": "تسجيل خروج"
+  },
   "orderPage": "اهلا بكم في صفحة الطلبات"
 }

@@ -1,6 +1,7 @@
-import { Bell } from "lucide-react";
+import { Bell, LogOut } from "lucide-react";
 import SearchInput from "./search-input";
 import LanguageSwitcher from "./language-switcher";
+import LogoutButton from "./logout-button";
 
 export default function Header() {
   return (
@@ -11,9 +12,12 @@ export default function Header() {
         <LanguageSwitcher />
 
         <Bell />
-        <h2 className="text-sm font-medium text-zinc-700 font-ibm">
-          تسجيل الخروج
-        </h2>
+        <LogoutButton />
+
+        {/* <h2 className="text-sm font-medium text-zinc-700 font-ibm flex gap-1.5">
+          تسجيل خروج
+          <LogOut />
+        </h2> */}
       </div>
     </header>
   );

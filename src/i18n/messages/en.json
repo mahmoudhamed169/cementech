@@ -30,6 +30,9 @@
     "unavailable": "Unavailable",
     "totalDrivers": "Total Drivers"
   },
+  "common": {
+    "logout": "Log out"
+  },
 
   "orderPage": "Welcome in the order page"
 }

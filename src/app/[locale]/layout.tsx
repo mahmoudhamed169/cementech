@@ -57,7 +57,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`${cairo.className} ${ibmPlex.className}`}
+      className={`${cairo.className} `}
     >
       <body suppressHydrationWarning className="antialiased">
         <Providers locale={locale} messages={messages}>
