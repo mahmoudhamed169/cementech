@@ -26,7 +26,7 @@ export default function DriversStatus() {
   const max = 342;
 
   return (
-    <div className="w-lg p-6 rounded-xl min-h-85 bg-white border border-[#E5E7EB]">
+    <div className="w-2xl p-6 rounded-xl min-h-85 bg-white border border-[#E5E7EB]">
       <h2 className="font-bold text-lg text-[#101828] mb-4">{t("title")}</h2>
 
       <div className="flex flex-col gap-6 border-b pb-8 border-[#E5E7EB]">

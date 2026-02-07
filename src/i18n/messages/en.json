@@ -30,6 +30,17 @@
     "unavailable": "Unavailable",
     "totalDrivers": "Total Drivers"
   },
+  "systemWarnings": {
+    "title": "System Warnings",
+    "urgentCount": "{count} Urgent",
+    "items": {
+      "manualAssignment": "Order #{orderId} requires manual assignment – {drivers} drivers rejected",
+      "driverDelay": "Delay in assigning a driver for order #{orderId}",
+      "driverUpdated": "Driver status updated successfully",
+      "minutesAgo": "{minutes} minutes ago",
+      "hoursAgo": "{hours} hour ago"
+    }
+  },
   "common": {
     "logout": "Log out"
   },

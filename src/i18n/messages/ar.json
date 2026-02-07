@@ -30,6 +30,17 @@
     "unavailable": "غير متاح",
     "totalDrivers": "إجمالي السائقين"
   },
+  "systemWarnings": {
+    "title": "تحذيرات النظام",
+    "urgentCount": "{count} طارئ",
+    "items": {
+      "manualAssignment": "الطلب رقم {orderId} يتطلب تخصيصًا يدويًا - تم رفض {drivers} سائقين",
+      "driverDelay": "تأخير في تعيين السائق للطلب رقم {orderId}",
+      "driverUpdated": "تم تحديث حالة السائق بنجاح",
+      "minutesAgo": "منذ {minutes} دقائق",
+      "hoursAgo": "منذ {hours} ساعة"
+    }
+  },
   "common": {
     "logout": "تسجيل خروج"
   },
