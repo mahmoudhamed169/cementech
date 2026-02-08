@@ -1,8 +1,86 @@
 {
   "hello": "Hello",
-  "welcome": "Welcome to our application!",
+
   "title": "Cementech - Your Partner in Construction Technology",
   "Metadata": {
     "title": "Cementech - Your Partner in Construction Technology"
-  }
+  },
+  "sidebar": {
+    "home": "Dashboard",
+    "orders": "Orders",
+    "drivers": "Drivers",
+    "users": "Users",
+    "payments": "Payments",
+    "settings": "Settings"
+  },
+  "welcome": {
+    "title": "Welcome, {name}!",
+    "subtitle": "Here’s what’s happening with your delivery platform today."
+  },
+  "statistics": {
+    "totalRevenue": "Total Revenue",
+    "totalOrders": "Total Orders",
+    "activeUsers": "Active Users",
+    "activeDrivers": "Active Drivers"
+  },
+  "driversStatus": {
+    "title": "Drivers Status",
+    "available": "Available",
+    "inDelivery": "On Delivery",
+    "unavailable": "Unavailable",
+    "totalDrivers": "Total Drivers"
+  },
+  "systemWarnings": {
+    "title": "System Warnings",
+    "urgentCount": "{count} Urgent",
+    "items": {
+      "manualAssignment": "Order #{orderId} requires manual assignment – {drivers} drivers rejected",
+      "driverDelay": "Delay in assigning a driver for order #{orderId}",
+      "driverUpdated": "Driver status updated successfully",
+      "minutesAgo": "{minutes} minutes ago",
+      "hoursAgo": "{hours} hour ago"
+    }
+  },
+  "recentOrders": {
+    "title": "Recent Orders",
+    "viewAll": "View All Orders",
+    "caption": "الطلبات الأخيرة",
+    "header": {
+      "index": "#",
+      "orderId": "Order",
+      "customer": "Customer",
+      "driverStatus": "Driver",
+      "deliveryStatus": "Status",
+      "shipments": "Shipments",
+      "quantity": "Qty",
+      "price": "Amount",
+      "time": "Time",
+      "actions": "Actions"
+    },
+    "actions": {
+      "view": "عرض"
+    },
+    "driverStatus": {
+      "assigned": "Assigned",
+      "unassigned": "Unassigned"
+    },
+    "orderStatus": {
+      "delivering": "Delivering",
+      "completed": "Completed",
+      "pending": "Pending"
+    },
+    "shipmentLabel": {
+      "one": "Shipment",
+      "many": "Shipments"
+    },
+    "weightUnit": {
+      "one": "Ton",
+      "many": "Tons"
+    }
+  },
+  "common": {
+    "logout": "Log out"
+  },
+
+  "orderPage": "Welcome in the order page"
 }

@@ -2,18 +2,23 @@ import Providers from "@/src/components/providers";
 import { routing } from "@/src/i18n/routing";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cairo, IBM_Plex_Sans_Arabic } from "next/font/google";
+
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const cairo = Cairo({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-cairo",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const ibmPlex = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-ibm",
+  display: "swap",
 });
 
 type Props = {
@@ -49,11 +54,12 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = (await import(`@/src/i18n/messages/${locale}.json`)).default;
 
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
-      <body
-        suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html
+      lang={locale}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className={`${cairo.className} `}
+    >
+      <body suppressHydrationWarning className="antialiased">
         <Providers locale={locale} messages={messages}>
           {children}
         </Providers>

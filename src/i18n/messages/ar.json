@@ -1,9 +1,86 @@
 {
   "hello": "مرحبا",
-  "welcome": "مرحبًا بك في تطبيقنا!",
   "title": "Cementech - شريكك في تكنولوجيا البناء",
 
   "Metadata": {
     "title": "Cementech - شريكك في تكنولوجيا البناء"
-  }
+  },
+  "sidebar": {
+    "home": "الصفحة الرئيسية",
+    "orders": "الطلبات",
+    "drivers": "السائقين",
+    "users": "المستخدمين",
+    "payments": "المدفوعات",
+    "settings": "الإعدادات"
+  },
+  "welcome": {
+    "title": "مرحبًا بك، {name}!",
+    "subtitle": "إليك ما يحدث مع منصة التوصيل الخاصة بكم اليوم."
+  },
+  "statistics": {
+    "totalRevenue": "مجموع الأرباح",
+    "totalOrders": "مجموع الطلبات",
+    "activeUsers": "المستخدمين النشطين",
+    "activeDrivers": "السائقين النشطين"
+  },
+  "driversStatus": {
+    "title": "حالة السائقين",
+    "available": "متاح",
+    "inDelivery": "في طلبات توصيل",
+    "unavailable": "غير متاح",
+    "totalDrivers": "إجمالي السائقين"
+  },
+  "systemWarnings": {
+    "title": "تحذيرات النظام",
+    "urgentCount": "{count} طارئ",
+    "items": {
+      "manualAssignment": "الطلب رقم {orderId} يتطلب تخصيصًا يدويًا - تم رفض {drivers} سائقين",
+      "driverDelay": "تأخير في تعيين السائق للطلب رقم {orderId}",
+      "driverUpdated": "تم تحديث حالة السائق بنجاح",
+      "minutesAgo": "منذ {minutes} دقائق",
+      "hoursAgo": "منذ {hours} ساعة"
+    }
+  },
+  "recentOrders": {
+    "title": "الطلبات الأخيرة",
+    "viewAll": "كل الطلبات",
+    "caption": "الطلبات الأخيرة",
+    "header": {
+      "index": "#",
+      "orderId": "رقم الطلب",
+      "customer": "اسم العميل",
+      "driverStatus": "حالة السائق",
+      "deliveryStatus": "حالة الطلب",
+      "shipments": "الشحنات",
+      "quantity": "الكمية",
+      "price": "السعر",
+      "time": "وقت الطلب",
+      "actions": "الإجراءات"
+    },
+    "actions": {
+      "view": "عرض"
+    },
+
+    "driverStatus": {
+      "assigned": "تم التخصيص",
+      "unassigned": "غير مخصص"
+    },
+    "orderStatus": {
+      "delivering": "قيد التنفيذ",
+      "completed": "مكتمل",
+      "pending": "بانتظار السائق"
+    },
+    "shipmentLabel": {
+      "one": "شحنة",
+      "many": "شحنات"
+    },
+    "weightUnit": {
+      "one": "طن",
+      "many": "أطنان"
+    }
+  },
+  "common": {
+    "logout": "تسجيل خروج"
+  },
+  "orderPage": "اهلا بكم في صفحة الطلبات"
 }
