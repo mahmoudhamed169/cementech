@@ -41,6 +41,43 @@
       "hoursAgo": "{hours} hour ago"
     }
   },
+  "recentOrders": {
+    "title": "Recent Orders",
+    "viewAll": "View All Orders",
+    "caption": "الطلبات الأخيرة",
+    "header": {
+      "index": "#",
+      "orderId": "Order",
+      "customer": "Customer",
+      "driverStatus": "Driver",
+      "deliveryStatus": "Status",
+      "shipments": "Shipments",
+      "quantity": "Qty",
+      "price": "Amount",
+      "time": "Time",
+      "actions": "Actions"
+    },
+    "actions": {
+      "view": "عرض"
+    },
+    "driverStatus": {
+      "assigned": "Assigned",
+      "unassigned": "Unassigned"
+    },
+    "orderStatus": {
+      "delivering": "Delivering",
+      "completed": "Completed",
+      "pending": "Pending"
+    },
+    "shipmentLabel": {
+      "one": "Shipment",
+      "many": "Shipments"
+    },
+    "weightUnit": {
+      "one": "Ton",
+      "many": "Tons"
+    }
+  },
   "common": {
     "logout": "Log out"
   },
