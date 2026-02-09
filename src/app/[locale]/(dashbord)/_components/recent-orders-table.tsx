@@ -19,6 +19,8 @@ import TimeAgo from "@/src/components/providers/shared/_components/time-ago";
 import { Orders } from "@/src/lib/constants/order";
 import { OrderActions } from "@/src/components/shared/order-actions";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
+import { AssigneDriver } from "@/src/components/shared/assigne-driver-dialog";
+import { Button } from "@/components/ui/button";
 
 dayjs.extend(relativeTime);
 
@@ -124,7 +126,17 @@ export function RecentOrdersTable() {
                 <div className="w-5 h-5 flex items-center justify-center">
                   {order.driverStatus === "unassigned" && (
                     <div title="لم يتم تعيين سائق">
-                      <UserRoundPlus className="stroke-[#FB2C36] " size={24} />
+                      <AssigneDriver
+                        numOfShipments={order.shipments}
+                        orderId={order.id}
+                      >
+                        <Button>
+                          <UserRoundPlus
+                            className="stroke-[#FB2C36]"
+                            size={24}
+                          />
+                        </Button>
+                      </AssigneDriver>
                     </div>
                   )}
                 </div>

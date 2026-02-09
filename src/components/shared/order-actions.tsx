@@ -61,12 +61,12 @@ export function OrderActions({ order }: { order: Order }) {
                 trackingUrl={order.driver?.trackingUrl}
               />
             ) : (
-              <UnassignedDriverState />
+              <UnassignedDriverState order={order} />
             )}
 
             {/* تفاصيل الإستلام */}
             <OrderLocationDetails
-              title="تفاصيل الطلب"
+              title="تفاصيل الإستلام"
               locations={[
                 {
                   title: "موقع توصيل الاسمنت",
