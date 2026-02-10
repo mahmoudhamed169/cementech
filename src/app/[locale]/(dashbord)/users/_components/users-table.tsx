@@ -13,6 +13,8 @@ import { UserStatusBadge } from "./user-status-badge";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
 import { Button } from "@/components/ui/button";
 import { EllipsisVertical } from "lucide-react";
+import { UserActions } from "./user-actions";
+import { getTotalPaid } from "@/src/lib/utils/utils";
 
 export default function UsersTable() {
   const headers = [
@@ -27,10 +29,6 @@ export default function UsersTable() {
     "actions",
   ] as const;
   const t = useTranslations("userPage.usersTable.columns");
-
-  function getTotalPaid(user: User) {
-    return user.orders.reduce((sum, order) => sum + order.price, 0);
-  }
 
   return (
     <Table>
@@ -94,18 +92,9 @@ export default function UsersTable() {
             {/* actions */}
             <TableCell className="text-center">
               <div className="flex items-center justify-center">
-                <Button className="w-6 h-6 bg-[#5E5C5C] p-0.5 flex justify-center items-center rounded-lg cursor-pointer">
-                  <EllipsisVertical className="stroke-white w-4 h-4" />
-                </Button>
+                <UserActions user={user} />
               </div>
             </TableCell>
-
-            {/* 
-    "phoneNumber",
-    "status",
-    "ordersCount",
-    "totalPaid",
-    "actions", */}
           </TableRow>
         ))}
       </TableBody>

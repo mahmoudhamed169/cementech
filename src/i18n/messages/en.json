@@ -107,10 +107,29 @@
         "actions": "Actions"
       }
     },
-     "userStatus": {
+    "userStatus": {
       "active": "Active",
       "inactive": "Inactive",
       "blocked": "Blocked"
+    },
+    "basicInfo": {
+      "title": "Basic Information",
+      "userId": "User ID",
+      "name": "Name",
+      "phone": "Phone Number",
+      "status": "Status",
+      "joinDate": "Join Date",
+      "active": "Active"
+    },
+    "userOrderTable": {
+      "colums": {
+        "index": "#",
+        "orderNumber": "Order Number",
+        "data": "Order Date",
+        "quantity": "Quantity",
+        "orderState": "Order Status",
+        "actions": "Actions"
+      }
     }
   }
 }

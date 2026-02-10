@@ -7,7 +7,7 @@ export type Order = {
 };
 
 export type User = {
-  id: number;
+  id: string;
   userName: string;
   organizationName: string | null;
   phoneNumber: string;
@@ -16,7 +16,7 @@ export type User = {
 };
 export const dummyUsers: User[] = [
   {
-    id: 1,
+    id: "USR001",
     userName: "أحمد علي",
     organizationName: "مؤسسة النور",
     phoneNumber: "0501234567",
@@ -60,7 +60,7 @@ export const dummyUsers: User[] = [
     ],
   },
   {
-    id: 2,
+    id: "USR002",
     userName: "سارة محمد",
     organizationName: null,
     phoneNumber: "0502345678",
@@ -104,7 +104,7 @@ export const dummyUsers: User[] = [
     ],
   },
   {
-    id: 3,
+    id: "USR003",
     userName: "خالد حسن",
     organizationName: "مؤسسة الأمل",
     phoneNumber: "0503456789",
@@ -148,7 +148,7 @@ export const dummyUsers: User[] = [
     ],
   },
   {
-    id: 4,
+    id: "USR004",
     userName: "مريم يوسف",
     organizationName: null,
     phoneNumber: "0504567890",
@@ -192,7 +192,7 @@ export const dummyUsers: User[] = [
     ],
   },
   {
-    id: 5,
+    id: "USR005",
     userName: "ليلى محمود",
     organizationName: "مؤسسة الفجر",
     phoneNumber: "0505678901",
@@ -236,7 +236,7 @@ export const dummyUsers: User[] = [
     ],
   },
   {
-    id: 6,
+    id: "USR006",
     userName: "عمرو سامي",
     organizationName: "مؤسسة الغد",
     phoneNumber: "0506789012",
@@ -280,7 +280,7 @@ export const dummyUsers: User[] = [
     ],
   },
   {
-    id: 7,
+    id: "USR007",
     userName: "ندى أحمد",
     organizationName: null,
     phoneNumber: "0507890123",
@@ -324,7 +324,7 @@ export const dummyUsers: User[] = [
     ],
   },
   {
-    id: 8,
+    id: "USR008",
     userName: "سامية خالد",
     organizationName: "مؤسسة الرؤية",
     phoneNumber: "0508901234",

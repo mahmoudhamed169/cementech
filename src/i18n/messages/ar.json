@@ -113,6 +113,25 @@
       "active": "نشط",
       "inactive": "غير نشط",
       "blocked": "محظور"
+    },
+    "basicInfo": {
+      "title": "البيانات الأساسية",
+      "userId": "رقم المستخدم التعريفي",
+      "name": "الاسم",
+      "phone": "رقم الجوال",
+      "status": "الحالة",
+      "joinDate": "تاريخ الانضمام",
+      "active": "نشط"
+    },
+    "userOrderTable": {
+      "colums": {
+        "index": "#",
+        "orderNumber": "رقم الطلب",
+        "data": "تاريخ الطلب",
+        "quantity": "الكمية",
+        "orderState": "حالة الطلب",
+        "actions": "الإجراءات"
+      }
     }
   }
 }

@@ -20,7 +20,7 @@ export const UserStatusBadge: React.FC<UserStatusBadgeProps> = ({ status }) => {
 
   return (
     <span
-      className={`px-5 py-0.5 rounded-full text-sm font-medium ${colors[status]}`}
+      className={`px-5  rounded-full text-sm font-medium ${colors[status]}`}
     >
       {t(status)}
     </span>
