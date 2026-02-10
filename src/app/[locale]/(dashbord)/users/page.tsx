@@ -1,9 +1,13 @@
-import React from 'react'
+import UserHeader from "./_components/user-header";
+import UsersList from "./_components/users-list";
+import UsersStatisctics from "./_components/users-statisctics";
 
 export default function page() {
   return (
-    <div>
-      <h1>the users page</h1>
-    </div>
-  )
+    <main className=" min-h-screen pt-12 pb-5 px-6 space-y-6 ">
+      <UserHeader />
+      <UsersStatisctics />
+      <UsersList />
+    </main>
+  );
 }
