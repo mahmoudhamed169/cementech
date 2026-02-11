@@ -9,7 +9,7 @@ export default function UserOrders({ userOrder }: IProps) {
   return (
     <div className="space-y-4">
       <h4 className="font-bold text-[#101828] text-lg">تاريخ الطلبات</h4>
-      <UserOrdersList userOrder={userOrder} />
+      {/* <UserOrdersList userOrder={userOrder} /> */}
     </div>
   );
 }

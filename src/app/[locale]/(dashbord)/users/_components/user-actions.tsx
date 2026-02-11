@@ -10,12 +10,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { EllipsisVertical } from "lucide-react";
+import { Ban, Bell, EllipsisVertical } from "lucide-react";
 import BasicInfo from "./user-basic-info";
 import UserStats from "./user-stats";
 import { User } from "@/src/lib/constants/user";
 import { getTotalPaid } from "@/src/lib/utils/utils";
 import UserOrders from "./user-order";
+import { SendUserNotification } from "./send-user-notification";
 
 export function UserActions({ user }: { user: User }) {
   return (
@@ -47,12 +48,28 @@ export function UserActions({ user }: { user: User }) {
             <UserOrders userOrder={user.orders} />
           </div>
         </div>
-        {/* <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DialogClose>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter> */}
+        <DialogFooter className="">
+          <div className="flex justify-around w-full gap-4">
+            {/* Ban User */}
+            <Button
+              variant="outline"
+              className="
+      w-87 h-12 bg-red-500 text-white p-2.5 rounded-xl
+      flex items-center justify-center gap-2
+      transition-all duration-200
+      hover:bg-red-600 hover:shadow-lg hover:scale-[1.02]
+      active:scale-[0.98]
+      focus-visible:ring-2 focus-visible:ring-red-400
+    "
+            >
+              <Ban className="w-5 h-5" />
+              حظر المستخدم
+            </Button>
+
+            {/* Send Notification */}
+            <SendUserNotification />
+          </div>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
