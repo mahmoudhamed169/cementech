@@ -11,6 +11,7 @@
     "drivers": "Drivers",
     "users": "Users",
     "payments": "Payments",
+    "invoices": "Invoices",
     "settings": "Settings"
   },
   "welcome": {
@@ -128,6 +129,27 @@
         "data": "Order Date",
         "quantity": "Quantity",
         "orderState": "Order Status",
+        "actions": "Actions"
+      }
+    }
+  },
+
+  "InvoicesPage": {
+    "header": {
+      "title": "Invoices Management",
+      "description": "Track and print invoices for all orders.",
+      "btn": "Print All Invoices"
+    },
+    "invoicesTable": {
+      "title": "Invoices",
+      "columns": {
+        "index": "#",
+        "invoicesId": "Invoice Number",
+        "orderId": "Order Number",
+        "userName": "client Name",
+        "userPhoneNumber": "Client Phone Number",
+        "date": "Date",
+        "totalPaid": "Total Paid",
         "actions": "Actions"
       }
     }

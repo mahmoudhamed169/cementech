@@ -5,6 +5,7 @@ import {
   CarFront,
   CircleDollarSign,
   LayoutDashboard,
+  ReceiptText,
   Settings,
   ShoppingBag,
   Users,
@@ -35,6 +36,11 @@ const SidebarLinks = [
     href: "/payments",
     labelKey: "payments",
     icon: <CircleDollarSign size={24} strokeWidth={1.75} />,
+  },
+  {
+    href: "/invoices",
+    labelKey: "invoices",
+    icon: <ReceiptText size={24} strokeWidth={1.75} />,
   },
   {
     href: "/settings",
