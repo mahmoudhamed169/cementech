@@ -82,5 +82,56 @@
   "common": {
     "logout": "تسجيل خروج"
   },
-  "orderPage": "اهلا بكم في صفحة الطلبات"
+  "orderPage": "اهلا بكم في صفحة الطلبات",
+
+  "userPage": {
+    "header": {
+      "title": "إدارة المستخدمين",
+      "description": "متابعة وإدارة المستخدمين المسجلين"
+    },
+    "statistics": {
+      "total": "مجموع المستخدمين",
+      "active": "المستخدمين النشطين",
+      "inactive": "المستخدمين الغير نشطين",
+      "blocked": "المستخدمين المحظورين"
+    },
+    "usersTable": {
+      "columns": {
+        "index": "#",
+        "userId": "رقم المستخدم",
+        "userName": "اسم المستخدم",
+        "organizationName": "اسم المؤسسة",
+        "phoneNumber": "رقم الجوال",
+        "status": "حالة المستخدم",
+        "ordersCount": "عدد الطلبات",
+        "totalPaid": "إجمالي الدفع",
+        "actions": "الإجراءات"
+      }
+    },
+
+    "userStatus": {
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "blocked": "محظور"
+    },
+    "basicInfo": {
+      "title": "البيانات الأساسية",
+      "userId": "رقم المستخدم التعريفي",
+      "name": "الاسم",
+      "phone": "رقم الجوال",
+      "status": "الحالة",
+      "joinDate": "تاريخ الانضمام",
+      "active": "نشط"
+    },
+    "userOrderTable": {
+      "colums": {
+        "index": "#",
+        "orderNumber": "رقم الطلب",
+        "data": "تاريخ الطلب",
+        "quantity": "الكمية",
+        "orderState": "حالة الطلب",
+        "actions": "الإجراءات"
+      }
+    }
+  }
 }
