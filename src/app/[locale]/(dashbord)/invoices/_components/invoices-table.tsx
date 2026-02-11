@@ -90,7 +90,7 @@ export default function InvoicesTable() {
                   <EllipsisVertical className="stroke-white w-4 h-4" />
                 </Button>
               </div>
-            </TableCell
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
