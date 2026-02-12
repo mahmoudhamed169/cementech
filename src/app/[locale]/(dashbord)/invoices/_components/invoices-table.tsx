@@ -12,6 +12,7 @@ import { CurrencyIcon } from "@/src/components/shared/currency-icon";
 import { invoicesData } from "@/src/lib/constants/invoice";
 import { EllipsisVertical } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { InvoiceModalContent } from "./invoice";
 
 export default function InvoicesTable() {
   const headers = [
@@ -86,9 +87,7 @@ export default function InvoicesTable() {
             {/* actions */}
             <TableCell className="text-center">
               <div className="w-full flex items-center justify-center">
-                <Button className="w-6 h-6 bg-[#5E5C5C] p-0.5 flex justify-center items-center rounded-lg cursor-pointer">
-                  <EllipsisVertical className="stroke-white w-4 h-4" />
-                </Button>
+                <InvoiceModalContent />
               </div>
             </TableCell>
           </TableRow>

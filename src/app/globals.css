@@ -8,3 +8,8 @@
   }
 }
 
+@media print {
+  .overflow-y-auto {
+    overflow: visible !important;
+  }
+}
