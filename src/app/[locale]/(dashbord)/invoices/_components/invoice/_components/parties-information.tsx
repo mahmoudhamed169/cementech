@@ -21,9 +21,9 @@ function InfoCard({
   footer?: React.ReactNode;
 }) {
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 print:w-full">
       <h5 className="text-xl font-semibold text-gray-900">{title}</h5>
-      <div className="min-w-[480px] min-h-[240px] rounded-xl bg-gray-50 py-4 px-5 flex flex-col justify-between">
+      <div className="min-w-[480px] min-h-[240px]  rounded-xl bg-gray-50 py-4 px-5 flex flex-col justify-between">
         {children}
         {footer && (
           <div className="mt-4 pt-3 border-t flex justify-between text-sm">
@@ -38,7 +38,7 @@ function InfoCard({
 // Main Component
 export default function PartiesInformation() {
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-6 info-card-container">
       {/* Supplier */}
       <InfoCard
         title="تفاصيل المورد"
