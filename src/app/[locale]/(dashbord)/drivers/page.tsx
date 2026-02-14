@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
 export default function page() {
   return (
-    <div>
-      <h1>the drivers page</h1>
-    </div>
-  )
+    <main className=" min-h-screen pt-12 pb-5 px-6 space-y-6 ">
+      <h1>اهلا بكم في صفحة السائقين</h1>
+    </main>
+  );
 }
