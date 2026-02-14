@@ -23,7 +23,7 @@ export default function ImportantNotes() {
 function NoteItem({ note }: { note: string }) {
   return (
     <div className="flex  items-center  gap-2 text-[#1A1A1A] font-bold ">
-      <Square size={16} />
+      <Square size={16}  />
       <p>{note}</p>{" "}
     </div>
   );

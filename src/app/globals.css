@@ -42,7 +42,7 @@
 
   /* تحسين الخط العربي */
   * {
-    font-family: "Tajawal", "Cairo", sans-serif !important;
+    font-family: "IBM Plex Sans Arabic" !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
