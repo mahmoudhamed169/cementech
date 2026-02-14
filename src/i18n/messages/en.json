@@ -11,6 +11,7 @@
     "drivers": "Drivers",
     "users": "Users",
     "payments": "Payments",
+    "invoices": "Invoices",
     "settings": "Settings"
   },
   "welcome": {
@@ -82,5 +83,75 @@
     "logout": "Log out"
   },
 
-  "orderPage": "Welcome in the order page"
+  "orderPage": "Welcome in the order page",
+  "userPage": {
+    "header": {
+      "title": "User Management",
+      "description": "Monitor and manage registered users"
+    },
+    "statistics": {
+      "total": "Total users",
+      "active": "Active users",
+      "inactive": "Inactive users",
+      "blocked": "Blocked users"
+    },
+    "usersTable": {
+      "columns": {
+        "index": "#",
+        "userId": "User ID",
+        "userName": "User Name",
+        "organizationName": "Organization Name",
+        "phoneNumber": "Phone Number",
+        "status": "User Status",
+        "ordersCount": "Orders Count",
+        "totalPaid": "Total Paid",
+        "actions": "Actions"
+      }
+    },
+    "userStatus": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "blocked": "Blocked"
+    },
+    "basicInfo": {
+      "title": "Basic Information",
+      "userId": "User ID",
+      "name": "Name",
+      "phone": "Phone Number",
+      "status": "Status",
+      "joinDate": "Join Date",
+      "active": "Active"
+    },
+    "userOrderTable": {
+      "colums": {
+        "index": "#",
+        "orderNumber": "Order Number",
+        "data": "Order Date",
+        "quantity": "Quantity",
+        "orderState": "Order Status",
+        "actions": "Actions"
+      }
+    }
+  },
+
+  "InvoicesPage": {
+    "header": {
+      "title": "Invoices Management",
+      "description": "Track and print invoices for all orders.",
+      "btn": "Print All Invoices"
+    },
+    "invoicesTable": {
+      "title": "Invoices",
+      "columns": {
+        "index": "#",
+        "invoicesId": "Invoice Number",
+        "orderId": "Order Number",
+        "userName": "client Name",
+        "userPhoneNumber": "Client Phone Number",
+        "date": "Date",
+        "totalPaid": "Total Paid",
+        "actions": "Actions"
+      }
+    }
+  }
 }

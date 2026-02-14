@@ -8,3 +8,71 @@
   }
 }
 
+/* ============================
+   PDF Arabic Fix — Print Only
+   ============================ */
+
+@media print {
+  /* إخفاء كل شيء خارج الفاتورة */
+  body * {
+    visibility: hidden !important;
+  }
+
+  .info-card-container {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 16px !important;
+  }
+
+  /* إظهار الفاتورة فقط */
+  #invoice-print-area,
+  #invoice-print-area * {
+    visibility: visible !important;
+    direction: rtl !important;
+    text-align: right !important;
+    unicode-bidi: plaintext !important;
+  }
+
+  /* تثبيت الفاتورة في أعلى الصفحة */
+  #invoice-print-area {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+  }
+
+  /* تحسين الخط العربي */
+  * {
+    font-family: "IBM Plex Sans Arabic" !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* منع تقسيم العناصر */
+  .avoid-break,
+  table,
+  tr,
+  td,
+  th,
+  .info-card-print {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* تصغير الكروت في الطباعة */
+  .info-card-print {
+    transform: scale(0.85) !important;
+    transform-origin: top right !important;
+  }
+
+  /* ترتيب الكروت */
+  .info-card-container {
+    display: flex !important;
+    gap: 20px !important;
+  }
+
+  /* إعدادات الصفحة */
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+}

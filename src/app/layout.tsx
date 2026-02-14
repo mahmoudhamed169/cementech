@@ -1,16 +1,17 @@
 import { ReactNode } from "react";
-import { Cairo, IBM_Plex_Sans } from "next/font/google";
+import { Cairo, IBM_Plex_Sans_Arabic } from "next/font/google";
+
+const ibmArabic = IBM_Plex_Sans_Arabic({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-ibm-arabic",
+});
+
 import "./globals.css";
 
 const cairo = Cairo({
   subsets: ["latin", "arabic"],
   variable: "--font-cairo",
-});
-
-const ibm = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-ibm",
 });
 
 /**
@@ -24,7 +25,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en" className={`${cairo.variable} ${ibm.variable}`}>
+    <html
+      lang="en"
+      className={`${ibmArabic.variable} ${ibmArabic.className}  `}
+    >
       <body>{children}</body>
     </html>
   );
