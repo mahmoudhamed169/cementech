@@ -133,6 +133,18 @@
       }
     }
   },
+  "driverPage": {
+    "header": {
+      "title": "Driver Management",
+      "description": "Monitor and manage registered drivers"
+    },
+    "statistics": {
+      "total": "Total Drivers",
+      "active": "Active Drivers",
+      "inactive": "Inactive Drivers",
+      "blocked": "Blocked Drivers"
+    }
+  },
 
   "InvoicesPage": {
     "header": {
