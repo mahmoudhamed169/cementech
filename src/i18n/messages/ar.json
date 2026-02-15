@@ -9,6 +9,7 @@
     "home": "الصفحة الرئيسية",
     "orders": "الطلبات",
     "drivers": "السائقين",
+    "loadingRequests": "طلبات التحميل",
     "users": "المستخدمين",
     "payments": "المدفوعات",
     "invoices": "الفواتير",
@@ -180,6 +181,12 @@
       "approved": "موثق",
       "rejected": "غير موثق",
       "pending": "معلق"
+    }
+  },
+  "loadingRequestsPage": {
+    "header": {
+      "title": "ادارة طلبات التحميل",
+      "description": "مراجعة وإدارة طلبات تحميل السائقين من المصنع"
     }
   },
   "InvoicesPage": {

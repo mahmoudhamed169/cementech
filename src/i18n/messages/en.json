@@ -9,6 +9,7 @@
     "home": "Dashboard",
     "orders": "Orders",
     "drivers": "Drivers",
+    "loadingRequests": "Loading Requests",
     "users": "Users",
     "payments": "Payments",
     "invoices": "Invoices",
@@ -178,7 +179,12 @@
       "pending": "Pending"
     }
   },
-
+  "loadingRequestsPage": {
+    "header": {
+      "title": "Loading Requests Management",
+      "description": "Review and manage driver loading requests from the factory"
+    }
+  },
   "InvoicesPage": {
     "header": {
       "title": "Invoices Management",
