@@ -25,6 +25,7 @@ export default function UsersTable() {
     "phoneNumber",
     "status",
     "ordersCount",
+    "documentStatus",
     "totalPaid",
     "actions",
   ] as const;

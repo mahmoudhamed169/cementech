@@ -136,6 +136,52 @@
       }
     }
   },
+  "driverPage": {
+    "header": {
+      "title": "إدارة السائقين",
+      "description": "متابعة وإدارة السائقين المسجلين"
+    },
+    "statistics": {
+      "total": "مجموع السائقين",
+      "active": "السائقين النشطين",
+      "inactive": "السائقين الغير نشطين",
+      "blocked": "السائقين المحظورين"
+    },
+    "driversTable": {
+      "columns": {
+        "index": "#",
+        "driverId": "رقم السائق",
+        "driverName": "اسم السائق",
+        "phoneNumber": "رقم الجوال",
+        "status": "حالة السائق",
+        "loadingStatus": "حالة التحميل",
+        "documentStatus": "حالة الوثائق",
+        "ordersCount": "عدد التوصيلات",
+        "actions": "الإجراءات"
+      },
+      "empty": {
+        "title": "لا يوجد سائقون حالياً",
+        "description": "سيظهر السائقون هنا بمجرد تسجيلهم في التطبيق."
+      }
+    },
+    "driverStatus": {
+      "available": "متاح",
+      "unavailable": "غير متاح",
+      "pending": "معلق",
+      "banned": "محظور"
+    },
+    "loadingStatus": {
+      "loaded": "محمل",
+      "unloaded": "غير محمل",
+      "pending": "معلق"
+    },
+
+    "documentStatus": {
+      "approved": "موثق",
+      "rejected": "غير موثق",
+      "pending": "معلق"
+    }
+  },
   "InvoicesPage": {
     "header": {
       "title": "ادارة الفواتير",
