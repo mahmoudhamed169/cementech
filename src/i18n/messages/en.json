@@ -159,18 +159,18 @@
       "empty": {
         "title": "No drivers found",
         "description": "Drivers will appear here once they register in the app."
-      },
-      "driverStatus": {
-        "available": "Available",
-        "unavailable": "Unavailable",
-        "pending": "Pending",
-        "banned": "Banned"
-      },
-      "loadingStatus": {
-        "loaded": "Loaded",
-        "unloaded": "Unloaded",
-        "pending": "Pending"
       }
+    },
+    "driverStatus": {
+      "available": "Available",
+      "unavailable": "Unavailable",
+      "pending": "Pending",
+      "banned": "Banned"
+    },
+    "loadingStatus": {
+      "loaded": "Loaded",
+      "unloaded": "Unloaded",
+      "pending": "Pending"
     },
     "documentStatus": {
       "approved": "Approved",
