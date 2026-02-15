@@ -143,6 +143,39 @@
       "active": "Active Drivers",
       "inactive": "Inactive Drivers",
       "blocked": "Blocked Drivers"
+    },
+    "driversTable": {
+      "columns": {
+        "index": "#",
+        "driverId": "Driver ID",
+        "driverName": "Driver Name",
+        "phoneNumber": "Phone Number",
+        "status": "Driver Status",
+        "loadingStatus": "Loading Status",
+        "documentStatus": "Document Status",
+        "ordersCount": "Orders Count",
+        "actions": "Actions"
+      },
+      "empty": {
+        "title": "No drivers found",
+        "description": "Drivers will appear here once they register in the app."
+      },
+      "driverStatus": {
+        "available": "Available",
+        "unavailable": "Unavailable",
+        "pending": "Pending",
+        "banned": "Banned"
+      },
+      "loadingStatus": {
+        "loaded": "Loaded",
+        "unloaded": "Unloaded",
+        "pending": "Pending"
+      }
+    },
+    "documentStatus": {
+      "approved": "Approved",
+      "rejected": "Unapproved",
+      "pending": "Pending"
     }
   },
 
