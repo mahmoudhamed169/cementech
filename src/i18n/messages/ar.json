@@ -187,6 +187,29 @@
     "header": {
       "title": "ادارة طلبات التحميل",
       "description": "مراجعة وإدارة طلبات تحميل السائقين من المصنع"
+    },
+    "statistics": {
+      "total": "مجموع طلبات التحميل",
+      "active": "طلبات التحميل المعلقة",
+      "inactive": "طلبات التحميل الجارية",
+      "blocked": "طلبات التحميل  المكتملة"
+    },
+    "table": {
+      "columns": {
+        "index": "#",
+        "requestId": "رقم الطلب",
+        "driverName": "اسم السائق",
+        "vehicleNumber": "رقم اللوحة",
+        "requestStatus": "حالة الطلب",
+        "quantity": "الكمية",
+        "requestTime": "وقت الطلب",
+        "loadingTime": "ميعاد التحميل",
+        "actions": "الإجراءات"
+      },
+      "empty": {
+        "title": "لا توجد طلبات تحميل حالياً",
+        "description": "ستظهر طلبات التحميل هنا بمجرد تقديمها من قبل السائقين."
+      }
     }
   },
   "InvoicesPage": {

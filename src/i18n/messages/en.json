@@ -182,9 +182,34 @@
   "loadingRequestsPage": {
     "header": {
       "title": "Loading Requests Management",
-      "description": "Review and manage driver loading requests from the factory"
+      "description": "Review and manage driver loading requests"
+    },
+    "statistics": {
+      "total": "Total Loading Requests",
+      "active": "Pending Loading Requests",
+      "inactive": "Ongoing Loading Requests",
+      "blocked": "Completed Loading Requests"
+    },
+     "table": {
+      "columns": {
+        "index": "#",
+        "requestId": "Request ID",
+        "driverName": "Driver Name",
+        "vehicleNumber": "Vehicle Number",
+        "requestStatus": "Request Status",
+        "quantity": "Quantity",
+        "requestTime": "Request Time",
+        "loadingTime": "Loading Time",
+        "actions": "Actions"
+      },
+      "empty": {
+        "title": "No loading requests found",
+        "description": "Loading requests will appear here once submitted by drivers."
+      }
     }
+    
   },
+
   "InvoicesPage": {
     "header": {
       "title": "Invoices Management",
