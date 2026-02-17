@@ -10,7 +10,7 @@ async function getDrivers() {
     page: 1,
     limit: 10,
   });
-  return response.data; // Assuming the API response has a 'data' field containing the drivers
+  return response.data;
 }
 
 export default async function DriversTableWrapper() {

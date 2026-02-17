@@ -43,6 +43,15 @@
       "hoursAgo": "{hours} hour ago"
     }
   },
+  "pagination": {
+    "showing": "Showing",
+    "from": "{from}-{to}",
+    "of": "of",
+    "users": "users",
+    "drivers": "drivers",
+    "orders": "orders",
+    "loadingRequests": "loading requests"
+  },
   "recentOrders": {
     "title": "Recent Orders",
     "viewAll": "View All Orders",
@@ -106,6 +115,7 @@
         "status": "User Status",
         "ordersCount": "Orders Count",
         "totalPaid": "Total Paid",
+        "lastLogin": "Last Login",
         "actions": "Actions"
       }
     },
@@ -131,6 +141,10 @@
         "quantity": "Quantity",
         "orderState": "Order Status",
         "actions": "Actions"
+      },
+      "empty": {
+        "title": "No users found",
+        "description": "Users will appear here once they register in the app."
       }
     }
   },
@@ -190,7 +204,7 @@
       "inactive": "Ongoing Loading Requests",
       "blocked": "Completed Loading Requests"
     },
-     "table": {
+    "table": {
       "columns": {
         "index": "#",
         "requestId": "Request ID",
@@ -207,7 +221,6 @@
         "description": "Loading requests will appear here once submitted by drivers."
       }
     }
-    
   },
 
   "InvoicesPage": {

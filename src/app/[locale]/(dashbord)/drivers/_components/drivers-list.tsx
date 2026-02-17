@@ -1,5 +1,4 @@
-import SearchInput from "@/src/components/shared/search-input";
-import React from "react";
+
 import DriversTable from "./driver-table/drivers-table";
 import DriversHeaderList from "./drivers-header-list";
 
