@@ -2,6 +2,8 @@ import { dummyUsers } from "@/src/lib/constants/user";
 
 import { getUsers } from "@/src/lib/services/users";
 import UsersTableBody from "./users-table-body";
+
+import { DynamicPagination } from "@/src/components/shared/pagination";
 import PaginationInfo from "@/src/components/shared/pagination-info";
 
 async function getCustomer() {
@@ -22,8 +24,8 @@ export default async function UsersTableWrapper() {
   return (
     <>
       <UsersTableBody users={users} />
+      <DynamicPagination totalPages={5} currentPage={1} />
 
-      {/* <PaginationInfo from={1} to={8} total={users.length} type="users" /> */}
     </>
   );
 }

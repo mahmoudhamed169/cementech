@@ -17,7 +17,7 @@ export default function UsersList() {
       </div>
 
       {/* Pagination / Info */}
-      <PaginationInfo from={1} to={8} total={150} type="users" />
+      {/* <PaginationInfo from={1} to={8} total={150} type="users" /> */}
     </section>
   );
 }

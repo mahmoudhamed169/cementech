@@ -6,6 +6,8 @@ import UsersTableWrapper from "./users-table-wrapper";
 
 export default function UsersTable() {
   return (
+
+
     <Table>
       {/* Header */}
       <UserTableHeader />
@@ -14,6 +16,8 @@ export default function UsersTable() {
       <Suspense fallback={<TableLoading colSpan={9} />}>
         <UsersTableWrapper />
       </Suspense>
+
+      
     </Table>
   );
 }
