@@ -44,6 +44,15 @@
       "hoursAgo": "منذ {hours} ساعة"
     }
   },
+  "pagination": {
+    "showing": "عرض",
+    "from": "{from}-{to}",
+    "of": "من أصل",
+    "users": "مستخدم",
+    "drivers": "سائق",
+    "orders": "طلب",
+    "loadingRequests": "طلب تحميل"
+  },
   "recentOrders": {
     "title": "الطلبات الأخيرة",
     "viewAll": "كل الطلبات",
@@ -108,7 +117,12 @@
         "status": "حالة المستخدم",
         "ordersCount": "عدد الطلبات",
         "totalPaid": "إجمالي الدفع",
+        "lastLogin": "آخر دخول",
         "actions": "الإجراءات"
+      },
+      "empty": {
+        "title": "لا يوجد مستخدمين",
+        "description": "سيظهر المستخدمون هنا بمجرد تسجيلهم في التطبيق."
       }
     },
 
