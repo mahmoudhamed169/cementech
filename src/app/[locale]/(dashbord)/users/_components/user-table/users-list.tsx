@@ -1,8 +1,8 @@
-import SearchInput from "@/src/components/shared/search-input";
+
 
 import UsersTable from "./users-table";
 import UserHeaderList from "./user-header-list";
-import PaginationInfo from "@/src/components/shared/pagination-info";
+
 
 export default function UsersList() {
   return (
@@ -15,9 +15,6 @@ export default function UsersList() {
         {/* هنا الجدول */}
         <UsersTable />
       </div>
-
-      {/* Pagination / Info */}
-      {/* <PaginationInfo from={1} to={8} total={150} type="users" /> */}
     </section>
   );
 }

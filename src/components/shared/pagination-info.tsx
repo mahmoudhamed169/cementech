@@ -20,7 +20,7 @@ export default function PaginationInfo({
   const t = useTranslations("pagination");
 
   return (
-    <div className="mt-auto pt-4 border-t border-[#E5E7EB]">
+    <div className="mt-auto pt-4 ">
       <h3 className="text-end text-sm text-[#475467]">
         {t("showing")} ({from}-{to}) {t("of")} {total} {t(type)}
       </h3>
