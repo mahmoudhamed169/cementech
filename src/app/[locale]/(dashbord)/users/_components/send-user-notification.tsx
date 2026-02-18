@@ -23,7 +23,7 @@ export function SendUserNotification() {
           <Button
             variant="outline"
             className="
-      w-87 h-12 bg-[#D08700] text-white p-2.5 rounded-xl
+      w-full h-12 bg-[#D08700] text-white p-2.5 rounded-xl
       flex items-center justify-center gap-2
       transition-all duration-200
       hover:bg-[#B87300] hover:shadow-lg hover:scale-[1.02]
