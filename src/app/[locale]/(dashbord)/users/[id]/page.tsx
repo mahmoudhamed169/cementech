@@ -61,6 +61,7 @@ export default function page() {
       <UserStats
         totalOrderCount={user.orders.length}
         totalPaid={user.orders.reduce((total, order) => total + order.price, 0)}
+        lastOrderDate={user.orders[user.orders.length - 1].date}
       />
 
       {/* user orders */}

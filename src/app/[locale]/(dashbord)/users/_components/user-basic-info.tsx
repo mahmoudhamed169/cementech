@@ -16,8 +16,7 @@ export default function BasicInfo({
   userStat,
   userPhoneNumber,
 }: Iprops) {
-  const t = useTranslations("userPage.basicInfo"); // هنا بنحدد مسار الترجمة
-
+  const t = useTranslations("userPage.basicInfo"); 
   return (
     <div className="space-y-4 ">
       <h4 className="font-bold text-[#101828] text-lg">{t("title")}</h4>

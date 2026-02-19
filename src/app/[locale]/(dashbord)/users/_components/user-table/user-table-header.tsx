@@ -12,7 +12,6 @@ export default function UserTableHeader() {
     "status",
     "ordersCount",
     "totalPaid",
-    "lastLogin",
     "actions",
   ] as const;
 
