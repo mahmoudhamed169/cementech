@@ -8,6 +8,8 @@ import { UserStatusBadge } from "../user-status-badge";
 import { getTotalPaid } from "@/src/lib/utils/utils";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
 import { UserActions } from "../user-actions";
+import { Eye } from "lucide-react";
+import { Link } from "@/src/i18n/navigation";
 
 interface Props {
   users: any[];
@@ -69,13 +71,16 @@ export default function UsersTableBody({ users }: Props) {
             <CurrencyIcon />
           </TableCell>
 
-          {/* lastLogin */}
-          <TableCell className="text-center">{user.lastLogin ? user.lastLogin.toLocaleDateString() : "-"}</TableCell>
-
           {/* actions */}
           <TableCell className="text-center">
             <div className="flex items-center justify-center">
-              <UserActions user={user} />
+              {/* <UserActions user={user} /> */}
+              <Link
+                href={`/users/${user.id}`}
+                className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
+              >
+                <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
+              </Link>
             </div>
           </TableCell>
         </TableRow>
