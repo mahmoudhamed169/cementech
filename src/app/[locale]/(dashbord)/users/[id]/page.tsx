@@ -52,7 +52,7 @@ export default function page() {
 
   return (
     <main className="bg-white min-h-132.5 border border-[#E5E7EB] rounded-xl p-6 flex flex-col space-y-6">
-      <PageTitleWithBack title="بيانات المستخدم" backHref="/dashboard/users" />
+      <PageTitleWithBack title="بيانات المستخدم" backHref="/users" />
 
       {/* USER DETAILS */}
       <UserDetails />
