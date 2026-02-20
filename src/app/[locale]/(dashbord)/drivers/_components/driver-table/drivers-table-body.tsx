@@ -6,6 +6,8 @@ import DriverStatusBadge from "../driver-status-badge";
 import LoadingStatusBadge from "../loading-status-badge";
 import DocumentStatusBadge from "../document-status-badge";
 import { useTranslations } from "next-intl";
+import { Link } from "@/src/i18n/navigation";
+import { Eye } from "lucide-react";
 
 interface Props {
   drivers: any[];
@@ -47,7 +49,18 @@ export default function DriversTableBody({ drivers }: Props) {
             <DocumentStatusBadge status={driver.documentStatus} />
           </TableCell>
           <TableCell>{driver.ordersCount}</TableCell>
-          <TableCell>...</TableCell>
+          {/* actions */}
+          <TableCell className="text-center">
+            <div className="flex items-center justify-center">
+              {/* <UserActions user={user} /> */}
+              <Link
+                href={`/drivers/${driver.id}`}
+                className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
+              >
+                <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
+              </Link>
+            </div>
+          </TableCell>
         </TableRow>
       ))}
     </TableBody>
