@@ -10,9 +10,10 @@ import { CurrencyIcon } from "@/src/components/shared/currency-icon";
 import { UserActions } from "../user-actions";
 import { Eye } from "lucide-react";
 import { Link } from "@/src/i18n/navigation";
+import { Customer } from "@/src/lib/types/users";
 
 interface Props {
-  users: any[];
+  users: Customer[];
 }
 
 export default function UsersTableBody({ users }: Props) {
@@ -41,20 +42,20 @@ export default function UsersTableBody({ users }: Props) {
           <TableCell className="text-center">{index + 1}</TableCell>
 
           {/* user id */}
-          <TableCell className="text-center font-medium">#{user.id}</TableCell>
+          <TableCell className="text-center font-medium">{user.code}</TableCell>
           {/* userName */}
           <TableCell className="text-center font-medium">
-            {user.userName}
+            {user.name}
           </TableCell>
 
           {/* organizationName */}
           <TableCell className="text-center font-medium">
-            {user.organizationName ?? "-"}
+            {user.company_name ?? "-"}
           </TableCell>
 
           {/* phoneNumber */}
           <TableCell className="text-center font-medium">
-            {user.phoneNumber}
+            {user.phone}
           </TableCell>
 
           {/* status */}
@@ -63,11 +64,11 @@ export default function UsersTableBody({ users }: Props) {
           </TableCell>
 
           {/* order count */}
-          <TableCell className="text-center">{user.orders.length}</TableCell>
+          <TableCell className="text-center">{user.order_count}</TableCell>
 
           {/* totalPaid */}
           <TableCell className="text-center flex items-center justify-center gap-1 mt-3">
-            <span>{getTotalPaid(user)}</span>
+            <span>{user.total_payments}</span>
             <CurrencyIcon />
           </TableCell>
 

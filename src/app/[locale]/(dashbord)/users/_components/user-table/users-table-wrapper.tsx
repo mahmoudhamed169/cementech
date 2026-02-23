@@ -6,18 +6,19 @@ import UsersTableBody from "./users-table-body";
 import { DynamicPagination } from "@/src/components/shared/pagination";
 import PaginationInfo from "@/src/components/shared/pagination-info";
 import { TableCell, TableFooter, TableRow } from "@/components/ui/table";
+import { Customer } from "@/src/lib/types/users";
 
-async function getCustomer() {
-  const response = await getUsers({
+export async function getCustomers(page = 1, limit = 8) {
+  const response = await getUsers<Customer>({
     type: "customer",
-    page: 1,
-    limit: 8,
+    page,
+    limit,
   });
   return response;
 }
 
 export default async function UsersTableWrapper() {
-  const userRes = await getCustomer();
+  const userRes = await getCustomers(2, 8); // Example: Fetch page 2 with 8 users per page
   console.log(userRes);
   const noUsers = [] as any[]; // Replace with actual users when API is ready
   const users = dummyUsers;
@@ -26,23 +27,23 @@ export default async function UsersTableWrapper() {
 
   return (
     <>
-      <UsersTableBody users={users} />
+      <UsersTableBody users={userRes.data} />
       {users.length > 0 && (
         <>
           <TableFooter>
             <TableRow className="border-t border-b-0 border-[#E5E7EB] h-14 text-start">
               <TableCell colSpan={9}>
                 <PaginationInfo
-                  from={1}
-                  to={8}
-                  total={users.length}
+                  from={(page - 1) * 8 + 1}
+                  to={Math.min(page * 8, userRes.meta.itemCount)}
+                  total={userRes.meta.itemCount}
                   type="users"
                 />
               </TableCell>
             </TableRow>
             <TableCell className="text-center" colSpan={9}>
               <DynamicPagination
-                totalPages={users.length / 8}
+                totalPages={pageCount}
                 currentPage={page}
               />
             </TableCell>

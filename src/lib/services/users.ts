@@ -1,3 +1,5 @@
+import { ApiUserResponse, Customer, Driver } from "../types/users";
+
 export interface GetUsersParams {
   page?: number;
   limit?: number;
@@ -9,9 +11,11 @@ export interface GetUsersParams {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getUsers(params: GetUsersParams) {
+// Generic function للـ type-safe
+export async function getUsers<T extends Driver | Customer>(
+  params: GetUsersParams,
+): Promise<ApiUserResponse<T>> {
   const query = new URLSearchParams();
-
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
       query.append(key, String(value));
@@ -21,6 +25,7 @@ export async function getUsers(params: GetUsersParams) {
   const res = await fetch(`${API_URL}/users?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
+      system_screen: "dashboard_users",
     },
     cache: "no-store",
   });
@@ -29,5 +34,5 @@ export async function getUsers(params: GetUsersParams) {
     throw new Error("Failed to fetch users");
   }
 
-  return res.json();
+  return res.json() as Promise<ApiUserResponse<T>>;
 }
