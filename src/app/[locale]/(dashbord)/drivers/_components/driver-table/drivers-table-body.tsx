@@ -8,9 +8,10 @@ import DocumentStatusBadge from "../document-status-badge";
 import { useTranslations } from "next-intl";
 import { Link } from "@/src/i18n/navigation";
 import { Eye } from "lucide-react";
+import { Driver } from "@/src/lib/types/users";
 
 interface Props {
-  drivers: any[];
+  drivers: Driver[];
 }
 
 export default function DriversTableBody({ drivers }: Props) {
@@ -36,19 +37,19 @@ export default function DriversTableBody({ drivers }: Props) {
           className="border-b border-[#E5E7EB] last:border-b-0 hover:bg-muted/40 h-14 text-center"
         >
           <TableCell>{index + 1}</TableCell>
-          <TableCell>{driver.id}</TableCell>
+          <TableCell>{driver.code}</TableCell>
           <TableCell>{driver.name}</TableCell>
           <TableCell>{driver.phone}</TableCell>
           <TableCell>
-            <DriverStatusBadge status={driver.status} />
+            {/* <DriverStatusBadge status={driver.status} /> */}
           </TableCell>
           <TableCell>
-            <LoadingStatusBadge status={driver.loadingStatus} />
+            {/* <LoadingStatusBadge status={driver.driver_request_status} /> */}
           </TableCell>
           <TableCell>
-            <DocumentStatusBadge status={driver.documentStatus} />
+            <DocumentStatusBadge status={driver.document_verify} />
           </TableCell>
-          <TableCell>{driver.ordersCount}</TableCell>
+          <TableCell>{driver.total_delivered_orders}</TableCell>
           {/* actions */}
           <TableCell className="text-center">
             <div className="flex items-center justify-center">

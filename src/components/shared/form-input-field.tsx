@@ -1,9 +1,12 @@
 import { Field, FieldLabel } from "@/components/ui/field";
-import { Input, InputProps } from "@/components/ui/input";
+import { Input } from "@/components/ui/input";
 
-interface FormInputFieldProps extends InputProps {
+interface FormInputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: string;
+  value: string;
+  readOnly?: boolean;
+  className?: string;
 }
 
 export default function FormInputField({
