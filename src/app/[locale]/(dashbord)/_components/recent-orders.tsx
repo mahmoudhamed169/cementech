@@ -3,6 +3,7 @@
 import { Link } from "@/src/i18n/navigation";
 import { RecentOrdersTable } from "./recent-orders-table";
 import { useTranslations } from "next-intl";
+import OrderTable from "../orders/_components/order-table/order.table";
 
 export default function RecentOrders() {
   const t = useTranslations("recentOrders"); // namespace for translations
@@ -15,7 +16,7 @@ export default function RecentOrders() {
           {t("viewAll")}
         </Link>
       </div>
-      <RecentOrdersTable />
+      <OrderTable limit={8} />
     </section>
   );
 }
