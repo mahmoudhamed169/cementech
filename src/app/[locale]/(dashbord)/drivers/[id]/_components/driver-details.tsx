@@ -3,22 +3,24 @@ import FormInputField from "@/src/components/shared/form-input-field";
 import DriverStatusBadge from "../../_components/driver-status-badge";
 import LoadingStatusBadge from "../../_components/loading-status-badge";
 import DocumentStatusBadge from "../../_components/document-status-badge";
+import { DriverUser } from "@/src/lib/types/spacific-user";
 
-export default function DriverDetails() {
+export default function DriverDetails({ driver }: { driver: DriverUser }) {
   return (
     <FieldGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
       <FormInputField
         id="user-id"
         label="رقم السائق (ID)"
-        value="123456789"
+        value={driver.id}
         readOnly
       />
+      <FormInputField id="full-name" label="الاسم الكامل" value={driver.name} />
       <FormInputField
-        id="full-name"
-        label="الاسم الكامل"
-        value="أحمد محمد أحمد"
+        id="phone-number"
+        label="رقم الجوال"
+        value={driver.phone}
+        readOnly
       />
-      <FormInputField id="phone-number" label="رقم الجوال" value="0501234567" />
 
       <Field>
         <FieldLabel htmlFor="status">الحالة </FieldLabel>
@@ -36,7 +38,7 @@ export default function DriverDetails() {
         <FieldLabel htmlFor="status">حالة الوثائق </FieldLabel>
 
         <div className="w-14">
-          <DocumentStatusBadge status="approved" />
+          <DocumentStatusBadge status={driver.document_verify} />
         </div>
       </Field>
 
@@ -45,13 +47,13 @@ export default function DriverDetails() {
       <FormInputField
         id="plate-number"
         label="رقم لوحة السيارة"
-        value="  س ع 1234 "
+        value={`${driver.driver_profile?.car_plate_number || ""} - ${driver.driver_profile?.car_plate_character || ""}`}
       />
 
       <FormInputField
         id="joining-date"
         label="  تاريخ الانضمام"
-        value="2023-01-15"
+        value={new Date(driver.created_at).toISOString().split("T")[0]} // تحويل التاريخ إلى صيغة YYYY-MM-DD
         type="date"
       />
     </FieldGroup>

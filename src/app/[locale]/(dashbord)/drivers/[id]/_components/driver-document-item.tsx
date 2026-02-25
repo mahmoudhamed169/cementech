@@ -1,19 +1,20 @@
 import { Download, FileText } from "lucide-react";
 import DocumentStatusBadge from "./document-status-badge";
+import { Link } from "@/src/i18n/navigation";
 
-type DocumentStatus = "approved" | "pending" | "rejected";
+type DocumentStatus = "accepted" | "pending" | "rejected";
 
 interface DriverDocumentItemProps {
   title: string;
   status: DocumentStatus;
-  onDownload?: () => void;
   icon?: React.ReactNode;
+  link: string; // URL to the document for download
 }
 
 export default function DriverDocumentItem({
   title,
   status,
-  onDownload,
+  link,
   icon,
 }: DriverDocumentItemProps) {
   return (
@@ -24,9 +25,9 @@ export default function DriverDocumentItem({
       </div>
 
       <div className="flex gap-4 items-center px-4 py-3 border-[#E5E7EB]">
-        <button onClick={onDownload}>
+        <Link href={link} className="text-[#344054] flex items-center gap-1.5">
           <Download size={20} />
-        </button>
+        </Link>
 
         <DocumentStatusBadge status={status} />
       </div>
