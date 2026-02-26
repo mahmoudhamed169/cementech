@@ -1,14 +1,14 @@
 import DriverDocumentItem from "./driver-document-item";
 
 interface Props {
-  // You can pass any props you need here, such as driver ID to fetch documents
+  
   driverNationalIdFront: string;
   driverNationalIdBack: string;
   driverLicenseFront: string;
   driverLicenseBack: string;
   carLicense: string;
   carInsurance: string;
-  documentVerifyStatus: string; // e.g., "approved", "pending", "rejected"
+  documentVerifyStatus: string; 
 }
 
 export default function DriverDocumentsSection(props: Props) {

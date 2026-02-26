@@ -3,9 +3,10 @@ import FormInputField from "@/src/components/shared/form-input-field";
 import DriverStatusBadge from "../../_components/driver-status-badge";
 import LoadingStatusBadge from "../../_components/loading-status-badge";
 import DocumentStatusBadge from "../../_components/document-status-badge";
-import { DriverUser } from "@/src/lib/types/spacific-user";
 
-export default function DriverDetails({ driver }: { driver: DriverUser }) {
+import { DriverProfile } from "@/src/lib/types/driver";
+
+export default function DriverDetails({ driver }: { driver: DriverProfile }) {
   return (
     <FieldGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
       <FormInputField
@@ -14,11 +15,15 @@ export default function DriverDetails({ driver }: { driver: DriverUser }) {
         value={driver.id}
         readOnly
       />
-      <FormInputField id="full-name" label="الاسم الكامل" value={driver.name} />
+      <FormInputField
+        id="full-name"
+        label="الاسم الكامل"
+        value={driver.driver_name}
+      />
       <FormInputField
         id="phone-number"
         label="رقم الجوال"
-        value={driver.phone}
+        value={driver.phone ? driver.phone : "غير متوفر"}
         readOnly
       />
 
@@ -47,7 +52,7 @@ export default function DriverDetails({ driver }: { driver: DriverUser }) {
       <FormInputField
         id="plate-number"
         label="رقم لوحة السيارة"
-        value={`${driver.driver_profile?.car_plate_number || ""} - ${driver.driver_profile?.car_plate_character || ""}`}
+        value={`${driver.car_plate_number || ""} - ${driver.car_plate_character || ""}`}
       />
 
       <FormInputField

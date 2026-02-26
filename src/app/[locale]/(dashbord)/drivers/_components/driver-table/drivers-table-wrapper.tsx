@@ -18,7 +18,7 @@ export async function getDrivers(page = 1, limit = 8) {
 }
 
 export default async function DriversTableWrapper() {
-  const drivers = await getDrivers(2, 8);
+  const drivers = await getDrivers(1, 8);
   const { page, pageCount } = drivers.meta;
   return (
     <>
