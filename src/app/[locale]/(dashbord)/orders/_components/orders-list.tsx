@@ -11,7 +11,7 @@ export default function OrdersList() {
       {/* orders table */}
       <div className="flex-1 mt-4">
         {/* هنا الجدول */}
-        <OrderTable />
+        <OrderTable limit={10} />
       </div>
     </section>
   );

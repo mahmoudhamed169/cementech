@@ -24,7 +24,7 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
 
   return (
     <TableBody>
-      {orders.slice(0, 8).map((order, index) => (
+      {orders.map((order, index) => (
         <TableRow
           key={order.id}
           className="border-b border-[#E5E7EB] last:border-b-0 hover:bg-muted/40 h-14 text-center"

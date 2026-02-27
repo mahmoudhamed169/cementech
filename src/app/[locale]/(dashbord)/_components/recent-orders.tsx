@@ -1,12 +1,10 @@
-"use client";
-
 import { Link } from "@/src/i18n/navigation";
-import { RecentOrdersTable } from "./recent-orders-table";
+
 import { useTranslations } from "next-intl";
 import OrderTable from "../orders/_components/order-table/order.table";
 
 export default function RecentOrders() {
-  const t = useTranslations("recentOrders"); // namespace for translations
+  const t = useTranslations("recentOrders");
 
   return (
     <section className="bg-white min-h-132.5 border-[0.8px] border-[#E5E7EB] rounded-xl p-6 space-y-4">

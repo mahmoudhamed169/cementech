@@ -11,20 +11,19 @@ export default async function OrdersTableWrapper({
 }: {
   limit?: number;
 }) {
-  const shouldShowPagination = limit !== 8 && Orders.length > 0;
-
   const ordersResponse = await getOrders({
     page: 1,
-    limit: limit || 10,
+    limit: limit,
     order: "ASC",
     search: "",
-
     time: "all",
   });
 
-  console.log(ordersResponse);
+  // console.log(ordersResponse);
 
   const { data, meta } = ordersResponse;
+
+  const shouldShowPagination = limit !== 8 && data.length > 0;
 
   return (
     <>
@@ -36,7 +35,7 @@ export default async function OrdersTableWrapper({
               <PaginationInfo
                 from={1}
                 to={limit ? Math.min(limit, data.length) : data.length}
-                total={data.length}
+                total={meta.itemCount}
                 type="orders"
               />
             </TableCell>
@@ -45,8 +44,8 @@ export default async function OrdersTableWrapper({
           <TableRow>
             <TableCell className="text-center" colSpan={9}>
               <DynamicPagination
-                totalPages={Math.ceil(data.length / 8)}
-                currentPage={1}
+                totalPages={meta.pageCount}
+                currentPage={meta.page}
               />
             </TableCell>
           </TableRow>
