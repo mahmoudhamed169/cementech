@@ -73,7 +73,8 @@
     },
     "driverStatus": {
       "assigned": "Assigned",
-      "unassigned": "Unassigned"
+      "unassigned": "Unassigned",
+      "notAssigned": "Driver not assigned"
     },
     "orderStatus": {
       "under_review": "Under Review",
@@ -90,6 +91,35 @@
       "one": "Ton",
       "many": "Tons"
     }
+  },
+  "orderActions": {
+    "orderNumber": "Order Number",
+    "invoice": "Invoice",
+    "orderStatus": "Order Status",
+    "customerInfo": "Customer Info",
+    "driverInfo": "Driver Info",
+    "notAssigned": "Not Assigned",
+    "assignDriver": "Assign Driver",
+    "name": "Name",
+    "phone": "Phone Number",
+    "deliveryDetails": "Delivery Details",
+    "deliveryLocation": "Cement Delivery Location",
+    "loadingLocation": "Cement Loading Location",
+    "factory": "Factory",
+    "cementQuantity": "Cement Quantity",
+    "price": "Price",
+    "lastUpdate": "Last Update",
+    "cancelOrder": "Cancel Order",
+
+    "assignDriverToOrder": "Assign Driver to Order",
+    "shipmentLabel": {
+      "one": "One shipment",
+      "many": "Multiple shipments"
+    },
+    "availableDrivers": "Available drivers nearby",
+    "driverId": "ID",
+    "distance": "Distance",
+    "confirm": "Confirm"
   },
   "common": {
     "logout": "Log out"

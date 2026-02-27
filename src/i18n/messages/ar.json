@@ -75,7 +75,8 @@
 
     "driverStatus": {
       "assigned": "تم التخصيص",
-      "unassigned": "غير مخصص"
+      "unassigned": "غير مخصص",
+      "notAssigned": "لم يتم تعيين سائق"
     },
     "orderStatus": {
       "under_review": "تحت المراجعة",
@@ -93,6 +94,35 @@
       "one": "طن",
       "many": "أطنان"
     }
+  },
+
+  "orderActions": {
+    "orderNumber": "الطلب رقم",
+    "invoice": "الفاتورة",
+    "orderStatus": "حالة الطلب",
+    "customerInfo": "معلومات العميل",
+    "name": "الاسم",
+    "phone": "رقم الجوال",
+    "driverInfo": "معلومات السائق + (حوار الشحنات)",
+    "notAssigned": "غير مخصص لسائق",
+    "assignDriver": "تخصيص لسائق",
+    "deliveryDetails": "تفاصيل الإستلام",
+    "deliveryLocation": "موقع توصيل الاسمنت",
+    "loadingLocation": "موقع تحميل الاسمنت",
+    "factory": "المصنع",
+    "cementQuantity": "كمية الأسمنت",
+    "price": "السعر",
+    "lastUpdate": "آخر تحديث",
+    "cancelOrder": "الغاء الطلب",
+    "assignDriverToOrder": "تخصيص سائق للطلب رقم",
+    "shipmentLabel": {
+      "one": "شحنة واحدة",
+      "many": "عدة شحنات"
+    },
+    "availableDrivers": "سائقين متاحين بالقرب من الموقع",
+    "driverId": "ID",
+    "distance": "على بعد",
+    "confirm": "تأكيد"
   },
   "common": {
     "logout": "تسجيل خروج"

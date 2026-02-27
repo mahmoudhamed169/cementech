@@ -20,12 +20,12 @@ export default function InfoSection({
     <div>
       <h2 className="text-[#101828] font-bold text-xl">{title}</h2>
 
-      <div className="my-2.5 grid grid-cols-[70px_1fr] gap-y-1.5 text-[#364153]">
+      <div className="my-2.5  flex flex-col gap-2.5 text-[#364153]">
         {items.map((item, index) => (
-          <React.Fragment key={index}>
+          <div className="flex gap-3" key={index}>
             <span className="font-bold">{item.label} :</span>
             <span>{item.value}</span>
-          </React.Fragment>
+          </div>
         ))}
       </div>
       {trackingUrl && (
