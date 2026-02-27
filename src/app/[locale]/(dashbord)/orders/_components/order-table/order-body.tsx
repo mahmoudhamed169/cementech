@@ -1,7 +1,7 @@
 "use client";
 
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Orders } from "@/src/lib/constants/order";
+
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ar";
@@ -14,81 +14,87 @@ import { Button } from "@/components/ui/button";
 import { UserRoundPlus } from "lucide-react";
 import { OrderActions } from "@/src/components/shared/order-actions";
 import { useTranslations } from "next-intl";
+import { mapOrderStatus } from "@/src/lib/utils/order-status";
+import { Order } from "@/src/lib/types/orders/order";
 
 dayjs.extend(relativeTime);
 
-function mapOrderStatus(status: string) {
-  switch (status) {
-    case "delivering":
-      return "delivering";
-    case "completed":
-      return "completed";
-    default:
-      return "pending";
-  }
-}
-
-export default function OrderTableBody() {
+export default function OrderTableBody({ orders }: { orders: Order[] }) {
   const t = useTranslations("recentOrders");
 
   return (
     <TableBody>
-      {Orders.slice(0, 8).map((order, index) => (
+      {orders.slice(0, 8).map((order, index) => (
         <TableRow
           key={order.id}
           className="border-b border-[#E5E7EB] last:border-b-0 hover:bg-muted/40 h-14 text-center"
         >
+          {/* index */}
           <TableCell className="text-center">{index + 1}</TableCell>
-          <TableCell className="text-center font-medium">{order.id}</TableCell>
-          <TableCell className="text-center">
-            {order.customer.name}{" "}
-            <p className="text-[#6A7282]">{order.customer.phone}</p>
+
+          {/* orderId */}
+          <TableCell className="text-center font-medium">
+            {order.code}
           </TableCell>
+
+          {/* customer Phone Number */}
           <TableCell className="text-center">
-            {order.driverStatus === "unassigned" ? (
-              <span className="font-medium text-[#9F0712] ">
-                ( {t(`driverStatus.${order.driverStatus}`)} )
+            {order.customer_name ? order.customer_name : "-"}
+            <p className="text-[#6A7282]">{order.phone}</p>
+          </TableCell>
+
+          {/* driver Status ( has or not ) */}
+          <TableCell className="text-center">
+            {order.has_drivers ? (
+              <span className="text-[#364153] font-medium">
+                {t(`driverStatus.assigned`)}
               </span>
             ) : (
-              <span className="text-[#364153] font-medium">
-                {t(`driverStatus.${order.driverStatus}`)}
+              <span className="font-medium text-[#9F0712]">
+                ({t(`driverStatus.unassigned`)})
               </span>
             )}
           </TableCell>
 
+          {/* Order Status */}
           <TableCell className="text-center">
-            <DeliveryStatusBadge status={mapOrderStatus(order.orderStatus)} />
+            <DeliveryStatusBadge status={mapOrderStatus(order.order_status)} />
           </TableCell>
+
+          {/* order Shipment */}
           <TableCell className="text-center">
-            {order.shipments}{" "}
-            {order.shipments === 1
+            {order.truck_quantity}{" "}
+            {order.truck_quantity === 1
               ? t("shipmentLabel.one")
               : t("shipmentLabel.many")}
           </TableCell>
 
+          {/* order Quantatity */}
           <TableCell className="text-center">
             {order.quantity}{" "}
             {order.quantity === 1 ? t("weightUnit.one") : t("weightUnit.many")}
           </TableCell>
 
+          {/* order price */}
           <TableCell className="text-center flex items-center justify-center gap-1 mt-3.5">
-            <span className="text-sm leading-none">{order.price}</span>
+            <span className="text-sm leading-none">{order.total}</span>
             <CurrencyIcon />
           </TableCell>
 
           {/* الوقت النسبي */}
           <TableCell className="text-center">
-            <TimeAgo time={order.time} />
+            <TimeAgo time={order.created_at} />
           </TableCell>
 
+          {/* options actions */}
           <TableCell className="text-center">
             <div className="flex items-center justify-center gap-2.5">
-              {/* مساحة ثابتة للأيقونة التحذيرية */}
               <div className="w-5 h-5 flex items-center justify-center">
-                {order.driverStatus === "unassigned" && (
+                {order.has_drivers === false && (
                   <div title="لم يتم تعيين سائق">
                     <AssigneDriver
-                      numOfShipments={order.shipments}
+                      numOfShipments={order.truck_quantity}
+                      orderCode={order.code}
                       orderId={order.id}
                     >
                       <Button>
@@ -98,9 +104,6 @@ export default function OrderTableBody() {
                   </div>
                 )}
               </div>
-
-              {/* الاجراءات
-               */}
 
               <OrderActions order={order} />
             </div>

@@ -27,10 +27,12 @@ const drivers: Driver[] = [
 ];
 
 export function AssigneDriver({
+  orderCode,
   orderId,
   numOfShipments,
   children,
 }: {
+  orderCode: string;
   orderId: string;
   numOfShipments: number;
   children: React.ReactNode;
@@ -62,7 +64,7 @@ export function AssigneDriver({
       <DialogContent className="min-w-xl bg-white border-0 p-0">
         <DialogHeader className="p-6">
           <DialogTitle className="text-[#101828] font-bold text-2xl">
-            تخصيص سائق للطلب رقم {orderId}# ({numOfShipments}{" "}
+            تخصيص سائق للطلب رقم {orderCode}# ({numOfShipments}{" "}
             {numOfShipments === 1
               ? t("shipmentLabel.one")
               : t("shipmentLabel.many")}

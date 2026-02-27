@@ -1,16 +1,14 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { DeliveryStatusBadge } from "@/src/app/[locale]/(dashbord)/_components/deliver-status-badge";
-import { Order } from "@/src/lib/constants/order";
+
 import { CircleX, EllipsisVertical } from "lucide-react";
 import InfoSection from "./info-section";
 import UnassignedDriverState from "./unassigned-driver-state";
@@ -18,6 +16,7 @@ import OrderLocationDetails from "./order-location-details";
 import { InfoCard } from "./info-card";
 import TimeAgo from "../providers/shared/_components/time-ago";
 import { CurrencyIcon } from "./currency-icon";
+import { Order } from "@/src/lib/types/orders/order";
 
 export function OrderActions({ order }: { order: Order }) {
   return (
@@ -31,34 +30,38 @@ export function OrderActions({ order }: { order: Order }) {
         <DialogContent className="min-w-3xl bg-white border-0">
           <DialogHeader className="p-6">
             <DialogTitle className="text-[#101828] font-bold text-2xl">
-              الطلب رقم - {order.id}# + (الفاتورة)
+              الطلب رقم - {order.code}# + (الفاتورة)
             </DialogTitle>
           </DialogHeader>
           <div className="p-6 border-t-[0.8px] border-[#E5E7EB] space-y-6">
             {/* حالة الطلب */}
             <div className="bg-[#F9FAFB] rounded-xl min-h-17 p-4 flex justify-between items-center">
               <h6 className="text-[#364153]"> حالة الطلب :</h6>
-              <DeliveryStatusBadge status="delivering" />
+              <DeliveryStatusBadge status={order.order_status} />
             </div>
 
             {/* معلومات العميل */}
             <InfoSection
               title="معلومات العميل"
               items={[
-                { label: "الإسم", value: order.customer.name },
-                { label: "الجوال", value: order.customer.phone },
+                {
+                  label: "الإسم",
+                  value: order.customer_name ? order.customer_name : "-",
+                },
+                { label: "الجوال", value: order.phone ? order.phone : "-" },
               ]}
             />
 
             {/* معلومات السائق */}
-            {order.driver ? (
+            {order.has_drivers ? (
               <InfoSection
                 title="معلومات السائق + (حوار الشحنات)"
-                items={[
-                  { label: "الإسم", value: order.driver?.name },
-                  { label: "الجوال", value: order.driver?.phone },
-                ]}
-                trackingUrl={order.driver?.trackingUrl}
+                // هنا هيكون arr of objects كل object فيه label and value
+                items={order.drivers.map((driver) => ({
+                  label: driver.driver_name,
+                  value: driver.code,
+                }))}
+                // trackingUrl={order.drivers[0].trackingUrl}
               />
             ) : (
               <UnassignedDriverState order={order} />
@@ -70,13 +73,13 @@ export function OrderActions({ order }: { order: Order }) {
               locations={[
                 {
                   title: "موقع توصيل الاسمنت",
-                  address: order.deliveryLocation,
+                  address: order.address_title,
                   iconColor: "#00A63E",
                   iconBgColor: "#DCFCE7",
                 },
                 {
                   title: "موقع تحميل الاسمنت",
-                  address: order.pickupLocation,
+                  address: order.address_name ? order.address_name : "-",
                   iconColor: "#155DFC",
                   iconBgColor: "#DBEAFE",
                 },
@@ -84,15 +87,20 @@ export function OrderActions({ order }: { order: Order }) {
             />
 
             <div className="flex gap-3 mt-4 w-full">
-              <InfoCard label="كمية الأسمنت" value={`${order.quantity} طن`} />
+              <InfoCard label="المصنع" value={order.factory_name} />
+
+              <InfoCard
+                label="كمية الأسمنت"
+                value={`${order.truck_quantity} طن`}
+              />
               <InfoCard
                 label="السعر"
-                value={order.price}
+                value={order.total}
                 icon={<CurrencyIcon />}
               />
               <InfoCard
                 label="آخر تحديث"
-                value={<TimeAgo time={order.time} />}
+                value={<TimeAgo time={order.created_at} />}
               />
             </div>
           </div>

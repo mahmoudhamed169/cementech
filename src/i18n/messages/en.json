@@ -76,9 +76,11 @@
       "unassigned": "Unassigned"
     },
     "orderStatus": {
-      "delivering": "Delivering",
-      "completed": "Completed",
-      "pending": "Pending"
+      "under_review": "Under Review",
+      "in_preparation": "In Preparation",
+      "delivery": "Delivering",
+      "deliverd": "Completed",
+      "canceled": "Canceled"
     },
     "shipmentLabel": {
       "one": "Shipment",
