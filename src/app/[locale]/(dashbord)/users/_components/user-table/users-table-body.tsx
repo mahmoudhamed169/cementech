@@ -44,9 +44,7 @@ export default function UsersTableBody({ users }: Props) {
           {/* user id */}
           <TableCell className="text-center font-medium">{user.code}</TableCell>
           {/* userName */}
-          <TableCell className="text-center font-medium">
-            {user.name}
-          </TableCell>
+          <TableCell className="text-center font-medium">{user.name}</TableCell>
 
           {/* organizationName */}
           <TableCell className="text-center font-medium">
@@ -77,7 +75,7 @@ export default function UsersTableBody({ users }: Props) {
             <div className="flex items-center justify-center">
               {/* <UserActions user={user} /> */}
               <Link
-                href={`/users/${user.id}`}
+                href={`/users/${user.id}` as any}
                 className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
               >
                 <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />

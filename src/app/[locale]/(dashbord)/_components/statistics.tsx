@@ -4,7 +4,16 @@ import { CarIcon, DollarSign, ShoppingBag, Users2 } from "lucide-react";
 import StatisticsCard from "./statisticscard";
 import { useTranslations } from "next-intl";
 
-const statisticsConfig = [
+type StatisticItem = {
+  icon: React.ReactNode;
+  iconBg: string;
+  percentage: string;
+  trending: "up" | "down";
+  titleKey: string;
+  value: string | number;
+};
+
+const statisticsConfig: StatisticItem[] = [
   {
     icon: <DollarSign size={24} strokeWidth={2.5} />,
     iconBg: "#00A63E",

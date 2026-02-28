@@ -1,14 +1,13 @@
-import DriverDocumentItem from "./driver-document-item";
+import DriverDocumentItem, { DocumentStatus } from "./driver-document-item";
 
 interface Props {
-  
   driverNationalIdFront: string;
   driverNationalIdBack: string;
   driverLicenseFront: string;
   driverLicenseBack: string;
   carLicense: string;
   carInsurance: string;
-  documentVerifyStatus: string; 
+  documentVerifyStatus: DocumentStatus;
 }
 
 export default function DriverDocumentsSection(props: Props) {

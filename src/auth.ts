@@ -14,12 +14,16 @@ export const authOptions: NextAuthOptions = {
         password: {},
       },
       async authorize(credentials) {
+        // returning a value that matches NextAuth's User type
+        // we include a "user" property since the built-in type expects it
         return {
-          id: "1",
-          name: "John Doe",
-          email: "john.doe@example.com",
-          token: "sample-jwt-token",
-        };
+          user: {
+            id: "1",
+            name: "John Doe",
+            email: "john.doe@example.com",
+            token: "sample-jwt-token",
+          },
+        } as any;
       },
     }),
   ],
@@ -32,7 +36,7 @@ export const authOptions: NextAuthOptions = {
     },
     session: async ({ session, token }) => {
       if (token) {
-        session.user.id = token.id;
+        session.user.id = (token as any).id;
       }
       return session;
     },
