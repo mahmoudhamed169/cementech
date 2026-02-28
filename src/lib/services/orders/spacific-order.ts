@@ -13,6 +13,8 @@ export interface Driver {
   phone: string;
 }
 
+import { ApiOrderStatus } from "@/src/lib/utils/order-status";
+
 export interface OrderData {
   id: string;
   code: string;
@@ -27,7 +29,7 @@ export interface OrderData {
   factory_name: string;
   address_name: string;
   address_title: string;
-  order_status: string;
+  order_status: ApiOrderStatus;
   quantity: number;
   truck_quantity: number;
   total: number;

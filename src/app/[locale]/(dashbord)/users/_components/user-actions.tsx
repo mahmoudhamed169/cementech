@@ -40,6 +40,7 @@ export function UserActions({ user }: { user: User }) {
           <UserStats
             totalOrderCount={user.orders.length}
             totalPaid={getTotalPaid(user)}
+            lastOrderDate={user.orders[user.orders.length - 1]?.date || ""}
           />
 
           <div className="">

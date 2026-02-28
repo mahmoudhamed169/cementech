@@ -4,7 +4,7 @@ export interface Driver {
   phone: string;
   code: string;
   name: string;
-  status: "free" | "busy" | string;
+  status: "free" | "busy";
   document_verify: "accepted" | "pending" | "rejected";
   driver_request_status: "pending" | "approved" | "rejected";
   driver_status: "free" | "busy" | string;
@@ -25,7 +25,7 @@ export interface Customer {
   order_count: number;
   total_payments: number;
   company_name: string | null;
-  status: "active" | "inactive" | "blocked" | string;
+  status: "active" | "inactive" | "blocked";
   role: "customer";
   verified: boolean;
   is_blocked: boolean;
@@ -49,6 +49,5 @@ export interface ApiUserResponse<T> {
   data: T[];
   meta: PaginationMeta;
 }
-
 
 export type User = Driver | Customer;

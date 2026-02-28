@@ -18,7 +18,7 @@ export default function SidebarLinkItem({
   return (
     <li className="mb-2">
       <Link
-        href={href}
+        href={href as any}
         className={`rounded-md p-4 w-58 flex items-center gap-3 transition
           ${
             isActive

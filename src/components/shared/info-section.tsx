@@ -29,7 +29,7 @@ export default function InfoSection({
         ))}
       </div>
       {trackingUrl && (
-        <Link href={trackingUrl} className="text-[#155DFC] flex gap-2">
+        <Link href={trackingUrl as any} className="text-[#155DFC] flex gap-2">
           <Navigation />
           <span className=" underline">تتبع الطلب على الخريطة</span>
         </Link>
