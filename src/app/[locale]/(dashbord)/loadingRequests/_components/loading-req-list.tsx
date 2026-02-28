@@ -1,25 +1,18 @@
 import SearchInput from "@/src/components/shared/search-input";
 
-import UsersTable from "./users-table";
+import LoadingRequestsTable from "./loading-requests-table";
+import LoadingReqHeader from "./loading-req-list-header";
 
-export default function UsersList() {
+export default function LoadingReqList() {
   return (
     <section className="bg-white min-h-132.5 border border-[#E5E7EB] rounded-xl p-6 flex flex-col">
       {/* Header */}
-      <div className="flex flex-wrap justify-between items-center gap-4">
-        <h3 className="font-bold text-lg text-[#101828]">المستخدمين</h3>
-
-        <div className="flex flex-wrap items-center gap-4">
-          <div className="w-65">
-            <SearchInput placeholder="ابحث عن اسم او رقم جوال ..." />
-          </div>
-        </div>
-      </div>
+      <LoadingReqHeader />
 
       {/* users table */}
       <div className="flex-1 mt-4">
         {/* هنا الجدول */}
-        <UsersTable />
+        <LoadingRequestsTable />
       </div>
 
       {/* Pagination / Info */}

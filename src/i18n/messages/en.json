@@ -9,6 +9,7 @@
     "home": "Dashboard",
     "orders": "Orders",
     "drivers": "Drivers",
+    "loadingRequests": "Loading Requests",
     "users": "Users",
     "payments": "Payments",
     "invoices": "Invoices",
@@ -42,6 +43,15 @@
       "hoursAgo": "{hours} hour ago"
     }
   },
+  "pagination": {
+    "showing": "Showing",
+    "from": "{from}-{to}",
+    "of": "of",
+    "users": "users",
+    "drivers": "drivers",
+    "orders": "orders",
+    "loadingRequests": "loading requests"
+  },
   "recentOrders": {
     "title": "Recent Orders",
     "viewAll": "View All Orders",
@@ -63,12 +73,15 @@
     },
     "driverStatus": {
       "assigned": "Assigned",
-      "unassigned": "Unassigned"
+      "unassigned": "Unassigned",
+      "notAssigned": "Driver not assigned"
     },
     "orderStatus": {
-      "delivering": "Delivering",
-      "completed": "Completed",
-      "pending": "Pending"
+      "under_review": "Under Review",
+      "in_preparation": "In Preparation",
+      "delivery": "Delivering",
+      "deliverd": "Completed",
+      "canceled": "Canceled"
     },
     "shipmentLabel": {
       "one": "Shipment",
@@ -78,6 +91,35 @@
       "one": "Ton",
       "many": "Tons"
     }
+  },
+  "orderActions": {
+    "orderNumber": "Order Number",
+    "invoice": "Invoice",
+    "orderStatus": "Order Status",
+    "customerInfo": "Customer Info",
+    "driverInfo": "Driver Info",
+    "notAssigned": "Not Assigned",
+    "assignDriver": "Assign Driver",
+    "name": "Name",
+    "phone": "Phone Number",
+    "deliveryDetails": "Delivery Details",
+    "deliveryLocation": "Cement Delivery Location",
+    "loadingLocation": "Cement Loading Location",
+    "factory": "Factory",
+    "cementQuantity": "Cement Quantity",
+    "price": "Price",
+    "lastUpdate": "Last Update",
+    "cancelOrder": "Cancel Order",
+
+    "assignDriverToOrder": "Assign Driver to Order",
+    "shipmentLabel": {
+      "one": "One shipment",
+      "many": "Multiple shipments"
+    },
+    "availableDrivers": "Available drivers nearby",
+    "driverId": "ID",
+    "distance": "Distance",
+    "confirm": "Confirm"
   },
   "common": {
     "logout": "Log out"
@@ -105,6 +147,7 @@
         "status": "User Status",
         "ordersCount": "Orders Count",
         "totalPaid": "Total Paid",
+        "lastLogin": "Last Login",
         "actions": "Actions"
       }
     },
@@ -130,6 +173,84 @@
         "quantity": "Quantity",
         "orderState": "Order Status",
         "actions": "Actions"
+      },
+      "empty": {
+        "title": "No users found",
+        "description": "Users will appear here once they register in the app."
+      }
+    }
+  },
+  "driverPage": {
+    "header": {
+      "title": "Driver Management",
+      "description": "Monitor and manage registered drivers"
+    },
+    "statistics": {
+      "total": "Total Drivers",
+      "active": "Active Drivers",
+      "inactive": "Inactive Drivers",
+      "blocked": "Blocked Drivers"
+    },
+    "driversTable": {
+      "columns": {
+        "index": "#",
+        "driverId": "Driver ID",
+        "driverName": "Driver Name",
+        "phoneNumber": "Phone Number",
+        "status": "Driver Status",
+        "loadingStatus": "Loading Status",
+        "documentStatus": "Document Status",
+        "ordersCount": "Orders Count",
+        "actions": "Actions"
+      },
+      "empty": {
+        "title": "No drivers found",
+        "description": "Drivers will appear here once they register in the app."
+      }
+    },
+    "driverStatus": {
+      "available": "Available",
+      "unavailable": "Unavailable",
+      "pending": "Pending",
+      "banned": "Banned"
+    },
+    "loadingStatus": {
+      "loaded": "Loaded",
+      "unloaded": "Unloaded",
+      "pending": "Pending"
+    },
+    "documentStatus": {
+      "approved": "Approved",
+      "rejected": "Unapproved",
+      "pending": "Pending"
+    }
+  },
+  "loadingRequestsPage": {
+    "header": {
+      "title": "Loading Requests Management",
+      "description": "Review and manage driver loading requests"
+    },
+    "statistics": {
+      "total": "Total Loading Requests",
+      "active": "Pending Loading Requests",
+      "inactive": "Ongoing Loading Requests",
+      "blocked": "Completed Loading Requests"
+    },
+    "table": {
+      "columns": {
+        "index": "#",
+        "requestId": "Request ID",
+        "driverName": "Driver Name",
+        "vehicleNumber": "Vehicle Number",
+        "requestStatus": "Request Status",
+        "quantity": "Quantity",
+        "requestTime": "Request Time",
+        "loadingTime": "Loading Time",
+        "actions": "Actions"
+      },
+      "empty": {
+        "title": "No loading requests found",
+        "description": "Loading requests will appear here once submitted by drivers."
       }
     }
   },

@@ -3,6 +3,7 @@
 import React from "react";
 import { ShoppingBag, CreditCard, DollarSign, Calendar } from "lucide-react";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
+import StatItem from "@/src/components/shared/stat-item";
 
 interface StatItemProps {
   title: string;
@@ -13,36 +14,16 @@ interface StatItemProps {
   currency?: React.ReactNode;
 }
 
-function StatItem({
-  title,
-  value,
-  bgColor,
-  icon,
-  iconColor,
-  currency,
-}: StatItemProps) {
-  return (
-    <div
-      className={`min-h-24 p-4 rounded-xl flex flex-col justify-center gap-4 ${bgColor}`}
-    >
-      <h6 className="flex items-center gap-2 text-sm text-[#4A5565]">
-        <span className={`${iconColor} flex items-center `}>{icon}</span>
-        <span>{title}</span>
-      </h6>
-
-      <h4 className="font-bold text-2xl flex gap-2 items-center">
-        {value} {currency && currency}
-      </h4>
-    </div>
-  );
-}
-
 type IProps = {
   totalOrderCount: number;
   totalPaid: number;
+  lastOrderDate: string;
 };
-export default function UserStats({ totalOrderCount, totalPaid }: IProps) {
-  // ✅ داتا ثابتة مؤقتًا
+export default function UserStats({
+  totalOrderCount,
+  totalPaid,
+  lastOrderDate,
+}: IProps) {
   const stats: StatItemProps[] = [
     {
       title: "إجمالي الطلبات",
@@ -61,7 +42,7 @@ export default function UserStats({ totalOrderCount, totalPaid }: IProps) {
     },
     {
       title: "آخر طلب",
-      value: "2025-01-24",
+      value: lastOrderDate,
       bgColor: "bg-[#FAF5FF]",
       icon: <Calendar size={20} />,
       iconColor: "text-[#9810FA]",

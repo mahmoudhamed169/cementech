@@ -6,6 +6,7 @@ import { Cairo, IBM_Plex_Sans_Arabic } from "next/font/google";
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
+import DirectionProvider from "@/src/components/providers/shared/_components/direction-provider";
 
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
@@ -54,16 +55,15 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = (await import(`@/src/i18n/messages/${locale}.json`)).default;
 
   return (
-    <html
-      lang={locale}
-      dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`${cairo.variable} ${ibmPlex.variable} font-sans`}
-    >
-      <body suppressHydrationWarning className="antialiased">
+    <DirectionProvider locale={locale}>
+      <div
+        dir={locale === "ar" ? "rtl" : "ltr"}
+        className={`${cairo.variable} ${ibmPlex.variable} font-sans`}
+      >
         <Providers locale={locale} messages={messages}>
           {children}
         </Providers>
-      </body>
-    </html>
+      </div>
+    </DirectionProvider>
   );
 }

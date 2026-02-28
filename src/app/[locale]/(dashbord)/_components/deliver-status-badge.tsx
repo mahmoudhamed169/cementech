@@ -1,25 +1,33 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { DeliveryStatus } from "@/src/lib/utils/order-status";
 import { useTranslations } from "next-intl";
 
-type DeliveryStatus = "delivering" | "completed" | "pending";
-
+// نحدد الألوان لكل حالة
 const deliveryStatusStyles: Record<
   DeliveryStatus,
   { bg: string; text: string }
 > = {
-  delivering: {
-    bg: "bg-[#DBEAFE]",
-    text: "text-[#193CB8]",
+  under_review: {
+    bg: "bg-yellow-100",
+    text: "text-yellow-800",
   },
-  completed: {
-    bg: "bg-[#DCFCE7]",
-    text: "text-[#016630]",
+  in_preparation: {
+    bg: "bg-orange-100",
+    text: "text-orange-800",
   },
-  pending: {
-    bg: "bg-[#FEF9C2]",
-    text: "text-[#894B00]",
+  delivery: {
+    bg: "bg-blue-100",
+    text: "text-blue-800",
+  },
+  deliverd: {
+    bg: "bg-green-100",
+    text: "text-green-800",
+  },
+  canceled: {
+    bg: "bg-red-100",
+    text: "text-red-700",
   },
 };
 

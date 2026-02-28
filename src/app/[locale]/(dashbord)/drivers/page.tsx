@@ -1,9 +1,5 @@
-import React from 'react'
+import DriversList from "./_components/drivers-list";
 
-export default function page() {
-  return (
-    <div>
-      <h1>the drivers page</h1>
-    </div>
-  )
+export default async function page() {
+  return <DriversList />;
 }

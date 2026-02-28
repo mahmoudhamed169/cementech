@@ -9,6 +9,7 @@
     "home": "الصفحة الرئيسية",
     "orders": "الطلبات",
     "drivers": "السائقين",
+    "loadingRequests": "طلبات التحميل",
     "users": "المستخدمين",
     "payments": "المدفوعات",
     "invoices": "الفواتير",
@@ -43,6 +44,15 @@
       "hoursAgo": "منذ {hours} ساعة"
     }
   },
+  "pagination": {
+    "showing": "عرض",
+    "from": "{from}-{to}",
+    "of": "من أصل",
+    "users": "مستخدم",
+    "drivers": "سائق",
+    "orders": "طلب",
+    "loadingRequests": "طلب تحميل"
+  },
   "recentOrders": {
     "title": "الطلبات الأخيرة",
     "viewAll": "كل الطلبات",
@@ -65,13 +75,17 @@
 
     "driverStatus": {
       "assigned": "تم التخصيص",
-      "unassigned": "غير مخصص"
+      "unassigned": "غير مخصص",
+      "notAssigned": "لم يتم تعيين سائق"
     },
     "orderStatus": {
-      "delivering": "جاري التوصيل ",
-      "completed": "مكتمل",
-      "pending": "بانتظار السائق"
+      "under_review": "تحت المراجعة",
+      "in_preparation": "جاري التحضير",
+      "delivery": "جاري التوصيل",
+      "deliverd": "تم التسليم",
+      "canceled": "ملغي"
     },
+
     "shipmentLabel": {
       "one": "شحنة",
       "many": "شحنات"
@@ -80,6 +94,35 @@
       "one": "طن",
       "many": "أطنان"
     }
+  },
+
+  "orderActions": {
+    "orderNumber": "الطلب رقم",
+    "invoice": "الفاتورة",
+    "orderStatus": "حالة الطلب",
+    "customerInfo": "معلومات العميل",
+    "name": "الاسم",
+    "phone": "رقم الجوال",
+    "driverInfo": "معلومات السائق + (حوار الشحنات)",
+    "notAssigned": "غير مخصص لسائق",
+    "assignDriver": "تخصيص لسائق",
+    "deliveryDetails": "تفاصيل الإستلام",
+    "deliveryLocation": "موقع توصيل الاسمنت",
+    "loadingLocation": "موقع تحميل الاسمنت",
+    "factory": "المصنع",
+    "cementQuantity": "كمية الأسمنت",
+    "price": "السعر",
+    "lastUpdate": "آخر تحديث",
+    "cancelOrder": "الغاء الطلب",
+    "assignDriverToOrder": "تخصيص سائق للطلب رقم",
+    "shipmentLabel": {
+      "one": "شحنة واحدة",
+      "many": "عدة شحنات"
+    },
+    "availableDrivers": "سائقين متاحين بالقرب من الموقع",
+    "driverId": "ID",
+    "distance": "على بعد",
+    "confirm": "تأكيد"
   },
   "common": {
     "logout": "تسجيل خروج"
@@ -107,7 +150,12 @@
         "status": "حالة المستخدم",
         "ordersCount": "عدد الطلبات",
         "totalPaid": "إجمالي الدفع",
+        "lastLogin": "آخر دخول",
         "actions": "الإجراءات"
+      },
+      "empty": {
+        "title": "لا يوجد مستخدمين",
+        "description": "سيظهر المستخدمون هنا بمجرد تسجيلهم في التطبيق."
       }
     },
 
@@ -133,6 +181,81 @@
         "quantity": "الكمية",
         "orderState": "حالة الطلب",
         "actions": "الإجراءات"
+      }
+    }
+  },
+  "driverPage": {
+    "header": {
+      "title": "إدارة السائقين",
+      "description": "متابعة وإدارة السائقين المسجلين"
+    },
+    "statistics": {
+      "total": "مجموع السائقين",
+      "active": "السائقين النشطين",
+      "inactive": "السائقين الغير نشطين",
+      "blocked": "السائقين المحظورين"
+    },
+    "driversTable": {
+      "columns": {
+        "index": "#",
+        "driverId": "رقم السائق",
+        "driverName": "اسم السائق",
+        "phoneNumber": "رقم الجوال",
+        "status": "حالة السائق",
+        "loadingStatus": "حالة التحميل",
+        "documentStatus": "حالة الوثائق",
+        "ordersCount": "عدد التوصيلات",
+        "actions": "الإجراءات"
+      },
+      "empty": {
+        "title": "لا يوجد سائقون حالياً",
+        "description": "سيظهر السائقون هنا بمجرد تسجيلهم في التطبيق."
+      }
+    },
+    "driverStatus": {
+      "available": "متاح",
+      "unavailable": "غير متاح",
+      "pending": "معلق",
+      "banned": "محظور"
+    },
+    "loadingStatus": {
+      "loaded": "محمل",
+      "unloaded": "غير محمل",
+      "pending": "معلق"
+    },
+
+    "documentStatus": {
+      "approved": "موثق",
+      "rejected": "غير موثق",
+      "pending": "معلق"
+    }
+  },
+  "loadingRequestsPage": {
+    "header": {
+      "title": "ادارة طلبات التحميل",
+      "description": "مراجعة وإدارة طلبات تحميل السائقين من المصنع"
+    },
+    "statistics": {
+      "total": "مجموع طلبات التحميل",
+      "active": "طلبات التحميل المعلقة",
+      "inactive": "طلبات التحميل الجارية",
+      "blocked": "طلبات التحميل  المكتملة"
+    },
+    "table": {
+      "columns": {
+        "index": "#",
+        "requestId": "رقم الطلب",
+        "driverName": "اسم السائق",
+        "vehicleNumber": "رقم اللوحة",
+        "requestStatus": "حالة الطلب",
+        "quantity": "الكمية",
+        "requestTime": "وقت الطلب",
+        "loadingTime": "ميعاد التحميل",
+        "actions": "الإجراءات"
+      },
+      "empty": {
+        "title": "لا توجد طلبات تحميل حالياً",
+        "description": "ستظهر طلبات التحميل هنا بمجرد تقديمها من قبل السائقين."
       }
     }
   },

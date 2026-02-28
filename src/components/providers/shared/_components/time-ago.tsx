@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useLocale } from "next-intl";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -11,14 +12,24 @@ dayjs.extend(relativeTime);
 export default function TimeAgo({ time }: { time: string }) {
   const locale = useLocale(); // "ar" أو "en"
 
-  dayjs.locale(locale);
+  // SSR + أول رندر على العميل يطلعوا نفس القيمة (تاريخ ثابت)
+  const [display, setDisplay] = useState(() => {
+    const orderTime = dayjs(time);
+    return orderTime.format("DD/MM/YYYY");
+  });
 
-  const orderTime = dayjs(time);
-  const now = dayjs();
+  useEffect(() => {
+    dayjs.locale(locale);
 
-  if (now.diff(orderTime, "hour") >= 24) {
-    return <span>{orderTime.format("DD/MM/YYYY")}</span>;
-  }
+    const orderTime = dayjs(time);
+    const now = dayjs();
 
-  return <span>{orderTime.fromNow()}</span>;
+    if (now.diff(orderTime, "hour") >= 24) {
+      setDisplay(orderTime.format("DD/MM/YYYY"));
+    } else {
+      setDisplay(orderTime.fromNow());
+    }
+  }, [time, locale]);
+
+  return <span>{display}</span>;
 }

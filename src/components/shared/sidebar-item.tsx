@@ -13,16 +13,7 @@ export default function SidebarLinkItem({
 }) {
   const pathname = usePathname();
 
-  const isActive =
-    href === "/"
-      ? pathname === "/"
-      : pathname.startsWith(href);
-
-  console.log({
-    pathname,
-    href,
-    isActive,
-  });
+  const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
     <li className="mb-2">

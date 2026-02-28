@@ -1,16 +1,16 @@
 import React from "react";
 
-interface UserStatisticsItemProps {
+interface DashboardStatCardProps {
   title: string;
   value: number;
   valueColor: string;
 }
 
-export default function UserStatisticsItem({
+export default function DashboardStatCard({
   title,
   value,
   valueColor,
-}: UserStatisticsItemProps) {
+}: DashboardStatCardProps) {
   return (
     <div className="h-32 bg-white border border-[#E5E7EB] rounded-xl p-6 flex flex-col justify-between">
       <h4 className="text-sm text-[#4A5565]">{title}</h4>
