@@ -15,7 +15,7 @@ export default function PageTitleWithBack({
       <h1 className="text-xl font-bold text-[#101828]">{title}</h1>
 
       <Link
-        href={backHref}
+        href={backHref as any}
         className="text-lg font-semibold mt-2 flex items-center text-[#344054] gap-1"
       >
         رجوع

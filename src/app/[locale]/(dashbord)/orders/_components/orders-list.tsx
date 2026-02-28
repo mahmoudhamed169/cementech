@@ -1,4 +1,3 @@
-import { RecentOrdersTable } from "../../_components/recent-orders-table";
 import OrderHeaderList from "../../users/_components/order-header-list";
 import OrderTable from "./order-table/order.table";
 

@@ -4,8 +4,10 @@ import PageTitleWithBack from "./_components/page-title-with-back";
 import UserActions from "./_components/user-actions";
 import UserDetails from "./_components/user-details";
 
+import { User } from "@/src/lib/constants/user";
+
 export default function page() {
-  const user = {
+  const user: User = {
     id: "USR001",
     userName: "أحمد علي",
     organizationName: "مؤسسة النور",

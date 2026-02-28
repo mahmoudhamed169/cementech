@@ -2,7 +2,9 @@
 
 import { useTranslations } from "next-intl";
 
-type DocumentStatus = "approved" | "rejected" | "pending";
+// add "accepted" since some APIs return that value
+// we treat it the same as approved
+export type DocumentStatus = "approved" | "accepted" | "rejected" | "pending";
 
 type DocumentStatusBadgeProps = {
   status: DocumentStatus;
@@ -18,6 +20,7 @@ export default function DocumentStatusBadge({
 
   const statusStyles: Record<DocumentStatus, string> = {
     approved: "bg-green-100 text-green-700",
+    accepted: "bg-green-100 text-green-700",
     rejected: "bg-gray-100 text-gray-600",
     pending: "bg-yellow-100 text-yellow-700",
   };

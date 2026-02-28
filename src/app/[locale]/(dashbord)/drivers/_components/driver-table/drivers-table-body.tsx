@@ -55,7 +55,7 @@ export default function DriversTableBody({ drivers }: Props) {
             <div className="flex items-center justify-center">
               {/* <UserActions user={user} /> */}
               <Link
-                href={`/drivers/${driver.id}`}
+                href={`/drivers/${driver.id}` as any}
                 className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
               >
                 <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />

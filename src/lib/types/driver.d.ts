@@ -9,6 +9,7 @@ export interface DriverProfile {
   user_id: string;
   driver_name: string;
   residence_location: string;
+  phone?: string;
 
   personal_photo: string;
   driver_license_front: string;
@@ -31,7 +32,8 @@ export interface DriverProfile {
   driver_status: "pending" | "approved" | "rejected" | string;
   driver_request_status: "not loaded" | "loaded" | string;
 
-  document_verify: "pending" | "approved" | "rejected" | string;
+  // may come as "approved" or "accepted" from backend
+  document_verify: "pending" | "approved" | "accepted" | "rejected";
 
   current_request_id: string | null;
   request: DriverRequest;

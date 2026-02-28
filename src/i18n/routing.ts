@@ -10,5 +10,6 @@ export const routing = defineRouting({
   // Map of pathnames to localized pathnames
   pathnames: {
     "/": { en: "/", ar: "/" },
+    "/orders": { en: "/orders", ar: "/orders" },
   },
 });

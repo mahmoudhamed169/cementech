@@ -3,7 +3,13 @@
 import StatsProgress from "./stats-progress";
 import { useTranslations } from "next-intl";
 
-const driversStatusConfig = [
+type DriverStatus = {
+  labelKey: string;
+  value: number;
+  type: "AVAILABLE" | "IN_DELIVERY" | "UNAVAILABLE";
+};
+
+const driversStatusConfig: DriverStatus[] = [
   {
     labelKey: "available",
     value: 156,

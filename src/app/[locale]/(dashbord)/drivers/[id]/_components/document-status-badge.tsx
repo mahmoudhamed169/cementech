@@ -1,6 +1,6 @@
 import { CircleCheckBig, Clock, CircleX } from "lucide-react";
 
-type DocumentStatus = "accepted" | "pending" | "rejected";
+type DocumentStatus = "accepted" | "approved" | "pending" | "rejected";
 
 interface Props {
   status: DocumentStatus;
@@ -9,6 +9,13 @@ interface Props {
 export default function DocumentStatusBadge({ status }: Props) {
   const config = {
     accepted: {
+      label: "موثق",
+      color: "text-green-600",
+      dot: "bg-green-600",
+      icon: <CircleCheckBig size={15} />,
+    },
+    approved: {
+      // backend may use "approved" instead of "accepted"
       label: "موثق",
       color: "text-green-600",
       dot: "bg-green-600",

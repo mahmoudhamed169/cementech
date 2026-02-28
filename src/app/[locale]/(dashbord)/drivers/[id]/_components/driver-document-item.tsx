@@ -2,7 +2,7 @@ import { Download, FileText } from "lucide-react";
 import DocumentStatusBadge from "./document-status-badge";
 import { Link } from "@/src/i18n/navigation";
 
-type DocumentStatus = "accepted" | "pending" | "rejected";
+export type DocumentStatus = "accepted" | "approved" | "pending" | "rejected";
 
 interface DriverDocumentItemProps {
   title: string;
@@ -25,7 +25,11 @@ export default function DriverDocumentItem({
       </div>
 
       <div className="flex gap-4 items-center px-4 py-3 border-[#E5E7EB]">
-        <Link href={link} className="text-[#344054] flex items-center gap-1.5">
+        {/* casting to any because link can be external or dynamic path */}
+        <Link
+          href={link as any}
+          className="text-[#344054] flex items-center gap-1.5"
+        >
           <Download size={20} />
         </Link>
 
