@@ -1,12 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Order } from "@/src/lib/types/orders/order";
 import OrderLocationDetails from "@/src/components/shared/order-location-details";
 import { OrderData } from "@/src/lib/services/orders/spacific-order";
 
 interface OrderLocationSectionProps {
-  order: Order;
+  order: OrderData;
 }
 
 export default function OrderLocationSection({

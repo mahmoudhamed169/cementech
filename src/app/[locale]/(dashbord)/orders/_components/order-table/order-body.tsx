@@ -1,3 +1,4 @@
+
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 import dayjs from "dayjs";
@@ -6,9 +7,6 @@ import "dayjs/locale/ar";
 import "dayjs/locale/en";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
 import TimeAgo from "@/src/components/providers/shared/_components/time-ago";
-
-import { OrderActions } from "@/src/app/[locale]/(dashbord)/orders/_components/order-table/order-actions/order-actions";
-import { useTranslations } from "next-intl";
 
 import { Order } from "@/src/lib/types/orders/order";
 import DriverStatusCell from "./driver-status-cell";
@@ -21,8 +19,6 @@ import OrderActionsWrapper from "./order-actions/_components/order-actions-wrapp
 dayjs.extend(relativeTime);
 
 export default function OrderTableBody({ orders }: { orders: Order[] }) {
-  const t = useTranslations("recentOrders");
-
   return (
     <TableBody>
       {orders.map((order, index) => (
@@ -69,7 +65,7 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
 
           {/* options actions */}
           <TableCell className="text-center">
-            <div className="flex items-center justify-center gap-2.5">
+            <div className="flex items-center justify-center space-x-2">
               {/* assignDriver */}
               <OrderAssignDriver
                 hasDrivers={order.has_drivers}
@@ -78,9 +74,8 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
                 orderId={order.id}
               />
 
-              {/* <OrderActionsWrapper orderId={order.id} /> */}
-
-              <OrderActions order={order} orderId={order.id} />
+              {/* Order Actions */}
+              <OrderActionsWrapper orderId={order.id} />
             </div>
           </TableCell>
         </TableRow>

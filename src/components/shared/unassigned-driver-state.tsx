@@ -3,12 +3,11 @@
 import { Button } from "@/components/ui/button";
 import { UserPlus } from "lucide-react";
 import { AssigneDriver } from "./assigne-driver-dialog";
-import { Order } from "@/src/lib/types/orders/order";
 import { useTranslations } from "next-intl";
 import { OrderData } from "@/src/lib/services/orders/spacific-order";
 
 interface UnassignedDriverStateProps {
-  order: Order;
+  order: OrderData;
 }
 
 export default function UnassignedDriverState({

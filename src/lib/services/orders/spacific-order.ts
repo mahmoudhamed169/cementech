@@ -36,6 +36,8 @@ export interface OrderData {
   factory_address: string;
   orderLogs: OrderLog[];
   drivers: Driver[];
+  customer_name?: string | null;
+  phone?: string;
 }
 
 export interface OrderResponse {

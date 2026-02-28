@@ -20,7 +20,8 @@ export default function OrderAssignDriver({
 }: OrderAssignDriverProps) {
   const t = useTranslations("recentOrders");
 
-  if (hasDrivers) return null;
+  if (hasDrivers)
+    return <div className="w-5 h-5 flex items-center justify-center"></div>;
 
   return (
     <div className="w-5 h-5 flex items-center justify-center">

@@ -1,11 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Order } from "@/src/lib/types/orders/order";
 import InfoSection from "@/src/components/shared/info-section";
+import { OrderData } from "@/src/lib/services/orders/spacific-order";
 
 interface CustomerInfoSectionProps {
-  order: Order;
+  order: OrderData;
 }
 
 export default function CustomerInfoSection({

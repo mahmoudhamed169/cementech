@@ -1,13 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Order } from "@/src/lib/types/orders/order";
 import { InfoCard } from "@/src/components/shared/info-card";
 import TimeAgo from "@/src/components/providers/shared/_components/time-ago";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
+import { OrderData } from "@/src/lib/services/orders/spacific-order";
 
 interface OrderInfoCardsProps {
-  order: Order;
+  order: OrderData;
 }
 
 export default function OrderInfoCards({ order }: OrderInfoCardsProps) {

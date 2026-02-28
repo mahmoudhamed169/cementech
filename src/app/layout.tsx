@@ -27,9 +27,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${ibmArabic.variable} ${ibmArabic.className}  `}
+      className={`${cairo.variable} ${ibmArabic.variable} ${ibmArabic.className}`}
     >
-      <body>{children}</body>
+      <body className="antialiased" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   );
 }
