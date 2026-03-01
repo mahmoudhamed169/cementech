@@ -6,8 +6,8 @@ export interface Driver {
   name: string;
   status: "free" | "busy";
   document_verify: "accepted" | "pending" | "rejected";
-  driver_request_status: "pending" | "approved" | "rejected";
-  driver_status: "free" | "busy" | string;
+  driver_request_status: "loaded" | "not loaded" | "pending";
+  driver_status: "free" | "offline" | "pending" | "blocked";
   total_delivered_orders: number;
   role: "driver";
   verified: boolean;

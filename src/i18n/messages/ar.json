@@ -224,19 +224,19 @@
       }
     },
     "driverStatus": {
-      "available": "متاح",
-      "unavailable": "غير متاح",
+      "free": "متاح",
+      "offline": "غير متصل",
       "pending": "معلق",
-      "banned": "محظور"
+      "blocked": "محظور"
     },
     "loadingStatus": {
       "loaded": "محمل",
-      "unloaded": "غير محمل",
+      "not loaded": "غير محمل",
       "pending": "معلق"
     },
 
     "documentStatus": {
-      "approved": "موثق",
+      "accepted": "موثق",
       "rejected": "غير موثق",
       "pending": "معلق"
     }

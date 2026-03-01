@@ -219,14 +219,14 @@
       }
     },
     "driverStatus": {
-      "available": "Available",
-      "unavailable": "Unavailable",
+      "free": "Free",
+      "offline": "Offline",
       "pending": "Pending",
-      "banned": "Banned"
+      "blocked": "Blocked"
     },
     "loadingStatus": {
       "loaded": "Loaded",
-      "unloaded": "Unloaded",
+      "not loaded": "Unloaded",
       "pending": "Pending"
     },
     "documentStatus": {

@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-type LoadingStatus = "loaded" | "unloaded" | "pending";
+type LoadingStatus = "loaded" | "not loaded" | "pending";
 
 type LoadingStatusBadgeProps = {
   status: LoadingStatus;
@@ -16,9 +16,9 @@ export default function LoadingStatusBadge({
   const baseStyle =
     "px-3 py-1 rounded-full text-xs font-medium inline-flex items-center justify-center";
 
-  const statusStyles: Record<LoadingStatus, string> = {
+  const statusStyles: Record<string, string> = {
     loaded: "bg-green-100 text-green-700",
-    unloaded: "bg-gray-100 text-gray-600",
+    "not loaded": "bg-gray-100 text-gray-600",
     pending: "bg-yellow-100 text-yellow-700",
   };
 
