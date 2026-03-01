@@ -1,4 +1,3 @@
-
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 import dayjs from "dayjs";
@@ -72,6 +71,7 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
                 truckQuantity={order.truck_quantity}
                 orderCode={order.code}
                 orderId={order.id}
+                productId={order.product_id}
               />
 
               {/* Order Actions */}

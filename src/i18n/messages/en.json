@@ -92,6 +92,16 @@
       "many": "Tons"
     }
   },
+  "orders": {
+    "statistics": {
+      "total": "Total Orders",
+      "delivered": "Completed Orders",
+      "in_preparation": "Orders in Preparation",
+      "under_review": "Pending Orders",
+      "delivery": "Ongoing Orders",
+      "canceled": "Canceled Orders"
+    }
+  },
   "orderActions": {
     "orderNumber": "Order Number",
     "invoice": "Invoice",

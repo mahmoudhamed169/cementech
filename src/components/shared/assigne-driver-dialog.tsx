@@ -30,11 +30,13 @@ export function AssigneDriver({
   orderCode,
   orderId,
   numOfShipments,
+  productId,
   children,
 }: {
   orderCode: string;
   orderId: string;
   numOfShipments: number;
+  productId: String;
   children: React.ReactNode;
 }) {
   const [selectedDrivers, setSelectedDrivers] = useState<string[]>([]);
@@ -73,9 +75,7 @@ export function AssigneDriver({
         </DialogHeader>
 
         <div className="min-h-85 border-y border-[#E5E7EB] p-6 space-y-4 max-h-100 overflow-y-auto">
-          <h6 className="text-[#4A5565] mb-2">
-            {t("availableDrivers")}
-          </h6>
+          <h6 className="text-[#4A5565] mb-2">{t("availableDrivers")}</h6>
 
           {drivers.map((driver) => {
             const isSelected = selectedDrivers.includes(driver.id);

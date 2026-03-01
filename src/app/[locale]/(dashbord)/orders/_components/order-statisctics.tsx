@@ -1,38 +1,32 @@
-const statistics = [
-  { name: "مجموع الطلبات", value: 423 },
-  { name: "الطلبات المكتملة", value: 320 },
-  { name: "الطلبات المعلقة", value: 48 },
-  { name: "الطلبات الجارية", value: 35 },
-  { name: "الطلبات الملغاة", value: 20 },
-];
+import { getOrderStats } from "@/src/lib/services/orders/order-stats";
+import OrdersStatisticsClient from "./orders-statistics-client";
 
-export default function OrdersStatistics() {
-  return (
-    <section>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
-        {statistics.map((item) => (
-          <OrderStatisticsItem
-            key={item.name}
-            title={item.name}
-            value={item.value}
-          />
-        ))}
-      </div>
-    </section>
-  );
-}
+export default async function OrdersStatistics() {
+  const stats = await getOrderStats({ lang: "en" });
+  const arabicToEnglish: Record<string, string> = {
+    "تم التسليم": "delivered",
+    ملغي: "canceled",
+    "قيد التجهيز": "in_preparation",
+    "تحت المراجعة": "under_review",
+    "قيد التوصيل": "delivery",
+  };
 
-function OrderStatisticsItem({
-  title,
-  value,
-}: {
-  title: string;
-  value: number;
-}) {
-  return (
-    <div className="h-33 bg-white border border-[#E5E7EB] rounded-xl p-6 flex flex-col justify-between">
-      <h4 className="text-sm text-[#4A5565]">{title}</h4>
-      <h5 className="font-bold text-2xl text-[#101828]">{value}</h5>
-    </div>
+  const statusMap: Record<string, number> = stats.data.statuses.reduce(
+    (acc, s) => {
+      const key = arabicToEnglish[s.status] ?? s.status;
+      acc[key] = s.totalOrders;
+      return acc;
+    },
+    {} as Record<string, number>,
   );
+  const statistics = [
+    { key: "total", value: stats.data.total },
+    { key: "delivered", value: statusMap["delivered"] ?? 0 },
+    { key: "in_preparation", value: statusMap["in_preparation"] ?? 0 },
+    { key: "under_review", value: statusMap["under_review"] ?? 0 },
+    { key: "delivery", value: statusMap["delivery"] ?? 0 },
+    { key: "canceled", value: statusMap["canceled"] ?? 0 },
+  ];
+
+  return <OrdersStatisticsClient statistics={statistics} />;
 }

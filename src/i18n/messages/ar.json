@@ -96,6 +96,17 @@
     }
   },
 
+  "orders": {
+    "statistics": {
+      "total": "مجموع الطلبات",
+      "delivered": "الطلبات المكتملة",
+      "in_preparation": "الطلبات قيد التجهيز",
+      "under_review": "الطلبات المعلقة",
+      "delivery": "الطلبات الجارية",
+      "canceled": "الطلبات الملغاة"
+    }
+  },
+
   "orderActions": {
     "orderNumber": "الطلب رقم",
     "invoice": "الفاتورة",
