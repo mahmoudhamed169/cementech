@@ -2,12 +2,9 @@
 
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import EmptyTableState from "@/src/components/shared/empty-tablestate";
-
 import { useTranslations } from "next-intl";
 import { UserStatusBadge } from "../user-status-badge";
-import { getTotalPaid } from "@/src/lib/utils/utils";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
-import { UserActions } from "../user-actions";
 import { Eye } from "lucide-react";
 import { Link } from "@/src/i18n/navigation";
 import { Customer } from "@/src/lib/types/users";

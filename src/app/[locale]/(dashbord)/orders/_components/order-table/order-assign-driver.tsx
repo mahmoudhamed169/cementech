@@ -10,6 +10,7 @@ interface OrderAssignDriverProps {
   truckQuantity: number;
   orderCode: string;
   orderId: string;
+  productId: string;
 }
 
 export default function OrderAssignDriver({
@@ -17,6 +18,7 @@ export default function OrderAssignDriver({
   truckQuantity,
   orderCode,
   orderId,
+  productId,
 }: OrderAssignDriverProps) {
   const t = useTranslations("recentOrders");
 

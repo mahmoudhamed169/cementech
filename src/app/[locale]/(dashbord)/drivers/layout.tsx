@@ -2,12 +2,18 @@ import DriversList from "./_components/drivers-list";
 import DriverStatistics from "./_components/driver-statisctics";
 import DriverPageHeader from "./_components/driver-header";
 import React from "react";
+import { getUsersStats } from "@/src/lib/services/user-state";
 
-export default function layout({ children }: { children: React.ReactNode }) {
+export default async function layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const stats = await getUsersStats({ type: "driver" });
   return (
     <div className=" min-h-screen pt-12 pb-5 px-6 space-y-6 ">
       <DriverPageHeader />
-      <DriverStatistics />
+      <DriverStatistics stats={stats.data} />
       {children}
     </div>
   );

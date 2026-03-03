@@ -41,13 +41,21 @@ export default function DriversTableBody({ drivers }: Props) {
           <TableCell>{driver.name}</TableCell>
           <TableCell>{driver.phone}</TableCell>
           <TableCell>
-            {/* <DriverStatusBadge status={driver.status} /> */}
+            {driver.driver_status ? (
+              <DriverStatusBadge status={driver.driver_status} />
+            ) : (
+              "-"
+            )}
           </TableCell>
           <TableCell>
-            {/* <LoadingStatusBadge status={driver.driver_request_status} /> */}
+            <LoadingStatusBadge status={driver.driver_request_status} />
           </TableCell>
           <TableCell>
-            <DocumentStatusBadge status={driver.document_verify} />
+            {driver.document_verify ? (
+              <DocumentStatusBadge status={driver.document_verify} />
+            ) : (
+              "-"
+            )}
           </TableCell>
           <TableCell>{driver.total_delivered_orders}</TableCell>
           {/* actions */}

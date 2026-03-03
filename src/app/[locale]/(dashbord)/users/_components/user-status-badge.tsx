@@ -10,7 +10,7 @@ interface UserStatusBadgeProps {
 }
 
 export const UserStatusBadge: React.FC<UserStatusBadgeProps> = ({ status }) => {
-  const t = useTranslations("userPage.userStatus"); // لازم تعمل ملفات الترجمة
+  const t = useTranslations("userPage.userStatus");
 
   const colors: Record<UserStatus, string> = {
     active: "bg-green-100 text-green-800",

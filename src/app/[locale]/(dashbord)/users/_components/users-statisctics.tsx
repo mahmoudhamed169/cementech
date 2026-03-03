@@ -1,20 +1,31 @@
 "use client";
 
-import { userStatistics } from "@/src/lib/constants/user-statistics";
 import { useTranslations } from "next-intl";
 import DashboardStatCard from "../../_components/dashboard-statcard";
+import { UsersStat } from "@/src/lib/services/user-state";
 
-export default function UsersStatistics() {
+interface UsersStatisticsProps {
+  stats: UsersStat;
+}
+
+const statsConfig = [
+  { key: "total", color: "text-[#101828]" },
+  { key: "active", color: "text-green-600" },
+  { key: "inactive", color: "text-yellow-600" },
+  { key: "blocked", color: "text-red-600" },
+] as const;
+
+export default function UsersStatistics({ stats }: UsersStatisticsProps) {
   const t = useTranslations("userPage.statistics");
 
   return (
     <section>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-        {userStatistics.map((item) => (
+        {statsConfig.map((item) => (
           <DashboardStatCard
             key={item.key}
             title={t(item.key)}
-            value={item.value}
+            value={stats[item.key]}
             valueColor={item.color}
           />
         ))}

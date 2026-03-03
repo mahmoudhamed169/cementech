@@ -18,9 +18,9 @@ export async function getCustomers(page = 1, limit = 8) {
 }
 
 export default async function UsersTableWrapper() {
-  const users = await getCustomers(2, 8); // Example: Fetch page 2 with 8 users per page
+  const users = await getCustomers(1, 10);
 
-  const { page, pageCount } = users.meta; // Destructure the actual response to get users, total count, etc.
+  const { page, pageCount } = users.meta;
 
   return (
     <>

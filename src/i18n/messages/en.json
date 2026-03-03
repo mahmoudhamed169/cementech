@@ -92,6 +92,16 @@
       "many": "Tons"
     }
   },
+  "orders": {
+    "statistics": {
+      "total": "Total Orders",
+      "delivered": "Completed Orders",
+      "in_preparation": "Orders in Preparation",
+      "under_review": "Pending Orders",
+      "delivery": "Ongoing Orders",
+      "canceled": "Canceled Orders"
+    }
+  },
   "orderActions": {
     "orderNumber": "Order Number",
     "invoice": "Invoice",
@@ -209,14 +219,14 @@
       }
     },
     "driverStatus": {
-      "available": "Available",
-      "unavailable": "Unavailable",
+      "free": "Free",
+      "offline": "Offline",
       "pending": "Pending",
-      "banned": "Banned"
+      "blocked": "Blocked"
     },
     "loadingStatus": {
       "loaded": "Loaded",
-      "unloaded": "Unloaded",
+      "not loaded": "Unloaded",
       "pending": "Pending"
     },
     "documentStatus": {
@@ -235,6 +245,12 @@
       "active": "Pending Loading Requests",
       "inactive": "Ongoing Loading Requests",
       "blocked": "Completed Loading Requests"
+    },
+    "loadingRequestHeader": {
+      "title": "Loading Requests",
+      "search": {
+        "placeholder": "Search by name or phone number ..."
+      }
     },
     "table": {
       "columns": {
