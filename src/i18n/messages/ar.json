@@ -252,6 +252,13 @@
       "inactive": "طلبات التحميل الجارية",
       "blocked": "طلبات التحميل  المكتملة"
     },
+
+    "loadingRequestHeader": {
+      "title": "طلبات التحميل",
+      "search": {
+        "placeholder": "ابحث عن اسم او رقم جوال ..."
+      }
+    },
     "table": {
       "columns": {
         "index": "#",

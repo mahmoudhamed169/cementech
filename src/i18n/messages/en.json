@@ -246,6 +246,12 @@
       "inactive": "Ongoing Loading Requests",
       "blocked": "Completed Loading Requests"
     },
+    "loadingRequestHeader": {
+      "title": "Loading Requests",
+      "search": {
+        "placeholder": "Search by name or phone number ..."
+      }
+    },
     "table": {
       "columns": {
         "index": "#",

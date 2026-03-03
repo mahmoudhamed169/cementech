@@ -1,6 +1,4 @@
-// drivers-table-wrapper.tsx
-import { dummyDrivers } from "@/src/lib/constants/drivers";
-import DriversTable from "./drivers-table";
+
 import DriversTableBody from "./drivers-table-body";
 import { getUsers } from "@/src/lib/services/users";
 import { Driver } from "@/src/lib/types/users";
