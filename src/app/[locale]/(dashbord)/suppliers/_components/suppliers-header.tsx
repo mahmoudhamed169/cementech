@@ -1,7 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { CirclePlus } from "lucide-react";
+
 import { useTranslations } from "next-intl";
+import { AddNewFactory } from "./new-factory";
 
 export default function SuppliersHeader() {
   const t = useTranslations("suppliersPage.header");
@@ -11,10 +11,7 @@ export default function SuppliersHeader() {
         <h2 className="text-2xl font-bold">{t("title")}</h2>
         <p>{t("description")}</p>
       </div>
-      <Button className="min-w-46  min-h-12 rounded-xl bg-[#00A63E] text-white p-3 flex justify-center items-center">
-        <CirclePlus />
-        {t("btn")}
-      </Button>
+      <AddNewFactory />
     </div>
   );
 }

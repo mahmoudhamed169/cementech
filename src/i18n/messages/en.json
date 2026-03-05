@@ -294,8 +294,8 @@
   },
   "suppliersPage": {
     "header": {
-      "title": "Factories & Products Settings",
-      "description": "Manage products and approved factory locations on the platform.",
+      "title": "Factory & Product Settings",
+      "description": "Manage products and approved factory locations on the platform",
       "btn": "Add New Factory"
     },
     "status": {
@@ -305,7 +305,7 @@
     "factoriesListHeader": {
       "title": "Factories",
       "search": {
-        "placeholder": "Search by factory name or number..."
+        "placeholder": "Search by factory number or name..."
       }
     },
     "table": {
@@ -313,11 +313,61 @@
         "index": "#",
         "factoryNumber": "Factory Number",
         "factoryName": "Factory Name",
-        "contactInfo": "Contact Info",
+        "contactInfo": "Contact",
         "region": "Region",
         "productsCount": "Products Count",
         "status": "Status",
         "actions": "Actions"
+      }
+    },
+    "addFactory": {
+      "title": "Add New Factory",
+      "sectionTitle": "Basic Information",
+      "fields": {
+        "nameAr": {
+          "label": "Factory Name (Arabic)",
+          "placeholder": "e.g. مصنع النور"
+        },
+        "nameEn": {
+          "label": "Factory Name (English)",
+          "placeholder": "e.g. Al Noor Factory"
+        },
+        "region": {
+          "label": "Region / Governorate",
+          "placeholder": "e.g. Riyadh"
+        },
+        "phone": {
+          "label": "Contact Number",
+          "placeholder": "+966 5X XXX XXXX"
+        },
+        "status": {
+          "label": "Status"
+        },
+        "location": {
+          "label": "Geographic Location",
+          "placeholder": "Select location",
+          "currentLocation": "My Current Location",
+          "locating": "Locating...",
+          "noGeolocation": "Your browser does not support geolocation",
+          "geolocationError": "Could not get your location, please check browser permissions"
+        }
+      },
+      "validation": {
+        "nameArRequired": "Factory name in Arabic is required",
+        "nameEnRequired": "Factory name in English is required",
+        "nameEnInvalid": "Must contain English letters only",
+        "regionRequired": "Region / Governorate is required",
+        "phoneRequired": "Contact number is required",
+        "phoneInvalid": "Invalid phone number"
+      },
+      "buttons": {
+        "submit": "Save Factory",
+        "cancel": "Cancel",
+        "submitting": "Saving..."
+      },
+      "messages": {
+        "success": "Factory added successfully",
+        "error": "An error occurred while adding the factory"
       }
     }
   }

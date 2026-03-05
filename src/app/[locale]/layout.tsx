@@ -7,6 +7,7 @@ import { Cairo, IBM_Plex_Sans_Arabic } from "next/font/google";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
 import DirectionProvider from "@/src/components/providers/shared/_components/direction-provider";
+import { Toaster } from "sonner";
 
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
@@ -64,6 +65,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           {children}
         </Providers>
       </div>
+      <Toaster />
     </DirectionProvider>
   );
 }
