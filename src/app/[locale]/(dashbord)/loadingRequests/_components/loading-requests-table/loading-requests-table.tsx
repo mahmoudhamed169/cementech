@@ -6,17 +6,22 @@ import LoadingReqsTableWrapper from "./loadingreqs-table-wrapper";
 
 export default function LoadingRequestsTable() {
   return (
-    <div>
-      <Table>
-        {/* Header */}
-        <LoadingReqTableHead />
+    <Table>
+      {/* Header */}
+      <LoadingReqTableHead />
 
-        {/* body */}
+      {/* body */}
 
-        <Suspense fallback={<TableLoadingSpinner colSpan={9} />}>
-          <LoadingReqsTableWrapper />
-        </Suspense>
-      </Table>
-    </div>
+    بالنسبة لرفع المشروع:
+
+سيتم رفع الموقع على سيرفر احترافي لضمان السرعة والاستقرار، ولكن تكلفة السيرفر والاستضافة والدومين تكون على حضرتك (وأساعدك في اختيار الأفضل حسب الميزانية).
+
+وأوفر لحضرتك دعم فني مجاني لمدة شهرين بعد التسليم، وأي مشكلة تقنية يتم حلها بدون أي رسوم إضافية خلال هذه الفترة.
+
+هدفي إن المشروع يطلع بشكل احترافي ومستقر ويبدأ يشتغل ويحقق نتائج فعلاً.
+
+في انتظار تأكيد حضرتك علشان نبدأ بإذن الله.
+
+    </Table>
   );
 }

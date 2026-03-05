@@ -13,8 +13,8 @@
     "users": "المستخدمين",
     "payments": "المدفوعات",
     "invoices": "الفواتير",
-
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "suppliers": "المصانع و المنتجات"
   },
   "welcome": {
     "title": "مرحبًا بك، {name}!",
@@ -294,6 +294,35 @@
         "date": "التاريخ",
         "totalPaid": "اجمالي الدفع",
         "actions": "الاجراءات"
+      }
+    }
+  },
+  "suppliersPage": {
+    "header": {
+      "title": "إعدادات المصانع و المنتجات",
+      "description": "إدارة المنتجات و مواقع المصانع المعتمدة في المنصة ",
+      "btn": "اضافة مصنع جديد"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "factoriesListHeader": {
+      "title": "المصانع",
+      "search": {
+        "placeholder": "ابحث عن رقم او اسم المصنع..."
+      }
+    },
+    "table": {
+      "columns": {
+        "index": "#",
+        "factoryNumber": "رقم المصنع",
+        "factoryName": "اسم المصنع",
+        "contactInfo": "التواصل",
+        "region": "المنطقة",
+        "productsCount": "عدد المنتجات",
+        "status": "الحالة",
+        "actions": "الإجراءات"
       }
     }
   }

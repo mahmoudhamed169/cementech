@@ -13,7 +13,8 @@
     "users": "Users",
     "payments": "Payments",
     "invoices": "Invoices",
-    "settings": "Settings"
+    "settings": "Settings",
+    "suppliers": "Factories & Products"
   },
   "welcome": {
     "title": "Welcome, {name}!",
@@ -287,6 +288,35 @@
         "userPhoneNumber": "Client Phone Number",
         "date": "Date",
         "totalPaid": "Total Paid",
+        "actions": "Actions"
+      }
+    }
+  },
+  "suppliersPage": {
+    "header": {
+      "title": "Factories & Products Settings",
+      "description": "Manage products and approved factory locations on the platform.",
+      "btn": "Add New Factory"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "factoriesListHeader": {
+      "title": "Factories",
+      "search": {
+        "placeholder": "Search by factory name or number..."
+      }
+    },
+    "table": {
+      "columns": {
+        "index": "#",
+        "factoryNumber": "Factory Number",
+        "factoryName": "Factory Name",
+        "contactInfo": "Contact Info",
+        "region": "Region",
+        "productsCount": "Products Count",
+        "status": "Status",
         "actions": "Actions"
       }
     }
