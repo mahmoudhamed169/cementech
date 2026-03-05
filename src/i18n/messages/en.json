@@ -369,6 +369,21 @@
         "success": "Factory added successfully",
         "error": "An error occurred while adding the factory"
       }
+    },
+    "deleteFactory": {
+      "title": "Delete Factory",
+      "description": "Are you sure you want to delete",
+      "descriptionSuffix": "? This action cannot be undone.",
+      "warning": "All data associated with this factory will be permanently deleted",
+      "buttons": {
+        "cancel": "Cancel",
+        "confirm": "Yes, Delete",
+        "deleting": "Deleting..."
+      },
+      "messages": {
+        "success": "Factory deleted successfully",
+        "error": "An error occurred while deleting the factory"
+      }
     }
   }
 }

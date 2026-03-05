@@ -9,3 +9,9 @@ export async function addFactoryAction(data: AddFactoryFormValues) {
   // مثال على الـ response
   return { success: true, message: "تم إضافة المصنع بنجاح" };
 }
+
+export async function deleteFactoryAction(id: string) {
+  // TODO: DB call
+  console.log("Delete factory:", id);
+  return { success: true };
+}

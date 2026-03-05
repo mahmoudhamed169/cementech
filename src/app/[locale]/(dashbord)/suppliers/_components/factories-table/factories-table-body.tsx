@@ -2,6 +2,8 @@ import { Factory } from "@/src/lib/types/factories/factory";
 import EmptyLoadingRequests from "../../../loadingRequests/_components/loading-requests-table/empty-loading-requests";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import StatusBadge from "./status-badge";
+import { SquarePen, Trash } from "lucide-react";
+import { DeleteFactoryDialog } from "./delete-factory-dialog";
 
 interface Props {
   factories: Factory[];
@@ -47,7 +49,11 @@ export default function FactoriesTableBody({ factories }: Props) {
           </TableCell>
 
           {/* actions */}
-          <TableCell>-</TableCell>
+          <TableCell>
+            <div>
+              <DeleteFactoryDialog factoryId={"nnnn"} factoryName={"النور"} />
+            </div>
+          </TableCell>
         </TableRow>
       ))}
     </TableBody>
