@@ -368,6 +368,34 @@
       "messages": {
         "success": "Factory added successfully",
         "error": "An error occurred while adding the factory"
+      },
+      "productsManagement": {
+        "title": "Products Management",
+        "addBtn": "Add Product",
+        "empty": "No products have been added to this factory yet",
+        "columns": {
+          "index": "#",
+          "nameAr": "Product Name (Arabic)",
+          "nameEn": "Product Name (English)",
+          "price": "Product Price (SAR)"
+        },
+        "fields": {
+          "nameAr": {
+            "placeholder": "Enter product name in Arabic"
+          },
+          "nameEn": {
+            "placeholder": "Enter product name in English"
+          },
+          "price": {
+            "placeholder": "0.00"
+          }
+        },
+        "validation": {
+          "nameArRequired": "Product name in Arabic is required",
+          "nameEnRequired": "Product name in English is required",
+          "priceRequired": "Price is required",
+          "priceInvalid": "Price must be a positive number"
+        }
       }
     },
     "deleteFactory": {

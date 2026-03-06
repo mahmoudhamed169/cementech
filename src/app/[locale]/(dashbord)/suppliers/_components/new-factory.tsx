@@ -13,7 +13,7 @@ import {
 import { CirclePlus } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { AddFactoryForm, type AddFactoryFormValues  } from "./add-factory-form";
+import { AddFactoryForm, type AddFactoryFormValues } from "./add-factory-form";
 import { addFactoryAction } from "../_actions/factory.actions";
 
 export function AddNewFactory() {
@@ -44,7 +44,10 @@ export function AddNewFactory() {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="min-w-[1008px] bg-white border-0" dir={dir}>
+      <DialogContent
+        className="min-w-[1008px] bg-white border-0 max-h-[90vh] overflow-y-auto"
+        dir={dir}
+      >
         <DialogHeader>
           <DialogTitle className="py-4 border-b border-[#E5E7EB] font-bold text-xl">
             {t("addFactory.title")}

@@ -17,7 +17,7 @@ export default async function FacotoriesTableWrapper() {
       <FactoriesTableBody factories={factories.data} />
       {factories.data.length > 0 && (
         <>
-          {/* <TableFooter>
+          <TableFooter>
             <TableRow className="border-t border-b-0 border-[#E5E7EB] h-14 text-start">
               <TableCell colSpan={9}>
                 <PaginationInfo
@@ -33,11 +33,11 @@ export default async function FacotoriesTableWrapper() {
             </TableRow>
             <TableCell className="text-center" colSpan={9}>
               <DynamicPagination
-                totalPages={data.meta.pageCount}
-                currentPage={data.meta.page}
+                totalPages={factories.meta.pageCount}
+                currentPage={factories.meta.page}
               />
             </TableCell>
-          </TableFooter> */}
+          </TableFooter>
         </>
       )}
     </>

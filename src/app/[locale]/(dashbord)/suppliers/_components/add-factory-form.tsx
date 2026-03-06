@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import dynamic from "next/dynamic";
 import { useTranslations, useLocale } from "next-intl";
+import ProductsManagement from "./factories-table/products-management";
 
 const LocationPicker = dynamic(
   () => import("./location-picker").then((m) => m.LocationPicker),
@@ -31,7 +32,6 @@ interface AddFactoryFormProps {
   dir?: "rtl" | "ltr";
 }
 
-// type مؤقت برا عشان يُستخدم في الـ props
 type AddFactoryFormValues = {
   nameAr: string;
   nameEn: string;
@@ -39,6 +39,12 @@ type AddFactoryFormValues = {
   phone: string;
   status: boolean;
   location?: { lat: number; lng: number };
+  products?: {
+    nameAr: string;
+    nameEn: string;
+    price: string;
+    isActive: boolean;
+  }[];
 };
 
 export type { AddFactoryFormValues };
@@ -81,6 +87,21 @@ export function AddFactoryForm({
             lng: z.number(),
           })
           .optional(),
+        products: z
+          .array(
+            z.object({
+              nameAr: z.string().min(1, "اسم المنتج بالعربية مطلوب"),
+              nameEn: z.string().min(1, "Product name in English is required"),
+              price: z
+                .string()
+                .min(1, "السعر مطلوب")
+                .refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
+                  message: "يجب أن يكون السعر رقمًا موجبًا",
+                }),
+              isActive: z.boolean(),
+            }),
+          )
+          .optional(),
       }),
     [t],
   );
@@ -94,6 +115,7 @@ export function AddFactoryForm({
       phone: "",
       status: true,
       location: undefined,
+      products: [],
     },
   });
 
@@ -260,6 +282,8 @@ export function AddFactoryForm({
             )}
           />
         </div>
+
+        <ProductsManagement />
 
         <div className="flex justify-end gap-3 pt-6 mt-6 border-t border-[#E5E7EB]">
           {onCancel && (

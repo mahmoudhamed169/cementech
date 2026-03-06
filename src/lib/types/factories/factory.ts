@@ -18,8 +18,17 @@ export interface Factory {
   updated_at: string;
 }
 
+export interface PaginationMeta {
+  page: number;
+  limit: number;
+  itemCount: number;
+  pageCount: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
+}
 export interface FactoriesResponse {
   success: boolean;
   message: string;
   data: Factory[];
+  meta?: PaginationMeta;
 }

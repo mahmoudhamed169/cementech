@@ -373,6 +373,34 @@
       "messages": {
         "success": "تم إضافة المصنع بنجاح",
         "error": "حدث خطأ أثناء إضافة المصنع"
+      },
+      "productsManagement": {
+        "title": "إدارة المنتجات",
+        "addBtn": "اضافة منتج",
+        "empty": "لا يوجد منتجات مضافة لهذا المصنع",
+        "columns": {
+          "index": "#",
+          "nameAr": "اسم المنتج (باللغة العربية)",
+          "nameEn": "اسم المنتج (باللغة الإنجليزية)",
+          "price": "سعر المنتج (ر.س)"
+        },
+        "fields": {
+          "nameAr": {
+            "placeholder": "أدخل اسم المنتج بالعربية"
+          },
+          "nameEn": {
+            "placeholder": "Enter product name in English"
+          },
+          "price": {
+            "placeholder": "0.00"
+          }
+        },
+        "validation": {
+          "nameArRequired": "اسم المنتج بالعربية مطلوب",
+          "nameEnRequired": "Product name in English is required",
+          "priceRequired": "السعر مطلوب",
+          "priceInvalid": "يجب أن يكون السعر رقمًا موجبًا"
+        }
       }
     },
     "deleteFactory": {
