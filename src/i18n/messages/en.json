@@ -5,6 +5,29 @@
   "Metadata": {
     "title": "Cementech - Your Partner in Construction Technology"
   },
+
+  "loginPage": {
+    "phoneStep": {
+      "title": "Welcome 👋",
+      "subtitle": "Enter your phone number to access the dashboard",
+      "phoneLabel": "Phone Number",
+      "phonePlaceholder": "05xxxxxxxx",
+      "continueBtn": "Continue"
+    },
+    "otpStep": {
+      "title": "Verify Your Identity",
+      "subtitle": "We sent a verification code to",
+      "resend": "Didn't receive the message?",
+      "resendBtn": "Resend",
+      "confirmBtn": "Confirm",
+      "back": "Back"
+    },
+    "footer": {
+      "problem": "Having trouble?",
+      "support": "Contact Support",
+      "rights": "All rights reserved to Cementech © 2026"
+    }
+  },
   "sidebar": {
     "home": "Dashboard",
     "orders": "Orders",
