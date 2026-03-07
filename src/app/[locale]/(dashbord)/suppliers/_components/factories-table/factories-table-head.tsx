@@ -1,22 +1,21 @@
 "use client";
+
 import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useTranslations } from "next-intl";
 
-export default function LoadingReqTableHead() {
+export default function FactoriesTableHead() {
   const headers = [
     "index",
-    "requestId",
-    "driverName",
-    "vehicleNumber",
-    "requestStatus",
-    "quantity",
-    "requestTime",
-    "loadingTime",
+    "factoryNumber",
+    "factoryName",
+    "contactInfo",
+    "region",
+    "productsCount",
+    "status",
     "actions",
   ] as const;
 
-  const t = useTranslations("loadingRequestsPage.table.columns");
-
+  const t = useTranslations("suppliersPage.table.columns");
 
   return (
     <TableHeader>
@@ -27,7 +26,6 @@ export default function LoadingReqTableHead() {
             className="text-center text-[#364153] font-bold h-11"
           >
             {t(key)}
-            {/* {key} */}
           </TableHead>
         ))}
       </TableRow>

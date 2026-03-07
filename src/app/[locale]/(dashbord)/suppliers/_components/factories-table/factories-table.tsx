@@ -1,18 +1,19 @@
+import React, { Suspense } from "react";
+import FactoriesTableHead from "./factories-table-head";
 import { Table } from "@/components/ui/table";
-import LoadingReqTableHead from "./loading-req-table-head";
-import { Suspense } from "react";
 import TableLoadingSpinner from "@/src/components/shared/table-loading";
-import LoadingReqsTableWrapper from "./loadingreqs-table-wrapper";
+import FacotoriesTableWrapper from "./facotories-table-wrapper";
 
-export default function LoadingRequestsTable() {
+export default function FactoriesTable() {
   return (
     <Table>
       {/* Header */}
-      <LoadingReqTableHead />
+      <FactoriesTableHead />
 
       {/* body */}
+
       <Suspense fallback={<TableLoadingSpinner colSpan={9} />}>
-        <LoadingReqsTableWrapper />
+        <FacotoriesTableWrapper />
       </Suspense>
     </Table>
   );

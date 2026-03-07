@@ -4,6 +4,7 @@ import SidebarLinkItem from "./sidebar-item";
 import {
   CarFront,
   CircleDollarSign,
+  Factory,
   LayoutDashboard,
   ReceiptText,
   ScrollText,
@@ -52,6 +53,11 @@ const SidebarLinks = [
     href: "/settings",
     labelKey: "settings",
     icon: <Settings size={24} strokeWidth={1.75} />,
+  },
+  {
+    href: "/suppliers",
+    labelKey: "suppliers",
+    icon: <Factory size={24} strokeWidth={1.75} />,
   },
 ];
 

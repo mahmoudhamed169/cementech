@@ -13,8 +13,8 @@
     "users": "المستخدمين",
     "payments": "المدفوعات",
     "invoices": "الفواتير",
-
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "suppliers": "المصانع و المنتجات"
   },
   "welcome": {
     "title": "مرحبًا بك، {name}!",
@@ -294,6 +294,139 @@
         "date": "التاريخ",
         "totalPaid": "اجمالي الدفع",
         "actions": "الاجراءات"
+      }
+    }
+  },
+  "suppliersPage": {
+    "header": {
+      "title": "إعدادات المصانع و المنتجات",
+      "description": "إدارة المنتجات و مواقع المصانع المعتمدة في المنصة",
+      "btn": "اضافة مصنع جديد"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "factoriesListHeader": {
+      "title": "المصانع",
+      "search": {
+        "placeholder": "ابحث عن رقم او اسم المصنع..."
+      }
+    },
+    "table": {
+      "columns": {
+        "index": "#",
+        "factoryNumber": "رقم المصنع",
+        "factoryName": "اسم المصنع",
+        "contactInfo": "التواصل",
+        "region": "المنطقة",
+        "productsCount": "عدد المنتجات",
+        "status": "الحالة",
+        "actions": "الإجراءات"
+      }
+    },
+
+    "editFactory": {
+      "title": "تعديل المصنع",
+      "buttons": {
+        "submit": "حفظ التعديلات"
+      },
+      "messages": {
+        "success": "تم تعديل المصنع بنجاح",
+        "error": "حدث خطأ أثناء تعديل المصنع"
+      }
+    },
+    "addFactory": {
+      "title": "إضافة مصنع جديد",
+      "sectionTitle": "البيانات الأساسية",
+      "fields": {
+        "nameAr": {
+          "label": "اسم المصنع (باللغة العربية)",
+          "placeholder": "مثال: مصنع النور"
+        },
+        "nameEn": {
+          "label": "اسم المصنع (باللغة الإنجليزية)",
+          "placeholder": "e.g. Al Noor Factory"
+        },
+        "region": {
+          "label": "المنطقة / المحافظة",
+          "placeholder": "مثال: الرياض"
+        },
+        "phone": {
+          "label": "رقم التواصل",
+          "placeholder": "+966 5X XXX XXXX"
+        },
+        "status": {
+          "label": "الحالة"
+        },
+        "location": {
+          "label": "الموقع الجغرافي",
+          "placeholder": "اختر الموقع",
+          "currentLocation": "موقعي الحالي",
+          "locating": "جارٍ التحديد...",
+          "noGeolocation": "المتصفح لا يدعم تحديد الموقع",
+          "geolocationError": "تعذّر تحديد موقعك، تأكد من إذن الموقع في المتصفح"
+        }
+      },
+      "validation": {
+        "nameArRequired": "اسم المصنع بالعربية مطلوب",
+        "nameEnRequired": "اسم المصنع بالإنجليزية مطلوب",
+        "nameEnInvalid": "يجب أن يحتوي على أحرف إنجليزية فقط",
+        "regionRequired": "المنطقة / المحافظة مطلوبة",
+        "phoneRequired": "رقم التواصل مطلوب",
+        "phoneInvalid": "رقم هاتف غير صالح"
+      },
+      "buttons": {
+        "submit": "حفظ المصنع",
+        "cancel": "إلغاء",
+        "submitting": "جارٍ الحفظ..."
+      },
+      "messages": {
+        "success": "تم إضافة المصنع بنجاح",
+        "error": "حدث خطأ أثناء إضافة المصنع"
+      },
+      "productsManagement": {
+        "title": "إدارة المنتجات",
+        "addBtn": "اضافة منتج",
+        "empty": "لا يوجد منتجات مضافة لهذا المصنع",
+        "columns": {
+          "index": "#",
+          "nameAr": "اسم المنتج (باللغة العربية)",
+          "nameEn": "اسم المنتج (باللغة الإنجليزية)",
+          "price": "سعر المنتج (ر.س)"
+        },
+        "fields": {
+          "nameAr": {
+            "placeholder": "أدخل اسم المنتج بالعربية"
+          },
+          "nameEn": {
+            "placeholder": "Enter product name in English"
+          },
+          "price": {
+            "placeholder": "0.00"
+          }
+        },
+        "validation": {
+          "nameArRequired": "اسم المنتج بالعربية مطلوب",
+          "nameEnRequired": "Product name in English is required",
+          "priceRequired": "السعر مطلوب",
+          "priceInvalid": "يجب أن يكون السعر رقمًا موجبًا"
+        }
+      }
+    },
+    "deleteFactory": {
+      "title": "حذف المصنع",
+      "description": "هل أنت متأكد من حذف مصنع",
+      "descriptionSuffix": "؟ لا يمكن التراجع عن هذا الإجراء.",
+      "warning": "سيتم حذف جميع البيانات المرتبطة بهذا المصنع نهائياً",
+      "buttons": {
+        "cancel": "إلغاء",
+        "confirm": "نعم، احذف",
+        "deleting": "جارٍ الحذف..."
+      },
+      "messages": {
+        "success": "تم حذف المصنع بنجاح",
+        "error": "حدث خطأ أثناء حذف المصنع"
       }
     }
   }

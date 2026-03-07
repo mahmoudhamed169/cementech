@@ -13,7 +13,8 @@
     "users": "Users",
     "payments": "Payments",
     "invoices": "Invoices",
-    "settings": "Settings"
+    "settings": "Settings",
+    "suppliers": "Factories & Products"
   },
   "welcome": {
     "title": "Welcome, {name}!",
@@ -288,6 +289,138 @@
         "date": "Date",
         "totalPaid": "Total Paid",
         "actions": "Actions"
+      }
+    }
+  },
+  "suppliersPage": {
+    "header": {
+      "title": "Factory & Product Settings",
+      "description": "Manage products and approved factory locations on the platform",
+      "btn": "Add New Factory"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "factoriesListHeader": {
+      "title": "Factories",
+      "search": {
+        "placeholder": "Search by factory number or name..."
+      }
+    },
+    "table": {
+      "columns": {
+        "index": "#",
+        "factoryNumber": "Factory Number",
+        "factoryName": "Factory Name",
+        "contactInfo": "Contact",
+        "region": "Region",
+        "productsCount": "Products Count",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "editFactory": {
+      "title": "Edit Factory",
+      "buttons": {
+        "submit": "Save Changes"
+      },
+      "messages": {
+        "success": "Factory updated successfully",
+        "error": "An error occurred while updating the factory"
+      }
+    },
+    "addFactory": {
+      "title": "Add New Factory",
+      "sectionTitle": "Basic Information",
+      "fields": {
+        "nameAr": {
+          "label": "Factory Name (Arabic)",
+          "placeholder": "e.g. مصنع النور"
+        },
+        "nameEn": {
+          "label": "Factory Name (English)",
+          "placeholder": "e.g. Al Noor Factory"
+        },
+        "region": {
+          "label": "Region / Governorate",
+          "placeholder": "e.g. Riyadh"
+        },
+        "phone": {
+          "label": "Contact Number",
+          "placeholder": "+966 5X XXX XXXX"
+        },
+        "status": {
+          "label": "Status"
+        },
+        "location": {
+          "label": "Geographic Location",
+          "placeholder": "Select location",
+          "currentLocation": "My Current Location",
+          "locating": "Locating...",
+          "noGeolocation": "Your browser does not support geolocation",
+          "geolocationError": "Could not get your location, please check browser permissions"
+        }
+      },
+      "validation": {
+        "nameArRequired": "Factory name in Arabic is required",
+        "nameEnRequired": "Factory name in English is required",
+        "nameEnInvalid": "Must contain English letters only",
+        "regionRequired": "Region / Governorate is required",
+        "phoneRequired": "Contact number is required",
+        "phoneInvalid": "Invalid phone number"
+      },
+      "buttons": {
+        "submit": "Save Factory",
+        "cancel": "Cancel",
+        "submitting": "Saving..."
+      },
+      "messages": {
+        "success": "Factory added successfully",
+        "error": "An error occurred while adding the factory"
+      },
+      "productsManagement": {
+        "title": "Products Management",
+        "addBtn": "Add Product",
+        "empty": "No products have been added to this factory yet",
+        "columns": {
+          "index": "#",
+          "nameAr": "Product Name (Arabic)",
+          "nameEn": "Product Name (English)",
+          "price": "Product Price (SAR)"
+        },
+        "fields": {
+          "nameAr": {
+            "placeholder": "Enter product name in Arabic"
+          },
+          "nameEn": {
+            "placeholder": "Enter product name in English"
+          },
+          "price": {
+            "placeholder": "0.00"
+          }
+        },
+        "validation": {
+          "nameArRequired": "Product name in Arabic is required",
+          "nameEnRequired": "Product name in English is required",
+          "priceRequired": "Price is required",
+          "priceInvalid": "Price must be a positive number"
+        }
+      }
+    },
+    "deleteFactory": {
+      "title": "Delete Factory",
+      "description": "Are you sure you want to delete",
+      "descriptionSuffix": "? This action cannot be undone.",
+      "warning": "All data associated with this factory will be permanently deleted",
+      "buttons": {
+        "cancel": "Cancel",
+        "confirm": "Yes, Delete",
+        "deleting": "Deleting..."
+      },
+      "messages": {
+        "success": "Factory deleted successfully",
+        "error": "An error occurred while deleting the factory"
       }
     }
   }

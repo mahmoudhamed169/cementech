@@ -2,8 +2,7 @@ import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Request } from "@/src/lib/types/requests/request";
 import EmptyLoadingRequests from "./empty-loading-requests";
 import TimeAgo from "@/src/components/providers/shared/_components/time-ago";
-import { Button } from "@/components/ui/button";
-import { EllipsisVertical } from "lucide-react";
+
 import { LoadingRequestStatusBadge } from "../../../_components/loading-qequest-status-badge";
 
 interface Props {
