@@ -43,7 +43,6 @@ export default function ProductsManagement() {
         <NpProducts />
       ) : (
         <div className="border border-[#E5E7EB] rounded-xl bg-gray-50 overflow-hidden">
-          {/* Header */}
           <div className="grid grid-cols-[48px_1fr_1fr_1fr_48px] gap-x-3 px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-600 text-right">
             <div className="text-center">
               {t("addFactory.productsManagement.columns.index")}
@@ -54,21 +53,18 @@ export default function ProductsManagement() {
             <div />
           </div>
 
-          {/* Rows */}
           <div className="divide-y divide-[#E5E7EB]">
             {fields.map((field, index) => (
               <div
                 key={field.id}
                 className="grid grid-cols-[48px_1fr_1fr_1fr_48px] gap-x-3 px-4 py-3 items-center"
               >
-                {/* رقم المنتج */}
                 <div className="flex items-center justify-center">
                   <span className="w-7 h-7 rounded-full bg-[#00A63E]/10 text-[#00A63E] text-xs font-bold flex items-center justify-center">
                     {index + 1}
                   </span>
                 </div>
 
-                {/* اسم عربي */}
                 <div>
                   <Input
                     placeholder={t(
@@ -86,7 +82,6 @@ export default function ProductsManagement() {
                   )}
                 </div>
 
-                {/* اسم إنجليزي */}
                 <div>
                   <Input
                     placeholder={t(
@@ -104,7 +99,6 @@ export default function ProductsManagement() {
                   )}
                 </div>
 
-                {/* السعر */}
                 <div>
                   <Input
                     type="number"
@@ -124,7 +118,6 @@ export default function ProductsManagement() {
                   )}
                 </div>
 
-                {/* حذف */}
                 <div className="flex items-center justify-center">
                   <button
                     type="button"

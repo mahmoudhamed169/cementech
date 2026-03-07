@@ -2,8 +2,8 @@ import { Factory } from "@/src/lib/types/factories/factory";
 import EmptyLoadingRequests from "../../../loadingRequests/_components/loading-requests-table/empty-loading-requests";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import StatusBadge from "./status-badge";
-import { SquarePen, Trash } from "lucide-react";
 import { DeleteFactoryDialog } from "./delete-factory-dialog";
+import EditFactoryWrapper from "./edit-factory-wrapper";
 
 interface Props {
   factories: Factory[];
@@ -22,36 +22,23 @@ export default function FactoriesTableBody({ factories }: Props) {
           className="border-b border-[#E5E7EB] last:border-b-0 hover:bg-muted/40 h-14 text-center"
         >
           <TableCell>{index + 1}</TableCell>
-
-          {/* رقم المصنع */}
           <TableCell>{factory.code}</TableCell>
-
-          {/* اسم المصنع  */}
           <TableCell>{factory.name}</TableCell>
-
-          {/*  التواصل */}
           <TableCell>
             {factory.contact_number ? factory.contact_number : "-"}
           </TableCell>
-
-          {/* المنطقة */}
           <TableCell>{factory.location ? factory.location : "-"}</TableCell>
-
-          {/* عدد المنتجات */}
-          <TableCell>{factory.products.length}</TableCell>
-
-          {/* حالة الطلب */}
+          <TableCell>{factory.productsCount}</TableCell>
           <TableCell>
-            {/* {factory.is_active ? "نشط" : "غير نشط"}
-             */}
-
             <StatusBadge isActive={factory.is_active} />
           </TableCell>
-
-          {/* actions */}
           <TableCell>
-            <div>
-              <DeleteFactoryDialog factoryId={"nnnn"} factoryName={"النور"} />
+            <div className="flex items-center justify-center gap-2">
+              <EditFactoryWrapper id={factory.id} />
+              <DeleteFactoryDialog
+                factoryId={factory.id}
+                factoryName={factory.name}
+              />
             </div>
           </TableCell>
         </TableRow>

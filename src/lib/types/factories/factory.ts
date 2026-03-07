@@ -13,7 +13,7 @@ export interface Factory {
   code: string;
   contact_number: string;
   is_active: boolean;
-  products: Product[];
+  productsCount: number;
   created_at: string;
   updated_at: string;
 }

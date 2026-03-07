@@ -1,9 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   Form,
   FormControl,
@@ -18,104 +16,54 @@ import { cn } from "@/lib/utils";
 import { Switch } from "@/components/ui/switch";
 import dynamic from "next/dynamic";
 import { useTranslations, useLocale } from "next-intl";
+import { useMemo } from "react";
 import ProductsManagement from "./factories-table/products-management";
+import {
+  FactoryDataFormValues,
+  factoryDataSchema,
+} from "../_schema/factory.schema";
+import { RegionSelect } from "./factories-table/region-select";
 
 const LocationPicker = dynamic(
   () => import("./location-picker").then((m) => m.LocationPicker),
   { ssr: false },
 );
 
-interface AddFactoryFormProps {
-  onSubmit: (values: AddFactoryFormValues) => void;
+interface FactoryDataFormProps {
+  onSubmit: (values: FactoryDataFormValues) => void;
   onCancel?: () => void;
   isPending?: boolean;
   dir?: "rtl" | "ltr";
+  mode?: "add" | "edit";
+  defaultValues?: Partial<FactoryDataFormValues>;
 }
 
-type AddFactoryFormValues = {
-  nameAr: string;
-  nameEn: string;
-  region: string;
-  phone: string;
-  status: boolean;
-  location?: { lat: number; lng: number };
-  products?: {
-    nameAr: string;
-    nameEn: string;
-    price: string;
-    isActive: boolean;
-  }[];
-};
-
-export type { AddFactoryFormValues };
-
-export function AddFactoryForm({
+export default function FactoryDataForm({
   onSubmit,
   onCancel,
   isPending = false,
   dir,
-}: AddFactoryFormProps) {
+  mode = "add",
+  defaultValues,
+}: FactoryDataFormProps) {
   const t = useTranslations("suppliersPage");
   const locale = useLocale();
   const resolvedDir = dir ?? (locale === "ar" ? "rtl" : "ltr");
 
-  const addFactorySchema = useMemo(
-    () =>
-      z.object({
-        nameAr: z
-          .string()
-          .min(2, { message: t("addFactory.validation.nameArRequired") }),
-        nameEn: z
-          .string()
-          .min(2, { message: t("addFactory.validation.nameEnRequired") })
-          .regex(/^[a-zA-Z\s]+$/, {
-            message: t("addFactory.validation.nameEnInvalid"),
-          }),
-        region: z
-          .string()
-          .min(2, { message: t("addFactory.validation.regionRequired") }),
-        phone: z
-          .string()
-          .min(9, { message: t("addFactory.validation.phoneRequired") })
-          .regex(/^[0-9+\s\-()]+$/, {
-            message: t("addFactory.validation.phoneInvalid"),
-          }),
-        status: z.boolean().default(true),
-        location: z
-          .object({
-            lat: z.number(),
-            lng: z.number(),
-          })
-          .optional(),
-        products: z
-          .array(
-            z.object({
-              nameAr: z.string().min(1, "اسم المنتج بالعربية مطلوب"),
-              nameEn: z.string().min(1, "Product name in English is required"),
-              price: z
-                .string()
-                .min(1, "السعر مطلوب")
-                .refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
-                  message: "يجب أن يكون السعر رقمًا موجبًا",
-                }),
-              isActive: z.boolean(),
-            }),
-          )
-          .optional(),
-      }),
-    [t],
-  );
+  const schema = useMemo(() => factoryDataSchema(t), [t]);
 
-  const form = useForm<AddFactoryFormValues>({
-    resolver: zodResolver(addFactorySchema),
+  const form = useForm<FactoryDataFormValues>({
+    resolver: zodResolver(schema),
     defaultValues: {
       nameAr: "",
       nameEn: "",
-      region: "",
+      locationAr: "",
+      locationEn: "",
       phone: "",
       status: true,
       location: undefined,
       products: [],
+      ...defaultValues,
     },
   });
 
@@ -182,23 +130,21 @@ export function AddFactoryForm({
 
           <FormField
             control={form.control}
-            name="region"
-            render={({ field, fieldState }) => (
+            name="locationAr"
+            render={({ fieldState }) => (
               <FormItem>
                 <FormLabel className="text-[#364153] text-sm">
                   {t("addFactory.fields.region.label")}
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    {...field}
+                  <RegionSelect
+                    value={form.watch("locationAr")}
+                    onChange={(nameAr, nameEn) => {
+                      form.setValue("locationAr", nameAr);
+                      form.setValue("locationEn", nameEn);
+                    }}
                     placeholder={t("addFactory.fields.region.placeholder")}
-                    className={cn(
-                      "py-2 px-4 rounded-xl w-full transition-all duration-200",
-                      "border border-[#D1D5DC]",
-                      "focus-visible:ring-0 focus-visible:border-[#101828] focus-visible:shadow-[0_0_0_3px_rgba(16,24,40,0.15)]",
-                      fieldState.error &&
-                        "border-red-500 focus-visible:border-red-500 focus-visible:shadow-[0_0_0_3px_rgba(239,68,68,0.15)]",
-                    )}
+                    hasError={!!fieldState.error}
                   />
                 </FormControl>
                 <FormMessage className="text-red-500 text-xs mt-1" />
@@ -303,7 +249,9 @@ export function AddFactoryForm({
           >
             {isPending
               ? t("addFactory.buttons.submitting")
-              : t("addFactory.buttons.submit")}
+              : mode === "edit"
+                ? t("editFactory.buttons.submit")
+                : t("addFactory.buttons.submit")}
           </Button>
         </div>
       </form>

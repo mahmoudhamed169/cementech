@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { AddNewFactory } from "./new-factory";
+import FactoryDialog from "./factory-dialog";
 
 export default function SuppliersHeader() {
   const t = useTranslations("suppliersPage.header");
@@ -11,7 +11,7 @@ export default function SuppliersHeader() {
         <h2 className="text-2xl font-bold">{t("title")}</h2>
         <p>{t("description")}</p>
       </div>
-      <AddNewFactory />
+      <FactoryDialog />
     </div>
   );
 }

@@ -1,12 +1,10 @@
 "use client";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Trash2, TriangleAlert } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import { toast } from "sonner";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { deleteFactoryAction } from "../../_actions/factory.actions";
+import { useDeleteFactory } from "../../_hooks/use-delete-factory";
 
 interface DeleteFactoryDialogProps {
   factoryId: string;
@@ -21,19 +19,8 @@ export function DeleteFactoryDialog({
   const locale = useLocale();
   const dir = locale === "ar" ? "rtl" : "ltr";
   const [open, setOpen] = useState(false);
-  const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: () => deleteFactoryAction(factoryId),
-    onSuccess: () => {
-      toast.success(t("messages.success"));
-      queryClient.invalidateQueries({ queryKey: ["factories"] });
-      setOpen(false);
-    },
-    onError: () => {
-      toast.error(t("messages.error"));
-    },
-  });
+  const { mutate, isPending } = useDeleteFactory(() => setOpen(false));
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -95,7 +82,7 @@ export function DeleteFactoryDialog({
           </button>
           <button
             type="button"
-            onClick={() => mutate()}
+            onClick={() => mutate(factoryId)}
             disabled={isPending}
             className="py-5 text-base font-semibold text-white bg-red-500 hover:bg-red-600 active:bg-red-700 transition-colors duration-150 disabled:opacity-60 rounded-br-3xl"
           >

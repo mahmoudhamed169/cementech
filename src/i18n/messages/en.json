@@ -320,6 +320,16 @@
         "actions": "Actions"
       }
     },
+    "editFactory": {
+      "title": "Edit Factory",
+      "buttons": {
+        "submit": "Save Changes"
+      },
+      "messages": {
+        "success": "Factory updated successfully",
+        "error": "An error occurred while updating the factory"
+      }
+    },
     "addFactory": {
       "title": "Add New Factory",
       "sectionTitle": "Basic Information",

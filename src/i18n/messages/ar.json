@@ -325,6 +325,17 @@
         "actions": "الإجراءات"
       }
     },
+
+    "editFactory": {
+      "title": "تعديل المصنع",
+      "buttons": {
+        "submit": "حفظ التعديلات"
+      },
+      "messages": {
+        "success": "تم تعديل المصنع بنجاح",
+        "error": "حدث خطأ أثناء تعديل المصنع"
+      }
+    },
     "addFactory": {
       "title": "إضافة مصنع جديد",
       "sectionTitle": "البيانات الأساسية",
