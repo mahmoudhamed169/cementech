@@ -11,6 +11,7 @@ export async function getFactories(
       system_screen: "dashboard_factories",
       lang,
     },
+    next: { tags: ["factories"] },
     cache: "no-store",
   });
 

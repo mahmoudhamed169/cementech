@@ -10,7 +10,6 @@ export default async function FacotoriesTableWrapper() {
   const locale = (cookieStore.get("NEXT_LOCALE")?.value ?? "ar") as "ar" | "en";
 
   const factories = await getFactories(locale);
-  console.log(factories);
 
   return (
     <>

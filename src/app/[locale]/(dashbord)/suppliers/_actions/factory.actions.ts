@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidateTag } from "next/cache";
 import { FactoryDataFormValues } from "../_schema/factory.schema";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -21,20 +22,23 @@ export async function addFactoryAction(data: FactoryDataFormValues) {
     })),
   };
 
+  console.log(body);
+
   const res = await fetch(`${API_URL}/factories`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-      system_screen: "dashboard_factories",
+      system_screen: "management",
     },
     body: JSON.stringify(body),
   });
 
   if (!res.ok) {
+    console.log(res);
     throw new Error("Failed to add factory");
   }
-
+  revalidateTag("factories");
   return res.json();
 }
 
@@ -64,15 +68,16 @@ export async function editFactoryAction(
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-      system_screen: "dashboard_factories",
+      system_screen: "management",
     },
     body: JSON.stringify(body),
   });
 
   if (!res.ok) {
+    console.log(res);
     throw new Error("Failed to update factory");
   }
-
+  revalidateTag("factories");
   return res.json();
 }
 
@@ -81,13 +86,14 @@ export async function deleteFactoryAction(id: string) {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-      system_screen: "dashboard_factories",
+      system_screen: "management",
     },
   });
 
   if (!res.ok) {
     throw new Error("Failed to delete factory");
   }
+  revalidateTag("factories");
 
   return res.json();
 }
