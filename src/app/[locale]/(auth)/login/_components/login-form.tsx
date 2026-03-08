@@ -10,39 +10,44 @@ type Step = "phone" | "otp";
 export default function LoginForm() {
   const [step, setStep] = useState<Step>("phone");
   const [phone, setPhone] = useState("");
+  const [transactionId, setTransactionId] = useState("");
   const t = useTranslations("loginPage.footer");
 
   return (
-    <div className="relative flex flex-col h-full w-full max-w-[460px] mx-auto px-12">
-      {/* Header */}
-      <div className="absolute top-8 left-12 right-12 flex items-center justify-between">
+    <div className="relative flex flex-col h-full w-full max-w-[480px] mx-auto px-6">
+      <div className="absolute top-4 left-6 right-6 flex items-center justify-between">
         <LanguageSwitcher />
         <div className="flex gap-2">
           <div
-            className={`h-1 w-8 rounded-full transition-all duration-300 ${step === "phone" ? "bg-[#2382E2]" : "bg-[#E9E9E7]"}`}
+            className={`h-1.5 w-10 rounded-full transition-all duration-300 ${step === "phone" ? "bg-[#2382E2]" : "bg-[#E9E9E7]"}`}
           />
           <div
-            className={`h-1 w-8 rounded-full transition-all duration-300 ${step === "otp" ? "bg-[#2382E2]" : "bg-[#E9E9E7]"}`}
+            className={`h-1.5 w-10 rounded-full transition-all duration-300 ${step === "otp" ? "bg-[#2382E2]" : "bg-[#E9E9E7]"}`}
           />
         </div>
       </div>
 
-      {/* Content */}
-      <div className="flex-1 flex flex-col justify-center py-24">
+      <div className="flex-1 flex flex-col justify-center py-16 mt-6">
         {step === "phone" ? (
           <PhoneStep
             phone={phone}
             setPhone={setPhone}
-            onNext={() => setStep("otp")}
+            onNext={(txId) => {
+              setTransactionId(txId);
+              setStep("otp");
+            }}
           />
         ) : (
-          <OtpStep phone={phone} onBack={() => setStep("phone")} />
+          <OtpStep
+            phone={phone}
+            transactionId={transactionId}
+            onBack={() => setStep("phone")}
+          />
         )}
       </div>
 
-      {/* Footer */}
-      <div className="pb-12 flex flex-col items-center gap-2 text-center">
-        <div className="w-full h-px bg-[#F1F1EF] mb-5" />
+      <div className="pb-6 flex flex-col items-center gap-1.5 text-center">
+        <div className="w-full h-px bg-[#F1F1EF] mb-4" />
         <div className="flex gap-1.5 items-center text-sm text-[#9B9A97]">
           <span>{t("problem")}</span>
           <a href="#" className="text-[#2382E2] hover:underline font-medium">

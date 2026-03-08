@@ -156,7 +156,14 @@
     "confirm": "Confirm"
   },
   "common": {
-    "logout": "Log out"
+    "logout": "Logout",
+    "toast": {
+      "otpSent": "OTP sent successfully",
+      "otpSentError": "Failed to send OTP, please try again",
+      "loginSuccess": "Logged in successfully",
+      "loginError": "Invalid OTP, please try again",
+      "logoutSuccess": "Logged out successfully"
+    }
   },
 
   "orderPage": "Welcome in the order page",
