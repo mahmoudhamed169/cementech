@@ -1,3 +1,6 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/src/auth";
+
 export interface UsersStat {
   total: number;
   active: number;
@@ -20,20 +23,20 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export async function getUsersStats(
   params: GetUsersStatsParams,
 ): Promise<UsersStatsResponse> {
-  const query = new URLSearchParams();
+  const session = await getServerSession(authOptions);
 
+  const query = new URLSearchParams();
   query.append("type", params.type);
 
   const res = await fetch(`${API_URL}/users/stats?${query.toString()}`, {
     headers: {
-      Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-      system_screen: "dashboard_users_stats",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+      system_screen: params.type ?? "dashboard_users",
     },
     cache: "no-store",
   });
 
   if (!res.ok) {
-    console.log(res);
     throw new Error("Failed to fetch users stats");
   }
 

@@ -30,12 +30,14 @@ export default async function FacotoriesTableWrapper() {
                 />
               </TableCell>
             </TableRow>
-            <TableCell className="text-center" colSpan={9}>
-              <DynamicPagination
-                totalPages={factories.meta.pageCount}
-                currentPage={factories.meta.page}
-              />
-            </TableCell>
+            <TableRow>
+              <TableCell className="text-center" colSpan={9}>
+                <DynamicPagination
+                  totalPages={factories.meta.pageCount}
+                  currentPage={factories.meta.page}
+                />
+              </TableCell>
+            </TableRow>
           </TableFooter>
         </>
       )}

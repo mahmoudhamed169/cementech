@@ -1,3 +1,6 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/src/auth";
+
 export interface OrderStatusStat {
   status:
     | "delivered"
@@ -28,21 +31,24 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export async function getOrderStats(
   params: GetOrderStatsParams,
 ): Promise<OrdersStatsResponse> {
-  const query = new URLSearchParams();
+  const session = await getServerSession(authOptions);
 
+  const query = new URLSearchParams();
   if (params.lang) {
     query.append("lang", params.lang);
   }
 
   const res = await fetch(`${API_URL}/orders/stats?${query.toString()}`, {
     headers: {
-      Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-      system_screen: "dashboard_orders_stats",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+      system_screen: "order",
+      
     },
     cache: "no-store",
   });
 
   if (!res.ok) {
+    console.log(res);
     throw new Error("Failed to fetch order stats");
   }
 
