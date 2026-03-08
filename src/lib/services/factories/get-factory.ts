@@ -1,3 +1,6 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/src/auth";
+
 export interface FactoryProduct {
   id: string;
   name_en: string;
@@ -32,10 +35,12 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export async function getFactoryById(
   id: string,
 ): Promise<FactoryDetailsResponse> {
+  const session = await getServerSession(authOptions);
+
   const res = await fetch(`${API_URL}/factories/${id}`, {
     headers: {
-      Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-      system_screen: "dashboard_factories",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+      system_screen: "management",
       lang: "all",
     },
     cache: "no-store",

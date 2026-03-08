@@ -1,3 +1,5 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/src/auth";
 import { FactoriesResponse } from "../../types/factories/factory";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -5,10 +7,12 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export async function getFactories(
   lang: "ar" | "en",
 ): Promise<FactoriesResponse> {
+  const session = await getServerSession(authOptions);
+
   const res = await fetch(`${API_URL}/factories`, {
     headers: {
-      Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-      system_screen: "dashboard_factories",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+      system_screen: "management",
       lang,
     },
     next: { tags: ["factories"] },

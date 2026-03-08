@@ -1,3 +1,5 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/src/auth";
 import { RequestsResponse } from "../../types/requests/request";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -19,10 +21,13 @@ export interface GetRequestsParams {
 
 export async function getRequests(
   params: GetRequestsParams,
-  lang: "ar" | "en" ,
+  lang: "ar" | "en",
 ): Promise<RequestsResponse> {
-  const query = new URLSearchParams();
+  const session = await getServerSession(authOptions);
+  console.log("Session:", session);
+  console.log("Token:", session?.user.accessToken);
 
+  const query = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
       query.append(key, String(value));
@@ -31,15 +36,18 @@ export async function getRequests(
 
   const res = await fetch(`${API_URL}/requests?${query.toString()}`, {
     headers: {
-      Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-      system_screen: "dashboard_requests",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+      system_screen: "request",
       lang,
     },
     cache: "no-store",
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch requests");
+    const errorBody = await res.json();
+    console.log("Status:", res.status);
+    console.log("Body:", errorBody);
+    throw new Error("Failed to fetch requests stats");
   }
 
   return res.json() as Promise<RequestsResponse>;

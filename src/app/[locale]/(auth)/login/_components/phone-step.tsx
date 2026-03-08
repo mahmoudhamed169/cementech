@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useTranslations } from "next-intl";
 import { useSendOtp } from "../../_hooks/use-send-otp";
+import { toast } from "sonner";
 
 interface PhoneStepProps {
   phone: string;
@@ -18,6 +19,7 @@ export default function PhoneStep({ phone, setPhone, onNext }: PhoneStepProps) {
   function handleContinue() {
     sendOtp(phone, {
       onSuccess: (data) => onNext(data.transactionId),
+      onError: (error: Error) => toast.error(error.message),
     });
   }
 

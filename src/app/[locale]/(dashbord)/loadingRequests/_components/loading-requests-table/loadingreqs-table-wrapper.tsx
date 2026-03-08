@@ -11,6 +11,7 @@ export default async function LoadingReqsTableWrapper() {
   const locale = cookieStore.get("NEXT_LOCALE")?.value ?? "ar";
 
   const data = await getRequests({ page: 1, limit: 10 }, locale as "ar" | "en");
+  console.log(data);
 
   return (
     <>
