@@ -1,3 +1,5 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/src/auth";
 import { OrdersResponse } from "../../types/orders/order";
 
 export interface GetOrdersParams {
@@ -14,8 +16,9 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export async function getOrders(
   params: GetOrdersParams,
 ): Promise<OrdersResponse> {
-  const query = new URLSearchParams();
+  const session = await getServerSession(authOptions);
 
+  const query = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
       query.append(key, String(value));
@@ -24,8 +27,8 @@ export async function getOrders(
 
   const res = await fetch(`${API_URL}/orders?${query.toString()}`, {
     headers: {
-      Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-      system_screen: "dashboard_orders",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+      system_screen: "order",
     },
     cache: "no-store",
   });
@@ -36,6 +39,3 @@ export async function getOrders(
 
   return res.json() as Promise<OrdersResponse>;
 }
-
-
-

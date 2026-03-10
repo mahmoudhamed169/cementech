@@ -1,3 +1,5 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/src/auth";
 import { ApiUserResponse, Customer, Driver } from "../types/users";
 
 export interface GetUsersParams {
@@ -11,10 +13,11 @@ export interface GetUsersParams {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// Generic function للـ type-safe
 export async function getUsers<T extends Driver | Customer>(
   params: GetUsersParams,
 ): Promise<ApiUserResponse<T>> {
+  const session = await getServerSession(authOptions);
+
   const query = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
@@ -24,8 +27,8 @@ export async function getUsers<T extends Driver | Customer>(
 
   const res = await fetch(`${API_URL}/users?${query.toString()}`, {
     headers: {
-      Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-      system_screen: "dashboard_users",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+      system_screen: params.type ?? "dashboard_users",
     },
     cache: "no-store",
   });

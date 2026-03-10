@@ -1,11 +1,15 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/src/auth";
 import { FactoryDataFormValues } from "../_schema/factory.schema";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function addFactoryAction(data: FactoryDataFormValues) {
+  const session = await getServerSession(authOptions);
+
   const body = {
     name_en: data.nameEn,
     name_ar: data.nameAr,
@@ -22,22 +26,20 @@ export async function addFactoryAction(data: FactoryDataFormValues) {
     })),
   };
 
-  console.log(body);
-
   const res = await fetch(`${API_URL}/factories`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
+      Authorization: `Bearer ${session?.user.accessToken}`,
       system_screen: "management",
     },
     body: JSON.stringify(body),
   });
 
   if (!res.ok) {
-    console.log(res);
     throw new Error("Failed to add factory");
   }
+
   revalidateTag("factories");
   return res.json();
 }
@@ -45,6 +47,7 @@ export async function addFactoryAction(data: FactoryDataFormValues) {
 export async function editFactoryAction(
   data: FactoryDataFormValues & { id: string },
 ) {
+  const session = await getServerSession(authOptions);
   const { id, ...rest } = data;
 
   const body = {
@@ -67,25 +70,27 @@ export async function editFactoryAction(
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
+      Authorization: `Bearer ${session?.user.accessToken}`,
       system_screen: "management",
     },
     body: JSON.stringify(body),
   });
 
   if (!res.ok) {
-    console.log(res);
     throw new Error("Failed to update factory");
   }
+
   revalidateTag("factories");
   return res.json();
 }
 
 export async function deleteFactoryAction(id: string) {
+  const session = await getServerSession(authOptions);
+
   const res = await fetch(`${API_URL}/factories/${id}`, {
     method: "DELETE",
     headers: {
-      Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
+      Authorization: `Bearer ${session?.user.accessToken}`,
       system_screen: "management",
     },
   });
@@ -93,7 +98,7 @@ export async function deleteFactoryAction(id: string) {
   if (!res.ok) {
     throw new Error("Failed to delete factory");
   }
-  revalidateTag("factories");
 
+  revalidateTag("factories");
   return res.json();
 }
