@@ -14,7 +14,8 @@
     "payments": "Payments",
     "invoices": "Invoices",
     "settings": "Settings",
-    "suppliers": "Factories & Products"
+    "suppliers": "Factories & Products",
+    "permissions": "Permissions Management"
   },
   "welcome": {
     "title": "Welcome, {name}!",
@@ -421,6 +422,23 @@
       "messages": {
         "success": "Factory deleted successfully",
         "error": "An error occurred while deleting the factory"
+      }
+    }
+  },
+
+  "permissionsPage": {
+    "header": {
+      "title": "Roles & Permissions Management",
+      "description": "Define custom roles with flexible page-level and action-level permissions",
+      "addBtn": "Add New Role"
+    },
+    "guidelines": {
+      "badge": "Important Notice",
+      "title": "Role Management Guidelines",
+      "rules": {
+        "0": "The super admin role is protected and cannot be deleted or fully restricted.",
+        "1": "Role changes will affect all admins assigned to that role.",
+        "2": "All role and permission changes are logged for security audit purposes."
       }
     }
   }

@@ -5,6 +5,7 @@ import {
   CarFront,
   CircleDollarSign,
   Factory,
+  Key,
   LayoutDashboard,
   ReceiptText,
   ScrollText,
@@ -53,6 +54,11 @@ const SidebarLinks = [
     href: "/settings",
     labelKey: "settings",
     icon: <Settings size={24} strokeWidth={1.75} />,
+  },
+  {
+    href: "/permissions",
+    labelKey: "permissions",
+    icon: <Key size={24} strokeWidth={1.75} />,
   },
   {
     href: "/suppliers",
