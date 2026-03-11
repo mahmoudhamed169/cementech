@@ -1,7 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { CirclePlus } from "lucide-react";
+
 import { useTranslations } from "next-intl";
+import { RolePermissionsModal } from "./role-permissions";
 
 export default function PermissionHeader() {
   const t = useTranslations("permissionsPage.header");
@@ -13,12 +13,7 @@ export default function PermissionHeader() {
         <p className="text-white/80 text-sm">{t("description")}</p>
       </div>
 
-      <div className="flex items-center gap-3">
-        <Button className="min-w-46 min-h-12 rounded-xl bg-[#00A63E] text-white p-3 flex justify-center items-center gap-2">
-          <CirclePlus />
-          {t("addBtn")}
-        </Button>
-      </div>
+      <RolePermissionsModal />
     </div>
   );
 }

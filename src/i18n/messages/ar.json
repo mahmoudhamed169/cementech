@@ -36,9 +36,12 @@
     "users": "المستخدمين",
     "payments": "المدفوعات",
     "invoices": "الفواتير",
-    "settings": "الإعدادات",
-    "suppliers": "المصانع و المنتجات",
-    "permissions": "الإدارة والصلاحيات"
+    "notifications": "الإشعارات",
+    "permissions": "الإدارة والصلاحيات",
+    "supervisors": "إدارة المشرفين",
+    "suppliers": "المصانع والمنتجات",
+    "terms": "الشروط والأحكام",
+    "settings": "الإعدادات"
   },
   "welcome": {
     "title": "مرحبًا بك، {name}!",

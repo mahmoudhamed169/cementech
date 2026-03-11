@@ -29,16 +29,19 @@
     }
   },
   "sidebar": {
-    "home": "Dashboard",
+    "home": "Home",
     "orders": "Orders",
     "drivers": "Drivers",
     "loadingRequests": "Loading Requests",
     "users": "Users",
     "payments": "Payments",
     "invoices": "Invoices",
-    "settings": "Settings",
+    "notifications": "Notifications",
+    "permissions": "Administration & Permissions",
+    "supervisors": "Supervisors Management",
     "suppliers": "Factories & Products",
-    "permissions": "Permissions Management"
+    "terms": "Terms & Conditions",
+    "settings": "Settings"
   },
   "welcome": {
     "title": "Welcome, {name}!",

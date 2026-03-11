@@ -1,5 +1,5 @@
 import React from "react";
-import RolesGrid from "./_components/Roles-grid";
+import RolesGrid from "./_components/roles-grid";
 
 export default function page() {
   return <RolesGrid />;
