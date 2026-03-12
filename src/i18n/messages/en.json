@@ -474,5 +474,24 @@
         "2": "All role and permission changes are logged for security audit purposes."
       }
     }
+  },
+  "supervisorsPage": {
+    "header": {
+      "title": "Supervisors Management",
+      "description": "Create and manage supervisor accounts with defined roles",
+      "addBtn": "Add New Supervisor"
+    },
+    "title": "Supervisors",
+    "table": {
+      "columns": {
+        "index": "#",
+        "name": "Supervisor Name",
+        "contact": "Contact",
+        "status": "Status",
+        "management": "Management",
+        "lastLogin": "Last Login",
+        "actions": "Actions"
+      }
+    }
   }
 }
