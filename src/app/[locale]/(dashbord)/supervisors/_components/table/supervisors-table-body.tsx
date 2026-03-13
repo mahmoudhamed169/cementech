@@ -1,5 +1,8 @@
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { formatDistanceToNow } from "date-fns";
+import { ar } from "date-fns/locale";
+import { Eye, Trash2 } from "lucide-react";
 
 type ManagementType =
   | "حسابات"
@@ -67,14 +70,28 @@ const supervisors: Supervisor[] = [
   },
 ];
 
-function formatDate(dateStr: string): string {
+function formatDateOnly(dateStr: string): string {
   const date = new Date(dateStr);
   return date.toLocaleDateString("ar-SA", {
     year: "numeric",
-    month: "short",
-    day: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+}
+
+function formatTimeOnly(dateStr: string): string {
+  const date = new Date(dateStr);
+  return date.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
+    hour12: true,
+  });
+}
+
+function formatAgo(dateStr: string): string {
+  return formatDistanceToNow(new Date(dateStr), {
+    addSuffix: true,
+    locale: ar,
   });
 }
 
@@ -89,15 +106,15 @@ export default function SupervisorsTableBody() {
           {/* index */}
           <TableCell className="text-center">{index + 1}</TableCell>
 
-          {/* name + email */}
+          {/* name */}
           <TableCell className="text-center">
             <p className="font-medium text-[#101828]">{supervisor.name}</p>
           </TableCell>
 
-          {/* contact - phone */}
+          {/* contact - phone + email */}
           <TableCell className="text-center">
-            <p className="text-sm text-[#6A7282]">{supervisor.email}</p>
             <p className="text-[#101828]">{supervisor.phone}</p>
+            <p className="text-sm text-[#6A7282]">{supervisor.email}</p>
           </TableCell>
 
           {/* status */}
@@ -128,12 +145,29 @@ export default function SupervisorsTableBody() {
           </TableCell>
 
           {/* lastLogin */}
-          <TableCell className="text-center text-[#6A7282] text-sm">
-            {formatDate(supervisor.lastLogin)}
+          <TableCell className="text-center">
+            <p className="text-[#101828] text-sm">
+              {formatDateOnly(supervisor.lastLogin)}
+            </p>
+            <p className="text-[#6A7282] text-xs">
+              {formatTimeOnly(supervisor.lastLogin)}
+            </p>
+            <p className="text-[#6A7282] text-xs mt-0.5">
+              {formatAgo(supervisor.lastLogin)}
+            </p>
           </TableCell>
 
           {/* actions */}
-          <TableCell className="text-center">...</TableCell>
+          <TableCell className="text-center">
+            <div className="flex items-center justify-center gap-2">
+              <button className="p-2 rounded-lg hover:bg-[#FEE2E2] text-[#6A7282] hover:text-[#DC2626] transition-colors">
+                <Trash2 size={16} />
+              </button>
+              <button className="p-2 rounded-lg hover:bg-[#DBEAFE] text-[#6A7282] hover:text-[#193CB8] transition-colors">
+                <Eye size={16} />
+              </button>
+            </div>
+          </TableCell>
         </TableRow>
       ))}
     </TableBody>

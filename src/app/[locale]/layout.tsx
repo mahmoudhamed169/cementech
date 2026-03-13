@@ -49,11 +49,15 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   const messages = (await import(`@/src/i18n/messages/${locale}.json`)).default;
 
+  const isArabic = locale === "ar";
+
   return (
     <DirectionProvider locale={locale}>
       <div
-        dir={locale === "ar" ? "rtl" : "ltr"}
-        className={`${cairo.variable} ${ibmPlex.variable} font-sans`}
+        dir={isArabic ? "rtl" : "ltr"}
+        className={`${cairo.variable} ${ibmPlex.variable} ${
+          isArabic ? "lang-ar" : "lang-en"
+        }`}
       >
         <Providers locale={locale} messages={messages}>
           {children}
