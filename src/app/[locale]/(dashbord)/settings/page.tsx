@@ -1,9 +1,7 @@
-import React from "react";
-
 export default function page() {
   return (
     <div>
-      <h1>the settings page</h1>
+      <h1>صفحة الاعدادات</h1>
     </div>
   );
 }

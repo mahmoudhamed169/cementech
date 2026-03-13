@@ -4,7 +4,7 @@ import SideBarNavigation from "./sidebar-navigation";
 export default function Sidebar() {
   return (
     <aside className="fixed start-0 top-0 h-screen bg-[#1E2939] w-64 pt-4 text-white flex flex-col justify-between">
-      <div className="space-y-16">
+      <div className="space-y-3">
         {/* logo */}
         <Logo />
         {/* navigation */}

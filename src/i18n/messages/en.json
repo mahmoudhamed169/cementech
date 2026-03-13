@@ -29,15 +29,19 @@
     }
   },
   "sidebar": {
-    "home": "Dashboard",
+    "home": "Home",
     "orders": "Orders",
     "drivers": "Drivers",
     "loadingRequests": "Loading Requests",
     "users": "Users",
     "payments": "Payments",
     "invoices": "Invoices",
-    "settings": "Settings",
-    "suppliers": "Factories & Products"
+    "notifications": "Notifications",
+    "permissions": "Administration & Permissions",
+    "supervisors": "Supervisors Management",
+    "suppliers": "Factories & Products",
+    "terms": "Terms & Conditions",
+    "settings": "Settings"
   },
   "welcome": {
     "title": "Welcome, {name}!",
@@ -451,6 +455,42 @@
       "messages": {
         "success": "Factory deleted successfully",
         "error": "An error occurred while deleting the factory"
+      }
+    }
+  },
+
+  "permissionsPage": {
+    "header": {
+      "title": "Roles & Permissions Management",
+      "description": "Define custom roles with flexible page-level and action-level permissions",
+      "addBtn": "Add New Role"
+    },
+    "guidelines": {
+      "badge": "Important Notice",
+      "title": "Role Management Guidelines",
+      "rules": {
+        "0": "The super admin role is protected and cannot be deleted or fully restricted.",
+        "1": "Role changes will affect all admins assigned to that role.",
+        "2": "All role and permission changes are logged for security audit purposes."
+      }
+    }
+  },
+  "supervisorsPage": {
+    "header": {
+      "title": "Supervisors Management",
+      "description": "Create and manage supervisor accounts with defined roles",
+      "addBtn": "Add New Supervisor"
+    },
+    "title": "Supervisors",
+    "table": {
+      "columns": {
+        "index": "#",
+        "name": "Supervisor Name",
+        "contact": "Contact",
+        "status": "Status",
+        "management": "Management",
+        "lastLogin": "Last Login",
+        "actions": "Actions"
       }
     }
   }
