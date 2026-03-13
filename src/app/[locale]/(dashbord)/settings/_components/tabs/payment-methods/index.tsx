@@ -9,7 +9,7 @@ import {
   Landmark,
 } from "lucide-react";
 import PaymentMethodRow from "./payment-method-row";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 type PaymentMethod = {
   id: string;
@@ -28,6 +28,7 @@ const defaultMethods: PaymentMethod[] = [
 
 export default function PaymentMethodsTab() {
   const t = useTranslations("settingsPage.tabs.payment");
+
   const [methods, setMethods] = useState<PaymentMethod[]>(defaultMethods);
 
   const handleToggle = (id: string, value: boolean) => {
@@ -38,7 +39,7 @@ export default function PaymentMethodsTab() {
 
   return (
     <div className="space-y-4">
-      <div className="text-end space-y-1">
+      <div className={`space-y-1 `}>
         <h3 className="text-base font-bold text-gray-800">{t("title")}</h3>
         <p className="text-sm text-gray-500">{t("subtitle")}</p>
       </div>

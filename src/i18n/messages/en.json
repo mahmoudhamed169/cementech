@@ -514,15 +514,67 @@
       },
       "delivery": {
         "trigger": "Delivery Locations",
-        "title": "Delivery Locations",
-        "subtitle": "Manage available delivery zones",
-        "empty": "No delivery zones added yet"
+        "title": "Service Zones",
+        "subtitle": "Manage delivery zones and coverage areas",
+        "addZone": "Add Zone",
+        "edit": "Edit",
+        "empty": "No delivery zones added yet",
+
+        "table": {
+          "zone": "Zone",
+          "radius": "Coverage Radius",
+          "status": "Status",
+          "actions": "Actions"
+        },
+        "modal": {
+          "cancel": "Cancel",
+          "back": "Back",
+          "next": "Continue",
+          "save": "Save Zone",
+          "update": "Update Zone",
+          "steps": {
+            "location": "Select Location",
+            "settings": "Zone Settings",
+            "review": "Review & Confirm"
+          },
+          "stepLocation": {
+            "title": "Select Location",
+            "subtitle": "Pin the zone location on the map",
+            "searchPlaceholder": "Search for a city or address..."
+          },
+          "stepSettings": {
+            "title": "Zone Settings",
+            "subtitle": "Set the zone name and coverage radius",
+            "zoneName": "Zone Name",
+            "zoneNamePlaceholder": "e.g. Riyadh - Al Zahraa",
+            "radius": "Coverage Radius",
+            "km": "km",
+            "mapPreview": "Coverage Preview",
+            "coverageNote": "All orders within a {radius} km radius from the selected point will be covered"
+          },
+          "stepReview": {
+            "title": "Review & Confirm",
+            "subtitle": "Verify the data before saving",
+            "summary": "Zone Summary",
+            "zoneName": "Zone Name",
+            "location": "Selected Location",
+            "radius": "Coverage Radius",
+            "km": "km",
+            "mapPreview": "Coverage Preview",
+            "readyToSave": "Ready to save"
+          }
+        }
       },
       "pricing": {
         "trigger": "Pricing & Commission",
-        "title": "Pricing & Commission",
-        "subtitle": "Manage service pricing and commission rates",
-        "empty": "No pricing data added yet"
+        "title": "Set Pricing",
+        "subtitle": "Define base prices and commission rates",
+        "fields": {
+          "pricePerKm": "Price per KM",
+          "commission": "Commission Rate",
+          "cancellationFee": "Cancellation Fee"
+        },
+        "save": "Save Settings"
       }
     }
   }
