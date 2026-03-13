@@ -1,7 +1,5 @@
-export default function page() {
-  return (
-    <div>
-      <h1>صفحة الاعدادات</h1>
-    </div>
-  );
+import SettingsTabs from "./_components/settings-tabs";
+
+export default function SettingsPage() {
+  return <SettingsTabs />;
 }

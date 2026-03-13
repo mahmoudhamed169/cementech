@@ -493,5 +493,37 @@
         "actions": "Actions"
       }
     }
+  },
+  "settingsPage": {
+    "header": {
+      "title": "System Settings",
+      "subtitle": "Configure core system settings and system parameters"
+    },
+    "tabs": {
+      "payment": {
+        "trigger": "Payment Methods",
+        "title": "Select Payment Methods",
+        "subtitle": "Enable or disable payment methods available to customers",
+        "methods": {
+          "cod": "Cash on Delivery",
+          "credit": "Credit Card",
+          "apple": "Apple Pay",
+          "tabby": "Tabby",
+          "tamara": "Tamara"
+        }
+      },
+      "delivery": {
+        "trigger": "Delivery Locations",
+        "title": "Delivery Locations",
+        "subtitle": "Manage available delivery zones",
+        "empty": "No delivery zones added yet"
+      },
+      "pricing": {
+        "trigger": "Pricing & Commission",
+        "title": "Pricing & Commission",
+        "subtitle": "Manage service pricing and commission rates",
+        "empty": "No pricing data added yet"
+      }
+    }
   }
 }
