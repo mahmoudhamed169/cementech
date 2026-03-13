@@ -1,7 +1,6 @@
 "use client";
 import { useTranslations } from "next-intl";
 import SidebarLinkItem from "./sidebar-item";
-
 import {
   Bell,
   CarFront,
@@ -90,7 +89,10 @@ export default function SideBarNavigation() {
   const t = useTranslations("sidebar");
 
   return (
-    <nav className=" px-3">
+    <nav
+      className="px-3 overflow-y-auto overflow-x-hidden"
+      style={{ scrollbarWidth: "thin", scrollbarColor: "#374151 transparent" }}
+    >
       <ul>
         {SidebarLinks.map((link) => (
           <SidebarLinkItem
