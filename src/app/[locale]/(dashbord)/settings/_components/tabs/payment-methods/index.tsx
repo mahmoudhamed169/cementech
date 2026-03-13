@@ -38,12 +38,12 @@ export default function PaymentMethodsTab() {
 
   return (
     <div className="space-y-4">
-      <div className="text-end">
+      <div className="text-end space-y-1">
         <h3 className="text-base font-bold text-gray-800">{t("title")}</h3>
         <p className="text-sm text-gray-500">{t("subtitle")}</p>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-4">
         {methods.map((method) => (
           <PaymentMethodRow
             key={method.id}
