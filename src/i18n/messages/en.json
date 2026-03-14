@@ -577,5 +577,43 @@
         "save": "Save Settings"
       }
     }
+  },
+  "termsPage": {
+    "header": {
+      "title": "Terms & Conditions Settings",
+      "description": "Manage legal content and binding agreements for platform users and drivers"
+    },
+    "form": {
+      "publish": "Publish Now",
+      "saveDraft": "Save as Draft"
+    },
+
+    "category": {
+      "title": "Category",
+      "customers": "Users (Customers)",
+      "drivers": "Drivers"
+    },
+    "version": {
+      "title": "Version Info",
+      "number": "Version Number",
+      "lastUpdated": "Last Updated",
+      "updatedBy": "Updated By",
+      "status": "Status",
+      "system": "System",
+      "published": "Published",
+      "draft": "Draft"
+    },
+    "alert": {
+      "title": "Important Notice",
+      "point1": "Changes take effect immediately after publishing. Make sure to review legal terms before publishing",
+      "point2": "All users and drivers will be notified of new updates upon publishing"
+    },
+    "editor": {
+      "placeholder": "Write terms and conditions here...",
+      "search": "Search for a title or word...",
+      "editorLabel": "Text Editor",
+      "wordCount": "{count} words",
+      "charCount": "{count} chars"
+    }
   }
 }
