@@ -21,7 +21,7 @@ export default function Providers({
     <NextIntlProvider locale={locale} messages={messages}>
       <ReactQueryProvider>
         {/* react query dev tools */}
-        <ReactQueryDevtools initialIsOpen={false} />
+
         <NextAuthProvider>{children}</NextAuthProvider>
       </ReactQueryProvider>
     </NextIntlProvider>

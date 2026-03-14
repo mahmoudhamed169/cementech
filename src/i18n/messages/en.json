@@ -41,7 +41,8 @@
     "supervisors": "Supervisors Management",
     "suppliers": "Factories & Products",
     "terms": "Terms & Conditions",
-    "settings": "Settings"
+    "settings": "Settings",
+    "loggedInAs": "Logged in as"
   },
   "welcome": {
     "title": "Welcome, {name}!",

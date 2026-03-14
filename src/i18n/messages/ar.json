@@ -41,7 +41,8 @@
     "supervisors": "إدارة المشرفين",
     "suppliers": "المصانع والمنتجات",
     "terms": "الشروط والأحكام",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "loggedInAs": "تم التسجيل كـ"
   },
   "welcome": {
     "title": "مرحبًا بك، {name}!",
