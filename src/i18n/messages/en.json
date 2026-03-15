@@ -129,6 +129,31 @@
       "under_review": "Pending Orders",
       "delivery": "Ongoing Orders",
       "canceled": "Canceled Orders"
+    },
+    "header": {
+      "title": "Order Management",
+      "description": "Monitor and manage all delivery orders in real time",
+      "autoAssign": "Auto-assign orders to drivers",
+      "enabled": "Enabled"
+    },
+    "filter": {
+      "title": "Orders",
+      "searchPlaceholder": "Search by name or order number ...",
+      "timeFilter": "Filter by time",
+      "statusFilter": "Filter by status",
+      "time": {
+        "all": "All",
+        "today": "Today",
+        "this_week": "This Week",
+        "this_month": "This Month"
+      },
+      "status": {
+        "all": "All",
+        "under_review": "Under Review",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "delivery": "In Delivery"
+      }
     }
   },
   "orderActions": {

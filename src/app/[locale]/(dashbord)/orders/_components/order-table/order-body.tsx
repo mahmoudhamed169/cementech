@@ -14,10 +14,12 @@ import OrderShipmentCell from "./order-shipment-cell";
 import OrderQuantityCell from "./order-quantity-cell";
 import OrderAssignDriver from "./order-assign-driver";
 import OrderActionsWrapper from "./order-actions/_components/order-actions-wrapper";
+import OrdersTableEmpty from "./orders-table-empty";
 
 dayjs.extend(relativeTime);
 
 export default function OrderTableBody({ orders }: { orders: Order[] }) {
+  if (orders.length === 0) return <OrdersTableEmpty />;
   return (
     <TableBody>
       {orders.map((order, index) => (

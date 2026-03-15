@@ -28,9 +28,9 @@ export async function getOrders(
   const res = await fetch(`${API_URL}/orders?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "order",
+      system_screen: "order_permission",
     },
-    cache: "no-store",
+    next: { tags: ["orders"] },
   });
 
   if (!res.ok) {

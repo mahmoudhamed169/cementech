@@ -132,6 +132,31 @@
       "under_review": "الطلبات المعلقة",
       "delivery": "الطلبات الجارية",
       "canceled": "الطلبات الملغاة"
+    },
+    "header": {
+      "title": "إدارة الطلبات",
+      "description": "مراقبة وإدارة جميع طلبات التوصيل في الوقت الفعلي",
+      "autoAssign": "تخصيص الطلبات للسائقين تلقائياً",
+      "enabled": "مفعل"
+    },
+    "filter": {
+      "title": "الطلبات",
+      "searchPlaceholder": "ابحث عن اسم او رقم الطلب ...",
+      "timeFilter": "فلتر حسب الوقت",
+      "statusFilter": "فلتر حسب الحالة",
+      "time": {
+        "all": "الكل",
+        "today": "اليوم",
+        "this_week": "هذا الأسبوع",
+        "this_month": "هذا الشهر"
+      },
+      "status": {
+        "all": "الكل",
+        "under_review": "تحت المراجعة",
+        "approved": "مقبولة",
+        "rejected": "مرفوضة",
+        "delivery": "قيد التوصيل"
+      }
     }
   },
 
@@ -177,7 +202,6 @@
     },
     "back": "رجوع"
   },
-  "orderPage": "اهلا بكم في صفحة الطلبات",
 
   "userPage": {
     "header": {

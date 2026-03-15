@@ -60,7 +60,7 @@ export async function getOrderById(orderId: string): Promise<OrderResponse> {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "order",
+      system_screen: "order_permission",
     },
   });
 
