@@ -153,9 +153,10 @@
       "status": {
         "all": "الكل",
         "under_review": "تحت المراجعة",
-        "approved": "مقبولة",
-        "rejected": "مرفوضة",
-        "delivery": "قيد التوصيل"
+        "in_preparation": "قيد التجهيز",
+        "delivery": "قيد التوصيل",
+        "delivered": "تم التسليم",
+        "canceled": "ملغاة"
       }
     }
   },

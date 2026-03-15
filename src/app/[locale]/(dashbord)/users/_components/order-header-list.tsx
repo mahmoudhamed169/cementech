@@ -103,22 +103,28 @@ export default function OrderHeaderList() {
                 {t("status.under_review")}
               </SelectItem>
               <SelectItem
-                value="approved"
+                value="in_preparation"
                 className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
               >
-                {t("status.approved")}
-              </SelectItem>
-              <SelectItem
-                value="rejected"
-                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
-              >
-                {t("status.rejected")}
+                {t("status.in_preparation")}
               </SelectItem>
               <SelectItem
                 value="delivery"
                 className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
               >
                 {t("status.delivery")}
+              </SelectItem>
+              <SelectItem
+                value="delivered"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
+              >
+                {t("status.delivered")}
+              </SelectItem>
+              <SelectItem
+                value="canceled"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
+              >
+                {t("status.canceled")}
               </SelectItem>
             </SelectContent>
           </Select>

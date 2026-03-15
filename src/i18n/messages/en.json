@@ -150,9 +150,10 @@
       "status": {
         "all": "All",
         "under_review": "Under Review",
-        "approved": "Approved",
-        "rejected": "Rejected",
-        "delivery": "In Delivery"
+        "in_preparation": "In Preparation",
+        "delivery": "Delivering",
+        "delivered": "Completed",
+        "canceled": "Canceled"
       }
     }
   },

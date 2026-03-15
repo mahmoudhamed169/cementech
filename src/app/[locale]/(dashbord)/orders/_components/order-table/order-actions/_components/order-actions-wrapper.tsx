@@ -28,6 +28,5 @@ export default async function OrderActionsWrapper({
     return null;
   }
 
-  // نمرر الداتا للـ Client Component
   return <OrderActions order={order} />;
 }

@@ -7,7 +7,12 @@ export interface GetOrdersParams {
   limit?: number;
   order?: "ASC" | "DESC";
   search?: string;
-  status?: "all" | "under_review" | "approved" | "rejected" | "delivery";
+  status?:
+    | "under_review"
+    | "in_preparation"
+    | "delivery"
+    | "delivered"
+    | "canceled";
   time?: "today" | "this_week" | "this_month" | "all";
 }
 
@@ -20,7 +25,7 @@ export async function getOrders(
 
   const query = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
+    if (value !== undefined && value !== null && value !== "") {
       query.append(key, String(value));
     }
   });
@@ -29,12 +34,19 @@ export async function getOrders(
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
       system_screen: "order_permission",
+      lang: "en",
     },
     next: { tags: ["orders"] },
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch orders");
+    const errorBody = await res.text();
+    console.error("Orders error:", {
+      status: res.status,
+      body: errorBody,
+      url: `${API_URL}/orders?${query.toString()}`,
+    });
+    throw new Error(`Failed to fetch orders: ${res.status}`);
   }
 
   return res.json() as Promise<OrdersResponse>;

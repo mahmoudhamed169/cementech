@@ -8,9 +8,11 @@ import type { OrdersResponse } from "@/src/lib/types/orders/order";
 type OrderStatus =
   | "all"
   | "under_review"
-  | "approved"
-  | "rejected"
-  | "delivery";
+  | "in_preparation"
+  | "delivery"
+  | "delivered"
+  | "canceled";
+
 type OrderTime = "today" | "this_week" | "this_month" | "all";
 
 interface OrdersTableWrapperProps {

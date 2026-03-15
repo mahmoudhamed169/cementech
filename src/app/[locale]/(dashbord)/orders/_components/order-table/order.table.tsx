@@ -7,9 +7,11 @@ import OrdersTableWrapper from "./orders-table-wrapper";
 type OrderStatus =
   | "all"
   | "under_review"
-  | "approved"
-  | "rejected"
-  | "delivery";
+  | "in_preparation" // ✅
+  | "delivery"
+  | "delivered" // ✅
+  | "canceled"; // ✅
+
 type OrderTime = "today" | "this_week" | "this_month" | "all";
 
 interface OrderTableProps {
@@ -27,7 +29,7 @@ export default function OrderTable({
   status,
   time,
 }: OrderTableProps) {
-  const suspenseKey = `${page}-${search}-${status}-${time}`; // ✅ key بيتغير مع كل فلترة
+  const suspenseKey = `${page}-${search}-${status}-${time}`;
 
   return (
     <Table>

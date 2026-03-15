@@ -17,6 +17,7 @@ import OrderInfoCards from "./_components/order-info-cards";
 import OrderCancelButton from "./_components/order-cancel-button";
 import OrderDialogTitle from "./_components/order-dialog-title";
 import { OrderData } from "@/src/lib/services/orders/spacific-order";
+import OrderModelStatusCell from "./_components/order-status-cell";
 
 interface OrderActionsProps {
   order: OrderData;
@@ -37,7 +38,7 @@ export default function OrderActions({ order }: OrderActionsProps) {
       <DialogContent className="min-w-3xl bg-white border-0">
         <OrderDialogTitle orderCode={order.code} />
         <div className="p-6 border-t-[0.8px] border-[#E5E7EB] space-y-6">
-          <OrderStatusCell status={order.order_status} />
+          <OrderModelStatusCell status={order.order_status} />
           <CustomerInfoSection order={order} />
           <DriverInfoSection order={order} />
           <OrderLocationSection order={order} />

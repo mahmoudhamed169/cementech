@@ -2,13 +2,13 @@
 
 import { DeliveryStatusBadge } from "@/src/app/[locale]/(dashbord)/_components/deliver-status-badge";
 import { useTranslations } from "next-intl";
-import { mapOrderStatus, ApiOrderStatus } from "@/src/lib/utils/order-status";
+import OrderStatusCell from "../../order-status-cell";
 
 interface OrderStatusCellProps {
   status: string;
 }
 
-export default function OrderStatusCell({ status }: OrderStatusCellProps) {
+export default function OrderModelStatusCell({ status }: OrderStatusCellProps) {
   const t = useTranslations("orderActions");
 
   return (
@@ -17,7 +17,7 @@ export default function OrderStatusCell({ status }: OrderStatusCellProps) {
         {t("orderStatus") || "حالة الطلب"} :
       </h6>
 
-      <DeliveryStatusBadge status={mapOrderStatus(status as ApiOrderStatus)} />
+      <OrderStatusCell status={status} />
     </div>
   );
 }

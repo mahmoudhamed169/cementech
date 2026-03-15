@@ -61,6 +61,7 @@ export async function getOrderById(orderId: string): Promise<OrderResponse> {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
       system_screen: "order_permission",
+      lang: "en",
     },
   });
 
