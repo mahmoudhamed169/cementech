@@ -198,6 +198,8 @@
       }
     },
     "userStatus": {
+      "status": "User Status",
+      "all": "All",
       "active": "Active",
       "inactive": "Inactive",
       "blocked": "Blocked"

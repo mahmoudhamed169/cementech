@@ -206,6 +206,8 @@
     },
 
     "userStatus": {
+      "status": "حالة المستخدم",
+      "all": "الكل",
       "active": "نشط",
       "inactive": "غير نشط",
       "blocked": "محظور"

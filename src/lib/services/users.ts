@@ -13,8 +13,8 @@ export interface GetUsersParams {
   status?: "all" | "active" | "inactive" | "blocked";
   type?: "customer" | "driver" | "admin";
   screen?: string;
-  driverStatus?: DriverStatus; // ✅
-  requestStatus?: LoadingStatus; // ✅
+  driverStatus?: DriverStatus;
+  requestStatus?: LoadingStatus;
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -28,7 +28,8 @@ export async function getUsers<T extends Driver | Customer>(
 
   const query = new URLSearchParams();
   Object.entries(queryParams).forEach(([key, value]) => {
-    if (value !== undefined && value !== null) {
+    if (value !== undefined && value !== null && value !== "") {
+      // ✅ ضيف value !== ""
       query.append(key, String(value));
     }
   });
@@ -42,7 +43,15 @@ export async function getUsers<T extends Driver | Customer>(
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch users");
+    const errorBody = await res.json().catch(() => res.text());
+    console.error("Users error:", {
+      status: res.status,
+      statusText: res.statusText,
+      body: errorBody,
+      url: `${API_URL}/users?${query.toString()}`,
+      screen: screen ?? params.type ?? "dashboard_users",
+    });
+    throw new Error(`Failed to fetch users: ${res.status}`);
   }
 
   return res.json() as Promise<ApiUserResponse<T>>;

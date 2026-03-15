@@ -4,15 +4,24 @@ import { Suspense } from "react";
 import UsersTableWrapper from "./users-table-wrapper";
 import TableLoadingSpinner from "@/src/components/shared/table-loading";
 
-export default function UsersTable() {
+type UsersTableProps = {
+  page: number;
+  search: string;
+  status: string;
+};
+
+export default function UsersTable({ page, search, status }: UsersTableProps) {
   return (
     <Table>
       {/* Header */}
       <UserTableHeader />
 
       {/* Body */}
-      <Suspense fallback={<TableLoadingSpinner colSpan={9} />}>
-        <UsersTableWrapper />
+      <Suspense
+        key={`${page}-${search}-${status}`}
+        fallback={<TableLoadingSpinner colSpan={9} />}
+      >
+        <UsersTableWrapper page={page} search={search} status={status} />
       </Suspense>
     </Table>
   );
