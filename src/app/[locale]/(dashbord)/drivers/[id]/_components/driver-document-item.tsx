@@ -1,6 +1,8 @@
+"use client";
 import { Download, FileText } from "lucide-react";
 import DocumentStatusBadge from "./document-status-badge";
 import { Link } from "@/src/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 export type DocumentStatus = "accepted" | "approved" | "pending" | "rejected";
 
@@ -8,7 +10,7 @@ interface DriverDocumentItemProps {
   title: string;
   status: DocumentStatus;
   icon?: React.ReactNode;
-  link: string; // URL to the document for download
+  link: string;
 }
 
 export default function DriverDocumentItem({
@@ -17,6 +19,8 @@ export default function DriverDocumentItem({
   link,
   icon,
 }: DriverDocumentItemProps) {
+  const t = useTranslations("driverPage.driverDocuments");
+
   return (
     <div className="min-h-12 bg-[#F9FAFB] rounded-xl flex items-center justify-between">
       <div className="flex gap-2.5 items-center px-4 py-3">
@@ -25,10 +29,12 @@ export default function DriverDocumentItem({
       </div>
 
       <div className="flex gap-4 items-center px-4 py-3 border-[#E5E7EB]">
-        {/* casting to any because link can be external or dynamic path */}
         <Link
           href={link as any}
           className="text-[#344054] flex items-center gap-1.5"
+          title={t("download")}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           <Download size={20} />
         </Link>

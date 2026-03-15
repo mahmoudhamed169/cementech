@@ -265,15 +265,45 @@
       "not loaded": "Unloaded",
       "pending": "Pending"
     },
-    "documentStatus": {
-      "approved": "Approved",
-      "rejected": "Unapproved",
-      "pending": "Pending"
-    },
+
     "driversFilter": {
       "loadingStatus": "Loading Status",
       "driverStatus": "Driver Status",
       "all": "All"
+    },
+    "driverDetails": {
+      "title": "Driver Details",
+      "driverId": "Driver ID",
+      "fullName": "Full Name",
+      "phoneNumber": "Phone Number",
+      "notAvailable": "N/A",
+      "status": "Status",
+      "documentStatus": "Document Status",
+      "plateNumber": "Plate Number",
+      "joiningDate": "Joining Date",
+      "backToDrivers": "Drivers"
+    },
+
+    "driverStats": {
+      "title": "Statistics",
+      "totalOrders": "Total Deliveries",
+      "totalPaid": "Total Earnings",
+      "lastOrderDate": "Last Delivery",
+      "noOrders": "No orders yet"
+    },
+    "driverDocuments": {
+      "title": "Documents",
+      "nationalId": "Residence - ID",
+      "driverLicense": "Driver License",
+      "carLicense": "Vehicle Registration",
+      "carInsurance": "Insurance Document",
+      "download": "Download"
+    },
+    "documentStatus": {
+      "accepted": "Verified",
+      "approved": "Verified",
+      "pending": "Under Review",
+      "rejected": "Rejected"
     }
   },
   "loadingRequestsPage": {

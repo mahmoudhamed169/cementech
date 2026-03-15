@@ -270,15 +270,44 @@
       "pending": "معلق"
     },
 
-    "documentStatus": {
-      "accepted": "موثق",
-      "rejected": "غير موثق",
-      "pending": "معلق"
-    },
     "driversFilter": {
       "loadingStatus": "حالة التحميل",
       "driverStatus": "حالة السائق",
       "all": "الكل"
+    },
+    "driverDetails": {
+      "title": "بيانات السائق",
+      "driverId": "رقم السائق (ID)",
+      "fullName": "الاسم الكامل",
+      "phoneNumber": "رقم الجوال",
+      "notAvailable": "غير متوفر",
+      "status": "الحالة",
+      "documentStatus": "حالة الوثائق",
+      "plateNumber": "رقم لوحة السيارة",
+      "joiningDate": "تاريخ الانضمام",
+      "backToDrivers": "السائقين"
+    },
+
+    "driverStats": {
+      "title": "الإحصائيات",
+      "totalOrders": "إجمالي التوصيلات",
+      "totalPaid": "إجمالي الأرباح",
+      "lastOrderDate": "آخر توصيل",
+      "noOrders": "لا توجد طلبات بعد"
+    },
+    "driverDocuments": {
+      "title": "الوثائق",
+      "nationalId": "الإقامة - الهوية",
+      "driverLicense": "رخصة القيادة",
+      "carLicense": "استمارة المركبة",
+      "carInsurance": "وثيقة التأمين",
+      "download": "تحميل"
+    },
+    "documentStatus": {
+      "accepted": "موثق",
+      "approved": "موثق",
+      "pending": "قيد المراجعة",
+      "rejected": "مرفوض"
     }
   },
   "loadingRequestsPage": {

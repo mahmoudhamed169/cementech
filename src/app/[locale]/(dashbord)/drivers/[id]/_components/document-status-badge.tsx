@@ -1,4 +1,6 @@
+"use client ";
 import { CircleCheckBig, Clock, CircleX } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type DocumentStatus = "accepted" | "approved" | "pending" | "rejected";
 
@@ -7,28 +9,25 @@ interface Props {
 }
 
 export default function DocumentStatusBadge({ status }: Props) {
+  const t = useTranslations("driverPage.documentStatus");
+
   const config = {
     accepted: {
-      label: "موثق",
       color: "text-green-600",
       dot: "bg-green-600",
       icon: <CircleCheckBig size={15} />,
     },
     approved: {
-      // backend may use "approved" instead of "accepted"
-      label: "موثق",
       color: "text-green-600",
       dot: "bg-green-600",
       icon: <CircleCheckBig size={15} />,
     },
     pending: {
-      label: "قيد المراجعة",
       color: "text-yellow-600",
       dot: "bg-yellow-600",
       icon: <Clock size={15} />,
     },
     rejected: {
-      label: "مرفوض",
       color: "text-red-600",
       dot: "bg-red-600",
       icon: <CircleX size={15} />,
@@ -38,9 +37,8 @@ export default function DocumentStatusBadge({ status }: Props) {
   return (
     <div className="flex items-center gap-2.5">
       <div className={`w-2.5 h-2.5 rounded-full ${config.dot}`} />
-
       <div className={`flex gap-1.5 items-center ${config.color}`}>
-        <p className="text-sm">{config.label}</p>
+        <p className="text-sm">{t(status)}</p>
         {config.icon}
       </div>
     </div>
