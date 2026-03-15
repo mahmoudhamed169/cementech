@@ -2,6 +2,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/src/auth";
 import { ApiUserResponse, Customer, Driver } from "../types/users";
 
+type DriverStatus = "free" | "offline" | "pending" | "blocked";
+type LoadingStatus = "loaded" | "not loaded" | "pending";
+
 export interface GetUsersParams {
   page?: number;
   limit?: number;
@@ -9,6 +12,9 @@ export interface GetUsersParams {
   search?: string;
   status?: "all" | "active" | "inactive" | "blocked";
   type?: "customer" | "driver" | "admin";
+  screen?: string;
+  driverStatus?: DriverStatus; // ✅
+  requestStatus?: LoadingStatus; // ✅
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -18,8 +24,10 @@ export async function getUsers<T extends Driver | Customer>(
 ): Promise<ApiUserResponse<T>> {
   const session = await getServerSession(authOptions);
 
+  const { screen, ...queryParams } = params;
+
   const query = new URLSearchParams();
-  Object.entries(params).forEach(([key, value]) => {
+  Object.entries(queryParams).forEach(([key, value]) => {
     if (value !== undefined && value !== null) {
       query.append(key, String(value));
     }
@@ -28,7 +36,7 @@ export async function getUsers<T extends Driver | Customer>(
   const res = await fetch(`${API_URL}/users?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: params.type ?? "dashboard_users",
+      system_screen: screen ?? params.type ?? "dashboard_users",
     },
     cache: "no-store",
   });

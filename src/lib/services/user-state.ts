@@ -14,11 +14,12 @@ export interface UsersStatsResponse {
   data: UsersStat;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
 export interface GetUsersStatsParams {
   type: "customer" | "driver" | "admin";
+  screen?: string;
 }
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getUsersStats(
   params: GetUsersStatsParams,
@@ -31,13 +32,19 @@ export async function getUsersStats(
   const res = await fetch(`${API_URL}/users/stats?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: params.type ?? "dashboard_users",
+      system_screen: params.screen ?? params.type, // ✅ fallback على type لو screen مش موجود
     },
     cache: "no-store",
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch users stats");
+    const errorBody = await res.json().catch(() => res.text());
+    console.error("Users stats error:", {
+      status: res.status,
+      statusText: res.statusText,
+      body: errorBody,
+    });
+    throw new Error(`Failed to fetch users stats: ${res.status}`);
   }
 
   return res.json() as Promise<UsersStatsResponse>;

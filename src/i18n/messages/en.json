@@ -269,6 +269,11 @@
       "approved": "Approved",
       "rejected": "Unapproved",
       "pending": "Pending"
+    },
+    "driversFilter": {
+      "loadingStatus": "Loading Status",
+      "driverStatus": "Driver Status",
+      "all": "All"
     }
   },
   "loadingRequestsPage": {

@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Pagination,
   PaginationContent,
@@ -13,54 +14,38 @@ import {
 interface Props {
   totalPages: number;
   currentPage: number;
-  onPageChange?: (page: number) => void;
 }
 
-export function DynamicPagination({
-  totalPages,
-  currentPage,
-  onPageChange,
-}: Props) {
+export function DynamicPagination({ totalPages, currentPage }: Props) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   if (totalPages <= 1) return null;
 
-  const siblingCount = 1; // عدد الصفحات جنب الحالية
+  const handlePageChange = (page: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", String(page));
+    router.push(`?${params.toString()}`);
+  };
+
+  const siblingCount = 1;
   const pages: (number | "dots")[] = [];
 
   const left = Math.max(currentPage - siblingCount, 1);
   const right = Math.min(currentPage + siblingCount, totalPages);
 
-  // أول صفحة
-  if (left > 1) {
-    pages.push(1);
-  }
-
-  // Ellipsis قبل
-  if (left > 2) {
-    pages.push("dots");
-  }
-
-  // الصفحات حول الحالية
-  for (let i = left; i <= right; i++) {
-    pages.push(i);
-  }
-
-  // Ellipsis بعد
-  if (right < totalPages - 1) {
-    pages.push("dots");
-  }
-
-  // آخر صفحة
-  if (right < totalPages) {
-    pages.push(totalPages);
-  }
+  if (left > 1) pages.push(1);
+  if (left > 2) pages.push("dots");
+  for (let i = left; i <= right; i++) pages.push(i);
+  if (right < totalPages - 1) pages.push("dots");
+  if (right < totalPages) pages.push(totalPages);
 
   return (
     <Pagination dir="ltr" className="justify-center mt-6">
       <PaginationContent>
-        {/* Previous */}
         <PaginationItem>
           <PaginationPrevious
-            onClick={() => currentPage > 1 && onPageChange?.(currentPage - 1)}
+            onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
             className="[&>span]:hidden cursor-pointer"
           />
         </PaginationItem>
@@ -79,7 +64,7 @@ export function DynamicPagination({
           return (
             <PaginationItem key={item}>
               <PaginationLink
-                onClick={() => onPageChange?.(item)}
+                onClick={() => handlePageChange(item)}
                 className={`rounded-full px-4 py-2 flex items-center justify-center cursor-pointer transition-all
                   ${
                     isActive
@@ -93,11 +78,10 @@ export function DynamicPagination({
           );
         })}
 
-        {/* Next */}
         <PaginationItem>
           <PaginationNext
             onClick={() =>
-              currentPage < totalPages && onPageChange?.(currentPage + 1)
+              currentPage < totalPages && handlePageChange(currentPage + 1)
             }
             className="[&>span]:hidden cursor-pointer"
           />

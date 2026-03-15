@@ -274,6 +274,11 @@
       "accepted": "موثق",
       "rejected": "غير موثق",
       "pending": "معلق"
+    },
+    "driversFilter": {
+      "loadingStatus": "حالة التحميل",
+      "driverStatus": "حالة السائق",
+      "all": "الكل"
     }
   },
   "loadingRequestsPage": {
