@@ -1,5 +1,8 @@
+"use client";
 import { Link } from "@/src/i18n/navigation";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 interface PageTitleWithBackProps {
   title: string;
@@ -10,6 +13,10 @@ export default function PageTitleWithBack({
   title,
   backHref,
 }: PageTitleWithBackProps) {
+  const t = useTranslations("common");
+  const locale = useLocale();
+  const isRtl = locale === "ar";
+
   return (
     <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-4">
       <h1 className="text-xl font-bold text-[#101828]">{title}</h1>
@@ -18,8 +25,8 @@ export default function PageTitleWithBack({
         href={backHref as any}
         className="text-lg font-semibold mt-2 flex items-center text-[#344054] gap-1"
       >
-        رجوع
-        <ChevronLeft size={20} />
+        {t("back")}
+        {isRtl ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
       </Link>
     </div>
   );

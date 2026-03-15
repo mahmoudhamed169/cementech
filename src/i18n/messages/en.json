@@ -167,8 +167,12 @@
       "otpSentError": "Failed to send OTP, please try again",
       "loginSuccess": "Logged in successfully",
       "loginError": "Invalid OTP, please try again",
-      "logoutSuccess": "Logged out successfully"
-    }
+      "logoutSuccess": "Logged out successfully",
+      "blockSuccess": "User blocked successfully",
+      "unblockSuccess": "User unblocked successfully",
+      "blockError": "An error occurred, please try again"
+    },
+    "back": "Back"
   },
 
   "orderPage": "Welcome in the order page",
@@ -213,7 +217,24 @@
       "joinDate": "Join Date",
       "active": "Active"
     },
+    "userDetails": {
+      "pageTitle": "User Details",
+      "userId": "User ID",
+      "fullName": "Full Name",
+      "phoneNumber": "Phone Number",
+      "status": "Status",
+      "companyName": "Company Name",
+      "joiningDate": "Joining Date",
+      "notAvailable": "N/A"
+    },
+    "userStats": {
+      "title": "Statistics",
+      "totalOrders": "Total Orders",
+      "totalPaid": "Total Paid",
+      "lastOrder": "Last Order"
+    },
     "userOrderTable": {
+      "title": "Orders History",
       "colums": {
         "index": "#",
         "orderNumber": "Order Number",
@@ -226,6 +247,10 @@
         "title": "No users found",
         "description": "Users will appear here once they register in the app."
       }
+    },
+    "userActions": {
+      "block": "Block User",
+      "unblock": "Unblock User"
     }
   },
   "driverPage": {

@@ -170,8 +170,12 @@
       "otpSentError": "فشل إرسال رمز التحقق، حاول مجدداً",
       "loginSuccess": "تم تسجيل الدخول بنجاح",
       "loginError": "رمز التحقق غير صحيح، حاول مجدداً",
-      "logoutSuccess": "تم تسجيل الخروج بنجاح"
-    }
+      "logoutSuccess": "تم تسجيل الخروج بنجاح",
+      "blockSuccess": "تم حظر المستخدم بنجاح",
+      "unblockSuccess": "تم رفع الحظر بنجاح",
+      "blockError": "حدث خطأ، يرجى المحاولة مرة أخرى"
+    },
+    "back": "رجوع"
   },
   "orderPage": "اهلا بكم في صفحة الطلبات",
 
@@ -221,7 +225,24 @@
       "joinDate": "تاريخ الانضمام",
       "active": "نشط"
     },
+    "userDetails": {
+      "pageTitle": "بيانات المستخدم",
+      "userId": "رقم المستخدم (ID)",
+      "fullName": "الاسم الكامل",
+      "phoneNumber": "رقم الجوال",
+      "status": "الحالة",
+      "companyName": "اسم المؤسسة",
+      "joiningDate": "تاريخ الانضمام",
+      "notAvailable": "غير متوفر"
+    },
+    "userStats": {
+      "title": "الإحصائيات",
+      "totalOrders": "إجمالي الطلبات",
+      "totalPaid": "إجمالي المدفوع",
+      "lastOrder": "آخر طلب"
+    },
     "userOrderTable": {
+      "title": "تاريخ الطلبات",
       "colums": {
         "index": "#",
         "orderNumber": "رقم الطلب",
@@ -229,7 +250,15 @@
         "quantity": "الكمية",
         "orderState": "حالة الطلب",
         "actions": "الإجراءات"
+      },
+      "empty": {
+        "title": "لا توجد طلبات",
+        "description": "ستظهر الطلبات هنا بمجرد إنشائها."
       }
+    },
+    "userActions": {
+      "block": "حظر المستخدم",
+      "unblock": "رفع الحظر"
     }
   },
   "driverPage": {
