@@ -178,7 +178,10 @@
     "cementQuantity": "كمية الأسمنت",
     "price": "السعر",
     "lastUpdate": "آخر تحديث",
-    "cancelOrder": "الغاء الطلب",
+    "cancelOrder": "إلغاء الطلب",
+    "canceling": "جاري الإلغاء...",
+    "cancelSuccess": "تم إلغاء الطلب بنجاح",
+    "cancelError": "فشل إلغاء الطلب، حاول مرة أخرى",
     "assignDriverToOrder": "تخصيص سائق للطلب رقم",
     "shipmentLabel": {
       "one": "شحنة واحدة",

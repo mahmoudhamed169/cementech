@@ -69,16 +69,17 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
           {/* options actions */}
           <TableCell className="text-center">
             <div className="flex items-center justify-center space-x-2">
-              {/* assignDriver */}
-              <OrderAssignDriver
-                hasDrivers={order.has_drivers}
-                truckQuantity={order.truck_quantity}
-                orderCode={order.code}
-                orderId={order.id}
-                productId={order.product_id}
-              />
-
-              {/* Order Actions */}
+              <div
+                className={order.order_status === "canceled" ? "invisible" : ""}
+              >
+                <OrderAssignDriver
+                  hasDrivers={order.has_drivers}
+                  truckQuantity={order.truck_quantity}
+                  orderCode={order.code}
+                  orderId={order.id}
+                  productId={order.product_id}
+                />
+              </div>
               <OrderActionsWrapper orderId={order.id} />
             </div>
           </TableCell>

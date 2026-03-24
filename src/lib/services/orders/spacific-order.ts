@@ -63,6 +63,7 @@ export async function getOrderById(orderId: string): Promise<OrderResponse> {
       system_screen: "order_permission",
       lang: "en",
     },
+    next: { tags: ["orders"] },
   });
 
   if (!res.ok) {

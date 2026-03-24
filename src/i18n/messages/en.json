@@ -175,6 +175,9 @@
     "price": "Price",
     "lastUpdate": "Last Update",
     "cancelOrder": "Cancel Order",
+    "canceling": "Canceling...",
+    "cancelSuccess": "Order cancelled successfully",
+    "cancelError": "Failed to cancel order, please try again",
 
     "assignDriverToOrder": "Assign Driver to Order",
     "shipmentLabel": {
