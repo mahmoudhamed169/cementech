@@ -21,7 +21,7 @@ export default function UnassignedDriverState({
       <div className="mt-2.5 rounded-xl min-h-[68px] p-4 flex justify-between items-center bg-[#FEFCE8]">
         <h6 className="text-[#894B00]">{t("notAssigned")}</h6>
 
-        {order.order_status !== "canceled" && (
+        {!["canceled", "ملغي"].includes(order.order_status) && (
           <AssigneDriver
             numOfShipments={order.truck_quantity}
             orderId={order.id}

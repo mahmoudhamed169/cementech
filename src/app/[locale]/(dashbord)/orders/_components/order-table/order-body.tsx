@@ -74,7 +74,12 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
           <TableCell className="text-center">
             <div className="flex items-center justify-center space-x-2">
               <div
-                className={order.order_status === "canceled" ? "invisible" : ""}
+                className={
+                  order.order_status === "canceled" ||
+                  order.order_status === "ملغي"
+                    ? "invisible"
+                    : ""
+                }
               >
                 <OrderAssignDriver
                   hasDrivers={order.has_drivers}
