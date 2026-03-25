@@ -45,10 +45,8 @@ export default function OrderActions({ order }: OrderActionsProps) {
           <OrderInfoCards order={order} />
         </div>
         <DialogFooter className="p-6 border-t-[0.8px] border-[#E5E7EB]">
-          {order.order_status !== "canceled" && (
-           
-              <OrderCancelButton id={order.id} />
-          
+          {!["canceled", "ملغي"].includes(order.order_status) && (
+            <OrderCancelButton id={order.id} />
           )}
         </DialogFooter>
       </DialogContent>
