@@ -19,7 +19,7 @@ import OrdersTableEmpty from "./orders-table-empty";
 dayjs.extend(relativeTime);
 
 export default function OrderTableBody({ orders }: { orders: Order[] }) {
-  console.log(orders);
+  // console.log(orders);
   if (orders.length === 0) return <OrdersTableEmpty />;
   return (
     <TableBody>
@@ -48,6 +48,10 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
           {/* Order Status */}
           <OrderStatusCell status={order.order_status} />
           {/* <TableCell className="text-center">-</TableCell> */}
+
+          <TableCell className="text-center font-medium">
+            {order.product_name}
+          </TableCell>
 
           {/* order Shipment */}
           <OrderShipmentCell truckQuantity={order.truck_quantity} />
@@ -78,6 +82,7 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
                   orderCode={order.code}
                   orderId={order.id}
                   productId={order.product_id}
+                  quantity={order.quantity}
                 />
               </div>
               <OrderActionsWrapper orderId={order.id} />

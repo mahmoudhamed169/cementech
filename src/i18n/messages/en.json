@@ -91,6 +91,7 @@
       "customer": "Customer",
       "driverStatus": "Driver",
       "deliveryStatus": "Status",
+      "productName": "Product",
       "shipments": "Shipments",
       "quantity": "Qty",
       "price": "Amount",
@@ -173,6 +174,7 @@
     "factory": "Factory",
     "cementQuantity": "Cement Quantity",
     "price": "Price",
+    "product": "Product",
     "lastUpdate": "Last Update",
     "cancelOrder": "Cancel Order",
     "canceling": "Canceling...",
@@ -184,10 +186,16 @@
       "one": "One shipment",
       "many": "Multiple shipments"
     },
-    "availableDrivers": "Available drivers nearby",
+
     "driverId": "ID",
     "distance": "Distance",
-    "confirm": "Confirm"
+    "quantity": "Quantity",
+    "confirm": "Confirm",
+    "availableDrivers": "Nearby available drivers",
+    "noDriversAvailable": "No drivers available",
+    "noDriversAvailableDesc": "Try again later",
+    "errorLoadingDrivers": "Error loading drivers",
+    "errorLoadingDriversDesc": "Something went wrong, please try again"
   },
   "common": {
     "logout": "Logout",

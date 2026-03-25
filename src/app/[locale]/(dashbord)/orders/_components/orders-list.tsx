@@ -4,16 +4,16 @@ import OrderTable from "./order-table/order.table";
 type OrderStatus =
   | "all"
   | "under_review"
-  | "in_preparation" 
+  | "in_preparation"
   | "delivery"
-  | "delivered" 
-  | "canceled"; 
+  | "delivered"
+  | "canceled";
 type OrderTime = "today" | "this_week" | "this_month" | "all";
 
 interface OrdersListProps {
   page?: number;
   search?: string;
-  status?: OrderStatus;
+  status?: string;
   time?: OrderTime;
 }
 

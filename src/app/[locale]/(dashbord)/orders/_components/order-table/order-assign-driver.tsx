@@ -11,6 +11,7 @@ interface OrderAssignDriverProps {
   orderCode: string;
   orderId: string;
   productId: string;
+  quantity: number;
 }
 
 export default function OrderAssignDriver({
@@ -19,6 +20,7 @@ export default function OrderAssignDriver({
   orderCode,
   orderId,
   productId,
+  quantity,
 }: OrderAssignDriverProps) {
   const t = useTranslations("recentOrders");
 
@@ -32,6 +34,8 @@ export default function OrderAssignDriver({
           numOfShipments={truckQuantity}
           orderCode={orderCode}
           orderId={orderId}
+          productId={productId}
+          quantity={quantity}
         >
           <Button>
             <UserRoundPlus className="stroke-[#FB2C36]" size={24} />

@@ -4,6 +4,8 @@ import PaginationInfo from "@/src/components/shared/pagination-info";
 import { DynamicPagination } from "@/src/components/shared/pagination";
 import { getOrders } from "@/src/lib/services/orders/orders";
 import type { OrdersResponse } from "@/src/lib/types/orders/order";
+import { getLocale } from "next-intl/server";
+import { cookies } from "next/headers";
 
 type OrderStatus =
   | "all"
@@ -19,7 +21,7 @@ interface OrdersTableWrapperProps {
   limit?: number;
   page?: number;
   search?: string;
-  status?: OrderStatus;
+  status?: string;
   time?: OrderTime;
 }
 
@@ -40,15 +42,21 @@ export default async function OrdersTableWrapper({
     hasNextPage: false,
   };
 
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value ?? "ar") as "ar" | "en";
+
   try {
-    const ordersResponse = await getOrders({
-      page,
-      limit,
-      order: "ASC",
-      search,
-      status,
-      time,
-    });
+    const ordersResponse = await getOrders(
+      {
+        page,
+        limit,
+        order: "ASC",
+        search,
+        status,
+        time,
+      },
+      locale as "ar" | "en",
+    );
 
     data = ordersResponse.data;
     meta = ordersResponse.meta;

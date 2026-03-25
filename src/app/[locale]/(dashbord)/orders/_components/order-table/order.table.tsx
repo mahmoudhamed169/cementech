@@ -18,7 +18,7 @@ interface OrderTableProps {
   limit?: number;
   page?: number;
   search?: string;
-  status?: OrderStatus;
+  status?: string;
   time?: OrderTime;
 }
 

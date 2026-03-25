@@ -10,6 +10,7 @@ export default function OrdersTableHeader() {
     "customer",
     "driverStatus",
     "deliveryStatus",
+    "productName",
     "shipments",
     "quantity",
     "price",

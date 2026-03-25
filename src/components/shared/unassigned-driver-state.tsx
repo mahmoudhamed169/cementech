@@ -26,6 +26,8 @@ export default function UnassignedDriverState({
             numOfShipments={order.truck_quantity}
             orderId={order.id}
             orderCode={order.code}
+            productId={order.product_id}
+            quantity={order.quantity}
           >
             <Button className="min-w-[130px] min-h-[42px] bg-[#D08700] rounded-xl p-2.5 text-white flex items-center gap-2">
               <UserPlus />

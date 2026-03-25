@@ -13,7 +13,7 @@ export default function OrderDialogTitle({ orderCode }: OrderDialogTitleProps) {
   return (
     <DialogHeader className="p-6">
       <DialogTitle className="text-[#101828] font-bold text-2xl">
-        {t("orderNumber")} - {orderCode}# + ({t("invoice")})
+        {t("orderNumber")} - {orderCode}
       </DialogTitle>
     </DialogHeader>
   );

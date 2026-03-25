@@ -91,6 +91,7 @@
       "customer": "اسم العميل",
       "driverStatus": "حالة السائق",
       "deliveryStatus": "حالة الطلب",
+      "productName": "المنتج",
       "shipments": "الشحنات",
       "quantity": "الكمية",
       "price": "السعر",
@@ -168,7 +169,7 @@
     "customerInfo": "معلومات العميل",
     "name": "الاسم",
     "phone": "رقم الجوال",
-    "driverInfo": "معلومات السائق + (حوار الشحنات)",
+    "driverInfo": "معلومات السائق ",
     "notAssigned": "غير مخصص لسائق",
     "assignDriver": "تخصيص لسائق",
     "deliveryDetails": "تفاصيل الإستلام",
@@ -177,6 +178,7 @@
     "factory": "المصنع",
     "cementQuantity": "كمية الأسمنت",
     "price": "السعر",
+    "product": "المنتج",
     "lastUpdate": "آخر تحديث",
     "cancelOrder": "إلغاء الطلب",
     "canceling": "جاري الإلغاء...",
@@ -187,10 +189,15 @@
       "one": "شحنة واحدة",
       "many": "عدة شحنات"
     },
-    "availableDrivers": "سائقين متاحين بالقرب من الموقع",
     "driverId": "ID",
-    "distance": "على بعد",
-    "confirm": "تأكيد"
+    "distance": "المسافه",
+    "quantity": "الكمية",
+    "confirm": "تأكيد",
+    "availableDrivers": "سائقين متاحين بالقرب من الموقع",
+    "noDriversAvailable": "لا يوجد سائقون متاحون",
+    "noDriversAvailableDesc": "حاول مرة أخرى لاحقاً",
+    "errorLoadingDrivers": "حدث خطأ أثناء تحميل السائقين",
+    "errorLoadingDriversDesc": "حدث خطأ ما، حاول مرة أخرى"
   },
   "common": {
     "logout": "تسجيل خروج",

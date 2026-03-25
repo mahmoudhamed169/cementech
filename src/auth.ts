@@ -37,6 +37,7 @@ export const authOptions: NextAuthOptions = {
         return {
           id: json.data.id,
           phone: json.data.phone,
+          name: json.data.name,
           role: json.data.role,
           code: json.data.code,
           permissions_id: json.data.permissions_id,
@@ -52,6 +53,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.phone = user.phone;
+        token.name = user.name;
         token.role = user.role;
         token.code = user.code;
         token.permissions_id = user.permissions_id;
@@ -64,6 +66,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       session.user.id = token.id as string;
       session.user.phone = token.phone as string;
+      session.user.name = token.name as string;
       session.user.role = token.role as string;
       session.user.code = token.code as string;
       session.user.permissions_id = token.permissions_id as string;

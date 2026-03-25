@@ -1,3 +1,4 @@
+// getOrderById - spacific-order.ts
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/src/auth";
 import { ApiOrderStatus } from "@/src/lib/utils/order-status";
@@ -52,7 +53,10 @@ export interface OrderResponse {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getOrderById(orderId: string): Promise<OrderResponse> {
+export async function getOrderById(
+  orderId: string,
+  lang: "ar" | "en",
+): Promise<OrderResponse> {
   const session = await getServerSession(authOptions);
 
   const res = await fetch(`${API_URL}/orders/${orderId}`, {
@@ -61,7 +65,7 @@ export async function getOrderById(orderId: string): Promise<OrderResponse> {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
       system_screen: "order_permission",
-      lang: "en",
+      lang,
     },
     next: { tags: ["orders"] },
   });
