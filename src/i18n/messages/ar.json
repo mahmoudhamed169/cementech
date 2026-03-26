@@ -432,6 +432,64 @@
         "title": "لا توجد طلبات تحميل حالياً",
         "description": "ستظهر طلبات التحميل هنا بمجرد تقديمها من قبل السائقين."
       }
+    },
+    "approveModal": {
+      "rejectSuccess": "تم رفض الطلب بنجاح",
+      "rejectError": "حدث خطأ أثناء رفض الطلب",
+      "title": "الموافقة على طلب تحميل",
+      "stepOne": {
+        "status": "حالة الطلب",
+        "infoTitle": "معلومات الطلب",
+        "requestCode": "رقم الطلب التعريفي",
+        "phone": "رقم الجوال",
+        "driverName": "اسم السائق",
+        "driverCode": "الرقم السائق التعريفي",
+        "carPlates": "رقم لوحة السيارة",
+        "createdAt": "وقت الطلب",
+        "approve": "قبول الطلب",
+        "reject": "رفض الطلب",
+        "rejecting": "جاري الرفض..."
+      },
+      "stepTwo": {
+        "confirmMessage": "سيؤدي الموافقة على هذا الطلب إلى إرسال موقع المصنع والمستندات المطلوبة إلى السائق",
+        "locationTitle": "موقع المصنع",
+        "mapPlaceholder": "اختر الموقع على الخريطة",
+        "selectLocation": "اختر الموقع",
+        "documentsTitle": "المستندات المطلوبة",
+        "tripCertificate": "شهادة الرحلة",
+        "layingCommand": "امر التنزيل",
+        "submit": "قبول الطلب وإرسال المستندات",
+        "cancel": "إلغاء"
+      }
+    },
+    "detailsPage": {
+      "requestNumber": "طلب تحميل رقم",
+      "requestDetails": "تفاصيل طلب التحميل",
+      "orderStatus": "حالة الطلب",
+      "infoSection": {
+        "title": "معلومات الطلب",
+        "requestCode": "رقم الطلب التعريفي",
+        "driverName": "اسم السائق",
+        "phone": "رقم الجوال",
+        "driverCode": "الرقم السائق التعريفي",
+        "carPlates": "رقم لوحة السيارة",
+        "createdAt": "وقت الطلب",
+        "tripCertificate": "شهادة الرحلة",
+        "layingCommand": "امر التنزيل",
+        "documents": "وثائق التحميل"
+      },
+      "locationSection": {
+        "title": "موقع المصنع",
+        "noLocation": "لا يوجد موقع"
+      },
+      "logsSection": {
+        "title": "حالة التحميل",
+        "received": "تم استقبال الطلب",
+        "approved": "تمت الموافقة بواسطة الإدارة",
+        "factory_arrival": "تم إرسال المستندات المطلوبة",
+        "loading": "الوصول للمصنع",
+        "loaded": "تم التحميل"
+      }
     }
   },
   "InvoicesPage": {

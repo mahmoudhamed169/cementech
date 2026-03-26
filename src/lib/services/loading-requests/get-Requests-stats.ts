@@ -25,7 +25,7 @@ export async function getRequestsStats(
   const res = await fetch(`${API_URL}/requests/stats`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "request",
+      system_screen: "loading_request_permission",
       lang,
     },
     cache: "no-store",

@@ -425,6 +425,64 @@
         "title": "No loading requests found",
         "description": "Loading requests will appear here once submitted by drivers."
       }
+    },
+    "approveModal": {
+      "title": "Approve Loading Request",
+      "rejectSuccess": "Request rejected successfully",
+      "rejectError": "Failed to reject request",
+      "stepOne": {
+        "status": "Order Status",
+        "infoTitle": "Request Information",
+        "requestCode": "Request Code",
+        "phone": "Phone Number",
+        "driverName": "Driver Name",
+        "driverCode": "Driver Code",
+        "carPlates": "Car Plates",
+        "createdAt": "Request Time",
+        "approve": "Approve Request",
+        "reject": "Reject Request",
+        "rejecting": "Rejecting..."
+      },
+      "stepTwo": {
+        "confirmMessage": "Approving this request will send the factory location and required documents to the driver",
+        "locationTitle": "Factory Location",
+        "mapPlaceholder": "Select location on map",
+        "selectLocation": "Select Location",
+        "documentsTitle": "Required Documents",
+        "tripCertificate": "Trip Certificate",
+        "layingCommand": "Laying Command",
+        "submit": "Approve & Send Documents",
+        "cancel": "Cancel"
+      }
+    },
+    "detailsPage": {
+      "requestNumber": "Loading Request No",
+      "requestDetails": "Loading Request Details",
+      "orderStatus": "Order Status",
+      "infoSection": {
+        "title": "Request Information",
+        "requestCode": "Request Code",
+        "driverName": "Driver Name",
+        "phone": "Phone Number",
+        "driverCode": "Driver Code",
+        "carPlates": "Car Plates",
+        "createdAt": "Request Time",
+        "tripCertificate": "Trip Certificate",
+        "layingCommand": "Laying Command",
+        "documents": "Loading Documents"
+      },
+      "locationSection": {
+        "title": "Factory Location",
+        "noLocation": "No location available"
+      },
+      "logsSection": {
+        "title": "Loading Status",
+        "received": "Request Received",
+        "approved": "Approved by Management",
+        "factory_arrival": "Documents Sent",
+        "loading": "Arrived at Factory",
+        "loaded": "Loading Complete"
+      }
     }
   },
 

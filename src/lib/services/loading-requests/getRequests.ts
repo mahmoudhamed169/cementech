@@ -41,7 +41,7 @@ export async function getRequests(
       system_screen: "loading_request_permission",
       lang,
     },
-    cache: "no-store",
+    next: { tags: ["requests"] },
   });
 
   if (!res.ok) {
