@@ -389,6 +389,24 @@
       "title": "Loading Requests",
       "search": {
         "placeholder": "Search by name or phone number ..."
+      },
+      "filter": {
+        "filterLabel": "Filter by Status",
+        "all": "All",
+        "received": "Received",
+        "approved": "Approved",
+        "factory_arrival": "Arrived at Factory",
+        "loading": "Loading",
+        "loaded": "Loaded",
+        "rejected": "Rejected",
+        "pending_payment": "Pending Payment"
+      },
+      "timeFilter": {
+        "filterLabel": "Filter by Time",
+        "all": "All",
+        "today": "Today",
+        "this_week": "This Week",
+        "this_month": "This Month"
       }
     },
     "table": {

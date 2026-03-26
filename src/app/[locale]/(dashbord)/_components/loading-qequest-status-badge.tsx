@@ -6,7 +6,8 @@ type LoadingRequestStatus =
   | "factory_arrival"
   | "loading"
   | "loaded"
-  | "rejected";
+  | "rejected"
+  | "pending_payment";
 
 const arabicToEnglish: Record<string, LoadingRequestStatus> = {
   "تم استقبال": "received",
@@ -15,6 +16,7 @@ const arabicToEnglish: Record<string, LoadingRequestStatus> = {
   "جاري التحميل": "loading",
   "تم التحميل": "loaded",
   مرفوض: "rejected",
+  "في انتظار الدفع": "pending_payment",
 };
 
 type StatusStyle = { bg: string; text: string };
@@ -26,6 +28,7 @@ const loadingRequestStatusStyles: Record<LoadingRequestStatus, StatusStyle> = {
   loading: { bg: "bg-yellow-100", text: "text-yellow-800" },
   loaded: { bg: "bg-emerald-100", text: "text-emerald-800" },
   rejected: { bg: "bg-red-100", text: "text-red-700" },
+  pending_payment: { bg: "bg-orange-100", text: "text-orange-800" },
 };
 
 function normalizeStatus(status: string): LoadingRequestStatus {

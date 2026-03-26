@@ -396,6 +396,24 @@
       "title": "طلبات التحميل",
       "search": {
         "placeholder": "ابحث عن اسم او رقم جوال ..."
+      },
+      "filter": {
+        "filterLabel": "فلتر حسب الحالة",
+        "all": "الكل",
+        "received": "تم استقبال",
+        "approved": "تمت الموافقة",
+        "factory_arrival": "تم الوصول للمصنع",
+        "loading": "جاري التحميل",
+        "loaded": "تم التحميل",
+        "rejected": "مرفوض",
+        "pending_payment": "في انتظار الدفع"
+      },
+      "timeFilter": {
+        "filterLabel": "فلتر حسب الوقت",
+        "all": "الكل",
+        "today": "اليوم",
+        "this_week": "هذا الأسبوع",
+        "this_month": "هذا الشهر"
       }
     },
     "table": {
