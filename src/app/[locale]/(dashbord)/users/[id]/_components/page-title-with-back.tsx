@@ -18,8 +18,8 @@ export default function PageTitleWithBack({
   const isRtl = locale === "ar";
 
   return (
-    <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-4">
-      <h1 className="text-xl font-bold text-[#101828]">{title}</h1>
+    <div className="flex justify-between items-center border-b border-[#E5E7EB] pb-4 mb-10">
+      <h1 className="text-3xl font-bold text-[#101828]">{title}</h1>
 
       <Link
         href={backHref as any}

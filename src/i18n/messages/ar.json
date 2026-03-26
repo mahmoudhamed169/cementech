@@ -159,7 +159,11 @@
         "delivered": "تم التسليم",
         "canceled": "ملغاة"
       }
-    }
+    },
+    "orderDetails": "تفاصيل الطلب",
+    "orderNumber": "رقم الطلب",
+    "fetchError": "حدث خطأ أثناء تحميل الطلب",
+    "fetchErrorSub": "يرجى المحاولة مرة أخرى لاحقاً"
   },
 
   "orderActions": {

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { EllipsisVertical } from "lucide-react";
 
-import OrderStatusCell from "./_components/order-status-cell";
+import OrderStatusCell from "./_components/order-details-status-cell";
 import CustomerInfoSection from "./_components/customer-info-section";
 import DriverInfoSection from "./_components/driver-info-section";
 import OrderLocationSection from "./_components/order-location-section";
@@ -17,7 +17,7 @@ import OrderInfoCards from "./_components/order-info-cards";
 import OrderCancelButton from "./_components/order-cancel-button";
 import OrderDialogTitle from "./_components/order-dialog-title";
 import { OrderData } from "@/src/lib/services/orders/spacific-order";
-import OrderModelStatusCell from "./_components/order-status-cell";
+import OrderModelStatusCell from "./_components/order-details-status-cell";
 
 interface OrderActionsProps {
   order: OrderData;

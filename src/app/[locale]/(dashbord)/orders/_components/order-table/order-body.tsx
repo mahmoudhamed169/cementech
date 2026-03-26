@@ -15,6 +15,8 @@ import OrderQuantityCell from "./order-quantity-cell";
 import OrderAssignDriver from "./order-assign-driver";
 import OrderActionsWrapper from "./order-actions/_components/order-actions-wrapper";
 import OrdersTableEmpty from "./orders-table-empty";
+import { Link } from "@/src/i18n/navigation";
+import { Eye } from "lucide-react";
 
 dayjs.extend(relativeTime);
 
@@ -90,7 +92,14 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
                   quantity={order.quantity}
                 />
               </div>
-              <OrderActionsWrapper orderId={order.id} />
+
+              <Link
+                href={`/orders/${order.id}`}
+                className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
+              >
+                <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
+              </Link>
+              {/* <OrderActionsWrapper orderId={order.id} /> */}
             </div>
           </TableCell>
         </TableRow>

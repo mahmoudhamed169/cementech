@@ -156,7 +156,11 @@
         "delivered": "Completed",
         "canceled": "Canceled"
       }
-    }
+    },
+    "orderDetails": "Order Details",
+    "orderNumber": "Order Number",
+    "fetchError": "Failed to load order",
+    "fetchErrorSub": "Please try again later"
   },
   "orderActions": {
     "orderNumber": "Order Number",
