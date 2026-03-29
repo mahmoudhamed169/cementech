@@ -29,18 +29,58 @@ export default function StepTwo({ request, onClose }: StepTwoProps) {
         {t("confirmMessage")}
       </div>
 
-      {/* موقع المصنع */}
-      <div className="space-y-2">
+      <div className="space-y-4">
         <h3 className="font-bold text-base text-[#101828]">
           {t("locationTitle")}
         </h3>
-        <div className="w-full h-48 bg-[#F9FAFB] border border-[#E5E7EB] rounded-2xl overflow-hidden relative flex items-center justify-center">
-          <p className="text-sm text-[#6A7282]">{t("mapPlaceholder")}</p>
+
+        {/* Factory Name */}
+        <div className="space-y-1">
+          <label className="text-sm font-medium text-[#6A7282]">
+            {t("factoryName")}
+          </label>
+          <div className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-4 py-3">
+            <span className="text-sm text-[#101828]">
+              {request.factory_name || "—"}
+            </span>
+          </div>
         </div>
-        <div className="w-full bg-[#f9f9f9] border border-[#E5E7EB] rounded-xl px-4 py-3 flex items-center gap-2">
-          <span className="text-sm text-[#6A7282]">
-            {location || t("selectLocation")}
-          </span>
+
+        {/* Product Name */}
+        <div className="space-y-1">
+          <label className="text-sm font-medium text-[#6A7282]">
+            {t("productName")}
+          </label>
+          <div className="w-full bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-4 py-3">
+            <span className="text-sm text-[#101828]">
+              {request.product_name || "—"}
+            </span>
+          </div>
+        </div>
+
+        {/* Lat & Long */}
+        <div className="space-y-1">
+          <label className="text-sm font-medium text-[#6A7282]">
+            {t("locationCoords")}
+          </label>
+          <div className="flex gap-2">
+            <div className="w-1/2 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-4 py-3">
+              <span className="text-xs text-[#6A7282] block mb-0.5">
+                {t("latitude")}
+              </span>
+              <span className="text-sm text-[#101828]">
+                {request.lat ?? "—"}
+              </span>
+            </div>
+            <div className="w-1/2 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-4 py-3">
+              <span className="text-xs text-[#6A7282] block mb-0.5">
+                {t("longitude")}
+              </span>
+              <span className="text-sm text-[#101828]">
+                {request.lng ?? "—"}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -27,7 +27,7 @@ export default function OrderCancelButton({ id }: { id: string }) {
       onClick={handleCancel}
       disabled={isPending}
       variant="outline"
-      className="w-full bg-[#E7000B] border-0 text-white flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-red-600 disabled:opacity-60"
+      className="w-3xl h-12  bg-[#E7000B] border-0 text-white flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-red-600 disabled:opacity-60"
     >
       <CircleX className="w-5 h-5" />
       {isPending ? t("canceling") : t("cancelOrder")}

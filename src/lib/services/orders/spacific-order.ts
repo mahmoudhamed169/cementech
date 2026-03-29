@@ -67,7 +67,7 @@ export async function getOrderById(
       system_screen: "order_permission",
       lang,
     },
-    next: { tags: ["orders"] },
+    next: { tags: ["ordersId"] },
   });
 
   if (!res.ok) {

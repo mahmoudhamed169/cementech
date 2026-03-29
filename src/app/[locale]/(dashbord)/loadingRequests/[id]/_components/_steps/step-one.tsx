@@ -58,6 +58,10 @@ export default function StepOne({
           <InfoItem label={t("phone")} value={request.phone_number} />
           <InfoItem label={t("driverName")} value={request.driver_name} />
           <InfoItem label={t("driverCode")} value={request.car_plates} />
+          <InfoItem label={" المصنع"} value={request.factory_name} />
+          <InfoItem label={" المنتج"} value={request.product_name} />
+          <InfoItem label={" الكمية"} value={request.quantity} />
+
           <InfoItem label={t("carPlates")} value={request.car_plates} />
           <InfoItem
             label={t("createdAt")}

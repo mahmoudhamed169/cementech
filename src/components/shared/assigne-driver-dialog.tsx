@@ -14,6 +14,7 @@ import {
 import { CircleCheck, Loader2, CarFront } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useNearbyDrivers } from "@/src/lib/hooks/useNearbyDrivers";
+import { useAssignDriver } from "@/src/lib/hooks/use-assign-driver";
 
 export function AssigneDriver({
   orderCode,
@@ -33,12 +34,22 @@ export function AssigneDriver({
   const [selectedDrivers, setSelectedDrivers] = useState<string[]>([]);
   const [open, setOpen] = useState(false);
   const t = useTranslations("orderActions");
+  const { mutate: assignDriver, isPending } = useAssignDriver(orderId);
+
+  const handleConfirm = () => {
+    assignDriver(selectedDrivers, {
+      onSuccess: () => {
+        setOpen(false);
+        setSelectedDrivers([]);
+      },
+    });
+  };
 
   const {
     data: drivers = [],
     isLoading,
     isError,
-  } = useNearbyDrivers(open ? productId : "", quantity);
+  } = useNearbyDrivers(open ? productId : "", quantity, orderId);
 
   const handleSelect = (driverId: string) => {
     if (numOfShipments === 1) {
@@ -170,24 +181,25 @@ export function AssigneDriver({
         </div>
 
         <DialogFooter className="px-6 py-4">
-          <DialogClose asChild>
-            <Button
-              variant="outline"
-              disabled={!isValidSelection}
-              className={`
-                w-full border-0 text-white text-base flex items-center justify-center gap-2
-                transition-all
-                ${
-                  isValidSelection
-                    ? "bg-[#155DFC] hover:opacity-90 active:scale-95 focus:ring-[#155DFC]"
-                    : "bg-[#C0C0C0] opacity-60 cursor-not-allowed"
-                }
-                focus:outline-none focus:ring-2 focus:ring-offset-1
-              `}
-            >
-              {t("confirm")}
-            </Button>
-          </DialogClose>
+          <Button
+            onClick={handleConfirm}
+            disabled={!isValidSelection || isPending}
+            className={`
+            w-full border-0 text-white text-base flex items-center justify-center gap-2
+            transition-all
+            ${
+              isValidSelection && !isPending
+                ? "bg-[#155DFC] hover:opacity-90 active:scale-95"
+                : "bg-[#C0C0C0] opacity-60 cursor-not-allowed"
+            }
+          `}
+          >
+            {isPending ? (
+              <Loader2 className="animate-spin" size={18} />
+            ) : (
+              t("confirm")
+            )}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

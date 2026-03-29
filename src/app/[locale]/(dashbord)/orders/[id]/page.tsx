@@ -16,14 +16,20 @@ import OrderPageTitle from "./_components/order-page-title";
 import OrderdetailsStatusCell from "../_components/order-table/order-actions/_components/order-details-status-cell";
 import OrderFetchError from "./_components/order-fetch-error";
 
-export default async function page({ params }: { params: { id: string } }) {
+export default async function page({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   let order: OrderData | null = null;
+  const { id } = await params; // 👈 await هنا
 
   const cookieStore = await cookies();
   const locale = (cookieStore.get("NEXT_LOCALE")?.value ?? "ar") as "ar" | "en";
 
   try {
-    const response: OrderResponse = await getOrderById(params.id, locale);
+    const response: OrderResponse = await getOrderById(id, locale);
+    console.log(response);
     if (response.success) {
       order = response.data;
     }
@@ -40,7 +46,7 @@ export default async function page({ params }: { params: { id: string } }) {
     );
 
   return (
-    <div className="p-6 space-y-6 bg-white rounded-2xl min-h-screen">
+    <div className="p-6 space-y-11 bg-white rounded-2xl min-h-screen">
       <OrderPageTitle orderCode={order.code} />
       <OrderdetailsStatusCell status={order.order_status} />
 
@@ -51,7 +57,9 @@ export default async function page({ params }: { params: { id: string } }) {
       <OrderInfoCards order={order} />
 
       {!["canceled", "ملغي"].includes(order.order_status) && (
-        <OrderCancelButton id={order.id} />
+        <div className="flex justify-center">
+          <OrderCancelButton id={order.id} />
+        </div>
       )}
     </div>
   );
