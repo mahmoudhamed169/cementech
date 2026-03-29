@@ -13,7 +13,7 @@ import BasicInfo from "./user-basic-info";
 import UserStats from "./user-stats";
 import { User } from "@/src/lib/constants/user";
 import { getTotalPaid } from "@/src/lib/utils/utils";
-import UserOrders from "./user-order";
+import UserOrders from "../[id]/_components/user-order";
 import { SendUserNotification } from "./send-user-notification";
 
 export function UserActions({ user }: { user: User }) {

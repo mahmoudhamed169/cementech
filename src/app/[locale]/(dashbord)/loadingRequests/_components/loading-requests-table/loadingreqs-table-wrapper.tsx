@@ -1,20 +1,41 @@
 import { TableCell, TableFooter, TableRow } from "@/components/ui/table";
 import { DynamicPagination } from "@/src/components/shared/pagination";
 import PaginationInfo from "@/src/components/shared/pagination-info";
-import { getRequests } from "@/src/lib/services/loading-requests/getRequests";
+import {
+  getRequests,
+  GetRequestsParams,
+} from "@/src/lib/services/loading-requests/getRequests";
 
 import { cookies } from "next/headers";
 import LoadingRequestsTableBody from "./loading-req-body-table";
 
-export default async function LoadingReqsTableWrapper() {
+export default async function LoadingReqsTableWrapper({
+  searchParams,
+}: {
+  searchParams: {
+    page?: string;
+    search?: string;
+    status?: string;
+    time?: string;
+  };
+}) {
+  const page = Number(searchParams.page ?? 1);
+  const search = searchParams.search ?? undefined;
+  const status =
+    (searchParams.status as GetRequestsParams["status"]) ?? undefined;
+  const time = (searchParams.time as GetRequestsParams["time"]) ?? undefined;
+
   const cookieStore = await cookies();
   const locale = cookieStore.get("NEXT_LOCALE")?.value ?? "ar";
 
-  const data = await getRequests({ page: 1, limit: 10 }, locale as "ar" | "en");
+  const data = await getRequests(
+    { page, limit: 10, search, status, time },
+    locale as "ar" | "en",
+  );
 
   return (
     <>
-      <LoadingRequestsTableBody loadingRequests={data.data} />;
+      <LoadingRequestsTableBody loadingRequests={data.data} />
       {data.data.length > 0 && (
         <>
           <TableFooter>

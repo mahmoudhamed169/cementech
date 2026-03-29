@@ -1,16 +1,37 @@
 import OrderTableBody from "./order-body";
 import { TableCell, TableFooter, TableRow } from "@/components/ui/table";
 import PaginationInfo from "@/src/components/shared/pagination-info";
-
 import { DynamicPagination } from "@/src/components/shared/pagination";
 import { getOrders } from "@/src/lib/services/orders/orders";
 import type { OrdersResponse } from "@/src/lib/types/orders/order";
+import { getLocale } from "next-intl/server";
+import { cookies } from "next/headers";
+
+type OrderStatus =
+  | "all"
+  | "under_review"
+  | "in_preparation"
+  | "delivery"
+  | "delivered"
+  | "canceled";
+
+type OrderTime = "today" | "this_week" | "this_month" | "all";
+
+interface OrdersTableWrapperProps {
+  limit?: number;
+  page?: number;
+  search?: string;
+  status?: string;
+  time?: OrderTime;
+}
 
 export default async function OrdersTableWrapper({
   limit,
-}: {
-  limit?: number;
-}) {
+  page = 1,
+  search,
+  status,
+  time,
+}: OrdersTableWrapperProps) {
   let data: OrdersResponse["data"] = [];
   let meta: OrdersResponse["meta"] = {
     page: 1,
@@ -21,19 +42,26 @@ export default async function OrdersTableWrapper({
     hasNextPage: false,
   };
 
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value ?? "ar") as "ar" | "en";
+
   try {
-    const ordersResponse = await getOrders({
-      page: 4,
-      limit: limit,
-      order: "ASC",
-      search: "",
-      time: "all",
-    });
+    const ordersResponse = await getOrders(
+      {
+        page,
+        limit,
+        order: "ASC",
+        search,
+        status,
+        time,
+      },
+      locale as "ar" | "en",
+    );
 
     data = ordersResponse.data;
     meta = ordersResponse.meta;
   } catch (error) {
-    console.error("Failed to fetch orders in OrdersTableWrapper:", error);
+    console.error("Failed to fetch orders:", error);
   }
 
   const shouldShowPagination = limit !== 8 && data.length > 0;
@@ -46,14 +74,13 @@ export default async function OrdersTableWrapper({
           <TableRow className="border-t border-b-0 border-[#E5E7EB] h-14 text-start">
             <TableCell colSpan={9}>
               <PaginationInfo
-                from={1}
-                to={limit ? Math.min(limit, data.length) : data.length}
+                from={(meta.page - 1) * (limit ?? 10) + 1}
+                to={Math.min(meta.page * (limit ?? 10), meta.itemCount)}
                 total={meta.itemCount}
                 type="orders"
               />
             </TableCell>
           </TableRow>
-
           <TableRow>
             <TableCell className="text-center" colSpan={9}>
               <DynamicPagination

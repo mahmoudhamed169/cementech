@@ -17,7 +17,7 @@ export default function LoadingReqTableHead() {
 
   const t = useTranslations("loadingRequestsPage.table.columns");
 
-  console.log(t);
+
   return (
     <TableHeader>
       <TableRow>

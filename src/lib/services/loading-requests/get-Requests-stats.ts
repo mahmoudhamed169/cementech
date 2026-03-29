@@ -1,3 +1,6 @@
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/src/auth";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export interface RequestStat {
@@ -17,17 +20,18 @@ export interface RequestStatsResponse {
 export async function getRequestsStats(
   lang: "ar" | "en",
 ): Promise<RequestStatsResponse> {
+  const session = await getServerSession(authOptions);
+
   const res = await fetch(`${API_URL}/requests/stats`, {
     headers: {
-      Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-      system_screen: "dashboard_requests",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+      system_screen: "loading_request_permission",
       lang,
     },
     cache: "no-store",
   });
 
   if (!res.ok) {
-    console.log(res)
     throw new Error("Failed to fetch requests stats");
   }
 

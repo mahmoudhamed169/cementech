@@ -1,6 +1,8 @@
 "use client";
 import SearchInput from "@/src/components/shared/search-input";
 import { useTranslations } from "next-intl";
+import StatusFilter from "./status-filter";
+import TimeFilter from "./time-filter";
 
 export default function LoadingReqHeader() {
   const t = useTranslations("loadingRequestsPage.loadingRequestHeader");
@@ -11,6 +13,8 @@ export default function LoadingReqHeader() {
         <div className="w-65">
           <SearchInput placeholder={t("search.placeholder")} />
         </div>
+        <TimeFilter />
+        <StatusFilter />
       </div>
     </div>
   );

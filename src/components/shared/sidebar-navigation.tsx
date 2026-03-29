@@ -2,14 +2,19 @@
 import { useTranslations } from "next-intl";
 import SidebarLinkItem from "./sidebar-item";
 import {
+  Bell,
   CarFront,
   CircleDollarSign,
+  Factory,
+  FileText,
+  Key,
   LayoutDashboard,
   ReceiptText,
   ScrollText,
   Settings,
   ShoppingBag,
   Users,
+  UserCog,
 } from "lucide-react";
 
 const SidebarLinks = [
@@ -49,6 +54,31 @@ const SidebarLinks = [
     icon: <ReceiptText size={24} strokeWidth={1.75} />,
   },
   {
+    href: "/notifications",
+    labelKey: "notifications",
+    icon: <Bell size={24} strokeWidth={1.75} />,
+  },
+  {
+    href: "/permissions",
+    labelKey: "permissions",
+    icon: <Key size={24} strokeWidth={1.75} />,
+  },
+  {
+    href: "/supervisors",
+    labelKey: "supervisors",
+    icon: <UserCog size={24} strokeWidth={1.75} />,
+  },
+  {
+    href: "/suppliers",
+    labelKey: "suppliers",
+    icon: <Factory size={24} strokeWidth={1.75} />,
+  },
+  {
+    href: "/terms",
+    labelKey: "terms",
+    icon: <FileText size={24} strokeWidth={1.75} />,
+  },
+  {
     href: "/settings",
     labelKey: "settings",
     icon: <Settings size={24} strokeWidth={1.75} />,
@@ -59,7 +89,10 @@ export default function SideBarNavigation() {
   const t = useTranslations("sidebar");
 
   return (
-    <nav className="py-4 px-3">
+    <nav
+      className="px-3 overflow-y-auto overflow-x-hidden"
+      style={{ scrollbarWidth: "thin", scrollbarColor: "#374151 transparent" }}
+    >
       <ul>
         {SidebarLinks.map((link) => (
           <SidebarLinkItem

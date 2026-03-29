@@ -1,4 +1,8 @@
+"use client";
+
 import SearchInput from "@/src/components/shared/search-input";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   Select,
   SelectContent,
@@ -8,169 +12,119 @@ import {
 } from "@/components/ui/select";
 
 export default function OrderHeaderList() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const t = useTranslations("orders.filter");
+
+  const handleFilter = (key: string, value: string) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (value === "all") {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+    params.set("page", "1");
+    router.push(`?${params.toString()}`);
+  };
+
   return (
     <div className="flex flex-wrap justify-between items-center gap-4">
-      <h3 className="font-bold text-lg text-[#101828]">الطلبات</h3>
+      <h3 className="font-bold text-lg text-[#101828]">{t("title")}</h3>
 
       <div className="flex flex-wrap items-center gap-4">
         <div className="w-65">
-          <SearchInput placeholder="ابحث عن اسم او رقم الطلب ..." />
+          <SearchInput placeholder={t("searchPlaceholder")} />
         </div>
 
         {/* Time Filter */}
-        <FilterBox label="فلتر حسب الوقت">
-          <Select>
-            <SelectTrigger
-              className="
-        w-[100px] h-9
-        text-sm text-[#101828]
-        bg-[#F9FAFB]
-        border border-[#E5E7EB]
-        rounded-2xl min-h-10.5
-        px-3
-        hover:bg-white
-        focus:ring-2 focus:ring-[#155DFC]/20
-        transition-all duration-150
-        text-center
-      "
-            >
-              <SelectValue placeholder="اليوم" />
+        <FilterBox label={t("timeFilter")}>
+          <Select
+            defaultValue={searchParams.get("time") ?? "all"}
+            onValueChange={(value) => handleFilter("time", value)}
+          >
+            <SelectTrigger className="w-[100px] h-9 text-sm text-[#101828] bg-[#F9FAFB] border border-[#E5E7EB] rounded-2xl min-h-10.5 px-3 hover:bg-white focus:ring-2 focus:ring-[#155DFC]/20 transition-all duration-150 text-center">
+              <SelectValue placeholder={t("time.all")} />
             </SelectTrigger>
-
             <SelectContent
               align="start"
-              className="
-        w-[100px]
-        rounded-lg
-        border border-[#E5E7EB]
-        shadow-md
-        bg-white
-        animate-slide-down-fade
-      "
+              className="w-[100px] rounded-lg border border-[#E5E7EB] shadow-md bg-white"
             >
               <SelectItem
+                value="all"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
+              >
+                {t("time.all")}
+              </SelectItem>
+              <SelectItem
                 value="today"
-                className="
-          text-sm px-2 py-1 rounded-md
-          hover:bg-[#F2F4F7]
-          data-[state=checked]:bg-[#155DFC]/10
-          transition-colors duration-150
-        "
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
               >
-                اليوم
+                {t("time.today")}
               </SelectItem>
-
               <SelectItem
-                value="week"
-                className="
-          text-sm px-2 py-1 rounded-md
-          hover:bg-[#F2F4F7]
-          data-[state=checked]:bg-[#155DFC]/10
-          transition-colors duration-150
-        "
+                value="this_week"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
               >
-                هذا الأسبوع
+                {t("time.this_week")}
               </SelectItem>
-
               <SelectItem
-                value="month"
-                className="
-          text-sm px-2 py-1 rounded-md
-          hover:bg-[#F2F4F7]
-          data-[state=checked]:bg-[#155DFC]/10
-          transition-colors duration-150
-        "
+                value="this_month"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
               >
-                هذا الشهر
+                {t("time.this_month")}
               </SelectItem>
             </SelectContent>
           </Select>
         </FilterBox>
 
         {/* Status Filter */}
-        <FilterBox label="فلتر حسب الحالة">
-          <Select>
-            <SelectTrigger
-              className="
-        w-[100px] h-10
-        text-sm text-[#101828]
-        bg-[#F9FAFB]
-        border border-[#E5E7EB]
-        rounded-2xl min-h-10.5
-        px-3
-        hover:bg-white
-        focus:ring-2 focus:ring-[#155DFC]/30
-        transition-all duration-150
-      "
-            >
-              <SelectValue placeholder="الكل" />
+        <FilterBox label={t("statusFilter")}>
+          <Select
+            defaultValue={searchParams.get("status") ?? "all"}
+            onValueChange={(value) => handleFilter("status", value)}
+          >
+            <SelectTrigger className="w-[100px] h-10 text-sm text-[#101828] bg-[#F9FAFB] border border-[#E5E7EB] rounded-2xl min-h-10.5 px-3 hover:bg-white focus:ring-2 focus:ring-[#155DFC]/30 transition-all duration-150">
+              <SelectValue placeholder={t("status.all")} />
             </SelectTrigger>
-
             <SelectContent
               align="end"
-              className="
-        w-[120px] rounded-lg border border-[#E5E7EB] shadow-lg bg-white
-        animate-slide-down-fade
-      "
+              className="w-[120px] rounded-lg border border-[#E5E7EB] shadow-lg bg-white"
             >
               <SelectItem
-                className="
-          text-sm px-2 py-1 rounded-md
-          hover:bg-[#F2F4F7] 
-          data-[state=checked]:bg-[#155DFC]/10
-          transition-colors duration-150
-        "
                 value="all"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
               >
-                الكل
+                {t("status.all")}
               </SelectItem>
-
               <SelectItem
-                className="
-          text-sm px-2 py-1 rounded-md
-          hover:bg-[#F2F4F7] 
-          data-[state=checked]:bg-[#155DFC]/10
-          transition-colors duration-150
-        "
-                value="completed"
+                value="under_review"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
               >
-                مكتملة
+                {t("status.under_review")}
               </SelectItem>
-
               <SelectItem
-                className="
-          text-sm px-2 py-1 rounded-md
-          hover:bg-[#F2F4F7] 
-          data-[state=checked]:bg-[#155DFC]/10
-          transition-colors duration-150
-        "
-                value="pending"
+                value="in_preparation"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
               >
-                معلقة
+                {t("status.in_preparation")}
               </SelectItem>
-
               <SelectItem
-                className="
-          text-sm px-2 py-1 rounded-md
-          hover:bg-[#F2F4F7] 
-          data-[state=checked]:bg-[#155DFC]/10
-          transition-colors duration-150
-        "
-                value="ongoing"
+                value="delivery"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
               >
-                جارية
+                {t("status.delivery")}
               </SelectItem>
-
               <SelectItem
-                className="
-          text-sm px-2 py-1 rounded-md
-          hover:bg-[#F2F4F7] 
-          data-[state=checked]:bg-[#155DFC]/10
-          transition-colors duration-150
-        "
+                value="delivered"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
+              >
+                {t("status.delivered")}
+              </SelectItem>
+              <SelectItem
                 value="canceled"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
               >
-                ملغاة
+                {t("status.canceled")}
               </SelectItem>
             </SelectContent>
           </Select>
@@ -180,7 +134,6 @@ export default function OrderHeaderList() {
   );
 }
 
-/* UI helper فقط */
 function FilterBox({
   label,
   children,

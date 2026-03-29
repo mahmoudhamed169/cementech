@@ -2,9 +2,11 @@ import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { Request } from "@/src/lib/types/requests/request";
 import EmptyLoadingRequests from "./empty-loading-requests";
 import TimeAgo from "@/src/components/providers/shared/_components/time-ago";
-import { Button } from "@/components/ui/button";
-import { EllipsisVertical } from "lucide-react";
+
 import { LoadingRequestStatusBadge } from "../../../_components/loading-qequest-status-badge";
+import { Link } from "@/src/i18n/navigation";
+import { Eye } from "lucide-react";
+import LoadingRequestActions from "./loading-request-actions";
 
 interface Props {
   loadingRequests: Request[];
@@ -51,7 +53,12 @@ export default function LoadingRequestsTableBody({ loadingRequests }: Props) {
           </TableCell>
 
           {/* actions */}
-          <TableCell>-</TableCell>
+
+          <TableCell className="text-center">
+            <div className="flex items-center justify-center">
+              <LoadingRequestActions request={loading} />
+            </div>
+          </TableCell>
         </TableRow>
       ))}
     </TableBody>

@@ -21,16 +21,20 @@ export default function UnassignedDriverState({
       <div className="mt-2.5 rounded-xl min-h-[68px] p-4 flex justify-between items-center bg-[#FEFCE8]">
         <h6 className="text-[#894B00]">{t("notAssigned")}</h6>
 
-        <AssigneDriver
-          numOfShipments={order.truck_quantity}
-          orderId={order.id}
-          orderCode={order.code}
-        >
-          <Button className="min-w-[130px] min-h-[42px] bg-[#D08700] rounded-xl p-2.5 text-white flex items-center gap-2">
-            <UserPlus />
-            {t("assignDriver")}
-          </Button>
-        </AssigneDriver>
+        {!["canceled", "ملغي"].includes(order.order_status) && (
+          <AssigneDriver
+            numOfShipments={order.truck_quantity}
+            orderId={order.id}
+            orderCode={order.code}
+            productId={order.product_id}
+            quantity={order.quantity}
+          >
+            <Button className="min-w-[130px] min-h-[42px] bg-[#D08700] rounded-xl p-2.5 text-white flex items-center gap-2">
+              <UserPlus />
+              {t("assignDriver")}
+            </Button>
+          </AssigneDriver>
+        )}
       </div>
     </div>
   );

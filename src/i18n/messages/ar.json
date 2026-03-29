@@ -2,6 +2,29 @@
   "hello": "مرحبا",
   "title": "Cementech - شريكك في تكنولوجيا البناء",
 
+  "loginPage": {
+    "phoneStep": {
+      "title": "أهلاً بك 👋",
+      "subtitle": "أدخل رقم جوالك للوصول إلى لوحة التحكم",
+      "phoneLabel": "رقم الجوال",
+      "phonePlaceholder": "05xxxxxxxx",
+      "continueBtn": "متابعة"
+    },
+    "otpStep": {
+      "title": "التحقق من هويتك",
+      "subtitle": "أرسلنا رمز التحقق إلى",
+      "resend": "لم تصلك الرسالة؟",
+      "resendBtn": "إعادة الإرسال",
+      "confirmBtn": "تأكيد الدخول",
+      "back": "رجوع"
+    },
+    "footer": {
+      "problem": "هل تواجه مشكلة؟",
+      "support": "الدعم الفني",
+      "rights": "جميع الحقوق محفوظة لدى Cementech © 2026"
+    }
+  },
+
   "Metadata": {
     "title": "Cementech - شريكك في تكنولوجيا البناء"
   },
@@ -13,8 +36,13 @@
     "users": "المستخدمين",
     "payments": "المدفوعات",
     "invoices": "الفواتير",
-
-    "settings": "الإعدادات"
+    "notifications": "الإشعارات",
+    "permissions": "الإدارة والصلاحيات",
+    "supervisors": "إدارة المشرفين",
+    "suppliers": "المصانع والمنتجات",
+    "terms": "الشروط والأحكام",
+    "settings": "الإعدادات",
+    "loggedInAs": "تم التسجيل كـ"
   },
   "welcome": {
     "title": "مرحبًا بك، {name}!",
@@ -63,6 +91,7 @@
       "customer": "اسم العميل",
       "driverStatus": "حالة السائق",
       "deliveryStatus": "حالة الطلب",
+      "productName": "المنتج",
       "shipments": "الشحنات",
       "quantity": "الكمية",
       "price": "السعر",
@@ -104,7 +133,37 @@
       "under_review": "الطلبات المعلقة",
       "delivery": "الطلبات الجارية",
       "canceled": "الطلبات الملغاة"
-    }
+    },
+    "header": {
+      "title": "إدارة الطلبات",
+      "description": "مراقبة وإدارة جميع طلبات التوصيل في الوقت الفعلي",
+      "autoAssign": "تخصيص الطلبات للسائقين تلقائياً",
+      "enabled": "مفعل"
+    },
+    "filter": {
+      "title": "الطلبات",
+      "searchPlaceholder": "ابحث عن اسم او رقم الطلب ...",
+      "timeFilter": "فلتر حسب الوقت",
+      "statusFilter": "فلتر حسب الحالة",
+      "time": {
+        "all": "الكل",
+        "today": "اليوم",
+        "this_week": "هذا الأسبوع",
+        "this_month": "هذا الشهر"
+      },
+      "status": {
+        "all": "الكل",
+        "under_review": "تحت المراجعة",
+        "in_preparation": "قيد التجهيز",
+        "delivery": "قيد التوصيل",
+        "delivered": "تم التسليم",
+        "canceled": "ملغاة"
+      }
+    },
+    "orderDetails": "تفاصيل الطلب",
+    "orderNumber": "رقم الطلب",
+    "fetchError": "حدث خطأ أثناء تحميل الطلب",
+    "fetchErrorSub": "يرجى المحاولة مرة أخرى لاحقاً"
   },
 
   "orderActions": {
@@ -114,7 +173,7 @@
     "customerInfo": "معلومات العميل",
     "name": "الاسم",
     "phone": "رقم الجوال",
-    "driverInfo": "معلومات السائق + (حوار الشحنات)",
+    "driverInfo": "معلومات السائق ",
     "notAssigned": "غير مخصص لسائق",
     "assignDriver": "تخصيص لسائق",
     "deliveryDetails": "تفاصيل الإستلام",
@@ -123,22 +182,41 @@
     "factory": "المصنع",
     "cementQuantity": "كمية الأسمنت",
     "price": "السعر",
+    "product": "المنتج",
     "lastUpdate": "آخر تحديث",
-    "cancelOrder": "الغاء الطلب",
+    "cancelOrder": "إلغاء الطلب",
+    "canceling": "جاري الإلغاء...",
+    "cancelSuccess": "تم إلغاء الطلب بنجاح",
+    "cancelError": "فشل إلغاء الطلب، حاول مرة أخرى",
     "assignDriverToOrder": "تخصيص سائق للطلب رقم",
     "shipmentLabel": {
       "one": "شحنة واحدة",
       "many": "عدة شحنات"
     },
-    "availableDrivers": "سائقين متاحين بالقرب من الموقع",
     "driverId": "ID",
-    "distance": "على بعد",
-    "confirm": "تأكيد"
+    "distance": "المسافه",
+    "quantity": "الكمية",
+    "confirm": "تأكيد",
+    "availableDrivers": "سائقين متاحين بالقرب من الموقع",
+    "noDriversAvailable": "لا يوجد سائقون متاحون",
+    "noDriversAvailableDesc": "حاول مرة أخرى لاحقاً",
+    "errorLoadingDrivers": "حدث خطأ أثناء تحميل السائقين",
+    "errorLoadingDriversDesc": "حدث خطأ ما، حاول مرة أخرى"
   },
   "common": {
-    "logout": "تسجيل خروج"
+    "logout": "تسجيل خروج",
+    "toast": {
+      "otpSent": "تم إرسال رمز التحقق بنجاح",
+      "otpSentError": "فشل إرسال رمز التحقق، حاول مجدداً",
+      "loginSuccess": "تم تسجيل الدخول بنجاح",
+      "loginError": "رمز التحقق غير صحيح، حاول مجدداً",
+      "logoutSuccess": "تم تسجيل الخروج بنجاح",
+      "blockSuccess": "تم حظر المستخدم بنجاح",
+      "unblockSuccess": "تم رفع الحظر بنجاح",
+      "blockError": "حدث خطأ، يرجى المحاولة مرة أخرى"
+    },
+    "back": "رجوع"
   },
-  "orderPage": "اهلا بكم في صفحة الطلبات",
 
   "userPage": {
     "header": {
@@ -171,6 +249,8 @@
     },
 
     "userStatus": {
+      "status": "حالة المستخدم",
+      "all": "الكل",
       "active": "نشط",
       "inactive": "غير نشط",
       "blocked": "محظور"
@@ -184,7 +264,24 @@
       "joinDate": "تاريخ الانضمام",
       "active": "نشط"
     },
+    "userDetails": {
+      "pageTitle": "بيانات المستخدم",
+      "userId": "رقم المستخدم (ID)",
+      "fullName": "الاسم الكامل",
+      "phoneNumber": "رقم الجوال",
+      "status": "الحالة",
+      "companyName": "اسم المؤسسة",
+      "joiningDate": "تاريخ الانضمام",
+      "notAvailable": "غير متوفر"
+    },
+    "userStats": {
+      "title": "الإحصائيات",
+      "totalOrders": "إجمالي الطلبات",
+      "totalPaid": "إجمالي المدفوع",
+      "lastOrder": "آخر طلب"
+    },
     "userOrderTable": {
+      "title": "تاريخ الطلبات",
       "colums": {
         "index": "#",
         "orderNumber": "رقم الطلب",
@@ -192,7 +289,15 @@
         "quantity": "الكمية",
         "orderState": "حالة الطلب",
         "actions": "الإجراءات"
+      },
+      "empty": {
+        "title": "لا توجد طلبات",
+        "description": "ستظهر الطلبات هنا بمجرد إنشائها."
       }
+    },
+    "userActions": {
+      "block": "حظر المستخدم",
+      "unblock": "رفع الحظر"
     }
   },
   "driverPage": {
@@ -235,10 +340,44 @@
       "pending": "معلق"
     },
 
+    "driversFilter": {
+      "loadingStatus": "حالة التحميل",
+      "driverStatus": "حالة السائق",
+      "all": "الكل"
+    },
+    "driverDetails": {
+      "title": "بيانات السائق",
+      "driverId": "رقم السائق (ID)",
+      "fullName": "الاسم الكامل",
+      "phoneNumber": "رقم الجوال",
+      "notAvailable": "غير متوفر",
+      "status": "الحالة",
+      "documentStatus": "حالة الوثائق",
+      "plateNumber": "رقم لوحة السيارة",
+      "joiningDate": "تاريخ الانضمام",
+      "backToDrivers": "السائقين"
+    },
+
+    "driverStats": {
+      "title": "الإحصائيات",
+      "totalOrders": "إجمالي التوصيلات",
+      "totalPaid": "إجمالي الأرباح",
+      "lastOrderDate": "آخر توصيل",
+      "noOrders": "لا توجد طلبات بعد"
+    },
+    "driverDocuments": {
+      "title": "الوثائق",
+      "nationalId": "الإقامة - الهوية",
+      "driverLicense": "رخصة القيادة",
+      "carLicense": "استمارة المركبة",
+      "carInsurance": "وثيقة التأمين",
+      "download": "تحميل"
+    },
     "documentStatus": {
       "accepted": "موثق",
-      "rejected": "غير موثق",
-      "pending": "معلق"
+      "approved": "موثق",
+      "pending": "قيد المراجعة",
+      "rejected": "مرفوض"
     }
   },
   "loadingRequestsPage": {
@@ -257,6 +396,24 @@
       "title": "طلبات التحميل",
       "search": {
         "placeholder": "ابحث عن اسم او رقم جوال ..."
+      },
+      "filter": {
+        "filterLabel": "فلتر حسب الحالة",
+        "all": "الكل",
+        "received": "تم استقبال",
+        "approved": "تمت الموافقة",
+        "factory_arrival": "تم الوصول للمصنع",
+        "loading": "جاري التحميل",
+        "loaded": "تم التحميل",
+        "rejected": "مرفوض",
+        "pending_payment": "في انتظار الدفع"
+      },
+      "timeFilter": {
+        "filterLabel": "فلتر حسب الوقت",
+        "all": "الكل",
+        "today": "اليوم",
+        "this_week": "هذا الأسبوع",
+        "this_month": "هذا الشهر"
       }
     },
     "table": {
@@ -274,6 +431,69 @@
       "empty": {
         "title": "لا توجد طلبات تحميل حالياً",
         "description": "ستظهر طلبات التحميل هنا بمجرد تقديمها من قبل السائقين."
+      }
+    },
+    "approveModal": {
+      "rejectSuccess": "تم رفض الطلب بنجاح",
+      "rejectError": "حدث خطأ أثناء رفض الطلب",
+      "title": "الموافقة على طلب تحميل",
+      "stepOne": {
+        "status": "حالة الطلب",
+        "infoTitle": "معلومات الطلب",
+        "requestCode": "رقم الطلب التعريفي",
+        "phone": "رقم الجوال",
+        "driverName": "اسم السائق",
+        "driverCode": "الرقم السائق التعريفي",
+        "carPlates": "رقم لوحة السيارة",
+        "createdAt": "وقت الطلب",
+        "approve": "قبول الطلب",
+        "reject": "رفض الطلب",
+        "rejecting": "جاري الرفض..."
+      },
+      "stepTwo": {
+        "confirmMessage": "سيؤدي الموافقة على هذا الطلب إلى إرسال موقع المصنع والمستندات المطلوبة إلى السائق",
+        "mapPlaceholder": "اختر الموقع على الخريطة",
+        "selectLocation": "اختر الموقع",
+        "locationTitle": "بيانات الموقع",
+        "factoryName": "اسم المصنع",
+        "productName": "اسم المنتج",
+        "locationCoords": "إحداثيات الموقع",
+        "latitude": "خط العرض",
+        "longitude": "خط الطول",
+        "documentsTitle": "المستندات المطلوبة",
+        "tripCertificate": "شهادة الرحلة",
+        "layingCommand": "امر التنزيل",
+        "submit": "قبول الطلب وإرسال المستندات",
+        "cancel": "إلغاء"
+      }
+    },
+    "detailsPage": {
+      "requestNumber": "طلب تحميل رقم",
+      "requestDetails": "تفاصيل طلب التحميل",
+      "orderStatus": "حالة الطلب",
+      "infoSection": {
+        "title": "معلومات الطلب",
+        "requestCode": "رقم الطلب التعريفي",
+        "driverName": "اسم السائق",
+        "phone": "رقم الجوال",
+        "driverCode": "الرقم السائق التعريفي",
+        "carPlates": "رقم لوحة السيارة",
+        "createdAt": "وقت الطلب",
+        "tripCertificate": "شهادة الرحلة",
+        "layingCommand": "امر التنزيل",
+        "documents": "وثائق التحميل"
+      },
+      "locationSection": {
+        "title": "موقع المصنع",
+        "noLocation": "لا يوجد موقع"
+      },
+      "logsSection": {
+        "title": "حالة التحميل",
+        "received": "تم استقبال الطلب",
+        "approved": "تمت الموافقة بواسطة الإدارة",
+        "factory_arrival": "تم إرسال المستندات المطلوبة",
+        "loading": "الوصول للمصنع",
+        "loaded": "تم التحميل"
       }
     }
   },
@@ -295,6 +515,295 @@
         "totalPaid": "اجمالي الدفع",
         "actions": "الاجراءات"
       }
+    }
+  },
+  "suppliersPage": {
+    "header": {
+      "title": "إعدادات المصانع و المنتجات",
+      "description": "إدارة المنتجات و مواقع المصانع المعتمدة في المنصة",
+      "btn": "اضافة مصنع جديد"
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "factoriesListHeader": {
+      "title": "المصانع",
+      "search": {
+        "placeholder": "ابحث عن رقم او اسم المصنع..."
+      }
+    },
+    "table": {
+      "columns": {
+        "index": "#",
+        "factoryNumber": "رقم المصنع",
+        "factoryName": "اسم المصنع",
+        "contactInfo": "التواصل",
+        "region": "المنطقة",
+        "productsCount": "عدد المنتجات",
+        "status": "الحالة",
+        "actions": "الإجراءات"
+      }
+    },
+
+    "editFactory": {
+      "title": "تعديل المصنع",
+      "buttons": {
+        "submit": "حفظ التعديلات"
+      },
+      "messages": {
+        "success": "تم تعديل المصنع بنجاح",
+        "error": "حدث خطأ أثناء تعديل المصنع"
+      }
+    },
+    "addFactory": {
+      "title": "إضافة مصنع جديد",
+      "sectionTitle": "البيانات الأساسية",
+      "fields": {
+        "nameAr": {
+          "label": "اسم المصنع (باللغة العربية)",
+          "placeholder": "مثال: مصنع النور"
+        },
+        "nameEn": {
+          "label": "اسم المصنع (باللغة الإنجليزية)",
+          "placeholder": "e.g. Al Noor Factory"
+        },
+        "region": {
+          "label": "المنطقة / المحافظة",
+          "placeholder": "مثال: الرياض"
+        },
+        "phone": {
+          "label": "رقم التواصل",
+          "placeholder": "+966 5X XXX XXXX"
+        },
+        "status": {
+          "label": "الحالة"
+        },
+        "location": {
+          "label": "الموقع الجغرافي",
+          "placeholder": "اختر الموقع",
+          "currentLocation": "موقعي الحالي",
+          "locating": "جارٍ التحديد...",
+          "noGeolocation": "المتصفح لا يدعم تحديد الموقع",
+          "geolocationError": "تعذّر تحديد موقعك، تأكد من إذن الموقع في المتصفح"
+        }
+      },
+      "validation": {
+        "nameArRequired": "اسم المصنع بالعربية مطلوب",
+        "nameEnRequired": "اسم المصنع بالإنجليزية مطلوب",
+        "nameEnInvalid": "يجب أن يحتوي على أحرف إنجليزية فقط",
+        "regionRequired": "المنطقة / المحافظة مطلوبة",
+        "phoneRequired": "رقم التواصل مطلوب",
+        "phoneInvalid": "رقم هاتف غير صالح"
+      },
+      "buttons": {
+        "submit": "حفظ المصنع",
+        "cancel": "إلغاء",
+        "submitting": "جارٍ الحفظ..."
+      },
+      "messages": {
+        "success": "تم إضافة المصنع بنجاح",
+        "error": "حدث خطأ أثناء إضافة المصنع"
+      },
+      "productsManagement": {
+        "title": "إدارة المنتجات",
+        "addBtn": "اضافة منتج",
+        "empty": "لا يوجد منتجات مضافة لهذا المصنع",
+        "columns": {
+          "index": "#",
+          "nameAr": "اسم المنتج (باللغة العربية)",
+          "nameEn": "اسم المنتج (باللغة الإنجليزية)",
+          "price": "سعر المنتج (ر.س)"
+        },
+        "fields": {
+          "nameAr": {
+            "placeholder": "أدخل اسم المنتج بالعربية"
+          },
+          "nameEn": {
+            "placeholder": "Enter product name in English"
+          },
+          "price": {
+            "placeholder": "0.00"
+          }
+        },
+        "validation": {
+          "nameArRequired": "اسم المنتج بالعربية مطلوب",
+          "nameEnRequired": "Product name in English is required",
+          "priceRequired": "السعر مطلوب",
+          "priceInvalid": "يجب أن يكون السعر رقمًا موجبًا"
+        }
+      }
+    },
+    "deleteFactory": {
+      "title": "حذف المصنع",
+      "description": "هل أنت متأكد من حذف مصنع",
+      "descriptionSuffix": "؟ لا يمكن التراجع عن هذا الإجراء.",
+      "warning": "سيتم حذف جميع البيانات المرتبطة بهذا المصنع نهائياً",
+      "buttons": {
+        "cancel": "إلغاء",
+        "confirm": "نعم، احذف",
+        "deleting": "جارٍ الحذف..."
+      },
+      "messages": {
+        "success": "تم حذف المصنع بنجاح",
+        "error": "حدث خطأ أثناء حذف المصنع"
+      }
+    }
+  },
+  "permissionsPage": {
+    "header": {
+      "title": "إدارة الأدوار والصلاحيات",
+      "description": "حدد أدوارًا مخصصة مع أذونات مرنة على مستوى الصفحة والإجراءات",
+      "addBtn": "إضافة دور جديد"
+    },
+    "guidelines": {
+      "badge": "تنبيه مهم",
+      "title": "إرشادات إدارة الأدوار",
+      "rules": {
+        "0": "دور المشرف الرئيسي محمي ولا يمكن حذفه أو تقييده بالكامل.",
+        "1": "ستؤثر التغييرات في الأدوار على جميع المشرفين المعينين لهذا الدور.",
+        "2": "يتم تسجيل جميع تغييرات الأدوار والصلاحيات لأغراض التدقيق الأمني."
+      }
+    }
+  },
+  "supervisorsPage": {
+    "header": {
+      "title": "إدارة المشرفين",
+      "description": "إنشاء وإدارة حسابات المشرفين بأدوار محددة",
+      "addBtn": "إضافة مشرف جديد"
+    },
+    "title": "المشرفين",
+    "table": {
+      "columns": {
+        "index": "الرقم",
+        "name": "اسم المشرف",
+        "contact": "التواصل",
+        "status": "الحالة",
+        "management": "الإدارة",
+        "lastLogin": "آخر دخول",
+        "actions": "الإجراءات"
+      }
+    }
+  },
+  "settingsPage": {
+    "header": {
+      "title": "إعدادات النظام",
+      "subtitle": "ضبط إعدادات النظام الأساسي ومعلمات النظام"
+    },
+    "tabs": {
+      "payment": {
+        "trigger": "طرق الدفع",
+        "title": "تحديد طرق الدفع",
+        "subtitle": "تفعيل أو تعطيل طرق الدفع المتاحة للعملاء",
+        "methods": {
+          "cod": "عند التسليم",
+          "credit": "بطاقة الإئتمان",
+          "apple": "Apple Pay",
+          "tabby": "تابي",
+          "tamara": "تمارا"
+        }
+      },
+      "delivery": {
+        "trigger": "أماكن التوصيل",
+        "title": "مناطق الخدمة",
+        "subtitle": "إدارة مناطق التوصيل ومناطق التغطية",
+        "addZone": "إضافة منطقة",
+        "empty": "لا توجد مناطق توصيل مضافة",
+        "edit": "تعديل",
+        "table": {
+          "zone": "المنطقة",
+          "radius": "نصف قطر التغطية",
+          "status": "الحالة",
+          "actions": "الإجراءات"
+        },
+        "modal": {
+          "cancel": "إلغاء",
+          "back": "رجوع",
+          "next": "متابعة",
+          "save": "حفظ المنطقة",
+          "update": "تحديث المنطقة",
+          "steps": {
+            "location": "اختيار الموقع",
+            "settings": "إعدادات المنطقة",
+            "review": "المراجعة والتأكيد"
+          },
+          "stepLocation": {
+            "title": "اختيار الموقع",
+            "subtitle": "حدد موقع المنطقة على الخريطة",
+            "searchPlaceholder": "ابحث عن مدينة أو عنوان..."
+          },
+          "stepSettings": {
+            "title": "إعدادات المنطقة",
+            "subtitle": "حدد اسم المنطقة ونطاق التغطية",
+            "zoneName": "اسم المنطقة",
+            "zoneNamePlaceholder": "مثال: الرياض - حي الزهراء",
+            "radius": "نصف قطر التغطية",
+            "km": "كم",
+            "mapPreview": "معاينة نطاق التغطية",
+            "coverageNote": "سيتم تغطية جميع الطلبات ضمن دائرة نصف قطرها {radius} كم من النقطة المحددة"
+          },
+          "stepReview": {
+            "title": "المراجعة والتأكيد",
+            "subtitle": "تحقق من البيانات قبل الحفظ",
+            "summary": "ملخص المنطقة",
+            "zoneName": "اسم المنطقة",
+            "location": "الموقع المحدد",
+            "radius": "نصف قطر التغطية",
+            "km": "كم",
+            "mapPreview": "معاينة نطاق التغطية",
+            "readyToSave": "جاهز للحفظ"
+          }
+        }
+      },
+      "pricing": {
+        "trigger": "التسعير والعمولة",
+        "title": "تحديد التسعير",
+        "subtitle": "تحديد الأسعار الأساسية و العمولة",
+        "fields": {
+          "pricePerKm": "سعر الكيلومتر",
+          "commission": "نسبة العمولة",
+          "cancellationFee": "رسوم الإلغاء"
+        },
+        "save": "حفظ الإعدادات"
+      }
+    }
+  },
+  "termsPage": {
+    "header": {
+      "title": "إعدادات الشروط و الأحكام",
+      "description": "إدارة المحتوى القانوني و الاتفاقيات الملزمة لمستخدمي و سائقي المنصة"
+    },
+    "form": {
+      "publish": "نشر التحديثات الآن",
+      "saveDraft": "حفظ كمسودة"
+    },
+
+    "category": {
+      "title": "الفئة",
+      "customers": "المستخدمين (العملاء)",
+      "drivers": "السائقين"
+    },
+    "version": {
+      "title": "معلومات الإصدار",
+      "number": "رقم الإصدار",
+      "lastUpdated": "آخر تحديث",
+      "updatedBy": "تم التحديث بواسطة",
+      "status": "الحالة",
+      "system": "النظام",
+      "published": "منشور",
+      "draft": "مسودة"
+    },
+    "alert": {
+      "title": "تنبيه هام",
+      "point1": "تعمل التغييرات والتحديثات بعد نشرها فوراً، تأكد من مراجعة الشروط القانونية من قبل المختص القانوني قبل النشر",
+      "point2": "سيرسل إشعار لجميع المستخدمين والسائقين بالتحديثات الجديدة عند النشر"
+    },
+    "editor": {
+      "placeholder": "اكتب الشروط والأحكام هنا...",
+      "search": "ابحث عن عنوان او كلمة...",
+      "editorLabel": "محرر النصوص",
+      "wordCount": "{count} كلمة",
+      "charCount": "{count} حرف"
     }
   }
 }

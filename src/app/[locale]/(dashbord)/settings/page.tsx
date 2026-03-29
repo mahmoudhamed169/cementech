@@ -1,9 +1,5 @@
-import React from "react";
+import SettingsTabs from "./_components/settings-tabs";
 
-export default function page() {
-  return (
-    <div>
-      <h1>the settings page</h1>
-    </div>
-  );
+export default function SettingsPage() {
+  return <SettingsTabs />;
 }

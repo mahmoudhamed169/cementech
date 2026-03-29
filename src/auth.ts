@@ -1,43 +1,78 @@
 import { NextAuthOptions } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
   },
+  session: {
+    strategy: "jwt",
+  },
   providers: [
-    // Add your authentication providers here
-    Credentials({
+    CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: {},
-        password: {},
+        otp: {},
+        transactionId: {},
       },
       async authorize(credentials) {
-        // returning a value that matches NextAuth's User type
-        // we include a "user" property since the built-in type expects it
-        return {
-          user: {
-            id: "1",
-            name: "John Doe",
-            email: "john.doe@example.com",
-            token: "sample-jwt-token",
+        if (!credentials?.otp || !credentials?.transactionId) return null;
+
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}/verifyOTP`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              OTP: credentials.otp,
+              // transactionId: credentials.transactionId,
+              transactionId: "1234567890",
+            }),
           },
-        } as any;
+        );
+
+        const json = await res.json();
+        if (!res.ok || !json.success) return null;
+
+        return {
+          id: json.data.id,
+          phone: json.data.phone,
+          name: json.data.name,
+          role: json.data.role,
+          code: json.data.code,
+          permissions_id: json.data.permissions_id,
+          verified: json.data.verified,
+          firstTime: json.firstTime,
+          accessToken: json.accessToken,
+        };
       },
     }),
   ],
   callbacks: {
-    jwt: async ({ token, user }) => {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
+        token.phone = user.phone;
+        token.name = user.name;
+        token.role = user.role;
+        token.code = user.code;
+        token.permissions_id = user.permissions_id;
+        token.verified = user.verified;
+        token.firstTime = user.firstTime;
+        token.accessToken = user.accessToken;
       }
       return token;
     },
-    session: async ({ session, token }) => {
-      if (token) {
-        session.user.id = (token as any).id;
-      }
+    async session({ session, token }) {
+      session.user.id = token.id as string;
+      session.user.phone = token.phone as string;
+      session.user.name = token.name as string;
+      session.user.role = token.role as string;
+      session.user.code = token.code as string;
+      session.user.permissions_id = token.permissions_id as string;
+      session.user.verified = token.verified as boolean;
+      session.user.firstTime = token.firstTime as boolean;
+      session.user.accessToken = token.accessToken as string;
       return session;
     },
   },

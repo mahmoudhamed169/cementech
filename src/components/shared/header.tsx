@@ -14,11 +14,6 @@ export default function Header() {
 
         <Bell />
         <LogoutButton />
-
-        {/* <h2 className="text-sm font-medium text-zinc-700 font-ibm flex gap-1.5">
-          تسجيل خروج
-          <LogOut />
-        </h2> */}
       </div>
     </header>
   );

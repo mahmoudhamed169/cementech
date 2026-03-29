@@ -1,3 +1,8 @@
+// getOrderById - spacific-order.ts
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/src/auth";
+import { ApiOrderStatus } from "@/src/lib/utils/order-status";
+
 export interface OrderLog {
   id: string;
   order_id: string;
@@ -12,8 +17,6 @@ export interface Driver {
   code: string;
   phone: string;
 }
-
-import { ApiOrderStatus } from "@/src/lib/utils/order-status";
 
 export interface OrderData {
   id: string;
@@ -50,28 +53,26 @@ export interface OrderResponse {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getOrderById(orderId: string): Promise<OrderResponse> {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/orders/${orderId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.PUBLIC_TOKEN}`,
-          system_screen: "dashboard_orders",
-        },
-      },
-    );
+export async function getOrderById(
+  orderId: string,
+  lang: "ar" | "en",
+): Promise<OrderResponse> {
+  const session = await getServerSession(authOptions);
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch order. Status: ${res.status}`);
-    }
+  const res = await fetch(`${API_URL}/orders/${orderId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session?.user.accessToken}`,
+      system_screen: "order_permission",
+      lang,
+    },
+    next: { tags: ["ordersId"] },
+  });
 
-    const data: OrderResponse = await res.json();
-    return data;
-  } catch (error) {
-    console.error("Error fetching order:", error);
-    throw error;
+  if (!res.ok) {
+    throw new Error(`Failed to fetch order. Status: ${res.status}`);
   }
+
+  return res.json() as Promise<OrderResponse>;
 }

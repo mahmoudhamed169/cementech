@@ -3,10 +3,10 @@ import { routing } from "@/src/i18n/routing";
 import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { Cairo, IBM_Plex_Sans_Arabic } from "next/font/google";
-
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Metadata } from "next";
 import DirectionProvider from "@/src/components/providers/shared/_components/direction-provider";
+import { Toaster } from "sonner";
 
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
@@ -32,10 +32,7 @@ export async function generateMetadata({
 }: Pick<Props, "params">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "Metadata" });
-
-  return {
-    title: t("title"),
-  };
+  return { title: t("title") };
 }
 
 export function generateStaticParams() {
@@ -43,7 +40,6 @@ export function generateStaticParams() {
 }
 
 export default async function LocaleLayout({ children, params }: Props) {
-  // Ensure that the incoming `locale` is valid
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
@@ -51,19 +47,23 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   setRequestLocale(locale);
 
-  // Import messages for this locale
   const messages = (await import(`@/src/i18n/messages/${locale}.json`)).default;
+
+  const isArabic = locale === "ar";
 
   return (
     <DirectionProvider locale={locale}>
       <div
-        dir={locale === "ar" ? "rtl" : "ltr"}
-        className={`${cairo.variable} ${ibmPlex.variable} font-sans`}
+        dir={isArabic ? "rtl" : "ltr"}
+        className={`${cairo.variable} ${ibmPlex.variable} ${
+          isArabic ? "lang-ar" : "lang-en"
+        }`}
       >
         <Providers locale={locale} messages={messages}>
           {children}
         </Providers>
       </div>
+      <Toaster />
     </DirectionProvider>
   );
 }

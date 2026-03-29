@@ -1,11 +1,21 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* Font declarations */
-@layer base {
-  html {
-    font-family: var(--font-cairo);
-  }
+@import "leaflet/dist/leaflet.css";
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Arabic locale → IBM Plex Sans Arabic */
+.lang-ar {
+  font-family: var(--font-ibm), sans-serif;
+}
+
+/* English locale → Cairo */
+.lang-en {
+  font-family: var(--font-cairo), sans-serif;
 }
 
 /* ============================

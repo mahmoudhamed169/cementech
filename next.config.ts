@@ -1,8 +1,9 @@
-import type { NextConfig } from 'next';
-import createNextIntlPlugin from 'next-intl/plugin';
+import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
 const nextConfig: NextConfig = {
   // config options here
+  transpilePackages: ["leaflet", "react-leaflet"],
 };
 
 const withNextIntl = createNextIntlPlugin();
