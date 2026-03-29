@@ -512,6 +512,42 @@
       }
     }
   },
+  "NotificationPage": {
+    "header": {
+      "title": "Notifications",
+      "description": "Track and manage notifications sent to drivers and customers",
+      "btn": "Send New Notification"
+    },
+    "sendModal": {
+      "title": "Send Notification",
+      "description": "Send a message to drivers or users",
+      "sendTo": "Send To",
+      "recipients": {
+        "allDrivers": "All Drivers",
+        "allUsers": "All Users",
+        "specificDriver": "Specific Driver",
+        "specificUser": "Specific User"
+      },
+      "driverSearch": {
+        "label": "User Name or ID",
+        "placeholder": "Enter user name or ID."
+      },
+      "titleField": {
+        "label_ar": "Title in Arabic",
+        "label_en": "Title in English",
+        "placeholder_ar": "Enter title in Arabic..",
+        "placeholder_en": "Enter title in English.."
+      },
+      "body": {
+        "label_ar": "Message in Arabic",
+        "label_en": "Message in English",
+        "placeholder_ar": "Enter message in Arabic..",
+        "placeholder_en": "Enter message in English.."
+      },
+      "cancel": "Cancel",
+      "send": "Send"
+    }
+  },
   "suppliersPage": {
     "header": {
       "title": "Factory & Product Settings",
@@ -800,6 +836,37 @@
       "editorLabel": "Text Editor",
       "wordCount": "{count} words",
       "charCount": "{count} chars"
+    }
+  },
+  "SendNotification": {
+    "trigger": "Send Notification",
+    "modal": {
+      "title": "Send Notification",
+      "description": "Send a message to {recipientType} {recipientName}",
+      "recipientType": {
+        "driver": "driver",
+        "user": "user"
+      },
+      "titleField": {
+        "label_ar": "Title in Arabic",
+        "label_en": "Title in English",
+        "placeholder_ar": "Enter notification title in Arabic..",
+        "placeholder_en": "Enter notification title in English.."
+      },
+      "body": {
+        "label_ar": "Message in Arabic",
+        "label_en": "Message in English",
+        "placeholder_ar": "Enter notification message in Arabic..",
+        "placeholder_en": "Enter notification message in English.."
+      },
+      "required": "This field is required",
+      "cancel": "Cancel",
+      "send": "Send",
+      "sending": "Sending..."
+    },
+    "toast": {
+      "success": "Notification sent successfully",
+      "error": "Failed to send notification, please try again"
     }
   }
 }

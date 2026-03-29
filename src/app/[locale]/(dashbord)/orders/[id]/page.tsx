@@ -29,7 +29,6 @@ export default async function page({
 
   try {
     const response: OrderResponse = await getOrderById(id, locale);
-    console.log(response);
     if (response.success) {
       order = response.data;
     }
