@@ -79,7 +79,8 @@
     "users": "مستخدم",
     "drivers": "سائق",
     "orders": "طلب",
-    "loadingRequests": "طلب تحميل"
+    "loadingRequests": "طلب تحميل",
+    "invoices": "فاتورة"
   },
   "recentOrders": {
     "title": "الطلبات الأخيرة",
@@ -517,6 +518,42 @@
       }
     }
   },
+  "NotificationPage": {
+    "header": {
+      "title": "الإشعارات",
+      "description": "متابعة و إدارة الإشعارات المرسلة للسائقين و العملاء",
+      "btn": "إرسال إشعار جديد"
+    },
+    "sendModal": {
+      "title": "ارسال اشعار",
+      "description": "ارسال رسالة الي السائقين او للمستخدمين",
+      "sendTo": "ارسال الي",
+      "recipients": {
+        "allDrivers": "كل السائقين",
+        "allUsers": "كل المستخدمين",
+        "specificDriver": "سائق محدد",
+        "specificUser": "مستخدم محدد"
+      },
+      "driverSearch": {
+        "label": "اسم او ID المستخدم / السائق",
+        "placeholder": "ادخل اسم او الرقم التعريفي للمستخدم / السائق."
+      },
+      "titleField": {
+        "label_ar": "عنوان الرسالة بالعربي",
+        "label_en": "عنوان الرسالة بالانجليزي",
+        "placeholder_ar": "ادخل عنوان الإشعار بالعربي..",
+        "placeholder_en": "ادخل عنوان الإشعار بالانجليزي.."
+      },
+      "body": {
+        "label_ar": "النص بالعربي",
+        "label_en": "النص بالانجليزي",
+        "placeholder_ar": "ادخل نص الإشعار بالعربي..",
+        "placeholder_en": "ادخل نص الإشعار بالانجليزي.."
+      },
+      "cancel": "الغاء",
+      "send": "ارسال"
+    }
+  },
   "suppliersPage": {
     "header": {
       "title": "إعدادات المصانع و المنتجات",
@@ -804,6 +841,37 @@
       "editorLabel": "محرر النصوص",
       "wordCount": "{count} كلمة",
       "charCount": "{count} حرف"
+    }
+  },
+  "SendNotification": {
+    "trigger": "ارسال اشعار",
+    "modal": {
+      "title": "ارسال اشعار",
+      "description": "ارسال رسالة الى {recipientType} {recipientName}",
+      "recipientType": {
+        "driver": "السائق",
+        "user": "المستخدم"
+      },
+      "titleField": {
+        "label_ar": "عنوان الرسالة بالعربي",
+        "label_en": "عنوان الرسالة بالانجليزي",
+        "placeholder_ar": "ادخل عنوان الإشعار بالعربي..",
+        "placeholder_en": "ادخل عنوان الإشعار بالانجليزي.."
+      },
+      "body": {
+        "label_ar": "النص بالعربي",
+        "label_en": "النص بالانجليزي",
+        "placeholder_ar": "ادخل نص الإشعار بالعربي..",
+        "placeholder_en": "ادخل نص الإشعار بالانجليزي.."
+      },
+      "required": "هذا الحقل مطلوب",
+      "cancel": "الغاء",
+      "send": "ارسال",
+      "sending": "جاري الارسال..."
+    },
+    "toast": {
+      "success": "تم ارسال الاشعار بنجاح",
+      "error": "فشل ارسال الاشعار، حاول مرة اخرى"
     }
   }
 }

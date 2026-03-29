@@ -18,8 +18,22 @@ export function LocationPicker({ value, onChange }: LocationPickerProps) {
   const mapInstanceRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
   const [isLocating, setIsLocating] = useState(false);
+  const [locationName, setLocationName] = useState<string>("");
 
   const defaultCenter = value ?? { lat: 24.7136, lng: 46.6753 };
+
+  async function reverseGeocode(lat: number, lng: number) {
+    try {
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`,
+        { headers: { "Accept-Language": locale } },
+      );
+      const data = await res.json();
+      setLocationName(data.display_name ?? "");
+    } catch {
+      setLocationName("");
+    }
+  }
 
   useEffect(() => {
     if (typeof window === "undefined" || !mapRef.current) return;
@@ -41,9 +55,10 @@ export function LocationPicker({ value, onChange }: LocationPickerProps) {
         zoomControl: false,
       });
 
-      L.tileLayer("https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
-        subdomains: ["mt0", "mt1", "mt2", "mt3"],
+      // ← OpenStreetMap بدل Google Satellite
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 20,
+        attribution: "© OpenStreetMap",
       }).addTo(map);
 
       L.control.zoom({ position: "bottomleft" }).addTo(map);
@@ -55,20 +70,20 @@ export function LocationPicker({ value, onChange }: LocationPickerProps) {
       marker.on("dragend", () => {
         const { lat, lng } = marker.getLatLng();
         onChange({ lat, lng });
+        reverseGeocode(lat, lng);
       });
 
       map.on("click", (e: any) => {
         const { lat, lng } = e.latlng;
         marker.setLatLng([lat, lng]);
         onChange({ lat, lng });
+        reverseGeocode(lat, lng);
       });
 
       mapInstanceRef.current = map;
       markerRef.current = marker;
 
-      setTimeout(() => {
-        map.invalidateSize();
-      }, 100);
+      setTimeout(() => map.invalidateSize(), 100);
     });
 
     return () => {
@@ -91,6 +106,7 @@ export function LocationPicker({ value, onChange }: LocationPickerProps) {
         markerRef.current?.setLatLng([lat, lng]);
         mapInstanceRef.current?.flyTo([lat, lng], 15, { duration: 1.5 });
         onChange({ lat, lng });
+        reverseGeocode(lat, lng);
         setIsLocating(false);
       },
       () => {
@@ -135,16 +151,25 @@ export function LocationPicker({ value, onChange }: LocationPickerProps) {
             const { lat, lng } = e.latlng;
             markerRef.current?.setLatLng([lat, lng]);
             onChange({ lat, lng });
+            reverseGeocode(lat, lng);
           });
         }}
       >
-        <span className="text-[#9AA3AF] flex gap-2 items-center">
-          <MapPin size={16} className="stroke-red-600" />
-          {value
-            ? `${value.lat.toFixed(5)}, ${value.lng.toFixed(5)}`
-            : t("placeholder")}
+        <span className="text-[#9AA3AF] flex gap-2 items-center truncate">
+          <MapPin size={16} className="stroke-red-600 shrink-0" />
+          <span className="truncate">
+            {locationName
+              ? locationName
+              : value
+                ? `${value.lat.toFixed(5)}, ${value.lng.toFixed(5)}`
+                : t("placeholder")}
+          </span>
         </span>
-        {isRtl ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+        {isRtl ? (
+          <ChevronLeft size={16} className="shrink-0" />
+        ) : (
+          <ChevronRight size={16} className="shrink-0" />
+        )}
       </button>
     </div>
   );

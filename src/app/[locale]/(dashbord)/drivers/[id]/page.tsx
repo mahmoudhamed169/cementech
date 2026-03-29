@@ -4,6 +4,7 @@ import DriverStats from "./_components/driver-state";
 import DriverDocumentsSection from "./_components/driver-documents-section";
 import { fetchDriver } from "@/src/lib/services/driver-profile";
 import { DriverProfile } from "@/src/lib/types/driver";
+import DriverActions from "./_components/driver-actions";
 
 interface Props {
   params: Promise<{
@@ -17,7 +18,6 @@ export default async function page({ params }: Props) {
 
   const driver: DriverProfile = await fetchDriver(id);
 
-  console.log(driver);
   return (
     <main className="bg-white min-h-132.5 border border-[#E5E7EB] rounded-xl p-6 flex flex-col space-y-6">
       <PageTitleWithBack title="بيانات السائق" backHref="/drivers" />
@@ -51,6 +51,9 @@ export default async function page({ params }: Props) {
         carLicense={driver.car_license}
         carInsurance={driver.car_insurance}
       />
+
+      {/*  driver actions */}
+      <DriverActions driver={driver} />
 
       {/*  */}
     </main>
