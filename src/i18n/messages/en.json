@@ -79,7 +79,8 @@
     "users": "users",
     "drivers": "drivers",
     "orders": "orders",
-    "loadingRequests": "loading requests"
+    "loadingRequests": "loading requests",
+    "invoices": "invoices"
   },
   "recentOrders": {
     "title": "Recent Orders",

@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,7 +24,7 @@ export function InvoiceModalContent() {
   const invoiceRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = useReactToPrint({
-    contentRef: invoiceRef, // 👈 الطريقة الجديدة
+    contentRef: invoiceRef,
     documentTitle: "invoice",
   });
 
