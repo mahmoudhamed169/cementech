@@ -91,6 +91,7 @@
       "customer": "اسم العميل",
       "driverStatus": "حالة السائق",
       "deliveryStatus": "حالة الطلب",
+      "productName": "المنتج",
       "shipments": "الشحنات",
       "quantity": "الكمية",
       "price": "السعر",
@@ -132,7 +133,37 @@
       "under_review": "الطلبات المعلقة",
       "delivery": "الطلبات الجارية",
       "canceled": "الطلبات الملغاة"
-    }
+    },
+    "header": {
+      "title": "إدارة الطلبات",
+      "description": "مراقبة وإدارة جميع طلبات التوصيل في الوقت الفعلي",
+      "autoAssign": "تخصيص الطلبات للسائقين تلقائياً",
+      "enabled": "مفعل"
+    },
+    "filter": {
+      "title": "الطلبات",
+      "searchPlaceholder": "ابحث عن اسم او رقم الطلب ...",
+      "timeFilter": "فلتر حسب الوقت",
+      "statusFilter": "فلتر حسب الحالة",
+      "time": {
+        "all": "الكل",
+        "today": "اليوم",
+        "this_week": "هذا الأسبوع",
+        "this_month": "هذا الشهر"
+      },
+      "status": {
+        "all": "الكل",
+        "under_review": "تحت المراجعة",
+        "in_preparation": "قيد التجهيز",
+        "delivery": "قيد التوصيل",
+        "delivered": "تم التسليم",
+        "canceled": "ملغاة"
+      }
+    },
+    "orderDetails": "تفاصيل الطلب",
+    "orderNumber": "رقم الطلب",
+    "fetchError": "حدث خطأ أثناء تحميل الطلب",
+    "fetchErrorSub": "يرجى المحاولة مرة أخرى لاحقاً"
   },
 
   "orderActions": {
@@ -142,7 +173,7 @@
     "customerInfo": "معلومات العميل",
     "name": "الاسم",
     "phone": "رقم الجوال",
-    "driverInfo": "معلومات السائق + (حوار الشحنات)",
+    "driverInfo": "معلومات السائق ",
     "notAssigned": "غير مخصص لسائق",
     "assignDriver": "تخصيص لسائق",
     "deliveryDetails": "تفاصيل الإستلام",
@@ -151,17 +182,26 @@
     "factory": "المصنع",
     "cementQuantity": "كمية الأسمنت",
     "price": "السعر",
+    "product": "المنتج",
     "lastUpdate": "آخر تحديث",
-    "cancelOrder": "الغاء الطلب",
+    "cancelOrder": "إلغاء الطلب",
+    "canceling": "جاري الإلغاء...",
+    "cancelSuccess": "تم إلغاء الطلب بنجاح",
+    "cancelError": "فشل إلغاء الطلب، حاول مرة أخرى",
     "assignDriverToOrder": "تخصيص سائق للطلب رقم",
     "shipmentLabel": {
       "one": "شحنة واحدة",
       "many": "عدة شحنات"
     },
-    "availableDrivers": "سائقين متاحين بالقرب من الموقع",
     "driverId": "ID",
-    "distance": "على بعد",
-    "confirm": "تأكيد"
+    "distance": "المسافه",
+    "quantity": "الكمية",
+    "confirm": "تأكيد",
+    "availableDrivers": "سائقين متاحين بالقرب من الموقع",
+    "noDriversAvailable": "لا يوجد سائقون متاحون",
+    "noDriversAvailableDesc": "حاول مرة أخرى لاحقاً",
+    "errorLoadingDrivers": "حدث خطأ أثناء تحميل السائقين",
+    "errorLoadingDriversDesc": "حدث خطأ ما، حاول مرة أخرى"
   },
   "common": {
     "logout": "تسجيل خروج",
@@ -170,10 +210,13 @@
       "otpSentError": "فشل إرسال رمز التحقق، حاول مجدداً",
       "loginSuccess": "تم تسجيل الدخول بنجاح",
       "loginError": "رمز التحقق غير صحيح، حاول مجدداً",
-      "logoutSuccess": "تم تسجيل الخروج بنجاح"
-    }
+      "logoutSuccess": "تم تسجيل الخروج بنجاح",
+      "blockSuccess": "تم حظر المستخدم بنجاح",
+      "unblockSuccess": "تم رفع الحظر بنجاح",
+      "blockError": "حدث خطأ، يرجى المحاولة مرة أخرى"
+    },
+    "back": "رجوع"
   },
-  "orderPage": "اهلا بكم في صفحة الطلبات",
 
   "userPage": {
     "header": {
@@ -206,6 +249,8 @@
     },
 
     "userStatus": {
+      "status": "حالة المستخدم",
+      "all": "الكل",
       "active": "نشط",
       "inactive": "غير نشط",
       "blocked": "محظور"
@@ -219,7 +264,24 @@
       "joinDate": "تاريخ الانضمام",
       "active": "نشط"
     },
+    "userDetails": {
+      "pageTitle": "بيانات المستخدم",
+      "userId": "رقم المستخدم (ID)",
+      "fullName": "الاسم الكامل",
+      "phoneNumber": "رقم الجوال",
+      "status": "الحالة",
+      "companyName": "اسم المؤسسة",
+      "joiningDate": "تاريخ الانضمام",
+      "notAvailable": "غير متوفر"
+    },
+    "userStats": {
+      "title": "الإحصائيات",
+      "totalOrders": "إجمالي الطلبات",
+      "totalPaid": "إجمالي المدفوع",
+      "lastOrder": "آخر طلب"
+    },
     "userOrderTable": {
+      "title": "تاريخ الطلبات",
       "colums": {
         "index": "#",
         "orderNumber": "رقم الطلب",
@@ -227,7 +289,15 @@
         "quantity": "الكمية",
         "orderState": "حالة الطلب",
         "actions": "الإجراءات"
+      },
+      "empty": {
+        "title": "لا توجد طلبات",
+        "description": "ستظهر الطلبات هنا بمجرد إنشائها."
       }
+    },
+    "userActions": {
+      "block": "حظر المستخدم",
+      "unblock": "رفع الحظر"
     }
   },
   "driverPage": {
@@ -270,10 +340,44 @@
       "pending": "معلق"
     },
 
+    "driversFilter": {
+      "loadingStatus": "حالة التحميل",
+      "driverStatus": "حالة السائق",
+      "all": "الكل"
+    },
+    "driverDetails": {
+      "title": "بيانات السائق",
+      "driverId": "رقم السائق (ID)",
+      "fullName": "الاسم الكامل",
+      "phoneNumber": "رقم الجوال",
+      "notAvailable": "غير متوفر",
+      "status": "الحالة",
+      "documentStatus": "حالة الوثائق",
+      "plateNumber": "رقم لوحة السيارة",
+      "joiningDate": "تاريخ الانضمام",
+      "backToDrivers": "السائقين"
+    },
+
+    "driverStats": {
+      "title": "الإحصائيات",
+      "totalOrders": "إجمالي التوصيلات",
+      "totalPaid": "إجمالي الأرباح",
+      "lastOrderDate": "آخر توصيل",
+      "noOrders": "لا توجد طلبات بعد"
+    },
+    "driverDocuments": {
+      "title": "الوثائق",
+      "nationalId": "الإقامة - الهوية",
+      "driverLicense": "رخصة القيادة",
+      "carLicense": "استمارة المركبة",
+      "carInsurance": "وثيقة التأمين",
+      "download": "تحميل"
+    },
     "documentStatus": {
       "accepted": "موثق",
-      "rejected": "غير موثق",
-      "pending": "معلق"
+      "approved": "موثق",
+      "pending": "قيد المراجعة",
+      "rejected": "مرفوض"
     }
   },
   "loadingRequestsPage": {
@@ -292,6 +396,24 @@
       "title": "طلبات التحميل",
       "search": {
         "placeholder": "ابحث عن اسم او رقم جوال ..."
+      },
+      "filter": {
+        "filterLabel": "فلتر حسب الحالة",
+        "all": "الكل",
+        "received": "تم استقبال",
+        "approved": "تمت الموافقة",
+        "factory_arrival": "تم الوصول للمصنع",
+        "loading": "جاري التحميل",
+        "loaded": "تم التحميل",
+        "rejected": "مرفوض",
+        "pending_payment": "في انتظار الدفع"
+      },
+      "timeFilter": {
+        "filterLabel": "فلتر حسب الوقت",
+        "all": "الكل",
+        "today": "اليوم",
+        "this_week": "هذا الأسبوع",
+        "this_month": "هذا الشهر"
       }
     },
     "table": {
@@ -309,6 +431,69 @@
       "empty": {
         "title": "لا توجد طلبات تحميل حالياً",
         "description": "ستظهر طلبات التحميل هنا بمجرد تقديمها من قبل السائقين."
+      }
+    },
+    "approveModal": {
+      "rejectSuccess": "تم رفض الطلب بنجاح",
+      "rejectError": "حدث خطأ أثناء رفض الطلب",
+      "title": "الموافقة على طلب تحميل",
+      "stepOne": {
+        "status": "حالة الطلب",
+        "infoTitle": "معلومات الطلب",
+        "requestCode": "رقم الطلب التعريفي",
+        "phone": "رقم الجوال",
+        "driverName": "اسم السائق",
+        "driverCode": "الرقم السائق التعريفي",
+        "carPlates": "رقم لوحة السيارة",
+        "createdAt": "وقت الطلب",
+        "approve": "قبول الطلب",
+        "reject": "رفض الطلب",
+        "rejecting": "جاري الرفض..."
+      },
+      "stepTwo": {
+        "confirmMessage": "سيؤدي الموافقة على هذا الطلب إلى إرسال موقع المصنع والمستندات المطلوبة إلى السائق",
+        "mapPlaceholder": "اختر الموقع على الخريطة",
+        "selectLocation": "اختر الموقع",
+        "locationTitle": "بيانات الموقع",
+        "factoryName": "اسم المصنع",
+        "productName": "اسم المنتج",
+        "locationCoords": "إحداثيات الموقع",
+        "latitude": "خط العرض",
+        "longitude": "خط الطول",
+        "documentsTitle": "المستندات المطلوبة",
+        "tripCertificate": "شهادة الرحلة",
+        "layingCommand": "امر التنزيل",
+        "submit": "قبول الطلب وإرسال المستندات",
+        "cancel": "إلغاء"
+      }
+    },
+    "detailsPage": {
+      "requestNumber": "طلب تحميل رقم",
+      "requestDetails": "تفاصيل طلب التحميل",
+      "orderStatus": "حالة الطلب",
+      "infoSection": {
+        "title": "معلومات الطلب",
+        "requestCode": "رقم الطلب التعريفي",
+        "driverName": "اسم السائق",
+        "phone": "رقم الجوال",
+        "driverCode": "الرقم السائق التعريفي",
+        "carPlates": "رقم لوحة السيارة",
+        "createdAt": "وقت الطلب",
+        "tripCertificate": "شهادة الرحلة",
+        "layingCommand": "امر التنزيل",
+        "documents": "وثائق التحميل"
+      },
+      "locationSection": {
+        "title": "موقع المصنع",
+        "noLocation": "لا يوجد موقع"
+      },
+      "logsSection": {
+        "title": "حالة التحميل",
+        "received": "تم استقبال الطلب",
+        "approved": "تمت الموافقة بواسطة الإدارة",
+        "factory_arrival": "تم إرسال المستندات المطلوبة",
+        "loading": "الوصول للمصنع",
+        "loaded": "تم التحميل"
       }
     }
   },

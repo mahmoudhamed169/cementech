@@ -1,5 +1,3 @@
-
-
 interface Driver {
   id: string;
   driver_name: string;
@@ -26,7 +24,13 @@ export interface Order {
   address_name: string | null;
   address_title: string;
 
-  order_status: "all" | "under_review" | "approved" | "rejected" | "delivery";
+  order_status:
+    | "all"
+    | "under_review"
+    | "in_preparation"
+    | "delivery"
+    | "deliverd"
+    | "canceled";
 
   quantity: number;
   truck_quantity: number;

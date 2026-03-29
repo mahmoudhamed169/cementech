@@ -20,6 +20,8 @@ export default function OrderInfoCards({ order }: OrderInfoCardsProps) {
         label={t("cementQuantity")}
         value={`${order.truck_quantity} طن`}
       />
+
+      <InfoCard label={t("product")} value={order.product_name} />
       <InfoCard
         label={t("price")}
         value={order.total}

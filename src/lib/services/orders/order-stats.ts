@@ -42,9 +42,8 @@ export async function getOrderStats(
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
       system_screen: "order",
-      
     },
-    cache: "no-store",
+    next: { tags: ["orders/orderstatus"] },
   });
 
   if (!res.ok) {

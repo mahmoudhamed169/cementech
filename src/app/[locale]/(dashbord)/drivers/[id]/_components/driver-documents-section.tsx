@@ -1,4 +1,6 @@
+"use client";
 import DriverDocumentItem, { DocumentStatus } from "./driver-document-item";
+import { useTranslations } from "next-intl";
 
 interface Props {
   driverNationalIdFront: string;
@@ -20,30 +22,34 @@ export default function DriverDocumentsSection(props: Props) {
     carInsurance,
     documentVerifyStatus,
   } = props;
+
+  const t = useTranslations("driverPage.driverDocuments");
+
   return (
     <div className="space-y-4">
-      <h4 className="font-bold text-[#101828] text-lg">الوثائق</h4>
+      <h4 className="font-bold text-[#101828] text-lg">{t("title")}</h4>
 
       <div className="space-y-2">
         <DriverDocumentItem
-          title="الإقامة - الهوية"
+          title={t("nationalId")}
           status={documentVerifyStatus}
           link={driverNationalIdFront}
         />
 
         <DriverDocumentItem
-          title="رخصة القيادة"
+          title={t("driverLicense")}
           status={documentVerifyStatus}
           link={driverLicenseFront}
         />
 
         <DriverDocumentItem
-          title="استمارة المركبة"
+          title={t("carLicense")}
           status={documentVerifyStatus}
           link={carLicense}
         />
+
         <DriverDocumentItem
-          title=" وثيقة التامين"
+          title={t("carInsurance")}
           status={documentVerifyStatus}
           link={carInsurance}
         />

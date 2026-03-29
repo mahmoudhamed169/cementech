@@ -1,10 +1,10 @@
 "use server";
 
 export async function sendOtpAction(phone: string) {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/phoneLogin`, {
+  const res = await fetch(`https://cementech-backend.vercel.app/phoneLogin`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ phone, role: "admin" }),
+    body: JSON.stringify({ phone, role: "driver" }),
   });
 
   const json = await res.json();

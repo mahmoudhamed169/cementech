@@ -10,12 +10,15 @@ export interface GetRequestsParams {
   order?: "ASC" | "DESC";
   search?: string;
   status?:
+    | "all"
     | "received"
     | "approved"
     | "factory_arrival"
     | "loading"
     | "loaded"
-    | "rejected";
+    | "rejected"
+    | "pending_payment";
+
   time?: "today" | "this_week" | "this_month" | "all";
 }
 
@@ -24,8 +27,6 @@ export async function getRequests(
   lang: "ar" | "en",
 ): Promise<RequestsResponse> {
   const session = await getServerSession(authOptions);
-  console.log("Session:", session);
-  console.log("Token:", session?.user.accessToken);
 
   const query = new URLSearchParams();
   Object.entries(params).forEach(([key, value]) => {
@@ -37,10 +38,10 @@ export async function getRequests(
   const res = await fetch(`${API_URL}/requests?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "request",
+      system_screen: "loading_request_permission",
       lang,
     },
-    cache: "no-store",
+    next: { tags: ["requests"] },
   });
 
   if (!res.ok) {

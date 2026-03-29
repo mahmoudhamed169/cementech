@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
-import { ShoppingBag, CreditCard, DollarSign, Calendar } from "lucide-react";
+import { ShoppingBag, DollarSign, Calendar } from "lucide-react";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
 import StatItem from "@/src/components/shared/stat-item";
+import { useTranslations } from "next-intl";
 
 interface StatItemProps {
   title: string;
@@ -19,21 +20,24 @@ type IProps = {
   totalPaid: number;
   lastOrderDate: string;
 };
+
 export default function UserStats({
   totalOrderCount,
   totalPaid,
   lastOrderDate,
 }: IProps) {
+  const t = useTranslations("userPage.userStats");
+
   const stats: StatItemProps[] = [
     {
-      title: "إجمالي الطلبات",
+      title: t("totalOrders"),
       value: totalOrderCount,
       bgColor: "bg-[#EFF6FF]",
       icon: <ShoppingBag size={20} />,
       iconColor: "text-[#155DFC]",
     },
     {
-      title: "إجمالي المدفوع",
+      title: t("totalPaid"),
       value: totalPaid,
       currency: <CurrencyIcon height={20} width={20} />,
       bgColor: "bg-[#F0FDF4]",
@@ -41,7 +45,7 @@ export default function UserStats({
       iconColor: "text-green-600",
     },
     {
-      title: "آخر طلب",
+      title: t("lastOrder"),
       value: lastOrderDate,
       bgColor: "bg-[#FAF5FF]",
       icon: <Calendar size={20} />,
@@ -51,7 +55,7 @@ export default function UserStats({
 
   return (
     <div className="space-y-4">
-      <h4 className="font-bold text-[#101828] text-lg">الإحصائيات</h4>
+      <h4 className="font-bold text-[#101828] text-lg">{t("title")}</h4>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {stats.map((item, index) => (

@@ -91,6 +91,7 @@
       "customer": "Customer",
       "driverStatus": "Driver",
       "deliveryStatus": "Status",
+      "productName": "Product",
       "shipments": "Shipments",
       "quantity": "Qty",
       "price": "Amount",
@@ -129,7 +130,37 @@
       "under_review": "Pending Orders",
       "delivery": "Ongoing Orders",
       "canceled": "Canceled Orders"
-    }
+    },
+    "header": {
+      "title": "Order Management",
+      "description": "Monitor and manage all delivery orders in real time",
+      "autoAssign": "Auto-assign orders to drivers",
+      "enabled": "Enabled"
+    },
+    "filter": {
+      "title": "Orders",
+      "searchPlaceholder": "Search by name or order number ...",
+      "timeFilter": "Filter by time",
+      "statusFilter": "Filter by status",
+      "time": {
+        "all": "All",
+        "today": "Today",
+        "this_week": "This Week",
+        "this_month": "This Month"
+      },
+      "status": {
+        "all": "All",
+        "under_review": "Under Review",
+        "in_preparation": "In Preparation",
+        "delivery": "Delivering",
+        "delivered": "Completed",
+        "canceled": "Canceled"
+      }
+    },
+    "orderDetails": "Order Details",
+    "orderNumber": "Order Number",
+    "fetchError": "Failed to load order",
+    "fetchErrorSub": "Please try again later"
   },
   "orderActions": {
     "orderNumber": "Order Number",
@@ -147,18 +178,28 @@
     "factory": "Factory",
     "cementQuantity": "Cement Quantity",
     "price": "Price",
+    "product": "Product",
     "lastUpdate": "Last Update",
     "cancelOrder": "Cancel Order",
+    "canceling": "Canceling...",
+    "cancelSuccess": "Order cancelled successfully",
+    "cancelError": "Failed to cancel order, please try again",
 
     "assignDriverToOrder": "Assign Driver to Order",
     "shipmentLabel": {
       "one": "One shipment",
       "many": "Multiple shipments"
     },
-    "availableDrivers": "Available drivers nearby",
+
     "driverId": "ID",
     "distance": "Distance",
-    "confirm": "Confirm"
+    "quantity": "Quantity",
+    "confirm": "Confirm",
+    "availableDrivers": "Nearby available drivers",
+    "noDriversAvailable": "No drivers available",
+    "noDriversAvailableDesc": "Try again later",
+    "errorLoadingDrivers": "Error loading drivers",
+    "errorLoadingDriversDesc": "Something went wrong, please try again"
   },
   "common": {
     "logout": "Logout",
@@ -167,8 +208,12 @@
       "otpSentError": "Failed to send OTP, please try again",
       "loginSuccess": "Logged in successfully",
       "loginError": "Invalid OTP, please try again",
-      "logoutSuccess": "Logged out successfully"
-    }
+      "logoutSuccess": "Logged out successfully",
+      "blockSuccess": "User blocked successfully",
+      "unblockSuccess": "User unblocked successfully",
+      "blockError": "An error occurred, please try again"
+    },
+    "back": "Back"
   },
 
   "orderPage": "Welcome in the order page",
@@ -198,6 +243,8 @@
       }
     },
     "userStatus": {
+      "status": "User Status",
+      "all": "All",
       "active": "Active",
       "inactive": "Inactive",
       "blocked": "Blocked"
@@ -211,7 +258,24 @@
       "joinDate": "Join Date",
       "active": "Active"
     },
+    "userDetails": {
+      "pageTitle": "User Details",
+      "userId": "User ID",
+      "fullName": "Full Name",
+      "phoneNumber": "Phone Number",
+      "status": "Status",
+      "companyName": "Company Name",
+      "joiningDate": "Joining Date",
+      "notAvailable": "N/A"
+    },
+    "userStats": {
+      "title": "Statistics",
+      "totalOrders": "Total Orders",
+      "totalPaid": "Total Paid",
+      "lastOrder": "Last Order"
+    },
     "userOrderTable": {
+      "title": "Orders History",
       "colums": {
         "index": "#",
         "orderNumber": "Order Number",
@@ -224,6 +288,10 @@
         "title": "No users found",
         "description": "Users will appear here once they register in the app."
       }
+    },
+    "userActions": {
+      "block": "Block User",
+      "unblock": "Unblock User"
     }
   },
   "driverPage": {
@@ -265,10 +333,45 @@
       "not loaded": "Unloaded",
       "pending": "Pending"
     },
+
+    "driversFilter": {
+      "loadingStatus": "Loading Status",
+      "driverStatus": "Driver Status",
+      "all": "All"
+    },
+    "driverDetails": {
+      "title": "Driver Details",
+      "driverId": "Driver ID",
+      "fullName": "Full Name",
+      "phoneNumber": "Phone Number",
+      "notAvailable": "N/A",
+      "status": "Status",
+      "documentStatus": "Document Status",
+      "plateNumber": "Plate Number",
+      "joiningDate": "Joining Date",
+      "backToDrivers": "Drivers"
+    },
+
+    "driverStats": {
+      "title": "Statistics",
+      "totalOrders": "Total Deliveries",
+      "totalPaid": "Total Earnings",
+      "lastOrderDate": "Last Delivery",
+      "noOrders": "No orders yet"
+    },
+    "driverDocuments": {
+      "title": "Documents",
+      "nationalId": "Residence - ID",
+      "driverLicense": "Driver License",
+      "carLicense": "Vehicle Registration",
+      "carInsurance": "Insurance Document",
+      "download": "Download"
+    },
     "documentStatus": {
-      "approved": "Approved",
-      "rejected": "Unapproved",
-      "pending": "Pending"
+      "accepted": "Verified",
+      "approved": "Verified",
+      "pending": "Under Review",
+      "rejected": "Rejected"
     }
   },
   "loadingRequestsPage": {
@@ -286,6 +389,24 @@
       "title": "Loading Requests",
       "search": {
         "placeholder": "Search by name or phone number ..."
+      },
+      "filter": {
+        "filterLabel": "Filter by Status",
+        "all": "All",
+        "received": "Received",
+        "approved": "Approved",
+        "factory_arrival": "Arrived at Factory",
+        "loading": "Loading",
+        "loaded": "Loaded",
+        "rejected": "Rejected",
+        "pending_payment": "Pending Payment"
+      },
+      "timeFilter": {
+        "filterLabel": "Filter by Time",
+        "all": "All",
+        "today": "Today",
+        "this_week": "This Week",
+        "this_month": "This Month"
       }
     },
     "table": {
@@ -303,6 +424,70 @@
       "empty": {
         "title": "No loading requests found",
         "description": "Loading requests will appear here once submitted by drivers."
+      }
+    },
+    "approveModal": {
+      "title": "Approve Loading Request",
+      "rejectSuccess": "Request rejected successfully",
+      "rejectError": "Failed to reject request",
+      "stepOne": {
+        "status": "Order Status",
+        "infoTitle": "Request Information",
+        "requestCode": "Request Code",
+        "locationTitle": "Location Details",
+        "factoryName": "Factory Name",
+        "productName": "Product Name",
+        "locationCoords": "Location Coordinates",
+        "latitude": "Latitude",
+        "longitude": "Longitude",
+        "phone": "Phone Number",
+        "driverName": "Driver Name",
+        "driverCode": "Driver Code",
+        "carPlates": "Car Plates",
+        "createdAt": "Request Time",
+        "approve": "Approve Request",
+        "reject": "Reject Request",
+        "rejecting": "Rejecting..."
+      },
+      "stepTwo": {
+        "confirmMessage": "Approving this request will send the factory location and required documents to the driver",
+        "locationTitle": "Factory Location",
+        "mapPlaceholder": "Select location on map",
+        "selectLocation": "Select Location",
+        "documentsTitle": "Required Documents",
+        "tripCertificate": "Trip Certificate",
+        "layingCommand": "Laying Command",
+        "submit": "Approve & Send Documents",
+        "cancel": "Cancel"
+      }
+    },
+    "detailsPage": {
+      "requestNumber": "Loading Request No",
+      "requestDetails": "Loading Request Details",
+      "orderStatus": "Order Status",
+      "infoSection": {
+        "title": "Request Information",
+        "requestCode": "Request Code",
+        "driverName": "Driver Name",
+        "phone": "Phone Number",
+        "driverCode": "Driver Code",
+        "carPlates": "Car Plates",
+        "createdAt": "Request Time",
+        "tripCertificate": "Trip Certificate",
+        "layingCommand": "Laying Command",
+        "documents": "Loading Documents"
+      },
+      "locationSection": {
+        "title": "Factory Location",
+        "noLocation": "No location available"
+      },
+      "logsSection": {
+        "title": "Loading Status",
+        "received": "Request Received",
+        "approved": "Approved by Management",
+        "factory_arrival": "Documents Sent",
+        "loading": "Arrived at Factory",
+        "loaded": "Loading Complete"
       }
     }
   },

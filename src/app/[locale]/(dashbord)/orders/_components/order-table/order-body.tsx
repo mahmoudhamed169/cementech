@@ -14,10 +14,15 @@ import OrderShipmentCell from "./order-shipment-cell";
 import OrderQuantityCell from "./order-quantity-cell";
 import OrderAssignDriver from "./order-assign-driver";
 import OrderActionsWrapper from "./order-actions/_components/order-actions-wrapper";
+import OrdersTableEmpty from "./orders-table-empty";
+import { Link } from "@/src/i18n/navigation";
+import { Eye } from "lucide-react";
 
 dayjs.extend(relativeTime);
 
 export default function OrderTableBody({ orders }: { orders: Order[] }) {
+  // console.log(orders);
+  if (orders.length === 0) return <OrdersTableEmpty />;
   return (
     <TableBody>
       {orders.map((order, index) => (
@@ -44,6 +49,11 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
 
           {/* Order Status */}
           <OrderStatusCell status={order.order_status} />
+          {/* <TableCell className="text-center">-</TableCell> */}
+
+          <TableCell className="text-center font-medium">
+            {order.product_name}
+          </TableCell>
 
           {/* order Shipment */}
           <OrderShipmentCell truckQuantity={order.truck_quantity} />
@@ -65,17 +75,31 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
           {/* options actions */}
           <TableCell className="text-center">
             <div className="flex items-center justify-center space-x-2">
-              {/* assignDriver */}
-              <OrderAssignDriver
-                hasDrivers={order.has_drivers}
-                truckQuantity={order.truck_quantity}
-                orderCode={order.code}
-                orderId={order.id}
-                productId={order.product_id}
-              />
+              <div
+                className={
+                  order.order_status === "canceled" ||
+                  order.order_status === "ملغي"
+                    ? "invisible"
+                    : ""
+                }
+              >
+                <OrderAssignDriver
+                  hasDrivers={order.has_drivers}
+                  truckQuantity={order.truck_quantity}
+                  orderCode={order.code}
+                  orderId={order.id}
+                  productId={order.product_id}
+                  quantity={order.quantity}
+                />
+              </div>
 
-              {/* Order Actions */}
-              <OrderActionsWrapper orderId={order.id} />
+              <Link
+                href={`/orders/${order.id}`}
+                className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
+              >
+                <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
+              </Link>
+              {/* <OrderActionsWrapper orderId={order.id} /> */}
             </div>
           </TableCell>
         </TableRow>

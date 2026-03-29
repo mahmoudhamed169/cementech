@@ -4,6 +4,7 @@ import {
   OrderResponse,
 } from "@/src/lib/services/orders/spacific-order";
 import OrderActions from "../order-actions";
+import { cookies } from "next/headers";
 
 interface OrderActionsWrapperProps {
   orderId: string;
@@ -15,8 +16,11 @@ export default async function OrderActionsWrapper({
 }: OrderActionsWrapperProps) {
   let order: OrderData | null = null;
 
+  const cookieStore = await cookies();
+  const locale = (cookieStore.get("NEXT_LOCALE")?.value ?? "ar") as "ar" | "en";
+
   try {
-    const response: OrderResponse = await getOrderById(orderId);
+    const response: OrderResponse = await getOrderById(orderId, locale);
     if (response.success) {
       order = response.data;
     }
@@ -28,6 +32,5 @@ export default async function OrderActionsWrapper({
     return null;
   }
 
-  // نمرر الداتا للـ Client Component
   return <OrderActions order={order} />;
 }
