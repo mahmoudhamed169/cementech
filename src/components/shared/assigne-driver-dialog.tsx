@@ -147,7 +147,7 @@ export function AssigneDriver({
                           {driver.driver_name}
                         </h6>
                         <span className="text-sm text-[#6A7282]">
-                          {t("driverId")}: {driver.code}
+                          Code: {driver.code}
                         </span>
                       </div>
                     </div>

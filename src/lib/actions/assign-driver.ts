@@ -12,6 +12,15 @@ export async function assignDriverAction(
 ): Promise<{ success: boolean; message: string }> {
   const session = await getServerSession(authOptions);
 
+  const requestBody = { driver_ids: driverIds };
+
+  // ✅ Logging the request details for debugging
+  console.log("➡️ Assign Driver REQUEST:", {
+    url: `${API_URL}/orders/${orderId}/assign-driver`,
+    method: "POST",
+    body: requestBody,
+  });
+
   const res = await fetch(`${API_URL}/orders/${orderId}/assign-driver`, {
     method: "POST",
     headers: {
@@ -20,20 +29,25 @@ export async function assignDriverAction(
       system_screen: "orders_permission",
       lang: "en",
     },
-    body: JSON.stringify({ driver_ids: driverIds }),
+    body: JSON.stringify(requestBody),
+  });
+
+  // ✅ Logging the response details for debugging
+  const responseText = await res.text();
+  console.log("⬅️ Assign Driver RESPONSE:", {
+    status: res.status,
+    ok: res.ok,
+    body: responseText,
   });
 
   if (!res.ok) {
-    const errorBody = await res.text();
-    console.error("Assign driver error:", {
-      status: res.status,
-      body: errorBody,
-    });
-    throw new Error(`Failed to assign driver. Status: ${res.status}`);
+    throw new Error(
+      `Failed to assign driver. Status: ${res.status} | Body: ${responseText}`,
+    );
   }
 
   revalidateTag("ordersId");
   revalidateTag("orders");
 
-  return res.json();
+  return JSON.parse(responseText);
 }
