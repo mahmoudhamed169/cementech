@@ -869,5 +869,75 @@
       "success": "Notification sent successfully",
       "error": "Failed to send notification, please try again"
     }
+  },
+  "PaymentsPage": {
+    "header": {
+      "title": "Payments & Revenue",
+      "description": "Manage transactions, driver payouts, and financial reports"
+    },
+    "nav": {
+      "operations": "Payment Operations",
+      "matching": "Driver Bonuses",
+      "reports": "Financial Reports"
+    },
+    "operations": {
+      "filters": {
+        "byTime": "Filter by Time",
+        "byStatus": "Filter by Status",
+        "today": "Today",
+        "week": "This Week",
+        "month": "This Month",
+        "all": "All",
+        "allStatuses": "All Statuses",
+        "completed": "Completed",
+        "pending": "Pending",
+        "failed": "Failed"
+      },
+      "tableHeaders": {
+        "index": "#",
+        "transactionId": "Transaction ID",
+        "requestId": "Request ID",
+        "driverName": "Driver Name",
+        "clientName": "Client Name",
+        "amountPaid": "Amount Paid",
+        "commission": "Commission",
+        "paymentMethod": "Payment Method",
+        "paymentStatus": "Payment Status",
+        "transactionDate": "Transaction Date"
+      }
+    },
+    "matching": {
+      "filters": {
+        "title": "Bonuses",
+        "byStatus": "Filter by Status",
+        "all": "All",
+        "completed": "Completed",
+        "pending": "Pending"
+      },
+      "tableHeaders": {
+        "index": "#",
+        "driverId": "Driver ID",
+        "driverName": "Driver Name",
+        "completedOrders": "Completed Orders",
+        "totalEarnings": "Total Earnings",
+        "pendingBonus": "Pending Bonuses",
+        "bonusStatus": "Bonus Status",
+        "lastBonusDate": "Last Bonus Date",
+        "document": "Delivery Document",
+        "actions": "Actions",
+        "details": "Details"
+      },
+      "deliverModal": {
+        "title": "Confirm Bonus Delivery",
+        "description": "Upload a receipt of the bonus delivery then enter the bonus amount",
+        "bonusAmount": "Bonus Amount",
+        "amountPlaceholder": "Enter Amount",
+        "document": "Delivery Document",
+        "uploadDocument": "Click to Upload",
+        "cancel": "Cancel",
+        "confirm": "Add",
+        "uploaded": "Uploaded"
+      }
+    }
   }
 }

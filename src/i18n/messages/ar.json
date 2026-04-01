@@ -131,7 +131,7 @@
       "total": "مجموع الطلبات",
       "delivered": "الطلبات المكتملة",
       "in_preparation": "الطلبات قيد التجهيز",
-      "under_review": "الطلبات المعلقة",
+      "under_review": "الطلبات تحت المراجعة",
       "delivery": "الطلبات الجارية",
       "canceled": "الطلبات الملغاة"
     },
@@ -872,6 +872,77 @@
     "toast": {
       "success": "تم ارسال الاشعار بنجاح",
       "error": "فشل ارسال الاشعار، حاول مرة اخرى"
+    }
+  },
+  "PaymentsPage": {
+    "header": {
+      "title": "المدفوعات والإيرادات",
+      "description": "إدارة المعاملات، ودفعات السائقين، والتقارير المالية"
+    },
+    "nav": {
+      "operations": "عمليات الدفع",
+      "matching": "مكافآت السائقين",
+      "reports": "التقارير المالية"
+    },
+    "operations": {
+      "filters": {
+        "byTime": "فلتر حسب الوقت",
+        "byStatus": "فلتر حسب الحالة",
+        "today": "اليوم",
+        "week": "هذا الأسبوع",
+        "month": "هذا الشهر",
+        "all": "الكل",
+        "allStatuses": "كل الحالات",
+        "completed": "مكتمل",
+        "pending": "قيد الانتظار",
+        "failed": "فشل"
+      },
+      "tableHeaders": {
+        "index": "#",
+        "transactionId": "رقم المعاملة",
+        "requestId": "رقم الطلب",
+        "driverName": "اسم السائق",
+        "clientName": "اسم العميل",
+        "amountPaid": "المبلغ المدفوع",
+        "commission": "العمولة",
+        "paymentMethod": "طريقة الدفع",
+        "paymentStatus": "حالة الدفع",
+        "transactionDate": "تاريخ المعاملة"
+      }
+    },
+    "matching": {
+      "filters": {
+        "title": "المكافآت",
+        "byStatus": "فلتر حسب الحالة",
+        "all": "الكل",
+        "completed": "مكتمل",
+        "pending": "قيد الانتظار"
+      },
+      "tableHeaders": {
+        "index": "#",
+        "driverId": "رقم السائق",
+        "driverName": "اسم السائق",
+        "completedOrders": "الطلبات المكتملة",
+        "totalEarnings": "إجمالي الأرباح",
+        "pendingBonus": "المكافآت المعلقة",
+        "bonusStatus": "حالة المكافأة",
+        "lastBonusDate": "تاريخ آخر مكافأة",
+        "document": "مستند تسليم",
+        "actions": "الإجراءات",
+        "details": "تفاصيل"
+       
+      },
+      "deliverModal": {
+        "title": "تأكيد تسليم مكافأة",
+        "description": "قم برفع صورة من فاتورة تسليم المكافأة للسائق ثم ادخل قيمة المكافأة",
+        "bonusAmount": "قيمة المكافأة",
+        "amountPlaceholder": "ادخل المبلغ",
+        "document": "مستند التسليم",
+        "uploadDocument": "اضغط للرفع",
+        "cancel": "الغاء",
+        "confirm": "إضافة",
+        "uploaded": "تم الرفع"
+      }
     }
   }
 }
