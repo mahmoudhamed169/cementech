@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-type DriverStatus = "free" | "offline" | "pending" | "blocked" ;
+export type DriverStatus = "free" | "offline" | "pending" | "blocked";
 
 type DriverStatusBadgeProps = {
   status: DriverStatus;

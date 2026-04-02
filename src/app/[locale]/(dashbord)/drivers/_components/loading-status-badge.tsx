@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl";
 
-type LoadingStatus = "loaded" | "not loaded" | "pending";
+export type LoadingStatus = "loaded" | "not loaded" | "pending";
 
 type LoadingStatusBadgeProps = {
   status: LoadingStatus;

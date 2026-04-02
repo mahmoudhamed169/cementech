@@ -1,9 +1,11 @@
 "use client";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import FormInputField from "@/src/components/shared/form-input-field";
-import DriverStatusBadge from "../../_components/driver-status-badge";
-import LoadingStatusBadge from "../../_components/loading-status-badge";
-import DocumentStatusBadge from "../../_components/document-status-badge";
+import DriverStatusBadge, {
+  DriverStatus,
+} from "../../_components/driver-status-badge";
+import LoadingStatusBadge, { LoadingStatus } from "../../_components/loading-status-badge";
+import DocumentStatusBadge, { DocumentStatus } from "../../_components/document-status-badge";
 import { DriverProfile } from "@/src/lib/types/driver";
 import { useTranslations } from "next-intl";
 
@@ -34,10 +36,12 @@ export default function DriverDetails({ driver }: { driver: DriverProfile }) {
         <FieldLabel htmlFor="status">{t("status")}</FieldLabel>
         <div className="flex">
           <div className="w-14">
-            <DriverStatusBadge status={driver.driver_status} />
+            <DriverStatusBadge
+              status={driver.driver_status as DriverStatus}
+            />{" "}
           </div>
           <div className="min-w-14">
-            <LoadingStatusBadge status={driver.driver_request_status} />
+            <LoadingStatusBadge status={driver.driver_request_status as LoadingStatus} />
           </div>
         </div>
       </Field>
@@ -45,7 +49,7 @@ export default function DriverDetails({ driver }: { driver: DriverProfile }) {
       <Field>
         <FieldLabel htmlFor="status">{t("documentStatus")}</FieldLabel>
         <div className="w-14">
-          <DocumentStatusBadge status={driver.document_verify} />
+          <DocumentStatusBadge status={driver.document_verify as DocumentStatus} />
         </div>
       </Field>
 
