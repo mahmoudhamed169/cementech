@@ -466,7 +466,12 @@
         "tripCertificate": "شهادة الرحلة",
         "layingCommand": "امر التنزيل",
         "submit": "قبول الطلب وإرسال المستندات",
-        "cancel": "إلغاء"
+        "submitting": "جاري التأكيد...",
+        "cancel": "إلغاء",
+        "messages": {
+          "success": "تم قبول الطلب بنجاح",
+          "error": "حدث خطأ أثناء قبول الطلب"
+        }
       }
     },
     "detailsPage": {
