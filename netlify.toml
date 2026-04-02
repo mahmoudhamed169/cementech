@@ -1,6 +1,6 @@
 [build]
   command = "yarn build"
-  publish = "out"    # used when running `next export`, plugin will override for SSR/Functions
+  publish = ".next"
   functions = "netlify/functions"
 
 [[plugins]]
