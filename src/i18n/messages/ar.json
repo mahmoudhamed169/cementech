@@ -930,7 +930,6 @@
         "document": "مستند تسليم",
         "actions": "الإجراءات",
         "details": "تفاصيل"
-       
       },
       "deliverModal": {
         "title": "تأكيد تسليم مكافأة",
@@ -942,6 +941,19 @@
         "cancel": "الغاء",
         "confirm": "إضافة",
         "uploaded": "تم الرفع"
+      },
+      "ordersModal": {
+        "title": "تفاصيل مكافآت السائق",
+        "index": "#",
+        "orderId": "رقم الطلب",
+        "totalPrice": "إجمالي السعر",
+        "bonus": "المكافأة",
+        "document": "مستند تسليم",
+        "bonusStatus": "حالة المكافأة",
+        "bonusDate": "تاريخ المكافأة",
+        "actions": "الإجراءات",
+        "delivered": "تم التسليم",
+        "deliver": "تسليم"
       }
     }
   }

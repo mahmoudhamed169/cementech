@@ -1,10 +1,11 @@
 "use client";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Download } from "lucide-react";
+import { Download, Eye } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { DeliverBonusModal } from "./deliver-bonus-modal";
+import { DriverOrdersModal } from "./driver-orders-modal";
 
 const STATIC_MATCHING = [
   {
@@ -74,80 +75,97 @@ interface Props {
 
 export function MatchingTableBody({ matching }: Props) {
   const [selectedRow, setSelectedRow] = useState<Matching | null>(null);
+  const [ordersRow, setOrdersRow] = useState<Matching | null>(null);
+
   return (
     <>
-    <TableBody>
-      {matching.map((row, index) => (
-        <TableRow
-          key={row.id}
-          className="text-center h-16 border-b border-gray-100"
-        >
-          <TableCell className="text-gray-500">{index + 1}</TableCell>
-          <TableCell className="font-medium">{row.driverId}</TableCell>
+      <TableBody>
+        {matching.map((row, index) => (
+          <TableRow
+            key={row.id}
+            className="text-center h-16 border-b border-gray-100"
+          >
+            <TableCell className="text-gray-500">{index + 1}</TableCell>
+            <TableCell className="font-medium">{row.driverId}</TableCell>
 
-          {/* Driver */}
-          <TableCell>
-            <div className="flex flex-col items-center gap-0.5">
-              <span className="font-medium text-gray-800">
-                {row.driverName}
+            {/* Driver */}
+            <TableCell>
+              <div className="flex flex-col items-center gap-0.5">
+                <span className="font-medium text-gray-800">
+                  {row.driverName}
+                </span>
+                <span className="text-xs text-gray-400">{row.driverPhone}</span>
+              </div>
+            </TableCell>
+
+            <TableCell>{row.completedOrders}</TableCell>
+            <TableCell>﷼ {row.totalEarnings.toLocaleString("ar-SA")}</TableCell>
+            <TableCell>﷼ {row.pendingBonus}</TableCell>
+
+            {/* Status badge */}
+            <TableCell>
+              <span
+                className={cn(
+                  "px-3 py-1 rounded-full text-xs font-medium",
+                  statusStyles[row.bonusStatus],
+                )}
+              >
+                {row.bonusStatus}
               </span>
-              <span className="text-xs text-gray-400">{row.driverPhone}</span>
-            </div>
-          </TableCell>
+            </TableCell>
 
-          <TableCell>{row.completedOrders}</TableCell>
-          <TableCell>﷼ {row.totalEarnings.toLocaleString("ar-SA")}</TableCell>
-          <TableCell>﷼ {row.pendingBonus}</TableCell>
+            <TableCell className="text-gray-500">{row.lastBonusDate}</TableCell>
 
-          {/* Status badge */}
-          <TableCell>
-            <span
-              className={cn(
-                "px-3 py-1 rounded-full text-xs font-medium",
-                statusStyles[row.bonusStatus],
+            {/* Document download */}
+            <TableCell>
+              {row.hasDocument && (
+                <button className="text-gray-400 hover:text-gray-600 transition-colors">
+                  <Download size={18} />
+                </button>
               )}
-            >
-              {row.bonusStatus}
-            </span>
-          </TableCell>
+            </TableCell>
 
-          <TableCell className="text-gray-500">{row.lastBonusDate}</TableCell>
-
-          {/* Document download */}
-          <TableCell>
-            {row.hasDocument && (
-              <button className="text-gray-400 hover:text-gray-600 transition-colors">
-                <Download size={18} />
+            {/* Actions */}
+            <TableCell>
+              <Button
+                size="sm"
+                className={cn(
+                  "rounded-xl text-white text-xs w-24 h-9",
+                  row.delivered
+                    ? "bg-gray-300 text-gray-500 cursor-default"
+                    : "bg-green-600 hover:bg-green-700",
+                )}
+                disabled={row.delivered}
+                onClick={() => !row.delivered && setSelectedRow(row)}
+              >
+                {row.delivered ? "تم التسليم" : "تسليم"}
+              </Button>
+            </TableCell>
+            <TableCell>
+              <button
+                onClick={() => setOrdersRow(row)}
+                className="text-gray-400 hover:text-blue-500 transition-colors"
+              >
+                <Eye size={18} />
               </button>
-            )}
-          </TableCell>
-
-          {/* Actions */}
-          <TableCell>
-            <Button
-              size="sm"
-              className={cn(
-                "rounded-xl text-white text-xs w-24 h-9",
-                row.delivered
-                  ? "bg-gray-300 text-gray-500 cursor-default"
-                  : "bg-green-600 hover:bg-green-700",
-              )}
-              disabled={row.delivered}
-              onClick={() => !row.delivered && setSelectedRow(row)}
-            >
-              {row.delivered ? "تم التسليم" : "تسليم"}
-            </Button>
-          </TableCell>
-        </TableRow>
-      ))}
-    </TableBody>
-     <DeliverBonusModal
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+      <DeliverBonusModal
         open={!!selectedRow}
         onOpenChange={(open) => !open && setSelectedRow(null)}
         bonusAmount={selectedRow?.pendingBonus ?? 0}
         driverName={selectedRow?.driverName ?? ""}
       />
-      </>
+
+      <DriverOrdersModal
+        open={!!ordersRow}
+        onOpenChange={(open) => !open && setOrdersRow(null)}
+        driverName={ordersRow?.driverName ?? ""}
+        driverId={ordersRow?.driverId ?? ""}
+      />
+    </>
   );
 }
 

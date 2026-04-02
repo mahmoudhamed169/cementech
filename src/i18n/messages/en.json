@@ -937,6 +937,19 @@
         "cancel": "Cancel",
         "confirm": "Add",
         "uploaded": "Uploaded"
+      },
+      "ordersModal": {
+        "title": "Driver Bonus Details",
+        "index": "#",
+        "orderId": "Order ID",
+        "totalPrice": "Total Price",
+        "bonus": "Bonus",
+        "document": "Document",
+        "bonusStatus": "Bonus Status",
+        "bonusDate": "Bonus Date",
+        "actions": "Actions",
+        "delivered": "Delivered",
+        "deliver": "Deliver"
       }
     }
   }

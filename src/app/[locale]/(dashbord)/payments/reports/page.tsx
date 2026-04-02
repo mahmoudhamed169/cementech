@@ -1,9 +1,15 @@
-import React from "react";
+import { RevenueReportCard } from "./_components/revenue-report-card";
+import { CommissionReportCard } from "./_components/commission-report-card";
+import { CustomReportForm } from "./_components/custom-report-form";
 
-export default function page() {
+export default function ReportsPage() {
   return (
-    <div>
-      <h1>التقارير المالية</h1>
-    </div>
+    <section className="space-y-6 p-6">
+      <div className="grid grid-cols-2 gap-4">
+        <RevenueReportCard />
+        <CommissionReportCard />
+      </div>
+      <CustomReportForm />
+    </section>
   );
 }
