@@ -4,8 +4,8 @@ import { useTranslations } from "next-intl";
 import { Request } from "@/src/lib/types/requests/request";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { CheckCircle, Upload, FileText } from "lucide-react";
-import { Check } from "lucide-react";
+import { CheckCircle, Upload, FileText, Check } from "lucide-react";
+import { useAcceptRequest } from "../../../_hooks/use-accept-request";
 
 interface StepTwoProps {
   request: Request;
@@ -16,10 +16,17 @@ export default function StepTwo({ request, onClose }: StepTwoProps) {
   const t = useTranslations("loadingRequestsPage.approveModal.stepTwo");
   const [tripCertificate, setTripCertificate] = useState<File | null>(null);
   const [layingCommand, setLayingCommand] = useState<File | null>(null);
-  const [location, setLocation] = useState<string>("");
 
-  const handleSubmit = async () => {
-    // هنا هنعمل الـ API call
+  const { mutate, isPending } = useAcceptRequest(request.id, onClose);
+
+  const handleSubmit = () => {
+    const hasLocation = request.lat && request.lng;
+
+    mutate({
+      request_type: hasLocation ? "without_data" : "with_data",
+      trip_certificate: tripCertificate ?? undefined,
+      laying_command: layingCommand ?? undefined,
+    });
   };
 
   return (
@@ -92,7 +99,11 @@ export default function StepTwo({ request, onClose }: StepTwoProps) {
 
         {/* شهادة الرحلة */}
         <label
-          className={`flex items-center justify-between gap-2 p-4 rounded-2xl border cursor-pointer transition-colors ${tripCertificate ? "bg-green-50 border-green-400" : "bg-[#F9FAFB] border-[#E5E7EB] hover:bg-gray-100"}`}
+          className={`flex items-center justify-between gap-2 p-4 rounded-2xl border cursor-pointer transition-colors ${
+            tripCertificate
+              ? "bg-green-50 border-green-400"
+              : "bg-[#F9FAFB] border-[#E5E7EB] hover:bg-gray-100"
+          }`}
         >
           <div className="flex items-center gap-2">
             {tripCertificate ? (
@@ -114,7 +125,11 @@ export default function StepTwo({ request, onClose }: StepTwoProps) {
 
         {/* امر التنزيل */}
         <label
-          className={`flex items-center justify-between gap-2 p-4 rounded-2xl border cursor-pointer transition-colors ${layingCommand ? "bg-green-50 border-green-400" : "bg-[#F9FAFB] border-[#E5E7EB] hover:bg-gray-100"}`}
+          className={`flex items-center justify-between gap-2 p-4 rounded-2xl border cursor-pointer transition-colors ${
+            layingCommand
+              ? "bg-green-50 border-green-400"
+              : "bg-[#F9FAFB] border-[#E5E7EB] hover:bg-gray-100"
+          }`}
         >
           <div className="flex items-center gap-2">
             {layingCommand ? (
@@ -139,13 +154,15 @@ export default function StepTwo({ request, onClose }: StepTwoProps) {
       <div className="flex items-center gap-3 pt-2">
         <Button
           onClick={handleSubmit}
+          disabled={isPending}
           className="flex-1 h-12 bg-[#155DFC] hover:bg-[#1249d4] text-white rounded-2xl font-semibold flex items-center justify-center gap-2"
         >
           <Check className="w-4 h-4" />
-          {t("submit")}
+          {isPending ? t("submitting") : t("submit")}
         </Button>
         <Button
           onClick={onClose}
+          disabled={isPending}
           variant="outline"
           className="flex-1 h-12 rounded-2xl font-semibold"
         >

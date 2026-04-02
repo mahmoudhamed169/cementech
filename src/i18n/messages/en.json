@@ -327,7 +327,7 @@
       "free": "Free",
       "offline": "Offline",
       "pending": "Pending",
-      "blocked": "Blocked" , 
+      "blocked": "Blocked",
       "waiting_order": "Waiting for Order"
     },
     "loadingStatus": {
@@ -460,7 +460,14 @@
         "tripCertificate": "Trip Certificate",
         "layingCommand": "Laying Command",
         "submit": "Approve & Send Documents",
-        "cancel": "Cancel"
+        "submitting": "Confirming...",
+
+        "cancel": "Cancel",
+        "messages": {
+    "success": "Request accepted successfully",
+    "error": "An error occurred while accepting the request"
+  }
+       
       }
     },
     "detailsPage": {

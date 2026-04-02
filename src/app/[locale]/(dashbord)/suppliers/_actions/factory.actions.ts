@@ -73,7 +73,7 @@ export async function editFactoryAction(
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "",
+      system_screen: "factory_permissions",
     },
     body: JSON.stringify(body),
   });
