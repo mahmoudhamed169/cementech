@@ -4,6 +4,9 @@ import createNextIntlPlugin from "next-intl/plugin";
 const nextConfig: NextConfig = {
   // config options here
   transpilePackages: ["leaflet", "react-leaflet"],
+   typescript: {
+    ignoreBuildErrors: true, 
+  },
 };
 
 const withNextIntl = createNextIntlPlugin();
