@@ -650,7 +650,8 @@
           "index": "#",
           "nameAr": "اسم المنتج (باللغة العربية)",
           "nameEn": "اسم المنتج (باللغة الإنجليزية)",
-          "price": "سعر المنتج (ر.س)"
+          "price": "سعر المنتج (ر.س)",
+          "driverPrice": "سعر السائق"
         },
         "fields": {
           "nameAr": {
@@ -661,7 +662,8 @@
           },
           "price": {
             "placeholder": "0.00"
-          }
+          },
+          "driverPrice": { "placeholder": "أدخل سعر السائق" }
         },
         "validation": {
           "nameArRequired": "اسم المنتج بالعربية مطلوب",

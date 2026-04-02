@@ -644,7 +644,8 @@
           "index": "#",
           "nameAr": "Product Name (Arabic)",
           "nameEn": "Product Name (English)",
-          "price": "Product Price (SAR)"
+          "price": "Product Price (SAR)",
+          "driverPrice": "Driver Price"
         },
         "fields": {
           "nameAr": {
@@ -655,6 +656,9 @@
           },
           "price": {
             "placeholder": "0.00"
+          },
+          "driverPrice": {
+            "placeholder": "Enter driver price"
           }
         },
         "validation": {

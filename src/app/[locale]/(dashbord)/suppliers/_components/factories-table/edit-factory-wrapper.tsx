@@ -28,6 +28,7 @@ export default async function EditFactoryWrapper({
       nameAr: p.name_ar,
       nameEn: p.name_en,
       price: String(p.price),
+      driver_price: String(p.driver_price),
       isActive: true,
     })),
   };

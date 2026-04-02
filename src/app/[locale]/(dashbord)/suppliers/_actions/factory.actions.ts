@@ -23,6 +23,7 @@ export async function addFactoryAction(data: FactoryDataFormValues) {
       name_en: p.nameEn,
       name_ar: p.nameAr,
       price: Number(p.price),
+      driver_price: Number(p.driver_price),
     })),
   };
 
@@ -31,7 +32,7 @@ export async function addFactoryAction(data: FactoryDataFormValues) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "management",
+      system_screen: "factory_permissions",
     },
     body: JSON.stringify(body),
   });
@@ -63,6 +64,7 @@ export async function editFactoryAction(
       name_en: p.nameEn,
       name_ar: p.nameAr,
       price: Number(p.price),
+      driver_price: Number(p.driver_price),
     })),
   };
 
@@ -71,7 +73,7 @@ export async function editFactoryAction(
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "management",
+      system_screen: "",
     },
     body: JSON.stringify(body),
   });

@@ -29,8 +29,15 @@ export default function ProductsManagement() {
         </h3>
         <Button
           type="button"
-          onClick={() =>
-            append({ nameAr: "", nameEn: "", price: "", isActive: true })
+          onClick={
+            () =>
+              append({
+                nameAr: "",
+                nameEn: "",
+                price: "",
+                driver_price: "",
+                isActive: true,
+              }) // ✅ أضفنا driver_price
           }
           className="min-w-46 min-h-12 rounded-xl bg-[#00A63E] text-white p-3 flex justify-center items-center gap-2"
         >
@@ -43,13 +50,18 @@ export default function ProductsManagement() {
         <NpProducts />
       ) : (
         <div className="border border-[#E5E7EB] rounded-xl bg-gray-50 overflow-hidden">
-          <div className="grid grid-cols-[48px_1fr_1fr_1fr_48px] gap-x-3 px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-600 text-right">
+          {/* ✅ عدّلنا grid-cols عشان نضيف عمود driver_price */}
+          <div className="grid grid-cols-[48px_1fr_1fr_1fr_1fr_48px] gap-x-3 px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-600 text-right">
             <div className="text-center">
               {t("addFactory.productsManagement.columns.index")}
             </div>
             <div>{t("addFactory.productsManagement.columns.nameAr")}</div>
             <div>{t("addFactory.productsManagement.columns.nameEn")}</div>
             <div>{t("addFactory.productsManagement.columns.price")}</div>
+            <div>
+              {t("addFactory.productsManagement.columns.driverPrice")}
+            </div>{" "}
+            {/* ✅ */}
             <div />
           </div>
 
@@ -57,7 +69,7 @@ export default function ProductsManagement() {
             {fields.map((field, index) => (
               <div
                 key={field.id}
-                className="grid grid-cols-[48px_1fr_1fr_1fr_48px] gap-x-3 px-4 py-3 items-center"
+                className="grid grid-cols-[48px_1fr_1fr_1fr_1fr_48px] gap-x-3 px-4 py-3 items-center" // ✅
               >
                 <div className="flex items-center justify-center">
                   <span className="w-7 h-7 rounded-full bg-[#00A63E]/10 text-[#00A63E] text-xs font-bold flex items-center justify-center">
@@ -114,6 +126,28 @@ export default function ProductsManagement() {
                   {errors?.products?.[index]?.price && (
                     <p className="text-red-500 text-xs mt-1">
                       {errors.products[index].price.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* ✅ حقل driver_price الجديد */}
+                <div>
+                  <Input
+                    type="number"
+                    min="0"
+                    placeholder={t(
+                      "addFactory.productsManagement.fields.driverPrice.placeholder",
+                    )}
+                    {...register(`products.${index}.driver_price`)}
+                    className={
+                      errors?.products?.[index]?.driver_price
+                        ? "border-red-500"
+                        : ""
+                    }
+                  />
+                  {errors?.products?.[index]?.driver_price && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.products[index].driver_price.message}
                     </p>
                   )}
                 </div>
