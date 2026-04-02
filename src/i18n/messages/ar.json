@@ -650,7 +650,8 @@
           "index": "#",
           "nameAr": "اسم المنتج (باللغة العربية)",
           "nameEn": "اسم المنتج (باللغة الإنجليزية)",
-          "price": "سعر المنتج (ر.س)"
+          "price": "سعر المنتج (ر.س)",
+          "driverPrice": "سعر السائق"
         },
         "fields": {
           "nameAr": {
@@ -661,7 +662,8 @@
           },
           "price": {
             "placeholder": "0.00"
-          }
+          },
+          "driverPrice": { "placeholder": "أدخل سعر السائق" }
         },
         "validation": {
           "nameArRequired": "اسم المنتج بالعربية مطلوب",
@@ -930,7 +932,6 @@
         "document": "مستند تسليم",
         "actions": "الإجراءات",
         "details": "تفاصيل"
-       
       },
       "deliverModal": {
         "title": "تأكيد تسليم مكافأة",
@@ -942,6 +943,19 @@
         "cancel": "الغاء",
         "confirm": "إضافة",
         "uploaded": "تم الرفع"
+      },
+      "ordersModal": {
+        "title": "تفاصيل مكافآت السائق",
+        "index": "#",
+        "orderId": "رقم الطلب",
+        "totalPrice": "إجمالي السعر",
+        "bonus": "المكافأة",
+        "document": "مستند تسليم",
+        "bonusStatus": "حالة المكافأة",
+        "bonusDate": "تاريخ المكافأة",
+        "actions": "الإجراءات",
+        "delivered": "تم التسليم",
+        "deliver": "تسليم"
       }
     }
   }

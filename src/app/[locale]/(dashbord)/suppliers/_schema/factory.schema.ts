@@ -53,6 +53,17 @@ export const factoryDataSchema = (t: (key: string) => string) =>
                 "addFactory.productsManagement.validation.priceInvalid",
               ),
             }),
+          driver_price: z
+            .string()
+            .min(
+              1,
+              t("addFactory.productsManagement.validation.driverPriceRequired"),
+            )
+            .refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
+              message: t(
+                "addFactory.productsManagement.validation.driverPriceInvalid",
+              ),
+            }),
           isActive: z.boolean(),
         }),
       )

@@ -12,7 +12,7 @@ export async function getFactories(
   const res = await fetch(`${API_URL}/factories`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "management",
+      system_screen: "factories_permissions",
       lang,
     },
     next: { tags: ["factories"] },

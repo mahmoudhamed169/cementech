@@ -21,6 +21,7 @@ interface FactoryDialogProps {
   factoryId?: string;
   defaultValues?: Partial<FactoryDataFormValues>;
   trigger?: React.ReactNode;
+  
 }
 
 export default function FactoryDialog({
