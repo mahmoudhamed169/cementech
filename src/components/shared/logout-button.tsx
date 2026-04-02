@@ -13,7 +13,8 @@ export default function LogoutButton() {
 
   async function handleLogout() {
     toast.success(tToast("logoutSuccess"));
-    await signOut({ callbackUrl: `/${defaultLocale}/login` });
+    await signOut({ redirect: false });
+    window.location.href = `/${defaultLocale}/login`;
   }
 
   return (
