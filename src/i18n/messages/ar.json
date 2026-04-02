@@ -333,7 +333,8 @@
       "free": "متاح",
       "offline": "غير متصل",
       "pending": "معلق",
-      "blocked": "محظور"
+      "blocked": "محظور",
+      "waiting_order": "انتظار طلب"
     },
     "loadingStatus": {
       "loaded": "محمل",

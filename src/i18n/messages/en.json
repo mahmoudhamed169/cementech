@@ -327,7 +327,8 @@
       "free": "Free",
       "offline": "Offline",
       "pending": "Pending",
-      "blocked": "Blocked"
+      "blocked": "Blocked" , 
+      "waiting_order": "Waiting for Order"
     },
     "loadingStatus": {
       "loaded": "Loaded",
