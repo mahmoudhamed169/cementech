@@ -5,7 +5,6 @@ import DriverDocumentsSection from "./_components/driver-documents-section";
 import { fetchDriver } from "@/src/lib/services/driver-profile";
 import { DriverProfile } from "@/src/lib/types/driver";
 import DriverActions from "./_components/driver-actions";
-import DriverOrder from "./_components/driver-order";
 import UserOrders from "../../users/[id]/_components/user-order";
 
 interface Props {

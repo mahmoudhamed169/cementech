@@ -54,7 +54,7 @@ export default function InvoicesTableBody({
           {/* actions */}
           <TableCell className="text-center">
             <div className="flex items-center justify-center gap-2">
-              <InvoiceModalContent />
+              <InvoiceModalContent id={item.id} />
             </div>
           </TableCell>
         </TableRow>

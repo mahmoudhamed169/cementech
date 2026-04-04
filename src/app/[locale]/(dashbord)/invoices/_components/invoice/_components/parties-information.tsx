@@ -1,3 +1,4 @@
+import { InvoiceDetails } from "@/src/lib/types/invoices/invoice-details";
 import React from "react";
 
 // Reusable Info Item
@@ -36,7 +37,11 @@ function InfoCard({
 }
 
 // Main Component
-export default function PartiesInformation() {
+export default function PartiesInformation({
+  invoice,
+}: {
+  invoice: InvoiceDetails;
+}) {
   return (
     <div className="flex gap-6 info-card-container">
       {/* Supplier */}
@@ -63,19 +68,22 @@ export default function PartiesInformation() {
         title="تفاصيل المستلم"
         footer={
           <>
-            <InfoItem label="الرقم الضريبي" value="50070006000" />
-            <InfoItem label="رقم الجوال" value="0500700060" />
+            <InfoItem
+              label="الرقم الضريبي"
+              value={invoice.recipient_tax_id ?? "-"}
+            />
+            <InfoItem
+              label="رقم الجوال"
+              value={invoice.customer_phone ?? "-"}
+            />
           </>
         }
       >
         <div className="grid grid-cols-2 gap-4">
-          <InfoItem label="الاسم " value="محمد شهاب الدين" />
-          <InfoItem label="اسم المؤسسة" value="الحمد للإنشاءات" />
-          <InfoItem label="ID رقم" value="USR-120032" />
-          <InfoItem
-            label="العنوان"
-            value="الرياض - تقسيم الولاء - شارع ابو بكر"
-          />
+          <InfoItem label="الاسم " value={invoice.customer_name} />
+          <InfoItem label="اسم المؤسسة" value={invoice.company_name ?? "-"} />
+          <InfoItem label="ID رقم" value={invoice.customer_id_display ?? "-"} />
+          <InfoItem label="العنوان" value={invoice.address_name?? "-"} />
         </div>
       </InfoCard>
     </div>
