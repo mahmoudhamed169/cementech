@@ -5,16 +5,22 @@ import DriverDocumentsSection from "./_components/driver-documents-section";
 import { fetchDriver } from "@/src/lib/services/driver-profile";
 import { DriverProfile } from "@/src/lib/types/driver";
 import DriverActions from "./_components/driver-actions";
+import DriverOrder from "./_components/driver-order";
+import UserOrders from "../../users/[id]/_components/user-order";
 
 interface Props {
   params: Promise<{
     locale: string;
     id: string;
   }>;
+  searchParams: Promise<{
+    page?: string; // ✅ بدل orderPage
+  }>;
 }
 
-export default async function page({ params }: Props) {
+export default async function page({ params, searchParams }: Props) {
   const { id } = await params;
+  const { page } = await searchParams;
 
   const driver: DriverProfile = await fetchDriver(id);
 
@@ -51,6 +57,10 @@ export default async function page({ params }: Props) {
         carLicense={driver.car_license}
         carInsurance={driver.car_insurance}
       />
+
+      {/* <DriverOrder driverId={id} page={page ? Number(page) : 1} /> */}
+
+      <UserOrders userId={id} page={page ? Number(page) : 1} />
 
       {/*  driver actions */}
       <DriverActions driver={driver} />
