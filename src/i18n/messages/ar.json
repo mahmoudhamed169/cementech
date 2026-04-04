@@ -373,7 +373,8 @@
       "driverLicense": "رخصة القيادة",
       "carLicense": "استمارة المركبة",
       "carInsurance": "وثيقة التأمين",
-      "download": "تحميل"
+      "download": "تحميل",
+      "preview": "معاينة المستند"
     },
     "documentStatus": {
       "accepted": "موثق",
