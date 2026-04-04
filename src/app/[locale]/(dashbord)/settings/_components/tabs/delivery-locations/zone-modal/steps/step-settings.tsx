@@ -28,15 +28,29 @@ export default function StepSettings({ formData, onUpdate }: Props) {
       <div className="grid grid-cols-2 gap-6">
         {/* Form */}
         <div className="space-y-4">
+          {/* name_ar */}
           <div className="space-y-2">
-            <Label>{t("zoneName")}</Label>
+            <Label>{t("zoneNameAr")}</Label>
             <Input
-              value={formData.name}
-              onChange={(e) => onUpdate("name", e.target.value)}
-              placeholder={t("zoneNamePlaceholder")}
+              value={formData.name_ar}
+              onChange={(e) => onUpdate("name_ar", e.target.value)}
+              placeholder={t("zoneNameArPlaceholder")}
+              dir="rtl"
             />
           </div>
 
+          {/* name_en */}
+          <div className="space-y-2">
+            <Label>{t("zoneNameEn")}</Label>
+            <Input
+              value={formData.name_en}
+              onChange={(e) => onUpdate("name_en", e.target.value)}
+              placeholder={t("zoneNameEnPlaceholder")}
+              dir="ltr"
+            />
+          </div>
+
+          {/* Radius */}
           <div className="space-y-3">
             <Label>
               {t("radius")} ({t("km")})

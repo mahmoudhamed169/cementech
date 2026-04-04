@@ -464,10 +464,9 @@
 
         "cancel": "Cancel",
         "messages": {
-    "success": "Request accepted successfully",
-    "error": "An error occurred while accepting the request"
-  }
-       
+          "success": "Request accepted successfully",
+          "error": "An error occurred while accepting the request"
+        }
       }
     },
     "detailsPage": {
@@ -732,12 +731,12 @@
   "settingsPage": {
     "header": {
       "title": "System Settings",
-      "subtitle": "Configure core system settings and system parameters"
+      "subtitle": "Configure core system settings and parameters"
     },
     "tabs": {
       "payment": {
         "trigger": "Payment Methods",
-        "title": "Select Payment Methods",
+        "title": "Define Payment Methods",
         "subtitle": "Enable or disable payment methods available to customers",
         "methods": {
           "cod": "Cash on Delivery",
@@ -749,22 +748,29 @@
       },
       "delivery": {
         "trigger": "Delivery Locations",
-        "title": "Service Zones",
+        "title": "Service Areas",
         "subtitle": "Manage delivery zones and coverage areas",
         "addZone": "Add Zone",
-        "edit": "Edit",
         "empty": "No delivery zones added yet",
-
+        "edit": "Edit",
+        "errorLoading": "An error occurred while loading zones, please try again",
         "table": {
           "zone": "Zone",
           "radius": "Coverage Radius",
           "status": "Status",
           "actions": "Actions"
         },
+        "deleteDialog": {
+          "title": "Delete Zone",
+          "description": "Zone",
+          "descriptionSuffix": "will be permanently deleted and this action cannot be undone.",
+          "cancel": "Cancel",
+          "confirm": "Delete Zone"
+        },
         "modal": {
           "cancel": "Cancel",
           "back": "Back",
-          "next": "Continue",
+          "next": "Next",
           "save": "Save Zone",
           "update": "Update Zone",
           "steps": {
@@ -780,8 +786,10 @@
           "stepSettings": {
             "title": "Zone Settings",
             "subtitle": "Set the zone name and coverage radius",
-            "zoneName": "Zone Name",
-            "zoneNamePlaceholder": "e.g. Riyadh - Al Zahraa",
+            "zoneNameAr": "Zone Name (Arabic)",
+            "zoneNameArPlaceholder": "Example: Riyadh - Al Zahraa",
+            "zoneNameEn": "Zone Name (English)",
+            "zoneNameEnPlaceholder": "Example: Riyadh - Al Zahraa",
             "radius": "Coverage Radius",
             "km": "km",
             "mapPreview": "Coverage Preview",
@@ -791,7 +799,8 @@
             "title": "Review & Confirm",
             "subtitle": "Verify the data before saving",
             "summary": "Zone Summary",
-            "zoneName": "Zone Name",
+            "zoneNameAr": "Zone Name (Arabic)",
+            "zoneNameEn": "Zone Name (English)",
             "location": "Selected Location",
             "radius": "Coverage Radius",
             "km": "km",
@@ -802,10 +811,10 @@
       },
       "pricing": {
         "trigger": "Pricing & Commission",
-        "title": "Set Pricing",
-        "subtitle": "Define base prices and commission rates",
+        "title": "Define Pricing",
+        "subtitle": "Set base prices and commission rates",
         "fields": {
-          "pricePerKm": "Price per KM",
+          "pricePerKm": "Price per km",
           "commission": "Commission Rate",
           "cancellationFee": "Cancellation Fee"
         },

@@ -1,14 +1,19 @@
 "use client";
 
+"use client";
+
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { useTranslations } from "next-intl";
+import { DeliveryZone } from "../index"; // ✅ ضيف الـ import ده
+
+import ModalFooter from "./shared/modal-footer";
 import { useZoneModal } from "./use-zone-modal";
 import StepIndicator from "./shared/step-indicator";
-import ModalFooter from "./shared/modal-footer";
 import StepLocation from "./steps/step-location";
 import StepSettings from "./steps/step-settings";
 import StepReview from "./steps/step-review";
-import { DeliveryZone } from "../index";
+import { useAddDeliveryLocation } from "../../../../_hooks/delivery/use-add-delivery-location";
+import { useUpdateDeliveryLocation } from "../../../../_hooks/delivery/use-update-delivery-location";
 
 type Props = {
   mode: "add" | "edit";
@@ -37,16 +42,61 @@ export default function ZoneModal({
     isStepValid,
   } = useZoneModal({ mode, zone });
 
-  const handleSave = () => {
-    onSave({
-      id: zone?.id ?? crypto.randomUUID(),
-      name: formData.name,
-      radius: formData.radius,
-      lat: formData.lat,
-      lng: formData.lng,
-      enabled: zone?.enabled ?? true,
-    });
-    onClose();
+  const { mutateAsync: addZone, isPending: isAdding } =
+    useAddDeliveryLocation();
+  const { mutateAsync: updateZone, isPending: isUpdating } =
+    useUpdateDeliveryLocation();
+
+  const isPending = isAdding || isUpdating;
+
+  const handleSave = async () => {
+    try {
+      if (isEdit) {
+        const res = await updateZone({
+          id: zone!.id,
+          input: {
+            name_ar: formData.name_ar,
+            name_en: formData.name_en,
+            lat: formData.lat,
+            lng: formData.lng,
+            radius: formData.radius,
+            is_active: zone!.enabled,
+          },
+        });
+
+        onSave({
+          id: res.data.id,
+          name_ar: res.data.name_ar,
+          name_en: res.data.name_en,
+          radius: res.data.radius,
+          lat: res.data.lat,
+          lng: res.data.lng,
+          enabled: res.data.is_active,
+        });
+      } else {
+        const res = await addZone({
+          name_ar: formData.name_ar,
+          name_en: formData.name_en,
+          lat: formData.lat,
+          lng: formData.lng,
+          radius: formData.radius,
+        });
+
+        onSave({
+          id: res.data.id,
+          name_ar: res.data.name_ar,
+          name_en: res.data.name_en,
+          radius: res.data.radius,
+          lat: res.data.lat,
+          lng: res.data.lng,
+          enabled: res.data.is_active,
+        });
+      }
+
+      onClose();
+    } catch {
+      // toast handled in hook
+    }
   };
 
   return (
@@ -77,6 +127,7 @@ export default function ZoneModal({
           totalSteps={totalSteps}
           isStepValid={isStepValid(step)}
           isEdit={isEdit}
+          isPending={isPending}
           onNext={next}
           onBack={back}
           onCancel={onClose}

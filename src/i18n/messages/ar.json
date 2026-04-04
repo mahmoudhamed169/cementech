@@ -755,11 +755,19 @@
         "addZone": "إضافة منطقة",
         "empty": "لا توجد مناطق توصيل مضافة",
         "edit": "تعديل",
+        "errorLoading": "حدث خطأ أثناء تحميل المناطق، يرجى المحاولة مرة أخرى",
         "table": {
           "zone": "المنطقة",
           "radius": "نصف قطر التغطية",
           "status": "الحالة",
           "actions": "الإجراءات"
+        },
+        "deleteDialog": {
+          "title": "حذف المنطقة",
+          "description": "سيتم حذف منطقة",
+          "descriptionSuffix": "نهائياً ولا يمكن التراجع عن هذا الإجراء.",
+          "cancel": "إلغاء",
+          "confirm": "حذف المنطقة"
         },
         "modal": {
           "cancel": "إلغاء",
@@ -780,8 +788,10 @@
           "stepSettings": {
             "title": "إعدادات المنطقة",
             "subtitle": "حدد اسم المنطقة ونطاق التغطية",
-            "zoneName": "اسم المنطقة",
-            "zoneNamePlaceholder": "مثال: الرياض - حي الزهراء",
+            "zoneNameAr": "اسم المنطقة (عربي)",
+            "zoneNameArPlaceholder": "مثال: الرياض - حي الزهراء",
+            "zoneNameEn": "اسم المنطقة (إنجليزي)",
+            "zoneNameEnPlaceholder": "Example: Riyadh - Al Zahraa",
             "radius": "نصف قطر التغطية",
             "km": "كم",
             "mapPreview": "معاينة نطاق التغطية",
@@ -791,7 +801,8 @@
             "title": "المراجعة والتأكيد",
             "subtitle": "تحقق من البيانات قبل الحفظ",
             "summary": "ملخص المنطقة",
-            "zoneName": "اسم المنطقة",
+            "zoneNameAr": "اسم المنطقة (عربي)",
+            "zoneNameEn": "اسم المنطقة (إنجليزي)",
             "location": "الموقع المحدد",
             "radius": "نصف قطر التغطية",
             "km": "كم",
