@@ -7,6 +7,7 @@ import AddZoneButton from "./add-zone-button";
 import EmptyZones from "./empty-zones";
 import ZoneModal from "./zone-modal";
 import { useDeliveryLocations } from "../../../_hooks/delivery/use-delivery-locations";
+import { Loader2 } from "lucide-react";
 
 export type DeliveryZone = {
   id: string;
@@ -22,8 +23,6 @@ export default function DeliveryLocationsTab() {
   const t = useTranslations("settingsPage.tabs.delivery");
 
   const { data, isLoading, isError } = useDeliveryLocations();
-
-  console.log("🚀 DeliveryLocationsTab", { data, isLoading, isError });
 
   const zones: DeliveryZone[] = (data?.data ?? []).map((loc) => ({
     id: loc.id,
@@ -65,10 +64,10 @@ export default function DeliveryLocationsTab() {
             <p className="text-sm text-gray-500">{t("subtitle")}</p>
           </div>
         </div>
-        <div className="rounded-xl border border-gray-100 overflow-hidden animate-pulse">
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="h-14 bg-gray-50 border-b border-gray-100" />
-          ))}
+
+        <div className="rounded-xl border border-gray-100 py-16 flex flex-col items-center justify-center gap-3">
+          <Loader2 size={28} className="text-gray-400 animate-spin" />{" "}
+          <p className="text-sm text-gray-400">{t("loading")}</p>
         </div>
       </div>
     );

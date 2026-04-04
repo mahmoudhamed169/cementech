@@ -750,6 +750,7 @@
         "trigger": "Delivery Locations",
         "title": "Service Areas",
         "subtitle": "Manage delivery zones and coverage areas",
+        "loading": "Loading zones...",
         "addZone": "Add Zone",
         "empty": "No delivery zones added yet",
         "edit": "Edit",
@@ -813,10 +814,12 @@
         "trigger": "Pricing & Commission",
         "title": "Define Pricing",
         "subtitle": "Set base prices and commission rates",
+        "loading": "Loading pricing data...",
         "fields": {
           "pricePerKm": "Price per km",
           "commission": "Commission Rate",
-          "cancellationFee": "Cancellation Fee"
+          "cancellationFee": "Cancellation Fee",
+          "bankPercentage": "Bank Percentage"
         },
         "save": "Save Settings"
       }
