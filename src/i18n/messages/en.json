@@ -367,7 +367,8 @@
       "driverLicense": "Driver License",
       "carLicense": "Vehicle Registration",
       "carInsurance": "Insurance Document",
-      "download": "Download"
+      "download": "Download",
+      "preview": "Preview Document"
     },
     "documentStatus": {
       "accepted": "Verified",
