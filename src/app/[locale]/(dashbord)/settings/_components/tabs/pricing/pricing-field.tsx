@@ -1,20 +1,19 @@
 "use client";
 
+import { UseFormRegisterReturn } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 type PricingFieldProps = {
   label: string;
   unit: string;
-  value: number;
-  onChange: (value: string) => void;
+  registration: UseFormRegisterReturn;
 };
 
 export default function PricingField({
   label,
   unit,
-  value,
-  onChange,
+  registration,
 }: PricingFieldProps) {
   return (
     <div className="space-y-2">
@@ -22,12 +21,7 @@ export default function PricingField({
         {label}
         <span className="text-gray-400">({unit})</span>
       </Label>
-      <Input
-        type="number"
-        step="0.01"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      />
+      <Input type="number" step="0.01" {...registration} />
     </div>
   );
 }
