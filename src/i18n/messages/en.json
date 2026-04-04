@@ -375,6 +375,21 @@
       "approved": "Verified",
       "pending": "Under Review",
       "rejected": "Rejected"
+    },
+    "driverOrderTable": {
+      "title": "Orders History",
+      "colums": {
+        "index": "#",
+        "orderNumber": "Order Number",
+        "data": "Order Date",
+        "quantity": "Quantity",
+        "orderState": "Order Status",
+        "actions": "Actions"
+      },
+      "empty": {
+        "title": "No orders found for this driver",
+        "description": "Driver orders will appear here once they start delivering."
+      }
     }
   },
   "loadingRequestsPage": {

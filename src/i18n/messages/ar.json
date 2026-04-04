@@ -381,6 +381,21 @@
       "approved": "موثق",
       "pending": "قيد المراجعة",
       "rejected": "مرفوض"
+    },
+    "driverOrderTable": {
+      "title": "تاريخ التوصيلات",
+      "colums": {
+        "index": "#",
+        "orderNumber": "رقم الطلب",
+        "data": "تاريخ الطلب",
+        "quantity": "الكمية",
+        "orderState": "حالة الطلب",
+        "actions": "الإجراءات"
+      },
+      "empty": {
+        "title": "لا توجد توصيلات",
+        "description": "ستظهر التوصيلات هنا بمجرد إنشائها."
+      }
     }
   },
   "loadingRequestsPage": {
