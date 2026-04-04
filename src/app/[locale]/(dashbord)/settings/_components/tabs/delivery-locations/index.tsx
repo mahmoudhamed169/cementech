@@ -6,53 +6,40 @@ import DeliveryZoneRow from "./delivery-zone-row";
 import AddZoneButton from "./add-zone-button";
 import EmptyZones from "./empty-zones";
 import ZoneModal from "./zone-modal";
+import { useDeliveryLocations } from "../../../_hooks/delivery/use-delivery-locations";
 
 export type DeliveryZone = {
   id: string;
-  name: string;
+  name_ar: string;
+  name_en: string;
   radius: number;
   lat: number;
   lng: number;
   enabled: boolean;
 };
 
-const defaultZones: DeliveryZone[] = [
-  {
-    id: "1",
-    name: "الرياض - حي الجوف",
-    radius: 10,
-    lat: 24.6084,
-    lng: 46.6594,
-    enabled: true,
-  },
-  {
-    id: "2",
-    name: "الرياض - حي الزرقاء",
-    radius: 15,
-    lat: 24.7136,
-    lng: 46.6753,
-    enabled: false,
-  },
-  {
-    id: "3",
-    name: "الرياض - حي الوادي",
-    radius: 20,
-    lat: 24.6877,
-    lng: 46.7219,
-    enabled: true,
-  },
-];
-
 export default function DeliveryLocationsTab() {
   const t = useTranslations("settingsPage.tabs.delivery");
-  const [zones, setZones] = useState<DeliveryZone[]>(defaultZones);
+
+  const { data, isLoading, isError } = useDeliveryLocations();
+
+  console.log("🚀 DeliveryLocationsTab", { data, isLoading, isError });
+
+  const zones: DeliveryZone[] = (data?.data ?? []).map((loc) => ({
+    id: loc.id,
+    name_ar: loc.name_ar,
+    name_en: loc.name_en,
+    radius: loc.radius,
+    lat: loc.lat,
+    lng: loc.lng,
+    enabled: loc.is_active,
+  }));
+
   const [modalOpen, setModalOpen] = useState(false);
   const [editZone, setEditZone] = useState<DeliveryZone | undefined>();
 
   const handleToggle = (id: string, value: boolean) => {
-    setZones((prev) =>
-      prev.map((z) => (z.id === id ? { ...z, enabled: value } : z)),
-    );
+    // TODO: PATCH API call
   };
 
   const handleAdd = () => {
@@ -66,12 +53,42 @@ export default function DeliveryLocationsTab() {
   };
 
   const handleSave = (zone: DeliveryZone) => {
-    setZones((prev) =>
-      prev.find((z) => z.id === zone.id)
-        ? prev.map((z) => (z.id === zone.id ? zone : z))
-        : [...prev, zone],
-    );
+    // TODO: invalidate query
   };
+
+  if (isLoading) {
+    return (
+      <div className="space-y-4">
+        <div className="flex items-start justify-between">
+          <div className="text-start">
+            <h3 className="text-base font-bold text-gray-800">{t("title")}</h3>
+            <p className="text-sm text-gray-500">{t("subtitle")}</p>
+          </div>
+        </div>
+        <div className="rounded-xl border border-gray-100 overflow-hidden animate-pulse">
+          {[...Array(3)].map((_, i) => (
+            <div key={i} className="h-14 bg-gray-50 border-b border-gray-100" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="space-y-4">
+        <div className="flex items-start justify-between">
+          <div className="text-start">
+            <h3 className="text-base font-bold text-gray-800">{t("title")}</h3>
+            <p className="text-sm text-gray-500">{t("subtitle")}</p>
+          </div>
+        </div>
+        <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-6 text-center text-sm text-red-500">
+          {t("errorLoading")}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">

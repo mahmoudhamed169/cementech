@@ -6,6 +6,7 @@ export interface FactoryProduct {
   name_en: string;
   name_ar: string;
   price: number;
+  driver_price: number;
 }
 
 export interface FactoryDetails {
