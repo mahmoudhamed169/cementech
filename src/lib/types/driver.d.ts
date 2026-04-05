@@ -16,7 +16,7 @@ export interface DriverProfile {
   driver_license_back: string;
   national_id_front: string;
   national_id_back: string;
-
+  national_id: string;
   car_type: "cement_truck" | string;
   car_hold_capacity: number;
   car_plate_number: string;
