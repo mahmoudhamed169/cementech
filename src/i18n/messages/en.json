@@ -869,13 +869,16 @@
       "saveDraft": "Save as Draft",
       "publishSuccess": "Changes published successfully",
       "draftSuccess": "Draft saved successfully",
-      "error": "Something went wrong, please try again"
+      "error": "Something went wrong, please try again",
+      "draftConfirmTitle": "Convert policy to draft?",
+      "draftConfirmDesc": "This will change the current policy from published to draft and may affect active users. Are you sure?",
+      "draftConfirmCancel": "Cancel",
+      "draftConfirmOk": "Yes, save as draft"
     },
     "tabs": {
       "terms_conditions": "Terms & Conditions",
       "privacy_policy": "Privacy Policy"
     },
-  
 
     "category": {
       "title": "Category",

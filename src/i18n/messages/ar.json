@@ -871,7 +871,11 @@
       "saveDraft": "حفظ كمسودة",
       "publishSuccess": "تم نشر التحديثات بنجاح",
       "draftSuccess": "تم حفظ المسودة بنجاح",
-      "error": "حدث خطأ، يرجى المحاولة مرة أخرى"
+      "error": "حدث خطأ، يرجى المحاولة مرة أخرى",
+      "draftConfirmTitle": "تحويل الـ policy إلى مسودة؟",
+      "draftConfirmDesc": "هذا سيحول الـ policy الحالية من منشورة إلى مسودة وقد يؤثر على المستخدمين النشطين. هل أنت متأكد؟",
+      "draftConfirmCancel": "إلغاء",
+      "draftConfirmOk": "نعم، احفظ كمسودة"
     },
     "tabs": {
       "terms_conditions": "الشروط والأحكام",

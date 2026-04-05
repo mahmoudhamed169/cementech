@@ -12,6 +12,16 @@ import TermsVersionInfo from "./terms-version-info";
 import TermsAlert from "./terms-alert";
 import TermsEditor from "./terms-editor";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 import { updatePolicyAction } from "../_actions/update-policy-action";
 
@@ -20,8 +30,6 @@ interface TermsFormProps {
 }
 
 type LangTab = "ar" | "en";
-
-// مفتاح فريد لكل مجموعة محتوى: type-target-lang
 type ContentKey = `${TermsPolicyType}-${TermsTarget}-${"ar" | "en"}`;
 
 function makeKey(
@@ -70,12 +78,13 @@ export default function TermsForm({ policies }: TermsFormProps) {
   const [activeTarget, setActiveTarget] = useState<TermsTarget>("customer");
   const [activeLang, setActiveLang] = useState<LangTab>("ar");
   const [isPending, startTransition] = useTransition();
+  const [showDraftConfirm, setShowDraftConfirm] = useState(false);
 
   const [contents, setContents] = useState<Record<ContentKey, string>>(() =>
     buildInitialContent(policies),
   );
 
-  // مزامنة الـ state مع الـ policies بعد revalidatePath
+  // مزامنة مع الـ policies بعد revalidatePath
   useEffect(() => {
     setContents(buildInitialContent(policies));
   }, [policies]);
@@ -91,7 +100,8 @@ export default function TermsForm({ policies }: TermsFormProps) {
     setContents((prev) => ({ ...prev, [currentKey]: value }));
   };
 
-  const handleSave = (status: "published" | "draft") => {
+  // الـ API call المشترك بين publish و draft
+  const executeSave = (status: "published" | "draft") => {
     if (!activePolicy) return;
 
     startTransition(async () => {
@@ -115,81 +125,122 @@ export default function TermsForm({ policies }: TermsFormProps) {
     });
   };
 
+  // لو الـ policy published → اظهر confirmation، غير كده احفظ مباشرة
+  const handleSaveDraft = () => {
+    if (!activePolicy) return;
+    if (activePolicy.status === "published") {
+      setShowDraftConfirm(true);
+    } else {
+      executeSave("draft");
+    }
+  };
+
+  const handlePublish = () => executeSave("published");
+
   return (
-    <div className="space-y-5">
-      {/* Policy Type Tabs */}
-      <div className="flex items-center gap-1 bg-gray-100 rounded-xl p-1 w-fit">
-        {policyTypeTabs.map(({ value }) => (
-          <button
-            key={value}
-            onClick={() => setActiveType(value)}
-            className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${
-              activeType === value
-                ? "bg-white text-[#101828] shadow-sm font-semibold"
-                : "text-gray-400 hover:text-gray-600"
-            }`}
-          >
-            {tTabs(value)}
-          </button>
-        ))}
-      </div>
-
-      {/* Main Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Sidebar */}
-        <div className="space-y-4">
-          <TermsCategorySelect
-            activeTarget={activeTarget}
-            onChange={setActiveTarget}
-          />
-          <TermsVersionInfo policy={activePolicy} />
-          <div className="space-y-2">
-            <Button
-              className="w-full h-12 bg-[#155DFC] hover:bg-[#193CB8] text-white font-medium"
-              onClick={() => handleSave("published")}
-              disabled={isPending}
+    <>
+      {/* Confirmation Dialog */}
+      <AlertDialog open={showDraftConfirm} onOpenChange={setShowDraftConfirm}>
+        <AlertDialogContent className="bg-white border-none">
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("draftConfirmTitle")}</AlertDialogTitle>
+            <AlertDialogDescription>
+              {t("draftConfirmDesc")}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("draftConfirmCancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-amber-500 hover:bg-amber-600 text-white"
+              onClick={() => {
+                setShowDraftConfirm(false);
+                executeSave("draft");
+              }}
             >
-              ✓ {t("publish")}
-            </Button>
-            <Button
-              variant="outline"
-              className="w-full h-12 font-medium border-gray-300"
-              onClick={() => handleSave("draft")}
-              disabled={isPending}
-            >
-              {t("saveDraft")}
-            </Button>
-          </div>
-        </div>
+              {t("draftConfirmOk")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
 
-        {/* Editor */}
-        <div className="lg:col-span-2 space-y-4">
-          {/* Lang Tabs */}
-          <div className="flex items-center gap-1 bg-gray-100 rounded-xl p-1 w-fit">
-            {(["ar", "en"] as LangTab[]).map((lang) => (
+      <div className="space-y-5">
+        {/* Policy Type Tabs — Cards style */}
+        <div className="flex items-center gap-3">
+          {policyTypeTabs.map(({ value }) => {
+            const isActive = activeType === value;
+            return (
               <button
-                key={lang}
-                onClick={() => setActiveLang(lang)}
-                className={`px-5 py-1.5 rounded-lg text-sm font-medium transition-all ${
-                  activeLang === lang
-                    ? "bg-white text-[#101828] shadow-sm font-semibold"
-                    : "text-gray-400 hover:text-gray-600"
+                key={value}
+                onClick={() => setActiveType(value)}
+                className={`relative px-5 py-2.5 rounded-xl text-sm font-medium border transition-all ${
+                  isActive
+                    ? "bg-white border-[#155DFC] text-[#155DFC] shadow-sm"
+                    : "bg-gray-50 border-gray-200 text-gray-400 hover:border-gray-300 hover:text-gray-600"
                 }`}
               >
-                {lang === "ar" ? "العربية" : "English"}
+                {tTabs(value)}
               </button>
-            ))}
+            );
+          })}
+        </div>
+
+        {/* Main Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Sidebar */}
+          <div className="space-y-4">
+            <TermsCategorySelect
+              activeTarget={activeTarget}
+              onChange={setActiveTarget}
+            />
+            <TermsVersionInfo policy={activePolicy} />
+            <div className="space-y-2">
+              <Button
+                className="w-full h-12 bg-[#155DFC] hover:bg-[#193CB8] text-white font-medium"
+                onClick={handlePublish}
+                disabled={isPending}
+              >
+                ✓ {t("publish")}
+              </Button>
+              <Button
+                variant="outline"
+                className="w-full h-12 font-medium border-gray-300"
+                onClick={handleSaveDraft}
+                disabled={isPending}
+              >
+                {t("saveDraft")}
+              </Button>
+            </div>
           </div>
 
-          <TermsEditor
-            key={`${activeType}-${activeTarget}-${activeLang}`}
-            content={currentContent}
-            onChange={handleContentChange}
-            dir={activeLang === "ar" ? "rtl" : "ltr"}
-          />
-          <TermsAlert />
+          {/* Editor */}
+          <div className="lg:col-span-2 space-y-4">
+            {/* Lang Tabs */}
+            <div className="flex items-center gap-1 bg-gray-100 rounded-xl p-1 w-fit">
+              {(["ar", "en"] as LangTab[]).map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => setActiveLang(lang)}
+                  className={`px-5 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    activeLang === lang
+                      ? "bg-white text-[#101828] shadow-sm font-semibold"
+                      : "text-gray-400 hover:text-gray-600"
+                  }`}
+                >
+                  {lang === "ar" ? "العربية" : "English"}
+                </button>
+              ))}
+            </div>
+
+            <TermsEditor
+              key={`${activeType}-${activeTarget}-${activeLang}`}
+              content={currentContent}
+              onChange={handleContentChange}
+              dir={activeLang === "ar" ? "rtl" : "ltr"}
+            />
+            <TermsAlert />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
