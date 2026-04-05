@@ -595,6 +595,11 @@
       "title": "Factories",
       "search": {
         "placeholder": "Search by factory number or name..."
+      },
+      "filter": {
+        "all": "All",
+        "active": "Active",
+        "inactive": "Inactive"
       }
     },
     "table": {

@@ -599,6 +599,11 @@
       "title": "المصانع",
       "search": {
         "placeholder": "ابحث عن رقم او اسم المصنع..."
+      },
+      "filter": {
+        "all": "الكل",
+        "active": "نشط",
+        "inactive": "غير نشط"
       }
     },
     "table": {

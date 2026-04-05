@@ -4,16 +4,32 @@ import { Table } from "@/components/ui/table";
 import TableLoadingSpinner from "@/src/components/shared/table-loading";
 import FacotoriesTableWrapper from "./facotories-table-wrapper";
 
-export default function FactoriesTable() {
+interface Props {
+  page: number;
+  limit: number;
+  search: string;
+  is_active?: boolean;
+}
+
+export default function FactoriesTable({
+  page,
+  limit,
+  search,
+  is_active,
+}: Props) {
   return (
     <Table>
-      {/* Header */}
       <FactoriesTableHead />
-
-      {/* body */}
-
-      <Suspense fallback={<TableLoadingSpinner colSpan={9} />}>
-        <FacotoriesTableWrapper />
+      <Suspense
+        key={`${page}-${search}-${is_active}`}
+        fallback={<TableLoadingSpinner colSpan={9} />}
+      >
+        <FacotoriesTableWrapper
+          page={page}
+          limit={limit}
+          search={search}
+          is_active={is_active}
+        />
       </Suspense>
     </Table>
   );
