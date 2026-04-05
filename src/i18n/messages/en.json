@@ -612,6 +612,10 @@
         "productsCount": "Products Count",
         "status": "Status",
         "actions": "Actions"
+      },
+      "empty": {
+        "title": "No factories found",
+        "description": "Factories will appear here once they are added."
       }
     },
     "editFactory": {

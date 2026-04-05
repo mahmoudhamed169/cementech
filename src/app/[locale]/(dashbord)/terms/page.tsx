@@ -23,6 +23,6 @@ async function getTermsData(token: string): Promise<TermsPolicy[]> {
 export default async function TermsPage() {
   const session = await getServerSession(authOptions);
   const policies = await getTermsData(session?.user.accessToken ?? "");
-  console.log(policies);
+
   return <TermsForm policies={policies} />;
 }
