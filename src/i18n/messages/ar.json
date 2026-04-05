@@ -357,7 +357,8 @@
       "documentStatus": "حالة الوثائق",
       "plateNumber": "رقم لوحة السيارة",
       "joiningDate": "تاريخ الانضمام",
-      "backToDrivers": "السائقين"
+      "backToDrivers": "السائقين",
+      "nationalId": "رقم الهوية / الإقامة"
     },
 
     "driverStats": {
