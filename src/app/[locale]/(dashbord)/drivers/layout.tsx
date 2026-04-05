@@ -9,7 +9,7 @@ export default async function layout({
 }: {
   children: React.ReactNode;
 }) {
-  const stats = await getUsersStats({ type: "driver" });
+  const stats = await getUsersStats({ type: "driver" , screen: "driver_permission" });
   return (
     <div className=" min-h-screen pt-12 pb-5 px-6 space-y-6 ">
       <DriverPageHeader />

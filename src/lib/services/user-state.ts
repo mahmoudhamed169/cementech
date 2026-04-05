@@ -32,7 +32,7 @@ export async function getUsersStats(
   const res = await fetch(`${API_URL}/users/stats?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: params.screen ?? params.type, // ✅ fallback على type لو screen مش موجود
+      system_screen: params.screen ?? params.type ?? "user_permission",
     },
     cache: "no-store",
   });

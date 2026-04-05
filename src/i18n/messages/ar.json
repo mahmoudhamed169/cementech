@@ -374,7 +374,15 @@
       "carLicense": "استمارة المركبة",
       "carInsurance": "وثيقة التأمين",
       "download": "تحميل",
-      "preview": "معاينة المستند"
+      "preview": "معاينة المستند",
+      "verifyDocuments": {
+        "accept": "قبول الطلب",
+        "reject": "رفض الطلب",
+        "acceptSuccess": "تم قبول الطلب بنجاح",
+        "rejectSuccess": "تم رفض الطلب",
+        "acceptError": "فشل قبول الطلب، حاول مرة أخرى",
+        "rejectError": "فشل رفض الطلب، حاول مرة أخرى"
+      }
     },
     "documentStatus": {
       "accepted": "موثق",
