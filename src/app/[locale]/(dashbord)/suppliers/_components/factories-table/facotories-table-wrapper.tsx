@@ -5,41 +5,57 @@ import { getFactories } from "@/src/lib/services/factories/factories";
 import { cookies } from "next/headers";
 import FactoriesTableBody from "./factories-table-body";
 
-export default async function FacotoriesTableWrapper() {
+interface Props {
+  page: number;
+  limit: number;
+  search: string;
+  is_active?: boolean;
+}
+
+export default async function FacotoriesTableWrapper({
+  page,
+  limit,
+  search,
+  is_active,
+}: Props) {
   const cookieStore = await cookies();
   const locale = (cookieStore.get("NEXT_LOCALE")?.value ?? "ar") as "ar" | "en";
 
-  const factories = await getFactories(locale);
+  const factories = await getFactories({
+    lang: locale,
+    page,
+    limit,
+    search,
+    is_active,
+  });
 
   return (
     <>
       <FactoriesTableBody factories={factories.data} />
       {factories.data.length > 0 && (
-        <>
-          <TableFooter>
-            <TableRow className="border-t border-b-0 border-[#E5E7EB] h-14 text-start">
-              <TableCell colSpan={9}>
-                <PaginationInfo
-                  from={(factories.meta.page - 1) * factories.meta.limit + 1}
-                  to={Math.min(
-                    factories.meta.page * factories.meta.limit,
-                    factories.meta.itemCount,
-                  )}
-                  total={factories.meta.itemCount}
-                  type="loadingRequests"
-                />
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell className="text-center" colSpan={9}>
-                <DynamicPagination
-                  totalPages={factories.meta.pageCount}
-                  currentPage={factories.meta.page}
-                />
-              </TableCell>
-            </TableRow>
-          </TableFooter>
-        </>
+        <TableFooter>
+          <TableRow className="border-t border-b-0 border-[#E5E7EB] h-14 text-start">
+            <TableCell colSpan={9}>
+              <PaginationInfo
+                from={(factories.meta.page - 1) * factories.meta.limit + 1}
+                to={Math.min(
+                  factories.meta.page * factories.meta.limit,
+                  factories.meta.itemCount,
+                )}
+                total={factories.meta.itemCount}
+                type="loadingRequests"
+              />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell className="text-center" colSpan={9}>
+              <DynamicPagination
+                totalPages={factories.meta.pageCount}
+                currentPage={factories.meta.page}
+              />
+            </TableCell>
+          </TableRow>
+        </TableFooter>
       )}
     </>
   );

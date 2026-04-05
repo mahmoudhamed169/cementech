@@ -17,6 +17,7 @@ export async function getInvoices({
   const params = new URLSearchParams({
     page: String(page),
     limit: String(limit),
+    invoice_type: "orders",
     ...(search ? { search } : {}),
   });
 

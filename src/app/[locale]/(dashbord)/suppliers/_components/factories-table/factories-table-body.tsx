@@ -34,7 +34,7 @@ export default function FactoriesTableBody({ factories }: Props) {
           </TableCell>
           <TableCell>
             <div className="flex items-center justify-center gap-2">
-              {/* <EditFactoryWrapper id={factory.id} /> */}
+              <EditFactoryWrapper id={factory.id} />
               <DeleteFactoryDialog
                 factoryId={factory.id}
                 factoryName={factory.name}
