@@ -368,7 +368,15 @@
       "carLicense": "Vehicle Registration",
       "carInsurance": "Insurance Document",
       "download": "Download",
-      "preview": "Preview Document"
+      "preview": "Preview Document",
+      "verifyDocuments": {
+        "accept": "Accept order",
+        "reject": "Reject order",
+        "acceptSuccess": "order accepted successfully",
+        "rejectSuccess": "order rejected",
+        "acceptError": "Failed to accept order, please try again",
+        "rejectError": "Failed to reject order, please try again"
+      }
     },
     "documentStatus": {
       "accepted": "Verified",

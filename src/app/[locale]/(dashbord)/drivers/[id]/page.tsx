@@ -5,7 +5,6 @@ import DriverDocumentsSection from "./_components/driver-documents-section";
 import { fetchDriver } from "@/src/lib/services/driver-profile";
 import { DriverProfile } from "@/src/lib/types/driver";
 import DriverActions from "./_components/driver-actions";
-import DriverOrder from "./_components/driver-order";
 import UserOrders from "../../users/[id]/_components/user-order";
 
 interface Props {
@@ -27,10 +26,8 @@ export default async function page({ params, searchParams }: Props) {
   return (
     <main className="bg-white min-h-132.5 border border-[#E5E7EB] rounded-xl p-6 flex flex-col space-y-6">
       <PageTitleWithBack title="بيانات السائق" backHref="/drivers" />
-
       {/* DRIVER DETAILS */}
       <DriverDetails driver={driver} />
-
       {/* DRIVER STATS */}
       <DriverStats
         totalOrderCount={driver.stats.totalOrders}
@@ -44,9 +41,7 @@ export default async function page({ params, searchParams }: Props) {
             : "لا توجد طلبات بعد"
         }
       />
-
       {/* بيانات التحميل */}
-
       {/* DRIVER DOCUMENTS */}
       <DriverDocumentsSection
         documentVerifyStatus={driver.document_verify}
@@ -57,14 +52,14 @@ export default async function page({ params, searchParams }: Props) {
         carLicense={driver.car_license}
         carInsurance={driver.car_insurance}
       />
-
-      {/* <DriverOrder driverId={id} page={page ? Number(page) : 1} /> */}
-
-      <UserOrders userId={id} page={page ? Number(page) : 1} />
-
-      {/*  driver actions */}
-      <DriverActions driver={driver} />
-
+      {driver.document_verify !== "rejected" &&
+        driver.document_verify !== "pending" && (
+          <UserOrders userId={id} page={page ? Number(page) : 1} />
+        )}{" "}
+      *
+      {driver.document_verify !== "rejected" && (
+        <DriverActions driver={driver} />
+      )}
       {/*  */}
     </main>
   );

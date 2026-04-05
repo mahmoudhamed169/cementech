@@ -7,6 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
+import { InvoiceDetails } from "@/src/lib/types/invoices/invoice-details";
 import React from "react";
 
 type OrderShipment = {
@@ -41,7 +42,11 @@ const shipments: OrderShipment[] = [
   },
 ];
 
-export default function OrderDetailsTable() {
+export default function OrderDetailsTable({
+  invoice,
+}: {
+  invoice: InvoiceDetails;
+}) {
   const headers = [
     "الوصف",
     "الكمية",

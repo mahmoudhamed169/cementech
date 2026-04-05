@@ -37,7 +37,7 @@ export async function getUsers<T extends Driver | Customer>(
   const res = await fetch(`${API_URL}/users?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: screen ?? params.type ?? "dashboard_users",
+      system_screen: screen ?? params.type ?? "user_permission",
     },
     cache: "no-store",
   });
@@ -45,11 +45,9 @@ export async function getUsers<T extends Driver | Customer>(
   if (!res.ok) {
     const errorBody = await res.json().catch(() => res.text());
     console.error("Users error:", {
-      status: res.status,
-      statusText: res.statusText,
-      body: errorBody,
+      status: res.status, // ← إيه الرقم ده؟ 401؟ 403؟ 500؟
+      body: errorBody, // ← إيه الرسالة؟
       url: `${API_URL}/users?${query.toString()}`,
-      screen: screen ?? params.type ?? "dashboard_users",
     });
     throw new Error(`Failed to fetch users: ${res.status}`);
   }

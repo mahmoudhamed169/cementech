@@ -35,7 +35,7 @@ export default function DriverDetails({ driver }: { driver: DriverProfile }) {
       <Field>
         <FieldLabel htmlFor="status">{t("status")}</FieldLabel>
         <div className="flex">
-          <div className="w-14">
+          <div className="w-20">
             <DriverStatusBadge
               status={driver.driver_status as DriverStatus}
             />{" "}
