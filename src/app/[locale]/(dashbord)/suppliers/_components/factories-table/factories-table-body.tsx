@@ -1,9 +1,9 @@
 import { Factory } from "@/src/lib/types/factories/factory";
-import EmptyLoadingRequests from "../../../loadingRequests/_components/loading-requests-table/empty-loading-requests";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import StatusBadge from "./status-badge";
 import { DeleteFactoryDialog } from "./delete-factory-dialog";
 import EditFactoryWrapper from "./edit-factory-wrapper";
+import EmptyFactories from "./empty-factories";
 
 interface Props {
   factories: Factory[];
@@ -11,7 +11,7 @@ interface Props {
 
 export default function FactoriesTableBody({ factories }: Props) {
   if (!factories || factories.length === 0) {
-    return <EmptyLoadingRequests />;
+    return <EmptyFactories />;
   }
 
   return (

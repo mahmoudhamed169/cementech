@@ -616,6 +616,10 @@
         "productsCount": "عدد المنتجات",
         "status": "الحالة",
         "actions": "الإجراءات"
+      },
+      "empty": {
+        "title": "لا توجد مصانع",
+        "description": "ستظهر المصانع هنا بمجرد إضافتها."
       }
     },
 
@@ -864,9 +868,19 @@
     },
     "form": {
       "publish": "نشر التحديثات الآن",
-      "saveDraft": "حفظ كمسودة"
+      "saveDraft": "حفظ كمسودة",
+      "publishSuccess": "تم نشر التحديثات بنجاح",
+      "draftSuccess": "تم حفظ المسودة بنجاح",
+      "error": "حدث خطأ، يرجى المحاولة مرة أخرى",
+      "draftConfirmTitle": "تحويل الـ policy إلى مسودة؟",
+      "draftConfirmDesc": "هذا سيحول الـ policy الحالية من منشورة إلى مسودة وقد يؤثر على المستخدمين النشطين. هل أنت متأكد؟",
+      "draftConfirmCancel": "إلغاء",
+      "draftConfirmOk": "نعم، احفظ كمسودة"
     },
-
+    "tabs": {
+      "terms_conditions": "الشروط والأحكام",
+      "privacy_policy": "سياسة الخصوصية"
+    },
     "category": {
       "title": "الفئة",
       "customers": "المستخدمين (العملاء)",
