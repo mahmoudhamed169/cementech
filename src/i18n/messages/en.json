@@ -866,8 +866,16 @@
     },
     "form": {
       "publish": "Publish Now",
-      "saveDraft": "Save as Draft"
+      "saveDraft": "Save as Draft",
+      "publishSuccess": "Changes published successfully",
+      "draftSuccess": "Draft saved successfully",
+      "error": "Something went wrong, please try again"
     },
+    "tabs": {
+      "terms_conditions": "Terms & Conditions",
+      "privacy_policy": "Privacy Policy"
+    },
+  
 
     "category": {
       "title": "Category",

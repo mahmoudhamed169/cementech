@@ -868,9 +868,15 @@
     },
     "form": {
       "publish": "نشر التحديثات الآن",
-      "saveDraft": "حفظ كمسودة"
+      "saveDraft": "حفظ كمسودة",
+      "publishSuccess": "تم نشر التحديثات بنجاح",
+      "draftSuccess": "تم حفظ المسودة بنجاح",
+      "error": "حدث خطأ، يرجى المحاولة مرة أخرى"
     },
-
+    "tabs": {
+      "terms_conditions": "الشروط والأحكام",
+      "privacy_policy": "سياسة الخصوصية"
+    },
     "category": {
       "title": "الفئة",
       "customers": "المستخدمين (العملاء)",

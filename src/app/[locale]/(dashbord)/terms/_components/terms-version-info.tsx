@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { TermsPolicy } from "../_types/terms.types";
 import { CalendarIcon } from "lucide-react";
 
@@ -8,11 +8,12 @@ interface TermsVersionInfoProps {
 
 export default function TermsVersionInfo({ policy }: TermsVersionInfoProps) {
   const t = useTranslations("termsPage.version");
+  const locale = useLocale();
 
   if (!policy) return null;
 
   const formattedDate = new Date(policy.updated_at).toLocaleDateString(
-    "ar-EG",
+    locale === "ar" ? "ar-EG" : "en-US",
     {
       year: "numeric",
       month: "2-digit",
