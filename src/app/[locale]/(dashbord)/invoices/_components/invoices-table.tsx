@@ -7,17 +7,26 @@ import TableLoadingSpinner from "@/src/components/shared/table-loading";
 type InvoicesTableProps = {
   page: number;
   search?: string;
+  invoiceType: string;
 };
 
-export default function InvoicesTable({ page, search }: InvoicesTableProps) {
+export default function InvoicesTable({
+  page,
+  search,
+  invoiceType,
+}: InvoicesTableProps) {
   return (
     <Table>
-      <InvoicesTableHeader />
+      <InvoicesTableHeader invoiceType={invoiceType} />
       <Suspense
-        key={`${page}-${search}`}
+        key={`${page}-${search}-${invoiceType}`}
         fallback={<TableLoadingSpinner colSpan={8} />}
       >
-        <InvoicesTableWrapper page={page} search={search} />
+        <InvoicesTableWrapper
+          page={page}
+          search={search}
+          invoiceType={invoiceType}
+        />
       </Suspense>
     </Table>
   );

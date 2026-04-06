@@ -441,6 +441,12 @@
         "today": "اليوم",
         "this_week": "هذا الأسبوع",
         "this_month": "هذا الشهر"
+      },
+      "typeFilter": {
+        "filterLabel": "النوع",
+        "all": "الكل",
+        "with_data": "طلب تحميل جديد",
+        "without_data": "محمل مسبقاً"
       }
     },
     "table": {
@@ -450,6 +456,7 @@
         "driverName": "اسم السائق",
         "vehicleNumber": "رقم اللوحة",
         "requestStatus": "حالة الطلب",
+        "type": "النوع",
         "quantity": "الكمية",
         "requestTime": "وقت الطلب",
         "loadingTime": "ميعاد التحميل",
@@ -458,6 +465,10 @@
       "empty": {
         "title": "لا توجد طلبات تحميل حالياً",
         "description": "ستظهر طلبات التحميل هنا بمجرد تقديمها من قبل السائقين."
+      },
+      "typeBadge": {
+        "with_data": "طلب تحميل جديد",
+        "without_data": "محمل مسبقاً"
       }
     },
     "approveModal": {
@@ -542,10 +553,16 @@
         "invoicesId": "رقم الفاتورة",
         "orderId": "رقم الطلب",
         "userName": "اسم العميل",
-        "userPhoneNumber": "رقم العميل ",
+        "userPhoneNumber": "رقم العميل",
+        "driverName": "اسم السائق",
+        "driverPhoneNumber": "رقم السائق",
+        "totalPaid": "إجمالي المبلغ",
         "date": "التاريخ",
-        "totalPaid": "اجمالي الدفع",
-        "actions": "الاجراءات"
+        "actions": "الإجراءات"
+      },
+      "typeFilter": {
+        "orders": "فاتورة طلب",
+        "requests": "فاتورة طلب تحميل"
       }
     }
   },

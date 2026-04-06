@@ -1,6 +1,10 @@
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
-import { Invoice } from "@/src/lib/types/invoices/invoice";
+import {
+  Invoice,
+  isOrderInvoice,
+  isRequestInvoice,
+} from "@/src/lib/types/invoices/invoice";
 import TimeAgo from "@/src/components/providers/shared/_components/time-ago";
 import { InvoiceModalContent } from "./invoice";
 
@@ -23,20 +27,31 @@ export default function InvoicesTableBody({
             #{item.code}
           </TableCell>
 
-          {/* order code */}
+          {/* order/request code */}
           <TableCell className="text-center font-medium">
-            {item.order_code ? `#${item.order_code}` : "-"}
+            {isOrderInvoice(item)
+              ? `#${item.order_code}`
+              : isRequestInvoice(item)
+                ? `#${item.request_code}`
+                : "-"}
           </TableCell>
 
-          {/* customer name */}
-          <TableCell className="text-center font-medium">
-            {item.customer_name ?? "-"}
-          </TableCell>
-
-          {/* customer phone */}
-          <TableCell className="text-center text-[#6A7282]">
-            {item.customer_phone ?? "-"}
-          </TableCell>
+          {/* name & phone */}
+          {isOrderInvoice(item) ? (
+            <>
+              <TableCell className="text-center">
+                {item.customer_name}
+              </TableCell>
+              <TableCell className="text-center">
+                {item.customer_phone}
+              </TableCell>
+            </>
+          ) : isRequestInvoice(item) ? (
+            <>
+              <TableCell className="text-center">{item.driver_name}</TableCell>
+              <TableCell className="text-center">{item.driver_phone}</TableCell>
+            </>
+          ) : null}
 
           {/* total amount */}
           <TableCell className="text-center">

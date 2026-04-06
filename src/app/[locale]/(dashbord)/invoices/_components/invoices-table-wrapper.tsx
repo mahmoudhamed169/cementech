@@ -10,14 +10,16 @@ type InvoicesTableWrapperProps = {
   page: number;
   search?: string;
   limit?: number;
+  invoiceType: string;
 };
 
 export default async function InvoicesTableWrapper({
   page,
   search,
   limit = LIMIT,
+  invoiceType,
 }: InvoicesTableWrapperProps) {
-  const res = await getInvoices({ page, limit, search });
+  const res = await getInvoices({ page, limit, search, invoiceType });
   const invoices = res.data.invoices;
   const total = res.data.total;
   const pageCount = Math.ceil(total / limit);

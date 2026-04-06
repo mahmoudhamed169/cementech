@@ -7,6 +7,7 @@ import {
 export default function OrderDetails({
   order,
   product,
+  fact
 }: {
   order: OrderDetailsType;
   product: Product;

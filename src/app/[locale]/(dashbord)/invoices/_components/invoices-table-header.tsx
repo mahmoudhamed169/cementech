@@ -1,7 +1,7 @@
 import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useTranslations } from "next-intl";
 
-const headers = [
+const ordersHeaders = [
   "index",
   "invoicesId",
   "orderId",
@@ -12,8 +12,24 @@ const headers = [
   "actions",
 ] as const;
 
-export default function InvoicesTableHeader() {
+const requestsHeaders = [
+  "index",
+  "invoicesId",
+  "orderId",
+  "driverName",
+  "driverPhoneNumber",
+  "totalPaid",
+  "date",
+  "actions",
+] as const;
+
+export default function InvoicesTableHeader({
+  invoiceType,
+}: {
+  invoiceType: string;
+}) {
   const t = useTranslations("InvoicesPage.invoicesTable.columns");
+  const headers = invoiceType === "requests" ? requestsHeaders : ordersHeaders;
 
   return (
     <TableHeader>

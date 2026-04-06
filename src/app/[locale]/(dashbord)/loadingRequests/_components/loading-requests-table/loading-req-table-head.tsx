@@ -9,6 +9,7 @@ export default function LoadingReqTableHead() {
     "driverName",
     "vehicleNumber",
     "requestStatus",
+    "type",
     "quantity",
     "requestTime",
     "loadingTime",
@@ -16,7 +17,6 @@ export default function LoadingReqTableHead() {
   ] as const;
 
   const t = useTranslations("loadingRequestsPage.table.columns");
-
 
   return (
     <TableHeader>
