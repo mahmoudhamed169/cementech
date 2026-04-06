@@ -7,8 +7,8 @@ const headers = [
   "orderId",
   "userName",
   "userPhoneNumber",
-  "date",
   "totalPaid",
+  "date",
   "actions",
 ] as const;
 

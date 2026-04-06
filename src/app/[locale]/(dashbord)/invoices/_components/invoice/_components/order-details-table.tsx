@@ -7,45 +7,18 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
-import { InvoiceDetails } from "@/src/lib/types/invoices/invoice-details";
+import {
+  OrderDetails,
+  Product,
+} from "@/src/lib/types/invoices/invoice-details";
 import React from "react";
 
-type OrderShipment = {
-  description: string;
-  quantity: number; // بالطن
-  cementType: string;
-  pricePerTon: number;
-  totalPrice: number;
-};
-
-const shipments: OrderShipment[] = [
-  {
-    description: "الشحنة الأولى",
-    quantity: 10,
-    cementType: "أسمنت بورتلاندي عادي",
-    pricePerTon: 280,
-    totalPrice: 2800,
-  },
-  {
-    description: "الشحنة الثانية",
-    quantity: 15,
-    cementType: "أسمنت مقاوم للأملاح",
-    pricePerTon: 300,
-    totalPrice: 4500,
-  },
-  {
-    description: "الشحنة الثالثة",
-    quantity: 8,
-    cementType: "أسمنت أبيض",
-    pricePerTon: 350,
-    totalPrice: 2800,
-  },
-];
-
 export default function OrderDetailsTable({
-  invoice,
+  order,
+  product,
 }: {
-  invoice: InvoiceDetails;
+  order: OrderDetails;
+  product: Product;
 }) {
   const headers = [
     "الوصف",
@@ -54,10 +27,21 @@ export default function OrderDetailsTable({
     "السعر ( الطن )",
     "اجمالي السعر",
   ] as const;
+
+  const rows = [
+    {
+      description: "الطلب",
+      quantity: order.quantity,
+      cementType: product.name,
+      pricePerTon: product.price,
+      totalPrice: order.total,
+    },
+  ];
+
   return (
     <Table>
       {/* Header */}
-      <TableHeader className=" border-[#F3F4F6]">
+      <TableHeader className="border-[#F3F4F6]">
         <TableRow>
           {headers.map((key) => (
             <TableHead
@@ -72,23 +56,19 @@ export default function OrderDetailsTable({
 
       {/* Body */}
       <TableBody>
-        {shipments.map((shipment, index) => (
+        {rows.map((row, index) => (
           <TableRow key={index} className="text-[#364153] border-[#F3F4F6]">
+            <TableCell className="text-center">{row.description}</TableCell>
+            <TableCell className="text-center">{row.quantity} طن</TableCell>
+            <TableCell className="text-center">{row.cementType}</TableCell>
             <TableCell className="text-center">
-              {shipment.description}
-            </TableCell>
-            <TableCell className="text-center">
-              {shipment.quantity} طن
-            </TableCell>
-            <TableCell className="text-center">{shipment.cementType}</TableCell>
-            <TableCell className="text-center">
-              <div className="flex  justify-center items-center  gap-1">
-                {shipment.pricePerTon} <CurrencyIcon />
+              <div className="flex justify-center items-center gap-1">
+                {row.pricePerTon} <CurrencyIcon />
               </div>
             </TableCell>
             <TableCell className="text-center font-semibold">
-              <div className="flex  justify-center items-center  gap-1">
-                {shipment.totalPrice} <CurrencyIcon />
+              <div className="flex justify-center items-center gap-1">
+                {row.totalPrice} <CurrencyIcon />
               </div>
             </TableCell>
           </TableRow>

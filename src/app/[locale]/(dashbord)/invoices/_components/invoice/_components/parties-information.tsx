@@ -1,4 +1,7 @@
-import { InvoiceDetails } from "@/src/lib/types/invoices/invoice-details";
+import {
+  Factory,
+  RecipientDetails,
+} from "@/src/lib/types/invoices/invoice-details";
 import React from "react";
 
 // Reusable Info Item
@@ -24,7 +27,7 @@ function InfoCard({
   return (
     <div className="space-y-2 print:w-full">
       <h5 className="text-xl font-semibold text-gray-900">{title}</h5>
-      <div className="min-w-[480px] min-h-[240px]  rounded-xl bg-gray-50 py-4 px-5 flex flex-col justify-between">
+      <div className="min-w-[480px] min-h-[240px] rounded-xl bg-gray-50 py-4 px-5 flex flex-col justify-between">
         {children}
         {footer && (
           <div className="mt-4 pt-3 border-t flex justify-between text-sm">
@@ -38,9 +41,11 @@ function InfoCard({
 
 // Main Component
 export default function PartiesInformation({
-  invoice,
+  recipient,
+  factory,
 }: {
-  invoice: InvoiceDetails;
+  recipient: RecipientDetails;
+  factory: Factory;
 }) {
   return (
     <div className="flex gap-6 info-card-container">
@@ -49,17 +54,13 @@ export default function PartiesInformation({
         title="تفاصيل المورد"
         footer={
           <>
-            <InfoItem label="الرقم الضريبي" value="50070006000" />
-            <InfoItem label="رقم التواصل " value="0500700060" />
+            <InfoItem label="رقم التواصل" value={factory.contact_number} />
           </>
         }
       >
         <div className="flex flex-col gap-3">
-          <InfoItem label="الاسم" value="شركة سيمينتك" />
-          <InfoItem
-            label="العنوان"
-            value="الرياض - تقسيم زهدي - شارع عثمان بن عفان"
-          />
+          <InfoItem label="الاسم" value={factory.name} />
+          <InfoItem label="العنوان" value={factory.address} />
         </div>
       </InfoCard>
 
@@ -70,20 +71,15 @@ export default function PartiesInformation({
           <>
             <InfoItem
               label="الرقم الضريبي"
-              value={invoice.recipient_tax_id ?? "-"}
+              value={recipient.tax_number ?? "-"}
             />
-            <InfoItem
-              label="رقم الجوال"
-              value={invoice.customer_phone ?? "-"}
-            />
+            <InfoItem label="رقم الجوال" value={recipient.phone ?? "-"} />
           </>
         }
       >
         <div className="grid grid-cols-2 gap-4">
-          <InfoItem label="الاسم " value={invoice.customer_name} />
-          <InfoItem label="اسم المؤسسة" value={invoice.company_name ?? "-"} />
-          <InfoItem label="ID رقم" value={invoice.customer_id_display ?? "-"} />
-          <InfoItem label="العنوان" value={invoice.address_name?? "-"} />
+          <InfoItem label="الاسم" value={recipient.customer_name ?? "-"} />
+          <InfoItem label="اسم المؤسسة" value={recipient.company_name ?? "-"} />
         </div>
       </InfoCard>
     </div>
