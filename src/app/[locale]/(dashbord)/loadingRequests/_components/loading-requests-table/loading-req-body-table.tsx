@@ -45,6 +45,12 @@ export default function LoadingRequestsTableBody({ loadingRequests }: Props) {
             <LoadingRequestTypeBadge type={loading.request_type} />
           </TableCell>
 
+          {/* اسم المنتج */}
+          <TableCell>
+            {loading.product_name} <br />
+            {loading.factory_name}
+          </TableCell>
+
           {/* الكمية */}
           <TableCell>{loading.quantity}</TableCell>
 

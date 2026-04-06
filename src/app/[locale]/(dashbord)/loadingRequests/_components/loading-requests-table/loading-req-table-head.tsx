@@ -10,6 +10,7 @@ export default function LoadingReqTableHead() {
     "vehicleNumber",
     "requestStatus",
     "type",
+    "productName",
     "quantity",
     "requestTime",
     "loadingTime",
