@@ -4,8 +4,7 @@ import {
   OrderData,
   OrderResponse,
 } from "@/src/lib/services/orders/spacific-order";
-import OrderDialogTitle from "../_components/order-table/order-actions/_components/order-dialog-title";
-// import OrderStatusCell from "../_components/order-table/order-status-cell";
+
 import CustomerInfoSection from "../_components/order-table/order-actions/_components/customer-info-section";
 import DriverInfoSection from "../_components/order-table/order-actions/_components/driver-info-section";
 import OrderLocationSection from "../_components/order-table/order-actions/_components/order-location-section";
@@ -51,12 +50,11 @@ export default async function page({
 
       <CustomerInfoSection order={order} />
       <DriverInfoSection order={order} />
-
       <OrderLocationSection order={order} />
       <OrderInfoCards order={order} />
 
       {!["canceled", "ملغي"].includes(order.order_status) && (
-        <div className="flex justify-center">
+        <div className="pt-6 border-t border-gray-100 flex justify-end">
           <OrderCancelButton id={order.id} />
         </div>
       )}

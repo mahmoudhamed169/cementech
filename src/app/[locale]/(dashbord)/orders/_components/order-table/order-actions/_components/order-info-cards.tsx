@@ -14,13 +14,13 @@ export default function OrderInfoCards({ order }: OrderInfoCardsProps) {
   const t = useTranslations("orderActions");
 
   return (
-    <div className="flex gap-3 mt-4 w-full">
+    <div
+      className="grid gap-3 mt-4 w-full"
+      style={{ gridTemplateColumns: "2fr 1fr 1fr 2fr 1.5fr 1.5fr" }}
+    >
       <InfoCard label={t("factory")} value={order.factory_name} />
-      <InfoCard
-        label={t("cementQuantity")}
-        value={`${order.truck_quantity} طن`}
-      />
-
+      <InfoCard label={t("truck_quantity")} value={order.truck_quantity} />
+      <InfoCard label={t("cementQuantity")} value={`${order.quantity} طن`} />
       <InfoCard label={t("product")} value={order.product_name} />
       <InfoCard
         label={t("price")}

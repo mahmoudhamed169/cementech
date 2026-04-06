@@ -185,6 +185,7 @@
     "canceling": "Canceling...",
     "cancelSuccess": "Order cancelled successfully",
     "cancelError": "Failed to cancel order, please try again",
+    "truck_quantity": "Number of Shipments",
 
     "assignDriverToOrder": "Assign Driver to Order",
     "shipmentLabel": {
@@ -200,7 +201,10 @@
     "noDriversAvailable": "No drivers available",
     "noDriversAvailableDesc": "Try again later",
     "errorLoadingDrivers": "Error loading drivers",
-    "errorLoadingDriversDesc": "Something went wrong, please try again"
+    "errorLoadingDriversDesc": "Something went wrong, please try again",
+    "cancelConfirmTitle": "Are you sure you want to cancel this order?",
+    "cancelConfirmDescription": "This action cannot be undone once confirmed.",
+    "cancelConfirmBack": "Go back"
   },
   "common": {
     "logout": "Logout",
