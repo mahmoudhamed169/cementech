@@ -457,6 +457,7 @@
         "vehicleNumber": "رقم اللوحة",
         "requestStatus": "حالة الطلب",
         "type": "النوع",
+        "productName": " المنتج",
         "quantity": "الكمية",
         "requestTime": "وقت الطلب",
         "loadingTime": "ميعاد التحميل",
@@ -524,7 +525,13 @@
         "createdAt": "وقت الطلب",
         "tripCertificate": "شهادة الرحلة",
         "layingCommand": "امر التنزيل",
-        "documents": "وثائق التحميل"
+        "documents": "وثائق التحميل",
+        "productName": "اسم المنتج",
+        "factoryName": "اسم المصنع",
+        "driverInfo": "معلومات السائق",
+        "orderInfo": "معلومات الطلب",
+        "quantity": "الكمية",
+        "preview": "معاينة المستند"
       },
       "locationSection": {
         "title": "موقع المصنع",

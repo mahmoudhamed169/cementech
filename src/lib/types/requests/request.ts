@@ -10,6 +10,7 @@ export interface Request {
   factory_name: string;
   trip_certificate: string;
   laying_command: string;
+  request_type: "with_data" | "without_data";
   lat: string;
   lng: string;
   request_status: string;

@@ -450,6 +450,7 @@
         "vehicleNumber": "Vehicle Number",
         "requestStatus": "Request Status",
         "type": "Type",
+        "productName": "Product ",
         "quantity": "Quantity",
         "requestTime": "Request Time",
         "loadingTime": "Loading Time",
@@ -519,7 +520,13 @@
         "createdAt": "Request Time",
         "tripCertificate": "Trip Certificate",
         "layingCommand": "Laying Command",
-        "documents": "Loading Documents"
+        "documents": "Loading Documents",
+        "productName": "Product Name",
+        "factoryName": "Factory Name",
+        "driverInfo": "Driver Information",
+        "orderInfo": "Order Information",
+        "quantity": "Quantity" , 
+        "preview": "Preview Document"
       },
       "locationSection": {
         "title": "Factory Location",

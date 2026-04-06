@@ -19,13 +19,15 @@ export default function StepTwo({ request, onClose }: StepTwoProps) {
 
   const { mutate, isPending } = useAcceptRequest(request.id, onClose);
 
-  const handleSubmit = () => {
-    const hasLocation = request.lat && request.lng;
+  const requestType = request.request_type;
 
+  const handleSubmit = () => {
     mutate({
-      request_type: hasLocation ? "without_data" : "with_data",
-      trip_certificate: tripCertificate ?? undefined,
-      laying_command: layingCommand ?? undefined,
+      request_type: requestType,
+      ...(requestType === "with_data" && {
+        trip_certificate: tripCertificate ?? undefined,
+        laying_command: layingCommand ?? undefined,
+      }),
     });
   };
 
@@ -91,64 +93,66 @@ export default function StepTwo({ request, onClose }: StepTwoProps) {
         </div>
       </div>
 
-      {/* المستندات المطلوبة */}
-      <div className="space-y-3">
-        <h3 className="font-bold text-base text-[#101828]">
-          {t("documentsTitle")}
-        </h3>
+      {/* المستندات المطلوبة - تظهر فقط لو with_data */}
+      {requestType === "with_data" && (
+        <div className="space-y-3">
+          <h3 className="font-bold text-base text-[#101828]">
+            {t("documentsTitle")}
+          </h3>
 
-        {/* شهادة الرحلة */}
-        <label
-          className={`flex items-center justify-between gap-2 p-4 rounded-2xl border cursor-pointer transition-colors ${
-            tripCertificate
-              ? "bg-green-50 border-green-400"
-              : "bg-[#F9FAFB] border-[#E5E7EB] hover:bg-gray-100"
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            {tripCertificate ? (
-              <CheckCircle className="w-5 h-5 text-green-500" />
-            ) : (
-              <FileText className="w-5 h-5 text-[#364153]" />
-            )}
-            <span className="text-sm font-medium text-[#101828]">
-              {t("tripCertificate")}
-            </span>
-          </div>
-          <Upload className="w-4 h-4 text-[#364153]" />
-          <input
-            type="file"
-            className="hidden"
-            onChange={(e) => setTripCertificate(e.target.files?.[0] ?? null)}
-          />
-        </label>
+          {/* شهادة الرحلة */}
+          <label
+            className={`flex items-center justify-between gap-2 p-4 rounded-2xl border cursor-pointer transition-colors ${
+              tripCertificate
+                ? "bg-green-50 border-green-400"
+                : "bg-[#F9FAFB] border-[#E5E7EB] hover:bg-gray-100"
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              {tripCertificate ? (
+                <CheckCircle className="w-5 h-5 text-green-500" />
+              ) : (
+                <FileText className="w-5 h-5 text-[#364153]" />
+              )}
+              <span className="text-sm font-medium text-[#101828]">
+                {t("tripCertificate")}
+              </span>
+            </div>
+            <Upload className="w-4 h-4 text-[#364153]" />
+            <input
+              type="file"
+              className="hidden"
+              onChange={(e) => setTripCertificate(e.target.files?.[0] ?? null)}
+            />
+          </label>
 
-        {/* امر التنزيل */}
-        <label
-          className={`flex items-center justify-between gap-2 p-4 rounded-2xl border cursor-pointer transition-colors ${
-            layingCommand
-              ? "bg-green-50 border-green-400"
-              : "bg-[#F9FAFB] border-[#E5E7EB] hover:bg-gray-100"
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            {layingCommand ? (
-              <CheckCircle className="w-5 h-5 text-green-500" />
-            ) : (
-              <FileText className="w-5 h-5 text-[#364153]" />
-            )}
-            <span className="text-sm font-medium text-[#101828]">
-              {t("layingCommand")}
-            </span>
-          </div>
-          <Upload className="w-4 h-4 text-[#364153]" />
-          <input
-            type="file"
-            className="hidden"
-            onChange={(e) => setLayingCommand(e.target.files?.[0] ?? null)}
-          />
-        </label>
-      </div>
+          {/* امر التنزيل */}
+          <label
+            className={`flex items-center justify-between gap-2 p-4 rounded-2xl border cursor-pointer transition-colors ${
+              layingCommand
+                ? "bg-green-50 border-green-400"
+                : "bg-[#F9FAFB] border-[#E5E7EB] hover:bg-gray-100"
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              {layingCommand ? (
+                <CheckCircle className="w-5 h-5 text-green-500" />
+              ) : (
+                <FileText className="w-5 h-5 text-[#364153]" />
+              )}
+              <span className="text-sm font-medium text-[#101828]">
+                {t("layingCommand")}
+              </span>
+            </div>
+            <Upload className="w-4 h-4 text-[#364153]" />
+            <input
+              type="file"
+              className="hidden"
+              onChange={(e) => setLayingCommand(e.target.files?.[0] ?? null)}
+            />
+          </label>
+        </div>
+      )}
 
       {/* الأزرار */}
       <div className="flex items-center gap-3 pt-2">
