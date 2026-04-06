@@ -1,113 +1,178 @@
 "use client";
-
 import { useState } from "react";
-import { Notification, NotificationSeverity } from "../_types/notification";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { AlertCircle, AlertTriangle, Info, CheckCircle2 } from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
+import { AlertCircle, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 
-// ─── severity config ──────────────────────────────────────────────────────────
+type NotificationSeverity = "success" | "error" | "alert";
+
+type NotificationAction = {
+  label: string;
+  variant: "outline" | "ghost";
+  onClick: string;
+};
+
+type Notification = {
+  id: string;
+  title: string;
+  description: string;
+  read: boolean;
+  timestamp: string;
+  severity: NotificationSeverity;
+  actions?: NotificationAction[];
+};
+
 type SeverityConfig = {
-  icon: React.ElementType;
-  iconClass: string;
-  borderClass: string;
-  bgClass: string;
+  bg: string;
+  border: string;
+  titleColor: string;
+  badgeBg: string;
+  badgeText: string;
+  color: string;
 };
 
 const severityConfig: Record<NotificationSeverity, SeverityConfig> = {
-  error:   { icon: AlertCircle,   iconClass: "text-red-500",    borderClass: "border-red-200",    bgClass: "bg-red-50"    },
-  warning: { icon: AlertTriangle, iconClass: "text-orange-400", borderClass: "border-orange-200", bgClass: "bg-orange-50" },
-  info:    { icon: Info,          iconClass: "text-blue-400",   borderClass: "border-blue-200",   bgClass: "bg-blue-50"   },
-  success: { icon: CheckCircle2,  iconClass: "text-green-500",  borderClass: "border-green-200",  bgClass: "bg-green-50"  },
+  error: {
+    bg: "bg-red-50",
+    border: "border-red-100",
+    titleColor: "text-red-700",
+    badgeBg: "bg-red-100",
+    badgeText: "text-red-600",
+    color: "#ef4444",
+  },
+  alert: {
+    bg: "bg-blue-50",
+    border: "border-blue-100",
+    titleColor: "text-blue-800",
+    badgeBg: "bg-blue-100",
+    badgeText: "text-blue-600",
+    color: "#3b82f6",
+  },
+  success: {
+    bg: "bg-green-50",
+    border: "border-green-100",
+    titleColor: "text-green-800",
+    badgeBg: "bg-green-100",
+    badgeText: "text-green-600",
+    color: "#22c55e",
+  },
 };
-// ─── props ────────────────────────────────────────────────────────────────────
-interface NotificationCardProps {
+
+const severityIcon: Record<NotificationSeverity, React.ElementType> = {
+  success: CheckCircle2,
+  error: AlertCircle,
+  alert: AlertTriangle,
+};
+
+export default function NotificationCard({
+  notification: init,
+}: {
   notification: Notification;
-}
+}) {
+  const [n, setN] = useState(init);
+  const cfg = severityConfig[n.severity] ?? severityConfig["alert"];
+  const Icon = severityIcon[n.severity] ?? severityIcon["alert"];
 
-// ─── component ────────────────────────────────────────────────────────────────
-export default function NotificationCard({ notification: initialNotification }: NotificationCardProps) {
-  const [notification, setNotification] = useState(initialNotification);
-
-  const { icon: Icon, iconClass, borderClass, bgClass } = severityConfig[notification.severity];
-
-  const timeAgo = formatDistanceToNow(new Date(notification.timestamp), {
-    addSuffix: true,
+  const formattedTime = format(new Date(n.timestamp), "yyyy/MM/dd · HH:mm", {
     locale: ar,
   });
 
-  // ─── handler ────────────────────────────────────────────────────────────────
   function handleAction(actionKey: string) {
-    switch (actionKey) {
-      case "mark_read":
-        setNotification((prev) => ({ ...prev, read: true }));
-        break;
-      case "assign_now":
-        console.log("assign_now for", notification.id);
-        break;
-      case "view_driver":
-        console.log("view_driver for", notification.id);
-        break;
-      case "review_join":
-        console.log("review_join for", notification.id);
-        break;
+    if (actionKey === "mark_read") {
+      setN((prev) => ({ ...prev, read: true }));
     }
   }
 
+  const mainActions =
+    n.actions?.filter((a) => a.onClick !== "mark_read") ?? [];
+
   return (
     <div
-      className={cn(
-        "rounded-2xl border p-4 space-y-3 transition-all",
-        bgClass,
-        borderClass,
-        !notification.read && "shadow-sm",
-      )}
       dir="rtl"
+      style={{
+        borderRightWidth: "4px",
+        borderRightColor: n.read ? cfg.color + "bb" : cfg.color,
+        backgroundColor: n.read ? cfg.color + "18" : undefined,
+      }}
+      className={cn(
+        "w-full rounded-lg border px-4 py-3 transition-all duration-300",
+        n.read ? "border-gray-100" : cn(cfg.bg, cfg.border),
+      )}
     >
-      {/* header row */}
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex items-center gap-2">
-          {!notification.read && (
-            <span
-              className="mt-1 h-2 w-2 rounded-full bg-current shrink-0"
-              style={{ color: "inherit" }}
-            />
-          )}
-          <Icon className={cn("h-5 w-5 shrink-0", iconClass)} />
-          <span className="font-semibold text-gray-800 text-sm">
-            {notification.title}
-          </span>
+      <div className="flex items-start justify-between gap-3">
+        <div className="flex items-start gap-3 flex-1 min-w-0">
+          <Icon
+            size={18}
+            style={{ color: n.read ? cfg.color + "dd" : cfg.color }}
+            className="shrink-0 mt-0.5 transition-colors duration-300"
+          />
+
+          <div className="flex flex-col gap-1 flex-1 min-w-0">
+            {/* Title + badge */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <span
+                className={cn(
+                  "text-base leading-snug transition-all duration-300",
+                  n.read
+                    ? "font-semibold text-gray-600"
+                    : cn("font-bold", cfg.titleColor),
+                )}
+              >
+                {n.title}
+              </span>
+              {!n.read && (
+                <span
+                  className={cn(
+                    "shrink-0 inline-flex items-center gap-1 text-[10px] font-medium px-1.5 py-0.5 rounded-full",
+                    cfg.badgeBg,
+                    cfg.badgeText,
+                  )}
+                >
+                  <span
+                    style={{ backgroundColor: cfg.color }}
+                    className="w-1.5 h-1.5 rounded-full"
+                  />
+                  جديد
+                </span>
+              )}
+            </div>
+
+            {/* Description */}
+            <p className="text-xs leading-relaxed text-gray-500">
+              {n.description}
+            </p>
+
+            {/* Actions — unread only */}
+            {!n.read && (
+              <div className="flex items-center gap-2 flex-wrap mt-1">
+                {mainActions.map((action) => (
+                  <button
+                    key={action.label}
+                    onClick={() =>
+                      action.onClick && handleAction(action.onClick)
+                    }
+                    className="text-xs px-3 py-1 rounded-md border bg-white font-medium text-gray-600 border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-200 cursor-pointer"
+                  >
+                    {action.label}
+                  </button>
+                ))}
+                <button
+                  onClick={() => handleAction("mark_read")}
+                  className="text-xs px-3 py-1 rounded-md border bg-white font-medium text-gray-400 border-gray-200 hover:text-gray-600 hover:border-gray-300 hover:bg-gray-50 transition-all duration-200 cursor-pointer"
+                >
+                  تعليم كمقروء
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-        <span className="text-xs text-gray-400 whitespace-nowrap shrink-0">
-          {timeAgo}
+
+        {/* Timestamp */}
+        <span className="text-[11px] text-gray-400 whitespace-nowrap font-mono shrink-0 mt-0.5">
+          {formattedTime}
         </span>
       </div>
-
-      {/* description */}
-      <p className="text-sm text-gray-600 pr-7">{notification.description}</p>
-
-      {/* actions */}
-      {notification.actions && notification.actions.length > 0 && (
-        <div className="flex flex-wrap gap-2 pr-7">
-          {notification.actions.map((action) => (
-            <Button
-              key={action.label}
-              size="sm"
-              variant={action.variant === "ghost" ? "ghost" : "outline"}
-              className={cn(
-                "rounded-xl text-xs h-8 px-3",
-                action.variant !== "ghost" &&
-                  "bg-white border-gray-300 text-gray-700 hover:bg-gray-50",
-              )}
-              onClick={() => action.onClick && handleAction(action.onClick)}
-            >
-              {action.label}
-            </Button>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
