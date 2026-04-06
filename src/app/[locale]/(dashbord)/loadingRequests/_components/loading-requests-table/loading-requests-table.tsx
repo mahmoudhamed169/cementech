@@ -12,6 +12,7 @@ export default function LoadingRequestsTable({
     search?: string;
     status?: string;
     time?: string;
+    type?: string;
   };
 }) {
   return (

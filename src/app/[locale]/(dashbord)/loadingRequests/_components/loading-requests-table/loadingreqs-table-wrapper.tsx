@@ -17,6 +17,7 @@ export default async function LoadingReqsTableWrapper({
     search?: string;
     status?: string;
     time?: string;
+    // type?: string;
   };
 }) {
   const page = Number(searchParams.page ?? 1);
@@ -24,6 +25,7 @@ export default async function LoadingReqsTableWrapper({
   const status =
     (searchParams.status as GetRequestsParams["status"]) ?? undefined;
   const time = (searchParams.time as GetRequestsParams["time"]) ?? undefined;
+  // const type = (searchParams.type as GetRequestsParams["type"]) ?? undefined;
 
   const cookieStore = await cookies();
   const locale = cookieStore.get("NEXT_LOCALE")?.value ?? "ar";

@@ -35,7 +35,9 @@ export default function StepTwo({ request, onClose }: StepTwoProps) {
     <div className="p-6 space-y-6">
       {/* رسالة تأكيد */}
       <div className="bg-[#F9FAFB] rounded-2xl px-4 py-3 text-sm text-[#364153] text-center">
-        {t("confirmMessage")}
+        {requestType === "with_data"
+          ? t("confirmMessage")
+          : t("confirmMessageWithoutData")}
       </div>
 
       <div className="space-y-4">
@@ -64,31 +66,6 @@ export default function StepTwo({ request, onClose }: StepTwoProps) {
             <span className="text-sm text-[#101828]">
               {request.product_name || "—"}
             </span>
-          </div>
-        </div>
-
-        {/* Lat & Long */}
-        <div className="space-y-1">
-          <label className="text-sm font-medium text-[#6A7282]">
-            {t("locationCoords")}
-          </label>
-          <div className="flex gap-2">
-            <div className="w-1/2 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-4 py-3">
-              <span className="text-xs text-[#6A7282] block mb-0.5">
-                {t("latitude")}
-              </span>
-              <span className="text-sm text-[#101828]">
-                {request.lat ?? "—"}
-              </span>
-            </div>
-            <div className="w-1/2 bg-[#F9FAFB] border border-[#E5E7EB] rounded-xl px-4 py-3">
-              <span className="text-xs text-[#6A7282] block mb-0.5">
-                {t("longitude")}
-              </span>
-              <span className="text-sm text-[#101828]">
-                {request.lng ?? "—"}
-              </span>
-            </div>
           </div>
         </div>
       </div>
@@ -162,7 +139,11 @@ export default function StepTwo({ request, onClose }: StepTwoProps) {
           className="flex-1 h-12 bg-[#155DFC] hover:bg-[#1249d4] text-white rounded-2xl font-semibold flex items-center justify-center gap-2"
         >
           <Check className="w-4 h-4" />
-          {isPending ? t("submitting") : t("submit")}
+          {isPending
+            ? t("submitting")
+            : requestType === "with_data"
+              ? t("submit")
+              : t("submitWithoutData")}
         </Button>
         <Button
           onClick={onClose}
