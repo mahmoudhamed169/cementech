@@ -1,30 +1,11 @@
+import { Shipment } from "@/src/lib/types/invoices/invoice-details";
 import React from "react";
 
-type Driver = {
-  name: string;
-  plateNumber: string;
-  arrivalTime: string;
-};
-
-const drivers: Driver[] = [
-  {
-    name: "محمد حسين البنهاوي",
-    plateNumber: "ن س ر - 1234",
-    arrivalTime: "10-01-2026 - 11:24 صباحًا",
-  },
-  {
-    name: "أحمد عبد الرحمن",
-    plateNumber: "ر ك ب - 5678",
-    arrivalTime: "10-01-2026 - 01:10 مساءً",
-  },
-  // {
-  //   name: "خالد محمود علي",
-  //   plateNumber: "م ل د - 9012",
-  //   arrivalTime: "11-01-2026 - 09:45 صباحًا",
-  // },
-];
-
-export default function DeliveryDetails() {
+export default function DeliveryDetails({
+  shipments,
+}: {
+  shipments: Shipment[];
+}) {
   return (
     <div className="space-y-5 print:w-full print:break-inside-avoid">
       {/* Title */}
@@ -34,15 +15,13 @@ export default function DeliveryDetails() {
 
       {/* Drivers list */}
       <div className="grid grid-cols-3 gap-4 print:grid-cols-2">
-        {drivers.map((driver, index) => (
+        {shipments.length === 0 && (
+          <p className="text-sm text-gray-400">لا يوجد سائقين</p>
+        )}
+        {shipments.map((driver) => (
           <div
-            key={index}
-            className="
-    bg-[#F9FAFB] rounded-xl p-5
-    flex flex-col justify-between
-    space-y-6
-    print:break-inside-avoid
-  "
+            key={driver.id}
+            className="bg-[#F9FAFB] rounded-xl p-5 flex flex-col justify-between space-y-6 print:break-inside-avoid"
           >
             {/* Top Info */}
             <div className="grid grid-cols-2 gap-6 print:grid-cols-1">
@@ -56,7 +35,7 @@ export default function DeliveryDetails() {
               <div className="space-y-1">
                 <p className="text-xs text-[#6B7280]">رقم اللوحات</p>
                 <p className="font-medium text-[#0A0A0A]">
-                  {driver.plateNumber}
+                  {driver.plate_number}
                 </p>
               </div>
             </div>
@@ -65,7 +44,7 @@ export default function DeliveryDetails() {
             <div className="space-y-1">
               <p className="text-xs text-[#6B7280]">تاريخ ووقت الوصول</p>
               <p className="font-semibold text-[#0A0A0A]">
-                {driver.arrivalTime}
+                {driver.arrival_time}
               </p>
             </div>
           </div>

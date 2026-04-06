@@ -30,13 +30,11 @@ export function InvoiceModalContent({ id }: Props) {
   const [open, setOpen] = useState(false);
 
   const { data, isLoading, isError } = useInvoiceDetails(id);
-  const invoice = data?.data?.data;
-
-  console.log(invoice);
+  const invoiceData = data?.data;
 
   const handlePrint = useReactToPrint({
     contentRef: invoiceRef,
-    documentTitle: `invoice-${invoice?.code ?? id}`,
+    documentTitle: `invoice-${invoiceData?.invoice_details.code ?? id}`,
   });
 
   return (
@@ -78,15 +76,23 @@ export function InvoiceModalContent({ id }: Props) {
             </div>
           )}
 
-          {invoice && (
+          {invoiceData && (
             <div ref={invoiceRef} id="invoice-print-area">
               <section className="px-4 py-6 space-y-8" dir="rtl">
-                <InvoiceInformation invoiceNumber={invoice.code} />
-                <PartiesInformation invoice={invoice} />
-                <OrderDetails />
-                <DeliveryDetails />
+                <InvoiceInformation
+                  invoiceNumber={invoiceData.invoice_details.code}
+                />
+                <PartiesInformation
+                  recipient={invoiceData.recipient_details}
+                  factory={invoiceData.factory}
+                />
+                <OrderDetails
+                  order={invoiceData.order_details}
+                  product={invoiceData.product}
+                />
+                <DeliveryDetails shipments={invoiceData.shipments} />
                 <div className="flex gap-13 print:flex-col print:gap-6">
-                  <PaymentDetails />
+                  <PaymentDetails payment={invoiceData.payment} />
                   <ImportantNotes />
                 </div>
               </section>

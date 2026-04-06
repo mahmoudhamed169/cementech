@@ -9,29 +9,44 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await getServerSession(authOptions);
+
+  if (!session?.user.accessToken) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { id } = await params;
 
-  
-
-  const res = await fetch(`${API_URL}/invoices/${id}`, {
-    headers: {
-      Authorization: `Bearer ${session?.user.accessToken}`,
-      // system_screen: "invoices_permissions",
-      // lang: "all",
-    },
-  });
-
-  console.log("status:", res.status);
-
-  if (!res.ok) {
-    const error = await res.json();
-    console.log("error:", error);
+  if (!id) {
     return NextResponse.json(
-      { error: "Failed to fetch invoice" },
-      { status: res.status },
+      { error: "Invoice ID is required" },
+      { status: 400 },
     );
   }
 
-  const data = await res.json();
-  return NextResponse.json(data);
+  try {
+    const res = await fetch(`${API_URL}/invoices/${id}?type=orders`, {
+      headers: {
+        Authorization: `Bearer ${session.user.accessToken}`,
+        Accept: "application/json",
+      },
+    });
+
+    if (!res.ok) {
+      const error = await res.json();
+      console.error("Invoice fetch error:", { status: res.status, error });
+      return NextResponse.json(
+        { error: error?.message ?? "Failed to fetch invoice" },
+        { status: res.status },
+      );
+    }
+
+    const data = await res.json();
+    return NextResponse.json(data);
+  } catch (error) {
+    console.error("Unexpected error:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
+  }
 }
