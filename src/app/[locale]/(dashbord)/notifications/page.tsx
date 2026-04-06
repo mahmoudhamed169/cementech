@@ -5,10 +5,7 @@ export default function NotificationsPage() {
   const unreadCount = mockNotifications.filter((n) => !n.read).length;
 
   return (
-    <div
-      className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-3"
-      dir="rtl"
-    >
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-3">
       {/* header row */}
       {unreadCount > 0 && (
         <div className="flex items-center justify-between pb-2 border-b border-gray-100">

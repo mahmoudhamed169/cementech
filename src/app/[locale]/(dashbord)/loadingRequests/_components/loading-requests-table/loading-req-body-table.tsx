@@ -7,6 +7,7 @@ import { LoadingRequestStatusBadge } from "../../../_components/loading-qequest-
 import { Link } from "@/src/i18n/navigation";
 import { Eye } from "lucide-react";
 import LoadingRequestActions from "./loading-request-actions";
+import LoadingRequestTypeBadge from "../../../_components/type-badge";
 
 interface Props {
   loadingRequests: Request[];
@@ -37,6 +38,11 @@ export default function LoadingRequestsTableBody({ loadingRequests }: Props) {
           <TableCell>
             {/* {loading.request_status} */}
             <LoadingRequestStatusBadge status={loading.request_status} />
+          </TableCell>
+
+          {/* نوع الطلب */}
+          <TableCell className="text-center">
+            <LoadingRequestTypeBadge type={loading.request_type} />
           </TableCell>
 
           {/* الكمية */}

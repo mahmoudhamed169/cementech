@@ -3,6 +3,7 @@ import SearchInput from "@/src/components/shared/search-input";
 import { useTranslations } from "next-intl";
 import StatusFilter from "./status-filter";
 import TimeFilter from "./time-filter";
+import TypeFilter from "./type-filter";
 
 export default function LoadingReqHeader() {
   const t = useTranslations("loadingRequestsPage.loadingRequestHeader");
@@ -15,6 +16,7 @@ export default function LoadingReqHeader() {
         </div>
         <TimeFilter />
         <StatusFilter />
+           <TypeFilter />
       </div>
     </div>
   );

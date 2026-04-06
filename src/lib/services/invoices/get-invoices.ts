@@ -11,13 +11,14 @@ export async function getInvoices({
   page = 1,
   limit = 10,
   search,
+  invoiceType,
 }: GetInvoicesParams = {}): Promise<InvoicesResponse> {
   const session = await getServerSession(authOptions);
 
   const params = new URLSearchParams({
     page: String(page),
     limit: String(limit),
-    invoice_type: "orders",
+    ...(invoiceType ? { invoice_type: invoiceType } : {}),
     ...(search ? { search } : {}),
   });
 
@@ -30,8 +31,8 @@ export async function getInvoices({
   });
 
   if (!res.ok) {
-    const error = await res.json();
-    console.error("Get invoices error:", error);
+    const text = await res.text();
+    console.error("Get invoices error:", res.status, text);
     throw new Error(`Failed to fetch invoices: ${res.status}`);
   }
 

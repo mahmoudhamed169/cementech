@@ -89,6 +89,7 @@ export function InvoiceModalContent({ id }: Props) {
                 <OrderDetails
                   order={invoiceData.order_details}
                   product={invoiceData.product}
+                  factory={invoiceData.factory}
                 />
                 <DeliveryDetails shipments={invoiceData.shipments} />
                 <div className="flex gap-13 print:flex-col print:gap-6">

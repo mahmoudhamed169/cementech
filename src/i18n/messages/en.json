@@ -434,6 +434,12 @@
         "today": "Today",
         "this_week": "This Week",
         "this_month": "This Month"
+      },
+      "typeFilter": {
+        "filterLabel": "Type",
+        "all": "All",
+        "with_data": "New Loading Request",
+        "without_data": "Pre-loaded"
       }
     },
     "table": {
@@ -443,6 +449,7 @@
         "driverName": "Driver Name",
         "vehicleNumber": "Vehicle Number",
         "requestStatus": "Request Status",
+        "type": "Type",
         "quantity": "Quantity",
         "requestTime": "Request Time",
         "loadingTime": "Loading Time",
@@ -451,6 +458,10 @@
       "empty": {
         "title": "No loading requests found",
         "description": "Loading requests will appear here once submitted by drivers."
+      },
+      "typeBadge": {
+        "with_data": "New Loading Request",
+        "without_data": "Pre-loaded"
       }
     },
     "approveModal": {
@@ -535,13 +546,19 @@
       "title": "Invoices",
       "columns": {
         "index": "#",
-        "invoicesId": "Invoice Number",
-        "orderId": "Order Number",
-        "userName": "client Name",
-        "userPhoneNumber": "Client Phone Number",
+        "invoicesId": "Invoice ID",
+        "orderId": "Order ID",
+        "userName": "Customer Name",
+        "userPhoneNumber": "Customer Phone",
+        "driverName": "Driver Name",
+        "driverPhoneNumber": "Driver Phone",
+        "totalPaid": "Total Amount",
         "date": "Date",
-        "totalPaid": "Total Paid",
         "actions": "Actions"
+      },
+      "typeFilter": {
+        "orders": "Order Invoice",
+        "requests": "Loading Request Invoice"
       }
     }
   },
