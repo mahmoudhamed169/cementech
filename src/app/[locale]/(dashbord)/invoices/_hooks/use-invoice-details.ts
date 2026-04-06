@@ -4,7 +4,7 @@ import { InvoiceDetailsResponse } from "@/src/lib/types/invoices/invoice-details
 async function fetchInvoiceDetails(
   id: string,
 ): Promise<InvoiceDetailsResponse> {
-  const res = await fetch(`/api/invoices/${id}`);
+  const res = await fetch(`/api/invoices/${id}?type=orders`);
   if (!res.ok) throw new Error("Failed to fetch invoice details");
   return res.json();
 }

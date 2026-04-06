@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await getServerSession(authOptions);
@@ -23,8 +23,10 @@ export async function GET(
     );
   }
 
+  const type = req.nextUrl.searchParams.get("type") ?? "orders";
+
   try {
-    const res = await fetch(`${API_URL}/invoices/${id}?type=orders`, {
+    const res = await fetch(`${API_URL}/invoices/${id}?type=${type}`, {
       headers: {
         Authorization: `Bearer ${session.user.accessToken}`,
         Accept: "application/json",
