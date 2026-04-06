@@ -9,6 +9,7 @@ export default function LoadingReqList({
     search?: string;
     status?: string;
     time?: string;
+    type?: string;
   };
 }) {
   return (

@@ -490,6 +490,7 @@
       },
       "stepTwo": {
         "confirmMessage": "Approving this request will send the factory location and required documents to the driver",
+        "confirmMessageWithoutData": "Approving this request will notify the driver that their request has been accepted",
         "locationTitle": "Factory Location",
         "mapPlaceholder": "Select location on map",
         "selectLocation": "Select Location",
@@ -497,6 +498,7 @@
         "tripCertificate": "Trip Certificate",
         "layingCommand": "Laying Command",
         "submit": "Approve & Send Documents",
+        "submitWithoutData": "Approve Request",
         "submitting": "Confirming...",
 
         "cancel": "Cancel",
@@ -525,7 +527,7 @@
         "factoryName": "Factory Name",
         "driverInfo": "Driver Information",
         "orderInfo": "Order Information",
-        "quantity": "Quantity" , 
+        "quantity": "Quantity",
         "preview": "Preview Document"
       },
       "locationSection": {

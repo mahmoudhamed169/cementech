@@ -491,6 +491,7 @@
       },
       "stepTwo": {
         "confirmMessage": "سيؤدي الموافقة على هذا الطلب إلى إرسال موقع المصنع والمستندات المطلوبة إلى السائق",
+        "confirmMessageWithoutData": "سيؤدي الموافقة على هذا الطلب إلى إشعار السائق بقبول طلبه",
         "mapPlaceholder": "اختر الموقع على الخريطة",
         "selectLocation": "اختر الموقع",
         "locationTitle": "بيانات الموقع",
@@ -503,6 +504,7 @@
         "tripCertificate": "شهادة الرحلة",
         "layingCommand": "امر التنزيل",
         "submit": "قبول الطلب وإرسال المستندات",
+        "submitWithoutData": "قبول الطلب",
         "submitting": "جاري التأكيد...",
         "cancel": "إلغاء",
         "messages": {
