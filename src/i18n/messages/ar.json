@@ -197,12 +197,16 @@
     "driverId": "ID",
     "distance": "المسافه",
     "quantity": "الكمية",
+    "truck_quantity": "عدد الشحنات",
     "confirm": "تأكيد",
     "availableDrivers": "سائقين متاحين بالقرب من الموقع",
     "noDriversAvailable": "لا يوجد سائقون متاحون",
     "noDriversAvailableDesc": "حاول مرة أخرى لاحقاً",
     "errorLoadingDrivers": "حدث خطأ أثناء تحميل السائقين",
-    "errorLoadingDriversDesc": "حدث خطأ ما، حاول مرة أخرى"
+    "errorLoadingDriversDesc": "حدث خطأ ما، حاول مرة أخرى",
+    "cancelConfirmTitle": "هل أنت متأكد من إلغاء الطلب؟",
+    "cancelConfirmDescription": "لا يمكن التراجع عن هذا الإجراء بعد تأكيده.",
+    "cancelConfirmBack": "رجوع"
   },
   "common": {
     "logout": "تسجيل خروج",
