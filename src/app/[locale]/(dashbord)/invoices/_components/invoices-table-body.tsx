@@ -7,6 +7,7 @@ import {
 } from "@/src/lib/types/invoices/invoice";
 import TimeAgo from "@/src/components/providers/shared/_components/time-ago";
 import { InvoiceModalContent } from "./invoice";
+import { RequestInvoiceModalContent } from "./invoice/request-invoice";
 
 export default function InvoicesTableBody({
   invoices,
@@ -67,9 +68,14 @@ export default function InvoicesTableBody({
           </TableCell>
 
           {/* actions */}
+          {/* actions */}
           <TableCell className="text-center">
             <div className="flex items-center justify-center gap-2">
-              <InvoiceModalContent id={item.id} />
+              {isOrderInvoice(item) ? (
+                <InvoiceModalContent id={item.id} />
+              ) : isRequestInvoice(item) ? (
+                <RequestInvoiceModalContent id={item.id} />
+              ) : null}
             </div>
           </TableCell>
         </TableRow>
