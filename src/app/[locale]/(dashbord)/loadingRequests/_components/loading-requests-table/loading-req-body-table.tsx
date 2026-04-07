@@ -47,8 +47,10 @@ export default function LoadingRequestsTableBody({ loadingRequests }: Props) {
 
           {/* اسم المنتج */}
           <TableCell>
-            {loading.product_name} <br />
-            {loading.factory_name}
+            <p className="text-base font-bold text-gray-800">
+              {loading.product_name}
+            </p>
+            <p className="text-sm text-gray-500">{loading.factory_name}</p>
           </TableCell>
 
           {/* الكمية */}
