@@ -7,7 +7,7 @@ import { NotificationsResponse } from "../../types/notifications/notification";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getNotifications(
-  lang: "ar" | "en"
+  lang: "ar" | "en",
 ): Promise<NotificationsResponse> {
   const session = await getServerSession(authOptions);
 
@@ -16,7 +16,7 @@ export async function getNotifications(
       Authorization: `Bearer ${session?.user.accessToken}`,
       lang,
     },
-    cache: "no-store",
+    next: { tags: ["notifications"] },
   });
 
   if (!res.ok) throw new Error("Failed to fetch notifications");

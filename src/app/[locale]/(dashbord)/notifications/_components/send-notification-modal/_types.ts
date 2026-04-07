@@ -1,8 +1,4 @@
-export type RecipientType =
-  | "allDrivers"
-  | "allUsers"
-  | "specificDriver"
-  | "specificUser";
+export type RecipientType = "allDrivers" | "allUsers" | "all";
 
 export interface SendNotificationForm {
   recipient: RecipientType;

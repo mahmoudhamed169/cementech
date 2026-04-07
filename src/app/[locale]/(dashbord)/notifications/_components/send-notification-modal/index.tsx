@@ -25,7 +25,7 @@ export default function SendNotificationModal({
   onOpenChange,
 }: SendNotificationModalProps) {
   const t = useTranslations("NotificationPage.sendModal");
-  const { form, showSearch } = useSendNotificationForm();
+  const { form } = useSendNotificationForm(); // ✅ حذفنا showSearch
   const { mutate, isPending } = useSendNotification();
 
   function handleSubmit(values: Parameters<typeof mutate>[0]) {
@@ -41,23 +41,22 @@ export default function SendNotificationModal({
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-lg rounded-2xl bg-white border-0 max-h-[80vh] overflow-y-auto ">
-        {" "}
+      <DialogContent className="sm:max-w-lg rounded-2xl bg-white border-0 max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>
           <DialogDescription>{t("description")}</DialogDescription>
         </DialogHeader>
         <Form {...form}>
-          <div className="space-y-5 pt-2 ">
+          <div className="space-y-5 pt-2">
             <RecipientSelector
               value={form.watch("recipient")}
               onChange={(val) => form.setValue("recipient", val)}
             />
-            <NotificationFormFields form={form} showSearch={showSearch} />
+            <NotificationFormFields form={form} /> {/* ✅ حذفنا showSearch */}
             <ModalActions
               onSubmit={form.handleSubmit(handleSubmit)}
               onCancel={handleClose}
-              isPending={isPending}
+              isPending={isPending} // ✅ كان isLoading
             />
           </div>
         </Form>
