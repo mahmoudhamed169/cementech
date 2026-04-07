@@ -6,6 +6,13 @@ import { SendNotificationSchema } from "./_schema";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+// Map our RecipientType → API target value
+const RECIPIENT_TARGET_MAP = {
+  allDrivers: "driver",
+  allUsers: "customer",
+  all: "all",
+} as const;
+
 export async function sendNotificationAction(data: SendNotificationSchema) {
   const session = await getServerSession(authOptions);
 
@@ -14,10 +21,9 @@ export async function sendNotificationAction(data: SendNotificationSchema) {
     title_en: data.title_en,
     description_ar: data.description_ar,
     description_en: data.description_en,
-    ...(data.search ? { user_id: data.search } : {}),
+    for_admin: true,
+    target: RECIPIENT_TARGET_MAP[data.recipient],
   };
-
-  console.log("Sending payload:", payload);
 
   const res = await fetch(`${API_URL}/notifications`, {
     method: "POST",
@@ -33,7 +39,6 @@ export async function sendNotificationAction(data: SendNotificationSchema) {
     console.error("Send notification error:", {
       status: res.status,
       body: errorBody,
-      messages: errorBody.message?.message,
     });
     throw new Error(`Failed to send notification: ${res.status}`);
   }

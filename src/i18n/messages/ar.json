@@ -592,8 +592,7 @@
       "recipients": {
         "allDrivers": "كل السائقين",
         "allUsers": "كل المستخدمين",
-        "specificDriver": "سائق محدد",
-        "specificUser": "مستخدم محدد"
+        "all": "الكل"
       },
       "driverSearch": {
         "label": "اسم او ID المستخدم / السائق",
@@ -613,7 +612,32 @@
       },
       "cancel": "الغاء",
       "send": "ارسال"
-    }
+    },
+    "title": "الإشعارات",
+    "unreadCount": "غير مقروء",
+    "empty": "لا توجد إشعارات",
+    "readSeparator": "الإشعارات المقروءة",
+    "markAllAsRead": {
+      "button": "تعليم الكل كمقروء",
+      "toast": {
+        "success": "تم تعليم الكل كمقروء",
+        "error": "فشل تعليم الكل كمقروء"
+      }
+    },
+    "markAsRead": {
+      "button": "تعليم كمقروء",
+      "toast": {
+        "success": "تم التعليم كمقروء",
+        "error": "فشل التعليم كمقروء"
+      }
+    },
+    "delete": {
+      "toast": {
+        "success": "تم حذف الإشعار",
+        "error": "فشل حذف الإشعار"
+      }
+    },
+    "badge": { "new": "جديد" }
   },
   "suppliersPage": {
     "header": {

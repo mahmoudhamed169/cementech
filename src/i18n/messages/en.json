@@ -578,7 +578,7 @@
   "NotificationPage": {
     "header": {
       "title": "Notifications",
-      "description": "Track and manage notifications sent to drivers and customers",
+      "description": "Monitor and manage notifications sent to drivers and customers",
       "btn": "Send New Notification"
     },
     "sendModal": {
@@ -588,28 +588,52 @@
       "recipients": {
         "allDrivers": "All Drivers",
         "allUsers": "All Users",
-        "specificDriver": "Specific Driver",
-        "specificUser": "Specific User"
+        "all": "Everyone"
       },
       "driverSearch": {
-        "label": "User Name or ID",
-        "placeholder": "Enter user name or ID."
+        "label": "User / Driver name or ID",
+        "placeholder": "Enter the name or ID of the user / driver."
       },
       "titleField": {
         "label_ar": "Title in Arabic",
         "label_en": "Title in English",
-        "placeholder_ar": "Enter title in Arabic..",
-        "placeholder_en": "Enter title in English.."
+        "placeholder_ar": "Enter notification title in Arabic..",
+        "placeholder_en": "Enter notification title in English.."
       },
       "body": {
-        "label_ar": "Message in Arabic",
-        "label_en": "Message in English",
-        "placeholder_ar": "Enter message in Arabic..",
-        "placeholder_en": "Enter message in English.."
+        "label_ar": "Body in Arabic",
+        "label_en": "Body in English",
+        "placeholder_ar": "Enter notification body in Arabic..",
+        "placeholder_en": "Enter notification body in English.."
       },
       "cancel": "Cancel",
       "send": "Send"
-    }
+    },
+    "title": "Notifications",
+    "unreadCount": "unread",
+    "empty": "No notifications",
+    "readSeparator": "Read notifications",
+    "markAllAsRead": {
+      "button": "Mark all as read",
+      "toast": {
+        "success": "All marked as read",
+        "error": "Failed to mark all as read"
+      }
+    },
+    "markAsRead": {
+      "button": "Mark as read",
+      "toast": {
+        "success": "Marked as read",
+        "error": "Failed to mark as read"
+      }
+    },
+    "delete": {
+      "toast": {
+        "success": "Notification deleted",
+        "error": "Failed to delete notification"
+      }
+    } , 
+    "badge": { "new": "New" }
   },
   "suppliersPage": {
     "header": {
