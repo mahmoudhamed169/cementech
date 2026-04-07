@@ -115,10 +115,16 @@ export default function DriverDetails({ driver }: { driver: DriverProfile }) {
           />
 
           <FormInputField
+            id="plate-number"
+            label={t("carCapacity")}
+            value={`${driver.car_hold_capacity || ""} ${t("ton")}`}
+            readOnly
+          />
+
+          <FormInputField
             id="joining-date"
             label={t("joiningDate")}
             value={new Date(driver.created_at).toISOString().split("T")[0]}
-            type="date"
             readOnly
           />
         </FieldGroup>

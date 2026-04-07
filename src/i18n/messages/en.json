@@ -356,7 +356,9 @@
       "plateNumber": "Plate Number",
       "joiningDate": "Joining Date",
       "backToDrivers": "Drivers",
-      "nationalId": "National ID / Residence"
+      "nationalId": "National ID / Residence",
+      "carCapacity": "سعة العربة",
+      "ton": "طن"
     },
 
     "driverStats": {
@@ -632,7 +634,7 @@
         "success": "Notification deleted",
         "error": "Failed to delete notification"
       }
-    } , 
+    },
     "badge": { "new": "New" }
   },
   "suppliersPage": {

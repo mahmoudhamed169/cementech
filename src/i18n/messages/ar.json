@@ -362,7 +362,9 @@
       "plateNumber": "رقم لوحة السيارة",
       "joiningDate": "تاريخ الانضمام",
       "backToDrivers": "السائقين",
-      "nationalId": "رقم الهوية / الإقامة"
+      "nationalId": "رقم الهوية / الإقامة",
+      "carCapacity": "سعة العربة",
+      "ton": "طن"
     },
 
     "driverStats": {
