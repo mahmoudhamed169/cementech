@@ -96,7 +96,7 @@ export default function NotificationCard({
 
   return (
     <div
-      dir="rtl"
+   
       style={{
         borderRightWidth: "4px",
         borderRightColor: n.read ? cfg.color + "bb" : cfg.color,
@@ -172,7 +172,7 @@ export default function NotificationCard({
           {/* Actions — unread only */}
           {!n.read && (
             <div className="flex items-center gap-2 flex-wrap mt-1">
-              {mainActions.map((action) => (
+              {/* {mainActions.map((action) => (
                 <button
                   key={action.label}
                   onClick={() => action.onClick && handleMarkAsRead()}
@@ -181,7 +181,7 @@ export default function NotificationCard({
                 >
                   {action.label}
                 </button>
-              ))}
+              ))} */}
               <button
                 onClick={handleMarkAsRead}
                 disabled={isPending}

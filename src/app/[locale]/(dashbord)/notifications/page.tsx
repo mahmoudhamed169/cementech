@@ -14,7 +14,7 @@ export default async function NotificationsPage() {
   const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
-    <div className="w-full" dir="rtl">
+    <div className="w-full" >
       <div className="bg-white border border-gray-200 rounded-xl p-6">
         <NotificationsHeader unreadCount={unreadCount} />
         <NotificationsList notifications={notifications} />
