@@ -1,0 +1,15 @@
+export const permissionPagesMap: Record<string, string> = {
+  home_permission: "home",
+  order_permission: "orders",
+  driver_permission: "drivers",
+  loading_request_permission: "loadingRequests",
+  user_permission: "users",
+  payment_permission: "payments",
+  invoice_permission: "invoices",
+  notification_permission: "notifications",
+  management_permission: "permissions",
+  supervisor_permission: "supervisors",
+  supplier_permission: "suppliers",
+  terms_permission: "terms",
+  setting_permission: "settings",
+};

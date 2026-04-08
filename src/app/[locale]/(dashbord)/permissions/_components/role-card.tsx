@@ -1,14 +1,17 @@
-import { Users, Lock, ChevronLeft, Eye, Pencil, Trash2 } from "lucide-react";
+import { Users, Lock, Pencil, Trash2 } from "lucide-react";
 import PagesModal from "./pages-card-modal";
 import { RoleDetails } from "./role-details";
+import { Permission } from "@/src/types/permissions/permission";
 
 interface RoleCardProps {
   title: string;
   description: string;
   assignedCount: number;
   pages: string[];
+  extraCount?: number;
   isProtected?: boolean;
   variant?: "default" | "primary";
+  permission: Permission;
 }
 
 export const colors = (p: boolean) => ({
@@ -37,8 +40,10 @@ export default function RoleCard({
   description,
   assignedCount,
   pages,
+  extraCount = 0,
   isProtected = false,
   variant = "default",
+  permission,
 }: RoleCardProps) {
   const p = variant === "primary";
   const c = colors(p);
@@ -61,7 +66,7 @@ export default function RoleCard({
           <div className="space-y-1">
             {p && (
               <span className="inline-flex items-center bg-[#FFDF20] text-[#78350F] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
-                النظام{" "}
+                النظام
               </span>
             )}
             <h2 className="text-[#0F172A] font-bold text-xl">{title}</h2>
@@ -86,7 +91,6 @@ export default function RoleCard({
           >
             <Users size={16} className={c.iconClr} />
           </div>
-
           <div>
             <p className="text-[#94A3B8] text-[11px] font-medium">
               المشرفون المعينون
@@ -107,9 +111,8 @@ export default function RoleCard({
             >
               الصفحات المتاحة
             </p>
-
             <div className="flex flex-wrap gap-2">
-              {pages.slice(0, 3).map((page, i) => (
+              {pages.map((page, i) => (
                 <span
                   key={i}
                   className={`text-xs font-medium px-3 py-1.5 rounded-lg ${c.tag}`}
@@ -117,9 +120,14 @@ export default function RoleCard({
                   {page}
                 </span>
               ))}
-
-              {pages.length > 3 && (
-                <PagesModal title={title} pages={pages} c={c} />
+              {extraCount > 0 && (
+                <PagesModal
+                  title={title}
+                  pages={pages}
+                  c={c}
+                  extraCount={extraCount}
+                  permission={permission}
+                />
               )}
             </div>
           </div>
@@ -127,17 +135,23 @@ export default function RoleCard({
           <div className={`h-px ${c.divider}`} />
 
           {p ? (
-            <RoleDetails title={title} description={description} />
+            <RoleDetails
+              title={title}
+              description={description}
+              permission={permission}
+            />
           ) : (
             <div className="flex items-center gap-2">
-              <div className="flex-1 ">
-                <RoleDetails title={title} description={description} />
+              <div className="flex-1">
+                <RoleDetails
+                  title={title}
+                  description={description}
+                  permission={permission}
+                />
               </div>
-
               <button className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
                 <Pencil size={14} />
               </button>
-
               <button className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-[#FFF1F2] border border-[#FFE4E6] text-[#F43F5E]">
                 <Trash2 size={14} />
               </button>

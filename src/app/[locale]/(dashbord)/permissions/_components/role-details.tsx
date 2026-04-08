@@ -7,16 +7,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { Eye } from "lucide-react";
 import TableRoles from "./table-roles";
+import { Permission } from "@/src/lib/services/permissions/get-permissions";
 
 export function RoleDetails({
   title,
   description,
+  permission,
 }: {
   title: string;
   description: string;
+  permission: Permission;
 }) {
   return (
     <Dialog>
@@ -26,18 +28,20 @@ export function RoleDetails({
             <Eye size={15} /> رؤية التفاصيل
           </Button>
         </DialogTrigger>
-        <DialogContent className="min-w-188.25 bg-white border-0 ">
+        <DialogContent className="min-w-188.25 bg-white border-0 max-h-[90vh] flex flex-col">
           <DialogHeader>
             <DialogTitle className="text-[#101828] font-bold text-2xl">
               {title}
             </DialogTitle>
             <DialogDescription>{description}</DialogDescription>
           </DialogHeader>
-          <div className="border-t border-[#E5E7EB] mt-6 py-6">
-            <h2 className="text-[#101828] font-bold text-xl">قايمة الأذونات</h2>
-
-            {/* table roles */}
-            <TableRoles />
+          <div className="border-t border-[#E5E7EB] mt-6 flex flex-col flex-1 overflow-hidden">
+            <h2 className="text-[#101828] font-bold text-xl py-6">
+              قايمة الأذونات
+            </h2>
+            <div className="overflow-y-auto flex-1 pb-6">
+              <TableRoles permission={permission} />
+            </div>
           </div>
         </DialogContent>
       </form>
