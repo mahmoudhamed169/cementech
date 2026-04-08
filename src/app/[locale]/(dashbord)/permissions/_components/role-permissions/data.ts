@@ -1,3 +1,5 @@
+import { HttpMethod } from "@/src/lib/services/permissions/get-permissions";
+
 export interface Page {
   id: string;
   label: string;
@@ -9,6 +11,7 @@ export interface PageGroup {
 }
 
 export type Permission = "preview" | "create" | "edit" | "delete";
+
 
 export const PERMISSIONS: { key: Permission; label: string }[] = [
   { key: "preview", label: "معاينة" },
@@ -91,3 +94,26 @@ export const PAGE_GROUPS: PageGroup[] = [
   "setting_permission": ["GET"]         // الإعدادات
 }
   */
+
+export const PAGE_ID_TO_PERMISSION_KEY: Record<string, string> = {
+  home: "home_permission",
+  orders: "order_permission",
+  drivers: "driver_permission",
+  loadingRequests: "loading_request_permission",
+  users: "user_permission",
+  payments: "payment_permission",
+  invoices: "invoice_permission",
+  notifications: "notification_permission",
+  permissions: "management_permission",
+  supervisors: "supervisor_permission",
+  suppliers: "supplier_permission",
+  terms: "terms_permission",
+  settings: "setting_permission",
+};
+
+export const PERMISSION_TO_HTTP: Record<Permission, HttpMethod> = {
+  preview: "GET",
+  create: "POST",
+  edit: "PATCH",
+  delete: "DELETE",
+};
