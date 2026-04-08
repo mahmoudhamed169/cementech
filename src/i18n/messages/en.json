@@ -585,12 +585,13 @@
     },
     "sendModal": {
       "title": "Send Notification",
-      "description": "Send a message to drivers or users",
+      "description": "Send a message to drivers or users to inform them about important updates, promotions, or alerts.",
       "sendTo": "Send To",
       "recipients": {
         "allDrivers": "All Drivers",
         "allUsers": "All Users",
-        "all": "Everyone"
+        "all": "All Users & Drivers",
+        "allSupervisors": "All Supervisors"
       },
       "driverSearch": {
         "label": "User / Driver name or ID",

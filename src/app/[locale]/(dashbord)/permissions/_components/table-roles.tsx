@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -6,29 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Permission } from "@/src/lib/services/permissions/get-permissions";
+import { permissionPagesMap } from "@/src/lib/services/permissions/permission-pages-map";
 import { CircleCheck, CircleX } from "lucide-react";
 
-const headers = ["الصفحات", "معاينة", "إنشاء", "تعديل", "حذف"];
+import { useTranslations } from "next-intl";
 
-const rows = [
-  {
-    page: "لوحة التحكم",
-    preview: true,
-    create: true,
-    edit: false,
-    delete: false,
-  },
-  { page: "المستخدمون", preview: true, create: true, edit: true, delete: true },
-  {
-    page: "التقارير",
-    preview: true,
-    create: false,
-    edit: false,
-    delete: false,
-  },
-  { page: "الإعدادات", preview: true, create: true, edit: true, delete: true },
-  { page: "المحتوى", preview: true, create: true, edit: true, delete: false },
-];
+const headers = ["الصفحات", "معاينة", "إنشاء", "تعديل", "حذف"];
 
 const Cell = ({ value }: { value: boolean }) =>
   value ? (
@@ -37,9 +23,23 @@ const Cell = ({ value }: { value: boolean }) =>
     <CircleX size={20} className="mx-auto text-[#FB2C36]" />
   );
 
-export default function TableRoles() {
+export default function TableRoles({ permission }: { permission: Permission }) {
+  const t = useTranslations("sidebar");
+
+  const rows = Object.entries(permissionPagesMap)
+    .map(([key, translationKey]) => {
+      const methods = permission[key as keyof Permission] as string[];
+      return {
+        page: t(translationKey),
+        preview: methods.includes("GET"),
+        create: methods.includes("POST"),
+        edit: methods.includes("PATCH"),
+        delete: methods.includes("DELETE"),
+      };
+    })
+    .filter((row) => row.preview || row.create || row.edit || row.delete); // ← هنا
   return (
-    <Table dir="rtl" className="mt-4">
+    <Table className="mt-4">
       <TableHeader>
         <TableRow className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
           {headers.map((h) => (
@@ -52,7 +52,6 @@ export default function TableRoles() {
           ))}
         </TableRow>
       </TableHeader>
-
       <TableBody>
         {rows.map((row, i) => (
           <TableRow
