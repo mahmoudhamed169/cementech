@@ -2,17 +2,18 @@
 
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 interface ModalActionsProps {
   onSubmit: () => void;
   onCancel: () => void;
-  isLoading?: boolean;
+  isPending?: boolean;
 }
 
 export default function ModalActions({
   onSubmit,
   onCancel,
-  isLoading,
+  isPending,
 }: ModalActionsProps) {
   const t = useTranslations("NotificationPage.sendModal");
 
@@ -21,15 +22,15 @@ export default function ModalActions({
       <Button
         className="flex-1 rounded-xl bg-blue-600 hover:bg-blue-700 text-white"
         onClick={onSubmit}
-        disabled={isLoading}
+        disabled={isPending}
       >
-        {t("send")}
+        {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : t("send")}
       </Button>
       <Button
         variant="outline"
         className="flex-1 rounded-xl"
         onClick={onCancel}
-        disabled={isLoading}
+        disabled={isPending}
       >
         {t("cancel")}
       </Button>
