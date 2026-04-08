@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -20,17 +20,131 @@ import {
   DEFAULT_PAGE_PERMISSIONS,
   Permission,
   SelectedPermissions,
+  PAGE_ID_TO_PERMISSION_KEY,
+  PERMISSION_TO_HTTP,
 } from "./data";
+import { useCreatePermission, useUpdatePermission } from "./_hooks";
+import { CreatePermissionSchema } from "./_schema";
+import { Permission as PermissionType } from "@/src/lib/services/permissions/get-permissions";
 
-// map: pageId -> label — لازم نعمله مرة واحدة بره الكومبوننت
 const PAGE_LABELS: Record<string, string> = Object.fromEntries(
   PAGE_GROUPS.flatMap((g) => g.pages.map((p) => [p.id, p.label])),
 );
 
-export function RolePermissionsModal() {
-  const t = useTranslations("permissionsPage.header");
-  const [selectedPages, setSelectedPages] = useState<Set<string>>(new Set());
-  const [permissions, setPermissions] = useState<SelectedPermissions>({});
+function permissionToState(permission: PermissionType) {
+  const selectedPages = new Set<string>();
+  const permissions: SelectedPermissions = {};
+
+  Object.entries(PAGE_ID_TO_PERMISSION_KEY).forEach(([pageId, permKey]) => {
+    const methods = permission[permKey as keyof PermissionType] as string[];
+    if (Array.isArray(methods) && methods.length > 0) {
+      selectedPages.add(pageId);
+      permissions[pageId] = {
+        preview: methods.includes("GET"),
+        create: methods.includes("POST"),
+        edit: methods.includes("PATCH"),
+        delete: methods.includes("DELETE"),
+      };
+    }
+  });
+
+  return { selectedPages, permissions };
+}
+
+function stateToPayload(
+  nameAr: string,
+  nameEn: string,
+  descAr: string,
+  descEn: string,
+  selectedPages: Set<string>,
+  permissions: SelectedPermissions,
+): CreatePermissionSchema {
+  const payload: CreatePermissionSchema = {
+    name_ar: nameAr,
+    name_en: nameEn,
+    description_ar: descAr,
+    description_en: descEn,
+    home_permission: [],
+    order_permission: [],
+    driver_permission: [],
+    loading_request_permission: [],
+    user_permission: [],
+    payment_permission: [],
+    invoice_permission: [],
+    notification_permission: [],
+    management_permission: [],
+    supervisor_permission: [],
+    supplier_permission: [],
+    terms_permission: [],
+    setting_permission: [],
+  };
+
+  selectedPages.forEach((pageId) => {
+    const permKey = PAGE_ID_TO_PERMISSION_KEY[
+      pageId
+    ] as keyof CreatePermissionSchema;
+    const perms = permissions[pageId] ?? DEFAULT_PAGE_PERMISSIONS;
+    const methods: string[] = [];
+
+    (Object.keys(PERMISSION_TO_HTTP) as Permission[]).forEach((p) => {
+      if (perms[p]) methods.push(PERMISSION_TO_HTTP[p]);
+    });
+
+    (payload as Record<string, unknown>)[permKey] = methods;
+  });
+
+  return payload;
+}
+
+interface RolePermissionsModalProps {
+  permissionId?: string;
+  initialData?: PermissionType;
+  trigger?: React.ReactNode;
+}
+
+export function RolePermissionsModal({
+  permissionId,
+  initialData,
+  trigger,
+}: RolePermissionsModalProps) {
+  const isEdit = !!permissionId;
+  const [open, setOpen] = useState(false);
+
+  const getInitialState = () => {
+    if (isEdit && initialData) return permissionToState(initialData);
+    return { selectedPages: new Set<string>(), permissions: {} };
+  };
+
+  const [nameAr, setNameAr] = useState(initialData?.name_ar ?? "");
+  const [nameEn, setNameEn] = useState(initialData?.name_en ?? "");
+  const [descAr, setDescAr] = useState(initialData?.description_ar ?? "");
+  const [descEn, setDescEn] = useState(initialData?.description_en ?? "");
+  const [selectedPages, setSelectedPages] = useState<Set<string>>(
+    () => getInitialState().selectedPages,
+  );
+  const [permissions, setPermissions] = useState<SelectedPermissions>(
+    () => getInitialState().permissions,
+  );
+
+  // أضف هذا
+  useEffect(() => {
+    if (open && isEdit && initialData) {
+      setNameAr(initialData.name_ar);
+      setNameEn(initialData.name_en);
+      setDescAr(initialData.description_ar);
+      setDescEn(initialData.description_en);
+      const { selectedPages, permissions } = permissionToState(initialData);
+      setSelectedPages(selectedPages);
+      setPermissions(permissions);
+    }
+  }, [open]);
+
+  const createMutation = useCreatePermission(() => setOpen(false));
+  const updateMutation = useUpdatePermission(permissionId ?? "", () =>
+    setOpen(false),
+  );
+
+  const isPending = createMutation.isPending || updateMutation.isPending;
 
   const togglePage = (id: string) => {
     setSelectedPages((prev) => {
@@ -39,7 +153,6 @@ export function RolePermissionsModal() {
         next.delete(id);
       } else {
         next.add(id);
-        // ابدأ بـ default permissions لما الصفحة تتضاف
         setPermissions((p) => ({
           ...p,
           [id]: p[id] ?? { ...DEFAULT_PAGE_PERMISSIONS },
@@ -59,16 +172,48 @@ export function RolePermissionsModal() {
     }));
   };
 
+  const handleSubmit = () => {
+    const payload = stateToPayload(
+      nameAr,
+      nameEn,
+      descAr,
+      descEn,
+      selectedPages,
+      permissions,
+    );
+    if (isEdit) {
+      updateMutation.mutate(payload);
+    } else {
+      createMutation.mutate(payload);
+    }
+  };
+
+  const handleOpenChange = (val: boolean) => {
+    setOpen(val);
+    if (!val && !isEdit) {
+      setNameAr("");
+      setNameEn("");
+      setDescAr("");
+      setDescEn("");
+      setSelectedPages(new Set());
+      setPermissions({});
+    }
+  };
+
   const totalSelected = selectedPages.size;
   const totalPages = PAGE_GROUPS.reduce((acc, g) => acc + g.pages.length, 0);
+  const isValid =
+    nameAr.trim() !== "" && nameEn.trim() !== "" && totalSelected > 0;
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button className="min-w-46 min-h-12 rounded-xl bg-[#00A63E] text-white p-3 flex justify-center items-center gap-2">
-          <CirclePlus />
-          {t("addBtn")}
-        </Button>
+        {trigger ?? (
+          <Button className="min-w-46 min-h-12 rounded-xl bg-[#00A63E] text-white p-3 flex justify-center items-center gap-2">
+            <CirclePlus />
+            إنشاء دور جديد
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="min-w-5xl bg-white border-0 shadow-2xl rounded-2xl">
         <DialogHeader className="border-b border-[#F3F4F6] pb-4">
@@ -78,7 +223,7 @@ export function RolePermissionsModal() {
             </div>
             <div>
               <DialogTitle className="text-[#101828] text-lg font-bold">
-                إنشاء دور جديد
+                {isEdit ? "تعديل الدور" : "إنشاء دور جديد"}
               </DialogTitle>
               <p className="text-xs text-[#6B7280] mt-0.5">
                 حدد الصلاحيات المناسبة لهذا الدور
@@ -92,9 +237,11 @@ export function RolePermissionsModal() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-[#374151]">
-                اسم الدور <span className="text-red-500">*</span>
+                اسم الدور (عربي) <span className="text-red-500">*</span>
               </label>
               <Input
+                value={nameAr}
+                onChange={(e) => setNameAr(e.target.value)}
                 placeholder="مثل: مدير مبيعات"
                 className={cn(
                   "py-2.5 px-4 rounded-xl w-full transition-all duration-200 border border-[#D1D5DC] text-right",
@@ -104,10 +251,40 @@ export function RolePermissionsModal() {
             </div>
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-[#374151]">
-                الوصف
+                اسم الدور (إنجليزي) <span className="text-red-500">*</span>
               </label>
               <Input
+                value={nameEn}
+                onChange={(e) => setNameEn(e.target.value)}
+                placeholder="e.g. Sales Manager"
+                className={cn(
+                  "py-2.5 px-4 rounded-xl w-full transition-all duration-200 border border-[#D1D5DC] text-right",
+                  "focus-visible:ring-0 focus-visible:border-[#00A63E] focus-visible:shadow-[0_0_0_3px_rgba(0,166,62,0.12)]",
+                )}
+              />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-[#374151]">
+                الوصف (عربي)
+              </label>
+              <Input
+                value={descAr}
+                onChange={(e) => setDescAr(e.target.value)}
                 placeholder="وصف مختصر للدور"
+                className={cn(
+                  "py-2.5 px-4 rounded-xl w-full transition-all duration-200 border border-[#D1D5DC] text-right",
+                  "focus-visible:ring-0 focus-visible:border-[#00A63E] focus-visible:shadow-[0_0_0_3px_rgba(0,166,62,0.12)]",
+                )}
+              />
+            </div>
+            <div className="space-y-1.5">
+              <label className="text-sm font-medium text-[#374151]">
+                الوصف (إنجليزي)
+              </label>
+              <Input
+                value={descEn}
+                onChange={(e) => setDescEn(e.target.value)}
+                placeholder="Brief role description"
                 className={cn(
                   "py-2.5 px-4 rounded-xl w-full transition-all duration-200 border border-[#D1D5DC] text-right",
                   "focus-visible:ring-0 focus-visible:border-[#00A63E] focus-visible:shadow-[0_0_0_3px_rgba(0,166,62,0.12)]",
@@ -155,23 +332,31 @@ export function RolePermissionsModal() {
         {/* Footer */}
         <div className="flex items-center gap-3 pt-4 border-t border-[#F3F4F6]">
           <Button
-            disabled={totalSelected === 0}
+            onClick={handleSubmit}
+            disabled={!isValid || isPending}
             className={cn(
               "rounded-xl px-8 transition-all duration-200 flex-1",
-              totalSelected > 0
+              isValid && !isPending
                 ? "bg-[#00A63E] hover:bg-[#008F35] text-white shadow-sm"
                 : "bg-[#E5E7EB] text-[#9CA3AF] cursor-not-allowed",
             )}
           >
-            إنشاء الدور
-            {totalSelected > 0 && (
-              <span className="mr-2 bg-white/20 text-white text-xs px-1.5 py-0.5 rounded-md">
-                {totalSelected}
-              </span>
+            {isPending ? (
+              "جاري الحفظ..."
+            ) : (
+              <>
+                {isEdit ? "حفظ التعديلات" : "إنشاء الدور"}
+                {totalSelected > 0 && (
+                  <span className="mr-2 bg-white/20 text-white text-xs px-1.5 py-0.5 rounded-md">
+                    {totalSelected}
+                  </span>
+                )}
+              </>
             )}
           </Button>
           <Button
             variant="outline"
+            onClick={() => handleOpenChange(false)}
             className="rounded-xl border-[#D1D5DC] text-[#374151] hover:bg-[#F9FAFB] px-6 flex-1"
           >
             إلغاء

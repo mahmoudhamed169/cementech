@@ -1,13 +1,17 @@
 import { Users, Lock, Pencil, Trash2 } from "lucide-react";
 import PagesModal from "./pages-card-modal";
 import { RoleDetails } from "./role-details";
-import { Permission } from "@/src/types/permissions/permission";
+
+import { Permission } from "@/src/lib/services/permissions/get-permissions";
+import { RolePermissionsModal } from "./role-permissions";
+import { DeletePermissionDialog } from "./delete-permission-dialog";
 
 interface RoleCardProps {
   title: string;
   description: string;
   assignedCount: number;
   pages: string[];
+  allPages: string[];
   extraCount?: number;
   isProtected?: boolean;
   variant?: "default" | "primary";
@@ -40,6 +44,7 @@ export default function RoleCard({
   description,
   assignedCount,
   pages,
+  allPages,
   extraCount = 0,
   isProtected = false,
   variant = "default",
@@ -123,7 +128,7 @@ export default function RoleCard({
               {extraCount > 0 && (
                 <PagesModal
                   title={title}
-                  pages={pages}
+                  pages={allPages}
                   c={c}
                   extraCount={extraCount}
                   permission={permission}
@@ -149,12 +154,19 @@ export default function RoleCard({
                   permission={permission}
                 />
               </div>
-              <button className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
-                <Pencil size={14} />
-              </button>
-              <button className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-[#FFF1F2] border border-[#FFE4E6] text-[#F43F5E]">
-                <Trash2 size={14} />
-              </button>
+              <RolePermissionsModal
+                permissionId={permission.id}
+                initialData={permission}
+                trigger={
+                  <button className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-[#F8FAFC] border border-[#E2E8F0]">
+                    <Pencil size={14} />
+                  </button>
+                }
+              />
+              <DeletePermissionDialog
+                permissionId={permission.id}
+                permissionName={title}
+              />
             </div>
           )}
         </div>

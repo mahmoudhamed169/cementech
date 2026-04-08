@@ -1,5 +1,3 @@
-// src/actions/permissions/get-permissions.ts
-
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/src/auth";
 
@@ -9,8 +7,10 @@ export type HttpMethod = "GET" | "POST" | "DELETE" | "PATCH";
 
 export interface Permission {
   id: string;
-  name: string;
-  description: string;
+  name_ar: string;
+  name_en: string;
+  description_ar: string;
+  description_en: string;
   is_admin: boolean;
   home_permission: HttpMethod[];
   order_permission: HttpMethod[];
@@ -44,20 +44,6 @@ export interface PermissionsResponse {
   };
 }
 
-export interface PermissionsResponse {
-  success: boolean;
-  message: string;
-  data: Permission[];
-  meta: {
-    page: number;
-    limit: number;
-    itemCount: number;
-    pageCount: number;
-    hasPreviousPage: boolean;
-    hasNextPage: boolean;
-  };
-}
-
 export async function getPermissions(): Promise<PermissionsResponse> {
   const session = await getServerSession(authOptions);
 
@@ -65,6 +51,7 @@ export async function getPermissions(): Promise<PermissionsResponse> {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
       system_screen: "permissions",
+      lang: "all",
     },
     next: { tags: ["permissions"] },
     cache: "no-store",
