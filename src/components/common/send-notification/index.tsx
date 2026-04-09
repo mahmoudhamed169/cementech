@@ -16,13 +16,24 @@ import { useSendNotificationForm } from "./_hooks/use-send-notification-form";
 import { useSendNotification } from "./_hooks/use-send-notification";
 import SendNotificationForm from "./_components/notification-form-fields";
 
+interface Props extends SendNotificationProps {
+  open?: boolean; // optional - لو مش موجود هيشتغل بالـ trigger
+  onClose?: () => void; // optional - لو مش موجود هيتحكم في نفسه
+}
+
 export default function SendNotification({
   recipientId,
   recipientName,
   recipientType,
-}: SendNotificationProps) {
+  open: controlledOpen,
+  onClose: controlledOnClose,
+}: Props) {
   const t = useTranslations("SendNotification");
-  const [open, setOpen] = useState(false);
+  const [internalOpen, setInternalOpen] = useState(false);
+
+  // لو في controlled props نستخدمهم، لو لأ نستخدم الـ internal state
+  const isControlled = controlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : internalOpen;
 
   const form = useSendNotificationForm();
   const { mutate, isPending } = useSendNotification(recipientId);
@@ -35,22 +46,28 @@ export default function SendNotification({
 
   function handleClose() {
     form.reset();
-    setOpen(false);
+    if (isControlled) {
+      controlledOnClose?.();
+    } else {
+      setInternalOpen(false);
+    }
   }
 
   return (
     <>
-      {/* ─── trigger ─── */}
-      <Button
-        variant="outline"
-        className="w-full rounded-2xl h-12 gap-2 text-gray-700 border-[#D1D5DC] hover:bg-gray-50 hover:border-gray-400 hover:scale-[1.02] transition-all"
-        onClick={() => setOpen(true)}
-      >
-        <Bell className="h-4 w-4" />
-        {t("trigger")}
-      </Button>
+      {/* الـ trigger بيظهر بس لو مش controlled */}
+      {!isControlled && (
+        <Button
+          variant="outline"
+          className="w-full rounded-2xl h-12 gap-2 text-gray-700 border-[#D1D5DC] hover:bg-gray-50 hover:border-gray-400 hover:scale-[1.02] transition-all"
+          onClick={() => setInternalOpen(true)}
+        >
+          <Bell className="h-4 w-4" />
+          {t("trigger")}
+        </Button>
+      )}
 
-      {/* ─── modal ─── */}
+      {/* modal */}
       <Dialog open={open} onOpenChange={handleClose}>
         <DialogContent className="sm:max-w-md rounded-2xl bg-white border-0">
           <DialogHeader>
@@ -65,7 +82,6 @@ export default function SendNotification({
 
           <SendNotificationForm form={form} />
 
-          {/* actions */}
           <div className="flex gap-3 pt-1">
             <Button
               className="flex-1 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white transition-all"

@@ -80,7 +80,8 @@
     "drivers": "drivers",
     "orders": "orders",
     "loadingRequests": "loading requests",
-    "invoices": "invoices"
+    "invoices": "invoices",
+    "supervisors": "supervisors"
   },
   "recentOrders": {
     "title": "Recent Orders",
@@ -804,7 +805,17 @@
     "header": {
       "title": "Supervisors Management",
       "description": "Create and manage supervisor accounts with defined roles",
-      "addBtn": "Add New Supervisor"
+      "addBtn": "Add New Supervisor",
+      "searchPlaceholder": "Search supervisor..."
+    },
+    "statistics": {
+      "total": "Total Supervisors",
+      "active": "Active Supervisors",
+      "inactive": "Inactive Supervisors",
+      "blocked": "Blocked Supervisors"
+    },
+    "filter": {
+      "statusFilter": "Status :"
     },
     "title": "Supervisors",
     "table": {
@@ -817,6 +828,55 @@
         "lastLogin": "Last Login",
         "actions": "Actions"
       }
+    },
+    "empty": {
+      "title": "No Supervisors",
+      "description": "Supervisors will appear here once they are added to the system."
+    },
+    "status": {
+      "all": "All",
+      "active": "Active",
+      "inactive": "Inactive",
+      "blocked": "Blocked"
+    },
+    "form": {
+      "addTitle": "Add New Supervisor",
+      "editTitle": "Edit Supervisor",
+      "rolesLabel": "Assign Role (choose one)",
+      "add": "Add",
+      "update": "Update",
+      "cancel": "Cancel",
+      "submitting": "Saving...",
+      "fields": {
+        "name": "Supervisor Name",
+        "namePlaceholder": "Enter supervisor name",
+        "phone": "Phone Number",
+        "phonePlaceholder": "05xxxxxxxx"
+      },
+      "roles": {
+        "accounts_supervisor": "Accounts Supervisor",
+        "operations_supervisor": "Operations Supervisor",
+        "drivers_supervisor": "Drivers Supervisor",
+        "users_supervisor": "Users Supervisor"
+      },
+      "validation": {
+        "name": "Supervisor name is required",
+        "phone": "Phone number is required",
+        "roles": "Please select one role"
+      },
+      "loadingRoles": "Loading roles..."
+    },
+    "viewDialog": {
+      "title": "Supervisor Details",
+      "phone": "Phone Number",
+      "code": "Supervisor Code",
+      "permission": "Permission",
+      "role": "Role",
+      "roleValue": "Supervisor",
+      "createdAt": "Created At",
+      "sendNotification": "Send Notification",
+      "activate": "Activate Account",
+      "deactivate": "Deactivate Account"
     }
   },
   "settingsPage": {

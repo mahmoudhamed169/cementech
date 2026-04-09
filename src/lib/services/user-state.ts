@@ -34,7 +34,7 @@ export async function getUsersStats(
       Authorization: `Bearer ${session?.user.accessToken}`,
       system_screen: params.screen ?? params.type ?? "user_permission",
     },
-    cache: "no-store",
+    next: { tags: ["supervisors_stats"] },
   });
 
   if (!res.ok) {

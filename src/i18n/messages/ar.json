@@ -80,7 +80,8 @@
     "drivers": "سائق",
     "orders": "طلب",
     "loadingRequests": "طلب تحميل",
-    "invoices": "فاتورة"
+    "invoices": "فاتورة",
+    "supervisors": "مشرف"
   },
   "recentOrders": {
     "title": "الطلبات الأخيرة",
@@ -806,7 +807,17 @@
     "header": {
       "title": "إدارة المشرفين",
       "description": "إنشاء وإدارة حسابات المشرفين بأدوار محددة",
-      "addBtn": "إضافة مشرف جديد"
+      "addBtn": "إضافة مشرف جديد",
+      "searchPlaceholder": "ابحث عن مشرف..."
+    },
+    "statistics": {
+      "total": "إجمالي المشرفين",
+      "active": "المشرفون النشطون",
+      "inactive": "المشرفون غير النشطون",
+      "blocked": "المشرفون المحظورون"
+    },
+    "filter": {
+      "statusFilter": "الحالة :"
     },
     "title": "المشرفين",
     "table": {
@@ -819,6 +830,55 @@
         "lastLogin": "آخر دخول",
         "actions": "الإجراءات"
       }
+    },
+    "empty": {
+      "title": "لا يوجد مشرفون",
+      "description": "سيظهر المشرفون هنا بمجرد إضافتهم إلى النظام."
+    },
+    "status": {
+      "all": "الكل",
+      "active": "نشط",
+      "inactive": "غير نشط",
+      "blocked": "محظور"
+    },
+    "form": {
+      "addTitle": "إضافة مشرف جديد",
+      "editTitle": "تعديل بيانات مشرف",
+      "rolesLabel": "تعيين الأدوار (اختر دوراً واحداً)",
+      "add": "إضافة",
+      "update": "تحديث",
+      "cancel": "إلغاء",
+      "submitting": "جارٍ الحفظ...",
+      "fields": {
+        "name": "اسم المشرف",
+        "namePlaceholder": "أدخل اسم المشرف",
+        "phone": "رقم الجوال",
+        "phonePlaceholder": "05xxxxxxxx"
+      },
+      "roles": {
+        "accounts_supervisor": "مشرف حسابات",
+        "operations_supervisor": "مشرف عمليات",
+        "drivers_supervisor": "مشرف سائقين",
+        "users_supervisor": "مشرف مستخدمين"
+      },
+      "validation": {
+        "name": "اسم المشرف مطلوب",
+        "phone": "رقم الجوال مطلوب",
+        "roles": "يجب اختيار دور واحد"
+      },
+      "loadingRoles": "جاري تحميل الصلاحيات..."
+    },
+    "viewDialog": {
+      "title": "بيانات المشرف",
+      "phone": "رقم الجوال",
+      "code": "رقم المشرف",
+      "permission": "الصلاحية",
+      "role": "الدور",
+      "roleValue": "مشرف",
+      "createdAt": "تاريخ الإنشاء",
+      "sendNotification": "إرسال إشعار",
+      "activate": "تنشيط الحساب",
+      "deactivate": "إلغاء التنشيط"
     }
   },
   "settingsPage": {
