@@ -51,8 +51,11 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
           <OrderStatusCell status={order.order_status} />
           {/* <TableCell className="text-center">-</TableCell> */}
 
-          <TableCell className="text-center font-medium">
-            {order.product_name}
+       <TableCell>
+            <p className="text-base font-bold text-gray-800">
+              {order.product_name}
+            </p>
+            <p className="text-sm text-gray-500">{order.factory_name}</p>
           </TableCell>
 
           {/* order Shipment */}

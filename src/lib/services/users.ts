@@ -1,6 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/src/auth";
 import { ApiUserResponse, Customer, Driver } from "../types/users";
+import { getLocale } from "next-intl/server"; // ✅
 
 type DriverStatus = "free" | "offline" | "pending" | "blocked";
 type LoadingStatus = "loaded" | "not loaded" | "pending";
@@ -15,6 +16,7 @@ export interface GetUsersParams {
   screen?: string;
   driverStatus?: DriverStatus;
   requestStatus?: LoadingStatus;
+  lang?: string; // ✅
 }
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -24,12 +26,11 @@ export async function getUsers<T extends Driver | Customer>(
 ): Promise<ApiUserResponse<T>> {
   const session = await getServerSession(authOptions);
 
-  const { screen, ...queryParams } = params;
+  const { screen, lang, ...queryParams } = params;
 
   const query = new URLSearchParams();
   Object.entries(queryParams).forEach(([key, value]) => {
     if (value !== undefined && value !== null && value !== "") {
-      // ✅ ضيف value !== ""
       query.append(key, String(value));
     }
   });
@@ -38,15 +39,16 @@ export async function getUsers<T extends Driver | Customer>(
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
       system_screen: screen ?? params.type ?? "user_permission",
+      ...(lang && { lang }), // ✅
     },
-    cache: "no-store",
+    next: { tags: ["supervisors"] },
   });
 
   if (!res.ok) {
     const errorBody = await res.json().catch(() => res.text());
     console.error("Users error:", {
-      status: res.status, // ← إيه الرقم ده؟ 401؟ 403؟ 500؟
-      body: errorBody, // ← إيه الرسالة؟
+      status: res.status,
+      body: errorBody,
       url: `${API_URL}/users?${query.toString()}`,
     });
     throw new Error(`Failed to fetch users: ${res.status}`);

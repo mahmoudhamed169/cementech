@@ -51,3 +51,4 @@ export interface ApiUserResponse<T> {
 }
 
 export type User = Driver | Customer;
+
