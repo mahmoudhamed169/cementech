@@ -97,6 +97,12 @@ export default function OrderHeaderList() {
                 {t("status.all")}
               </SelectItem>
               <SelectItem
+                value="pending_payment"
+                className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
+              >
+                {t("status.pending_payment")}
+              </SelectItem>
+              <SelectItem
                 value="under_review"
                 className="text-sm px-2 py-1 rounded-md hover:bg-[#F2F4F7] data-[state=checked]:bg-[#155DFC]/10"
               >

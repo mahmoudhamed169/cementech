@@ -5,14 +5,15 @@ import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 
 type DeliveryStatus =
+  | "pending_payment"
   | "under_review"
   | "in_preparation"
   | "delivery"
   | "delivered"
   | "canceled";
 
-// ← mapping من النص العربي للـ key
 const statusMap: Record<string, DeliveryStatus> = {
+  "في انتظار الدفع": "pending_payment",
   "تحت المراجعة": "under_review",
   "قيد التجهيز": "in_preparation",
   "قيد التوصيل": "delivery",
@@ -21,6 +22,7 @@ const statusMap: Record<string, DeliveryStatus> = {
 };
 
 const statusStyles: Record<DeliveryStatus, { bg: string; text: string }> = {
+  pending_payment: { bg: "bg-purple-100", text: "text-purple-800" },
   under_review: { bg: "bg-yellow-100", text: "text-yellow-800" },
   in_preparation: { bg: "bg-orange-100", text: "text-orange-800" },
   delivery: { bg: "bg-blue-100", text: "text-blue-800" },
@@ -29,7 +31,7 @@ const statusStyles: Record<DeliveryStatus, { bg: string; text: string }> = {
 };
 
 interface OrderStatusCellProps {
-  status: string; // ← string عشان الباك بيبعت عربي أو إنجليزي
+  status: string;
 }
 
 export default function OrderStatusCell({ status }: OrderStatusCellProps) {

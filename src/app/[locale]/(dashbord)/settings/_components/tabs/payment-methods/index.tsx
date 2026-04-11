@@ -1,57 +1,61 @@
 "use client";
 
-import { useState } from "react";
-import {
-  CreditCard,
-  Truck,
-  Smartphone,
-  Banknote,
-  Landmark,
-} from "lucide-react";
+import { CreditCard, Loader2, AlertCircle } from "lucide-react";
 import PaymentMethodRow from "./payment-method-row";
-import { useTranslations, useLocale } from "next-intl";
-
-type PaymentMethod = {
-  id: string;
-  labelKey: string;
-  icon: React.ComponentType<{ size?: number; className?: string }>;
-  enabled: boolean;
-};
-
-const defaultMethods: PaymentMethod[] = [
-  { id: "cod", labelKey: "cod", icon: Truck, enabled: true },
-  { id: "credit", labelKey: "credit", icon: CreditCard, enabled: true },
-  { id: "apple", labelKey: "apple", icon: Smartphone, enabled: true },
-  { id: "tabby", labelKey: "tabby", icon: Banknote, enabled: true },
-  { id: "tamara", labelKey: "tamara", icon: Landmark, enabled: true },
-];
+import { useTranslations } from "next-intl";
+import { usePaymentMethods } from "../../../_hooks/payment/use-payment-methods";
+import { useTogglePaymentMethod } from "../../../_hooks/payment/use-toggle-payment-method";
 
 export default function PaymentMethodsTab() {
   const t = useTranslations("settingsPage.tabs.payment");
+  const { data, isLoading, isError } = usePaymentMethods();
+  const { mutate: toggleMethod } = useTogglePaymentMethod();
 
-  const [methods, setMethods] = useState<PaymentMethod[]>(defaultMethods);
-
-  const handleToggle = (id: string, value: boolean) => {
-    setMethods((prev) =>
-      prev.map((m) => (m.id === id ? { ...m, enabled: value } : m)),
+  if (isLoading) {
+    return (
+      <div className="space-y-4">
+        <div className="text-start">
+          <h3 className="text-base font-bold text-gray-800">{t("title")}</h3>
+          <p className="text-sm text-gray-500">{t("subtitle")}</p>
+        </div>
+        <div className="rounded-xl border border-gray-100 py-16 flex flex-col items-center justify-center gap-3">
+          <Loader2 size={28} className="text-gray-400 animate-spin" />
+          <p className="text-sm text-gray-400">{t("loading")}</p>
+        </div>
+      </div>
     );
-  };
+  }
+
+  if (isError) {
+    return (
+      <div className="space-y-4">
+        <div className="text-start">
+          <h3 className="text-base font-bold text-gray-800">{t("title")}</h3>
+          <p className="text-sm text-gray-500">{t("subtitle")}</p>
+        </div>
+        <div className="rounded-xl border border-red-100 py-16 flex flex-col items-center justify-center gap-3">
+          <AlertCircle size={28} className="text-red-400" />
+          <p className="text-sm text-red-400">{t("error")}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">
-      <div className={`space-y-1 `}>
+      <div className="space-y-1">
         <h3 className="text-base font-bold text-gray-800">{t("title")}</h3>
         <p className="text-sm text-gray-500">{t("subtitle")}</p>
       </div>
 
       <div className="space-y-4">
-        {methods.map((method) => (
+        {data?.data.map((method) => (
           <PaymentMethodRow
             key={method.id}
-            label={t(`methods.${method.labelKey}`)}
-            icon={method.icon}
-            enabled={method.enabled}
-            onToggle={(val) => handleToggle(method.id, val)}
+            label={method.name}
+            icon={CreditCard}
+            enabled={method.is_active}
+            onToggle={(val) => toggleMethod({ id: method.id, is_active: val })}
           />
         ))}
       </div>

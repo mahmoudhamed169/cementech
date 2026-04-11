@@ -10,7 +10,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-type DriverStatus = "free" | "offline" | "pending" | "blocked";
+export type DriverStatus =
+  | "offline"
+  | "free"
+  | "waiting_order"
+  | "delivering"
+  | "blocked"
+  | "pending";
+
 type LoadingStatus = "loaded" | "not loaded" | "pending";
 
 export default function DriversFilter() {
@@ -31,14 +38,23 @@ export default function DriversFilter() {
     router.push(`?${params.toString()}`);
   };
 
-  const driverStatuses: DriverStatus[] = ["free", "offline", "pending", "blocked"];
+  const driverStatuses: DriverStatus[] = [
+    "free",
+    "offline",
+    "pending",
+    "blocked",
+    "waiting_order", 
+    "delivering",
+  ];
   const loadingStatuses: LoadingStatus[] = ["loaded", "not loaded", "pending"];
 
   return (
     <div className="flex items-center gap-3">
       {/* حالة التحميل */}
       <div className="flex items-center gap-2">
-        <span className="text-sm text-[#475467] whitespace-nowrap">{t("loadingStatus")}</span>
+        <span className="text-sm text-[#475467] whitespace-nowrap">
+          {t("loadingStatus")}
+        </span>
         <Select
           defaultValue={searchParams.get("loadingStatus") ?? "all"}
           onValueChange={(value) => handleFilter("loadingStatus", value)}
@@ -47,7 +63,12 @@ export default function DriversFilter() {
             <SelectValue placeholder={t("all")} />
           </SelectTrigger>
           <SelectContent className="bg-white border border-zinc-200 rounded-xl shadow-lg">
-            <SelectItem className="rounded-lg cursor-pointer hover:bg-zinc-50 focus:bg-zinc-50" value="all">{t("all")}</SelectItem>
+            <SelectItem
+              className="rounded-lg cursor-pointer hover:bg-zinc-50 focus:bg-zinc-50"
+              value="all"
+            >
+              {t("all")}
+            </SelectItem>
             {loadingStatuses.map((status) => (
               <SelectItem
                 className="rounded-lg cursor-pointer hover:bg-zinc-50 focus:bg-zinc-50"
@@ -63,7 +84,9 @@ export default function DriversFilter() {
 
       {/* حالة السائق */}
       <div className="flex items-center gap-2">
-        <span className="text-sm text-[#475467] whitespace-nowrap">{t("driverStatus")}</span>
+        <span className="text-sm text-[#475467] whitespace-nowrap">
+          {t("driverStatus")}
+        </span>
         <Select
           defaultValue={searchParams.get("driverStatus") ?? "all"}
           onValueChange={(value) => handleFilter("driverStatus", value)}
@@ -72,7 +95,12 @@ export default function DriversFilter() {
             <SelectValue placeholder={t("all")} />
           </SelectTrigger>
           <SelectContent className="bg-white border border-zinc-200 rounded-xl shadow-lg">
-            <SelectItem className="rounded-lg cursor-pointer hover:bg-zinc-50 focus:bg-zinc-50" value="all">{t("all")}</SelectItem>
+            <SelectItem
+              className="rounded-lg cursor-pointer hover:bg-zinc-50 focus:bg-zinc-50"
+              value="all"
+            >
+              {t("all")}
+            </SelectItem>
             {driverStatuses.map((status) => (
               <SelectItem
                 className="rounded-lg cursor-pointer hover:bg-zinc-50 focus:bg-zinc-50"
