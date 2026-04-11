@@ -4,7 +4,7 @@ export async function sendOtpAction(phone: string) {
   const res = await fetch(`https://cementech-backend.vercel.app/phoneLogin`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ phone, role: "driver" }),
+    body: JSON.stringify({ phone, role: "admin" }),
   });
 
   const json = await res.json();
