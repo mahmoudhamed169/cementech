@@ -890,12 +890,12 @@
         "trigger": "Payment Methods",
         "title": "Define Payment Methods",
         "subtitle": "Enable or disable payment methods available to customers",
-        "methods": {
-          "cod": "Cash on Delivery",
-          "credit": "Credit Card",
-          "apple": "Apple Pay",
-          "tabby": "Tabby",
-          "tamara": "Tamara"
+        "loading": "Loading...",
+        "error": "Something went wrong, please try again",
+        "toast": {
+          "activated": "Payment method activated successfully",
+          "deactivated": "Payment method deactivated",
+          "error": "Something went wrong, please try again"
         }
       },
       "delivery": {
