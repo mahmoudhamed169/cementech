@@ -25,8 +25,7 @@ export const authOptions: NextAuthOptions = {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               OTP: credentials.otp,
-              // transactionId: credentials.transactionId,
-              transactionId: "1234567890",
+              transactionId: credentials.transactionId,
             }),
           },
         );
