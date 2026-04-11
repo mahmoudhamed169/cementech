@@ -151,11 +151,11 @@
         "this_month": "This Month"
       },
       "status": {
-        "all": "All",
+        "pending_payment": "Pending Payment",
         "under_review": "Under Review",
         "in_preparation": "In Preparation",
-        "delivery": "Delivering",
-        "delivered": "Completed",
+        "delivery": "Out for Delivery",
+        "delivered": "Delivered",
         "canceled": "Canceled"
       }
     },
@@ -329,11 +329,12 @@
       }
     },
     "driverStatus": {
-      "free": "Free",
       "offline": "Offline",
-      "pending": "Pending",
-      "blocked": "Blocked",
-      "waiting_order": "Waiting for Order"
+      "free": "Available",
+      "waiting_order": "Waiting for Order",
+      "delivering": "On the Way",
+      "blocked": "Suspended",
+      "pending": "Awaiting Approval"
     },
     "loadingStatus": {
       "loaded": "Loaded",

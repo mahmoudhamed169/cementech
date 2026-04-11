@@ -155,11 +155,12 @@
       },
       "status": {
         "all": "الكل",
+        "pending_payment": "في انتظار الدفع",
         "under_review": "تحت المراجعة",
         "in_preparation": "قيد التجهيز",
         "delivery": "قيد التوصيل",
         "delivered": "تم التسليم",
-        "canceled": "ملغاة"
+        "canceled": "ملغي"
       }
     },
     "orderDetails": "تفاصيل الطلب",
@@ -335,11 +336,12 @@
       }
     },
     "driverStatus": {
+      "offline": "غير متاح",
       "free": "متاح",
-      "offline": "غير متصل",
-      "pending": "معلق",
-      "blocked": "محظور",
-      "waiting_order": "انتظار طلب"
+      "waiting_order": "في انتظار طلب",
+      "delivering": "في الطريق",
+      "blocked": "موقوف",
+      "pending": "في انتظار الموافقة"
     },
     "loadingStatus": {
       "loaded": "محمل",

@@ -5,7 +5,13 @@ import { TableCell, TableFooter, TableRow } from "@/components/ui/table";
 import PaginationInfo from "@/src/components/shared/pagination-info";
 import { DynamicPagination } from "@/src/components/shared/pagination";
 
-type DriverStatus = "free" | "offline" | "pending" | "blocked";
+type DriverStatus =
+  | "offline"
+  | "free"
+  | "waiting_order"
+  | "delivering"
+  | "blocked"
+  | "pending";
 type LoadingStatus = "loaded" | "not loaded" | "pending";
 
 export async function getDrivers(
