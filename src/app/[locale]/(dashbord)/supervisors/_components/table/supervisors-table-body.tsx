@@ -12,6 +12,7 @@ import { useLocale, useTranslations } from "next-intl";
 import EmptyTableState from "@/src/components/shared/empty-tablestate";
 import { ApiSupervisor } from "@/src/lib/types/admin/admin";
 import SupervisorsViewDialog from "./supervisors-view-dialog";
+import SupervisorsDialog from "../supervisors-form/supervisors-dialog";
 
 interface Props {
   data: ApiSupervisor[];
@@ -46,6 +47,9 @@ export default function SupervisorsTableBody({ data, page, limit }: Props) {
   const t = useTranslations("supervisorsPage.empty");
   const [selectedSupervisor, setSelectedSupervisor] =
     useState<ApiSupervisor | null>(null);
+  const [editSupervisor, setEditSupervisor] = useState<ApiSupervisor | null>(
+    null,
+  );
 
   if (!data.length) {
     return (
@@ -99,7 +103,10 @@ export default function SupervisorsTableBody({ data, page, limit }: Props) {
 
             <TableCell>
               <div className="flex items-center justify-center gap-1">
-                <button className="p-2 rounded-lg hover:bg-[#DBEAFE] text-[#6A7282] hover:text-[#193CB8] transition-colors">
+                <button
+                  onClick={() => setEditSupervisor(supervisor)}
+                  className="p-2 rounded-lg hover:bg-[#DBEAFE] text-[#6A7282] hover:text-[#193CB8] transition-colors"
+                >
                   <UserRoundPen size={16} />
                 </button>
                 <button
@@ -119,6 +126,14 @@ export default function SupervisorsTableBody({ data, page, limit }: Props) {
           open={!!selectedSupervisor}
           onClose={() => setSelectedSupervisor(null)}
           supervisor={selectedSupervisor}
+        />
+      )}
+
+      {editSupervisor && (
+        <SupervisorsDialog
+          open={!!editSupervisor}
+          onClose={() => setEditSupervisor(null)}
+          supervisor={editSupervisor}
         />
       )}
     </>

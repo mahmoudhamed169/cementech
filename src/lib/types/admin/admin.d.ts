@@ -3,6 +3,7 @@ export interface ApiSupervisor {
   phone: string;
   code: string;
   name: string;
+  permission_id: string;
   permissions: {
     name: string;
   };

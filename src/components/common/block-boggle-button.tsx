@@ -8,13 +8,15 @@ import { useBlockUser } from "@/src/lib/hooks/use-block-user";
 interface BlockToggleButtonProps {
   id: string;
   isBlocked: boolean;
-  type: "customer" | "driver"; // 👈 الفرق هنا
+  type: "customer" | "driver" | "admin";
+  onSuccess?: () => void;
 }
 
 export default function BlockToggleButton({
   id,
   isBlocked,
   type,
+  onSuccess,
 }: BlockToggleButtonProps) {
   const t = useTranslations("userPage.userActions");
   const tToast = useTranslations("common.toast");
@@ -31,6 +33,7 @@ export default function BlockToggleButton({
         unblockSuccess: tToast("unblockSuccess"),
         blockError: tToast("blockError"),
       },
+      onSuccess,
     });
   };
 

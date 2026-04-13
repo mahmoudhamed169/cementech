@@ -9,6 +9,7 @@ import SupervisorsFormFields from "./supervisors-form-fields";
 import SupervisorsRoles from "./supervisors-roles";
 import { ApiSupervisor } from "@/src/lib/types/admin/admin";
 import { useCreateSupervisor } from "../../_hooks/use-create-supervisor";
+import { useUpdateSupervisor } from "../../_hooks/use-update-supervisor";
 
 interface Props {
   supervisor?: ApiSupervisor;
@@ -18,23 +19,37 @@ interface Props {
 export default function SupervisorsForm({ supervisor, onClose }: Props) {
   const t = useTranslations("supervisorsPage.form");
   const isEdit = !!supervisor;
-  const { mutateAsync, isPending } = useCreateSupervisor();
+
+  const { mutateAsync: createMutate, isPending: isCreating } =
+    useCreateSupervisor();
+  const { mutateAsync: updateMutate, isPending: isUpdating } =
+    useUpdateSupervisor();
+
+  const isPending = isCreating || isUpdating;
 
   const form = useForm<SupervisorFormValues>({
     resolver: zodResolver(supervisorSchema),
     defaultValues: {
       name: supervisor?.name ?? "",
       phone: supervisor?.phone ?? "",
-      roles: [],
+      roles: supervisor?.permission_id ? [supervisor.permission_id] : [],
     },
   });
 
   const onSubmit = async (values: SupervisorFormValues) => {
     try {
       if (isEdit) {
-        console.log("update", values);
+        await updateMutate({
+          id: supervisor.id,
+          data: values,
+          original: {
+            name: supervisor.name,
+            phone: supervisor.phone,
+            permission_id: supervisor.permission_id,
+          },
+        });
       } else {
-        await mutateAsync(values);
+        await createMutate(values);
       }
       onClose();
     } catch (error) {

@@ -5,13 +5,12 @@ import { useTranslations } from "next-intl";
 export default function PaymentsTableHeader() {
   const headers = [
     "index",
-    "transactionId",
-    "requestId",
-    "driverName",
+    "code",
+    "invoiceId",
     "clientName",
-    "amountPaid",
-    "commission",
-    "paymentMethod",
+    "total",
+    "bankFee",
+    "platformFee",
     "paymentStatus",
     "transactionDate",
   ] as const;

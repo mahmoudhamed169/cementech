@@ -1071,28 +1071,36 @@
     },
     "operations": {
       "filters": {
-        "byTime": "فلتر حسب الوقت",
-        "byStatus": "فلتر حسب الحالة",
+        "byTime": "حسب الوقت",
+        "byStatus": "حسب الحالة",
         "today": "اليوم",
         "week": "هذا الأسبوع",
         "month": "هذا الشهر",
         "all": "الكل",
         "allStatuses": "كل الحالات",
-        "completed": "مكتمل",
-        "pending": "قيد الانتظار",
-        "failed": "فشل"
+        "fullyPaid": "مكتمل",
+        "partiallyPaid": "مدفوع جزئياً",
+        "notPaid": "غير مدفوع",
+        "refunded": "مسترجع",
+        "pickDate": "اختر تاريخ"
       },
       "tableHeaders": {
         "index": "#",
-        "transactionId": "رقم المعاملة",
-        "requestId": "رقم الطلب",
-        "driverName": "اسم السائق",
+        "code": "كود الطلب",
+        "invoiceId": "رقم الفاتورة",
         "clientName": "اسم العميل",
-        "amountPaid": "المبلغ المدفوع",
-        "commission": "العمولة",
-        "paymentMethod": "طريقة الدفع",
+        "total": "المبلغ الكلي",
+        "bankFee": "رسوم البنك",
+        "platformFee": "رسوم المنصة",
         "paymentStatus": "حالة الدفع",
-        "transactionDate": "تاريخ المعاملة"
+        "transactionDate": "التاريخ"
+      },
+
+      "invoiceStatus": {
+        "fullyPaid": "مكتمل",
+        "partiallyPaid": "مدفوع جزئياً",
+        "notPaid": "غير مدفوع",
+        "refunded": "مسترجع"
       }
     },
     "matching": {

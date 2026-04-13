@@ -1069,28 +1069,35 @@
     },
     "operations": {
       "filters": {
-        "byTime": "Filter by Time",
-        "byStatus": "Filter by Status",
+        "byTime": "By Time",
+        "byStatus": "By Status",
         "today": "Today",
         "week": "This Week",
         "month": "This Month",
         "all": "All",
         "allStatuses": "All Statuses",
-        "completed": "Completed",
-        "pending": "Pending",
-        "failed": "Failed"
+        "fullyPaid": "Fully Paid",
+        "partiallyPaid": "Partially Paid",
+        "notPaid": "Not Paid",
+        "refunded": "Refunded",
+        "pickDate": "Pick Date"
       },
       "tableHeaders": {
         "index": "#",
-        "transactionId": "Transaction ID",
-        "requestId": "Request ID",
-        "driverName": "Driver Name",
-        "clientName": "Client Name",
-        "amountPaid": "Amount Paid",
-        "commission": "Commission",
-        "paymentMethod": "Payment Method",
-        "paymentStatus": "Payment Status",
-        "transactionDate": "Transaction Date"
+        "code": "Order Code",
+        "invoiceId": "Invoice ID",
+        "clientName": "Customer Name",
+        "total": "Total Amount",
+        "bankFee": "Bank Fee",
+        "platformFee": "Platform Fee",
+        "paymentStatus": "Status",
+        "transactionDate": "Date"
+      },
+      "invoiceStatus": {
+        "fullyPaid": "Fully Paid",
+        "partiallyPaid": "Partially Paid",
+        "notPaid": "Not Paid",
+        "refunded": "Refunded"
       }
     },
     "matching": {

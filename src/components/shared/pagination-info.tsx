@@ -2,7 +2,13 @@
 
 import { useTranslations } from "next-intl";
 
-type EntityType = "users" | "drivers" | "orders" | "loadingRequests" | "supervisors";
+type EntityType =
+  | "users"
+  | "drivers"
+  | "orders"
+  | "loadingRequests"
+  | "supervisors"
+  | "payments";
 
 interface PaginationInfoProps {
   from: number;
