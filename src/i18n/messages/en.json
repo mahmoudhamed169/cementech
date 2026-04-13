@@ -55,22 +55,17 @@
     "activeDrivers": "Active Drivers"
   },
   "driversStatus": {
-    "title": "Drivers Status",
+    "title": "...",
     "available": "Available",
-    "inDelivery": "On Delivery",
-    "unavailable": "Unavailable",
+    "inDelivery": "In Delivery",
+    "waiting": "Waiting for Order",
+    "unavailable": "Offline",
     "totalDrivers": "Total Drivers"
   },
   "systemWarnings": {
-    "title": "System Warnings",
-    "urgentCount": "{count} Urgent",
-    "items": {
-      "manualAssignment": "Order #{orderId} requires manual assignment – {drivers} drivers rejected",
-      "driverDelay": "Delay in assigning a driver for order #{orderId}",
-      "driverUpdated": "Driver status updated successfully",
-      "minutesAgo": "{minutes} minutes ago",
-      "hoursAgo": "{hours} hour ago"
-    }
+    "title": "Warnings",
+    "viewAll": "View All",
+    "empty": "No warnings"
   },
   "pagination": {
     "showing": "Showing",
