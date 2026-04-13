@@ -1,75 +1,63 @@
-// payments/operations/_components/payments-table-body.tsx
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
-
-import { cn } from "@/lib/utils";
-
-const statusStyles: Record<string, string> = {
-  مكتمل: "bg-green-100 text-green-700",
-  "قيد الانتظار": "bg-yellow-100 text-yellow-700",
-  فشل: "bg-red-100 text-red-700",
-};
+import { InvoiceReportItem } from "@/src/lib/services/payments/get-invoice-report";
+import { InvoiceStatusBadge } from "./invoice-status-badge";
+import { CurrencyIcon } from "@/src/components/shared/currency-icon";
 
 interface Props {
-  payments: any[];
+  payments: InvoiceReportItem[];
 }
 
 export function PaymentsTableBody({ payments }: Props) {
   return (
     <TableBody>
-      {payments.map((payment, index) => (
-        <TableRow
-          key={payment.id}
-          className="text-center h-16 border-b border-gray-100"
-        >
-          <TableCell className="text-gray-500">{index + 1}</TableCell>
-          <TableCell className="font-medium">{payment.transactionId}</TableCell>
-          <TableCell>{payment.requestId}</TableCell>
+      {payments.map((payment, index) => {
+        const formattedDate = new Date(payment.created_at).toLocaleDateString(
+          "en-GB",
+          {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          },
+        );
 
-          {/* Driver */}
-          <TableCell>
-            <div className="flex flex-col items-center gap-0.5">
-              <span className="font-medium text-gray-800">
-                {payment.driverName}
-              </span>
-              <span className="text-xs text-gray-400">
-                {payment.driverPhone}
-              </span>
-            </div>
-          </TableCell>
-
-          {/* Client */}
-          <TableCell>
-            <div className="flex flex-col items-center gap-0.5">
-              <span className="font-medium text-gray-800">
-                {payment.clientName}
-              </span>
-              <span className="text-xs text-gray-400">
-                {payment.clientPhone}
-              </span>
-            </div>
-          </TableCell>
-
-          <TableCell>﷼ {payment.amountPaid.toLocaleString("ar-SA")}</TableCell>
-          <TableCell>﷼ {payment.commission}</TableCell>
-          <TableCell>{payment.paymentMethod}</TableCell>
-
-          {/* Status badge */}
-          <TableCell>
-            <span
-              className={cn(
-                "px-3 py-1 rounded-full text-xs font-medium",
-                statusStyles[payment.paymentStatus],
-              )}
-            >
-              {payment.paymentStatus}
-            </span>
-          </TableCell>
-
-          <TableCell className="text-gray-500">
-            {payment.transactionDate}
-          </TableCell>
-        </TableRow>
-      ))}
+        return (
+          <TableRow
+            key={payment.id}
+            className="text-center h-16 border-b border-gray-100"
+          >
+            <TableCell className="text-gray-500">{index + 1}</TableCell>
+            <TableCell className="font-medium">{payment.code}</TableCell>
+            <TableCell className="text-gray-500 text-xs">
+              {payment.invoice_id}
+            </TableCell>
+            <TableCell className="font-medium text-gray-800">
+              {payment.customer_name}
+            </TableCell>
+            <TableCell>
+              <div className="flex items-center justify-center gap-1">
+                <span>{payment.total}</span>
+                <CurrencyIcon />
+              </div>
+            </TableCell>
+            <TableCell>
+              <div className="flex items-center justify-center gap-1">
+                <span>{payment.bank_fee}</span>
+                <CurrencyIcon />
+              </div>
+            </TableCell>
+            <TableCell>
+              <div className="flex items-center justify-center gap-1">
+                <span>{payment.platform_fee}</span>
+                <CurrencyIcon />
+              </div>
+            </TableCell>
+            <TableCell>
+              <InvoiceStatusBadge status={payment.invoice_status} />
+            </TableCell>
+            <TableCell className="text-gray-500">{formattedDate}</TableCell>
+          </TableRow>
+        );
+      })}
     </TableBody>
   );
 }

@@ -55,22 +55,17 @@
     "activeDrivers": "السائقين النشطين"
   },
   "driversStatus": {
-    "title": "حالة السائقين",
+    "title": "...",
     "available": "متاح",
-    "inDelivery": "في طلبات توصيل",
-    "unavailable": "غير متاح",
+    "inDelivery": "جاري التوصيل",
+    "waiting": "في انتظار طلب",
+    "unavailable": "غير متصل",
     "totalDrivers": "إجمالي السائقين"
   },
   "systemWarnings": {
-    "title": "تحذيرات النظام",
-    "urgentCount": "{count} طارئ",
-    "items": {
-      "manualAssignment": "الطلب رقم {orderId} يتطلب تخصيصًا يدويًا - تم رفض {drivers} سائقين",
-      "driverDelay": "تأخير في تعيين السائق للطلب رقم {orderId}",
-      "driverUpdated": "تم تحديث حالة السائق بنجاح",
-      "minutesAgo": "منذ {minutes} دقائق",
-      "hoursAgo": "منذ {hours} ساعة"
-    }
+    "title": "التنبيهات",
+    "viewAll": "عرض الكل",
+    "empty": "لا توجد تنبيهات"
   },
   "pagination": {
     "showing": "عرض",
@@ -1071,28 +1066,36 @@
     },
     "operations": {
       "filters": {
-        "byTime": "فلتر حسب الوقت",
-        "byStatus": "فلتر حسب الحالة",
+        "byTime": "حسب الوقت",
+        "byStatus": "حسب الحالة",
         "today": "اليوم",
         "week": "هذا الأسبوع",
         "month": "هذا الشهر",
         "all": "الكل",
         "allStatuses": "كل الحالات",
-        "completed": "مكتمل",
-        "pending": "قيد الانتظار",
-        "failed": "فشل"
+        "fullyPaid": "مكتمل",
+        "partiallyPaid": "مدفوع جزئياً",
+        "notPaid": "غير مدفوع",
+        "refunded": "مسترجع",
+        "pickDate": "اختر تاريخ"
       },
       "tableHeaders": {
         "index": "#",
-        "transactionId": "رقم المعاملة",
-        "requestId": "رقم الطلب",
-        "driverName": "اسم السائق",
+        "code": "كود الطلب",
+        "invoiceId": "رقم الفاتورة",
         "clientName": "اسم العميل",
-        "amountPaid": "المبلغ المدفوع",
-        "commission": "العمولة",
-        "paymentMethod": "طريقة الدفع",
+        "total": "المبلغ الكلي",
+        "bankFee": "رسوم البنك",
+        "platformFee": "رسوم المنصة",
         "paymentStatus": "حالة الدفع",
-        "transactionDate": "تاريخ المعاملة"
+        "transactionDate": "التاريخ"
+      },
+
+      "invoiceStatus": {
+        "fullyPaid": "مكتمل",
+        "partiallyPaid": "مدفوع جزئياً",
+        "notPaid": "غير مدفوع",
+        "refunded": "مسترجع"
       }
     },
     "matching": {

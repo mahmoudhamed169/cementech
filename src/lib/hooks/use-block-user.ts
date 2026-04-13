@@ -7,22 +7,24 @@ import { toast } from "sonner";
 interface BlockUserParams {
   id: string;
   isBlocked: boolean;
-  type: "customer" | "driver";
+  type: "customer" | "driver" | "admin"; // ← أضفنا admin
   messages: {
     blockSuccess: string;
     unblockSuccess: string;
     blockError: string;
   };
+  onSuccess?: () => void; // ← أضفنا
 }
 
 export function useBlockUser() {
   const mutation = useMutation({
     mutationFn: ({ id, isBlocked, type }: BlockUserParams) =>
       toggleBlockUser(id, isBlocked, type),
-    onSuccess: (_, { isBlocked, messages }) => {
+    onSuccess: (_, { isBlocked, messages, onSuccess }) => {
       toast.success(
         isBlocked ? messages.unblockSuccess : messages.blockSuccess,
       );
+      onSuccess?.(); // ← استدعاء الـ callback
     },
     onError: (_, { messages }) => {
       toast.error(messages.blockError);

@@ -28,6 +28,7 @@ import { useSendNotificationForm } from "@/src/components/common/send-notificati
 import { useSendNotification } from "@/src/components/common/send-notification/_hooks/use-send-notification";
 import SendNotificationForm from "@/src/components/common/send-notification/_components/notification-form-fields";
 import { useLocale as useCurrentLocale } from "next-intl";
+import BlockToggleButton from "@/src/components/common/block-boggle-button";
 
 interface Props {
   open: boolean;
@@ -168,23 +169,20 @@ export default function SupervisorsViewDialog({
             <Button
               type="button"
               onClick={() => setView("notification")}
-              className="flex-1 h-11 bg-[#155DFC] hover:bg-[#1449CC] text-white rounded-xl font-medium flex items-center justify-center gap-2"
+              className="flex-1 h-11 bg-[#155DFC] hover:bg-[#1449CC] text-white rounded-xl font-medium flex items-center justify-center gap-2 text-sm"
             >
-              <Bell size={16} />
+              <Bell size={15} />
               {t("sendNotification")}
             </Button>
-            <Button
-              type="button"
-              onClick={() => console.log("toggle status")}
-              className={`flex-1 h-11 rounded-xl font-medium flex items-center justify-center gap-2 ${
-                isActive
-                  ? "bg-[#FEF2F2] hover:bg-[#FEE2E2] text-[#DC2626]"
-                  : "bg-[#F0FDF4] hover:bg-[#DCFCE7] text-[#16A34A]"
-              }`}
-            >
-              {isActive ? <PowerOff size={16} /> : <Power size={16} />}
-              {isActive ? t("deactivate") : t("activate")}
-            </Button>
+
+            <div className="flex-1">
+              <BlockToggleButton
+                id={supervisor.id}
+                isBlocked={supervisor.status === "blocked"}
+                type="admin"
+                onSuccess={handleClose}
+              />
+            </div>
           </div>
         </div>
 

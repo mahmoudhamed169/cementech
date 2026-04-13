@@ -55,22 +55,17 @@
     "activeDrivers": "Active Drivers"
   },
   "driversStatus": {
-    "title": "Drivers Status",
+    "title": "...",
     "available": "Available",
-    "inDelivery": "On Delivery",
-    "unavailable": "Unavailable",
+    "inDelivery": "In Delivery",
+    "waiting": "Waiting for Order",
+    "unavailable": "Offline",
     "totalDrivers": "Total Drivers"
   },
   "systemWarnings": {
-    "title": "System Warnings",
-    "urgentCount": "{count} Urgent",
-    "items": {
-      "manualAssignment": "Order #{orderId} requires manual assignment – {drivers} drivers rejected",
-      "driverDelay": "Delay in assigning a driver for order #{orderId}",
-      "driverUpdated": "Driver status updated successfully",
-      "minutesAgo": "{minutes} minutes ago",
-      "hoursAgo": "{hours} hour ago"
-    }
+    "title": "Warnings",
+    "viewAll": "View All",
+    "empty": "No warnings"
   },
   "pagination": {
     "showing": "Showing",
@@ -1069,28 +1064,35 @@
     },
     "operations": {
       "filters": {
-        "byTime": "Filter by Time",
-        "byStatus": "Filter by Status",
+        "byTime": "By Time",
+        "byStatus": "By Status",
         "today": "Today",
         "week": "This Week",
         "month": "This Month",
         "all": "All",
         "allStatuses": "All Statuses",
-        "completed": "Completed",
-        "pending": "Pending",
-        "failed": "Failed"
+        "fullyPaid": "Fully Paid",
+        "partiallyPaid": "Partially Paid",
+        "notPaid": "Not Paid",
+        "refunded": "Refunded",
+        "pickDate": "Pick Date"
       },
       "tableHeaders": {
         "index": "#",
-        "transactionId": "Transaction ID",
-        "requestId": "Request ID",
-        "driverName": "Driver Name",
-        "clientName": "Client Name",
-        "amountPaid": "Amount Paid",
-        "commission": "Commission",
-        "paymentMethod": "Payment Method",
-        "paymentStatus": "Payment Status",
-        "transactionDate": "Transaction Date"
+        "code": "Order Code",
+        "invoiceId": "Invoice ID",
+        "clientName": "Customer Name",
+        "total": "Total Amount",
+        "bankFee": "Bank Fee",
+        "platformFee": "Platform Fee",
+        "paymentStatus": "Status",
+        "transactionDate": "Date"
+      },
+      "invoiceStatus": {
+        "fullyPaid": "Fully Paid",
+        "partiallyPaid": "Partially Paid",
+        "notPaid": "Not Paid",
+        "refunded": "Refunded"
       }
     },
     "matching": {
