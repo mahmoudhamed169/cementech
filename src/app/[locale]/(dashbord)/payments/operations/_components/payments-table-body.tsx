@@ -2,12 +2,24 @@ import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { InvoiceReportItem } from "@/src/lib/services/payments/get-invoice-report";
 import { InvoiceStatusBadge } from "./invoice-status-badge";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
+import OrdersTableEmpty from "../../../orders/_components/order-table/orders-table-empty";
+
+import EmptyTableState from "@/src/components/shared/empty-tablestate";
 
 interface Props {
   payments: InvoiceReportItem[];
 }
 
 export function PaymentsTableBody({ payments }: Props) {
+  if (payments.length === 0)
+    return (
+      <TableBody>
+        <EmptyTableState
+          colSpan={9}
+          
+        />
+      </TableBody>
+    );
   return (
     <TableBody>
       {payments.map((payment, index) => {
@@ -26,7 +38,7 @@ export function PaymentsTableBody({ payments }: Props) {
             className="text-center h-16 border-b border-gray-100"
           >
             <TableCell className="text-gray-500">{index + 1}</TableCell>
-            <TableCell className="font-medium">{payment.code}</TableCell>
+            <TableCell className="font-medium">{payment.order_code}</TableCell>
             <TableCell className="text-gray-500 text-xs">
               {payment.invoice_id}
             </TableCell>

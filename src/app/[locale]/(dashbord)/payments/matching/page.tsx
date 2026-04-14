@@ -1,21 +1,28 @@
-// app/payments/matching/page.tsx
+// matching/page.tsx
 import { MatchingFilters } from "./_components/matching-filters";
 import { MatchingTable } from "./_components/matching-table";
 
 interface SearchParams {
   search?: string;
   status?: string;
+  page?: string;
 }
 
 interface Props {
-  searchParams: SearchParams;
+  searchParams: Promise<SearchParams>;
 }
 
-export default function MatchingPage({ searchParams }: Props) {
+export default async function MatchingPage({ searchParams }: Props) {
+  const { search, status, page } = await searchParams;
+
   return (
     <section className="space-y-8">
-      <MatchingFilters currentStatus={searchParams.status} />
-      <MatchingTable />
+      <MatchingFilters currentStatus={status} />
+      <MatchingTable
+        search={search}
+        status={status}
+        page={page ? Number(page) : 1}
+      />
     </section>
   );
 }

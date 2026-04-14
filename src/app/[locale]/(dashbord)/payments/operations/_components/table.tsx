@@ -1,20 +1,37 @@
+// payments-table.tsx
+
 import { Table } from "@/components/ui/table";
-
 import { Suspense } from "react";
-
 import TableLoadingSpinner from "@/src/components/shared/table-loading";
 import PaymentsTableHeader from "./payments-table-header";
 import PaymentsTableWrapper from "./payments-table-wrapper";
 
-export default function PaymentsTable() {
+interface Props {
+  search?: string;
+  status?: string;
+  timeRange?: string;
+  date?: string;
+  page?: number;
+}
+
+export default function PaymentsTable({
+  search,
+  status,
+  timeRange,
+  date,
+  page = 1,
+}: Props) {
   return (
     <Table>
-      {/* Header */}
       <PaymentsTableHeader />
-
-      {/* Body */}
       <Suspense fallback={<TableLoadingSpinner colSpan={9} />}>
-        <PaymentsTableWrapper />
+        <PaymentsTableWrapper
+          search={search}
+          status={status}
+          timeRange={timeRange}
+          date={date}
+          page={page}
+        />
       </Suspense>
     </Table>
   );

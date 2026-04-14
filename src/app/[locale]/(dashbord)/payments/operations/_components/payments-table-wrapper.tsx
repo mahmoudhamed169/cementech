@@ -1,24 +1,40 @@
 // payments-table-wrapper.tsx
+
 import { TableCell, TableFooter, TableRow } from "@/components/ui/table";
 import PaginationInfo from "@/src/components/shared/pagination-info";
 import { DynamicPagination } from "@/src/components/shared/pagination";
 import { PaymentsTableBody } from "./payments-table-body";
 import { getInvoiceReport } from "@/src/lib/services/payments/get-invoice-report";
+
 interface Props {
+  search?: string;
+  status?: string;
+  timeRange?: string;
+  date?: string;
   page?: number;
   limit?: number;
 }
 
 export default async function PaymentsTableWrapper({
+  search,
+  status,
+  timeRange,
+  date,
   page = 1,
   limit = 10,
 }: Props) {
-  const { data: payments, meta } = await getInvoiceReport(page, limit);
+  const { data: payments, meta } = await getInvoiceReport({
+    page,
+    limit,
+    search,
+    status,
+    timeRange,
+    date,
+  });
 
   return (
     <>
       <PaymentsTableBody payments={payments} />
-
       {payments.length > 0 && (
         <TableFooter>
           <TableRow className="border-t border-b-0 border-[#E5E7EB] h-14 text-start">
