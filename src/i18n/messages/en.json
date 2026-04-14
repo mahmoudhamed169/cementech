@@ -1057,6 +1057,12 @@
       "title": "Payments & Revenue",
       "description": "Manage transactions, driver payouts, and financial reports"
     },
+    "stats": {
+      "totalCommission": "Total Revenue",
+      "earnedFee": "Earned Commission",
+      "driversMoney": "Driver Bonuses",
+      "bankMoney": "Pending Bonuses"
+    },
     "nav": {
       "operations": "Payment Operations",
       "matching": "Driver Bonuses",
@@ -1138,7 +1144,22 @@
         "bonusDate": "Bonus Date",
         "actions": "Actions",
         "delivered": "Delivered",
-        "deliver": "Deliver"
+        "deliver": "Deliver",
+        "loading": "Loading orders...",
+        "error": "Failed to load data",
+
+        "empty": {
+          "title": "No orders",
+          "description": "No orders have been recorded for this driver yet"
+        },
+
+        "status": {
+          "paid": "Completed",
+          "notPaid": "Pending"
+        },
+        "selectedOrders": "Selected orders",
+        "clearSelection": "Clear selection",
+        "deliverSelected": "Deliver selected"
       }
     }
   }

@@ -38,7 +38,7 @@ export function PaymentsTableBody({ payments }: Props) {
             className="text-center h-16 border-b border-gray-100"
           >
             <TableCell className="text-gray-500">{index + 1}</TableCell>
-            <TableCell className="font-medium">{payment.code}</TableCell>
+            <TableCell className="font-medium">{payment.order_code}</TableCell>
             <TableCell className="text-gray-500 text-xs">
               {payment.invoice_id}
             </TableCell>
