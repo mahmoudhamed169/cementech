@@ -7,26 +7,27 @@ import {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getInvoices({
-  page = 1,
-  limit = 10,
-  search,
-  invoiceType,
-}: GetInvoicesParams = {}): Promise<InvoicesResponse> {
+export async function getInvoices(params: GetInvoicesParams = {}) {
   const session = await getServerSession(authOptions);
 
-  const params = new URLSearchParams({
-    page: String(page),
-    limit: String(limit),
-    ...(invoiceType ? { invoice_type: invoiceType } : {}),
-    ...(search ? { search } : {}),
+  const token = session?.user?.accessToken; // أو حسب شكل السيشن عندك
+
+  if (!token) {
+    throw new Error("No auth token found");
+  }
+
+  const query = new URLSearchParams({
+    page: String(params.page ?? 1),
+    limit: String(params.limit ?? 10),
+    ...(params.invoiceType ? { invoice_type: params.invoiceType } : {}),
+    ...(params.search ? { search: params.search } : {}),
   });
 
-  const res = await fetch(`${API_URL}/invoices?${params}`, {
+  const res = await fetch(`${API_URL}/invoices?${query}`, {
     headers: {
-      Authorization: `Bearer ${session?.user.accessToken}`,
+      Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
-         system_screen: "invoices_permission",
+      system_screen: "invoices_permission",
     },
     cache: "no-store",
   });
