@@ -1174,6 +1174,20 @@
         "clearSelection": "إلغاء التحديد",
         "deliverSelected": "تسليم المحدد"
       }
+    },
+    "reports": {
+      "revenue": {
+        "title": "تقرير الإيرادات",
+        "dailyAverage": "إيرادات اليوم",
+        "weeklyTotal": "الإجمالي الأسبوعي",
+        "monthlyTotal": "الإجمالي الشهري"
+      },
+      "commission": {
+        "title": "تقرير العمولة",
+        "bankFee": "رسوم البنك",
+        "totalCommission": "إجمالي العمولات",
+        "platformFee": "رسوم المنصة"
+      }
     }
   }
 }

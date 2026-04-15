@@ -1172,6 +1172,20 @@
         "clearSelection": "Clear selection",
         "deliverSelected": "Deliver selected"
       }
+    },
+    "reports": {
+      "revenue": {
+        "title": "Revenue Report",
+        "dailyAverage": "Today's Revenue",
+        "weeklyTotal": "Weekly Total",
+        "monthlyTotal": "Monthly Total"
+      },
+      "commission": {
+        "title": "Commission Report",
+        "bankFee": "Bank Fee",
+        "totalCommission": "Total Commission",
+        "platformFee": "Platform Fee"
+      }
     }
   }
 }
