@@ -26,6 +26,7 @@ export async function getInvoices({
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
       "Content-Type": "application/json",
+         system_screen: "invoices_permission",
     },
     cache: "no-store",
   });
