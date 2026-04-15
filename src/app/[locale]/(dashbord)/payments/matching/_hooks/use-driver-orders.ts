@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export interface DriverOrder {
   id: string;
@@ -10,40 +10,27 @@ export interface DriverOrder {
   updated_at: string;
 }
 
-interface UseDriverOrdersReturn {
-  orders: DriverOrder[];
-  isLoading: boolean;
-  error: string | null;
-}
+export function useDriverOrders(driverId: string) {
+  const query = useQuery({
+    queryKey: ["driver-orders", driverId],
+    queryFn: async () => {
+      const res = await fetch(`/api/driver-orders/${driverId}`);
 
-export function useDriverOrders(driverId: string): UseDriverOrdersReturn {
-  const [orders, setOrders] = useState<DriverOrder[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+      if (!res.ok) throw new Error("Failed to fetch orders");
 
-  useEffect(() => {
-    if (!driverId) return;
+      const data = await res.json();
+      return data.data as DriverOrder[];
+    },
+    enabled: !!driverId,
+  });
 
-    async function fetchOrders() {
-      try {
-        setIsLoading(true);
-
-        const res = await fetch(`/api/driver-orders/${driverId}`);
-
-        if (!res.ok) throw new Error("Failed to fetch orders");
-
-        const data = await res.json();
-
-        setOrders(data.data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong");
-      } finally {
-        setIsLoading(false);
-      }
-    }
-
-    fetchOrders();
-  }, [driverId]);
-
-  return { orders, isLoading, error };
+  return {
+    orders: query.data ?? [],
+    isLoading: query.isLoading,
+    error: query.error
+      ? query.error instanceof Error
+        ? query.error.message
+        : "Something went wrong"
+      : null,
+  };
 }

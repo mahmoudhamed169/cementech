@@ -1131,7 +1131,18 @@
         "uploadDocument": "Click to Upload",
         "cancel": "Cancel",
         "confirm": "Add",
-        "uploaded": "Uploaded"
+        "uploaded": "Uploaded",
+        "totalBonus": "Total Bonuses",
+        "singleOrder": "Single Order",
+        "multipleOrders": "Multiple Orders",
+
+        "note": "Note",
+        "notePlaceholder": "Write a note...",
+
+        "toast": {
+          "success": "Bonus delivered successfully",
+          "error": "Failed to deliver bonus"
+        }
       },
       "ordersModal": {
         "title": "Driver Bonus Details",
