@@ -61,13 +61,8 @@ export function DriverOrdersModal({
 
   const { orders, isLoading, error } = useDriverOrders(driverId);
 
-  // single order (for individual deliver button)
   const [selectedOrder, setSelectedOrder] = useState<DriverOrder | null>(null);
-
-  // multi-select set of order ids
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
-
-  // bulk deliver modal
   const [bulkModalOpen, setBulkModalOpen] = useState(false);
 
   function toggleRow(order: DriverOrder) {
@@ -84,6 +79,12 @@ export function DriverOrdersModal({
   }
 
   const selectedCount = selectedIds.size;
+
+  const selectedOrders = orders.filter((o) => selectedIds.has(o.id));
+  const bulkTotalBonus = selectedOrders.reduce(
+    (sum, o) => sum + o.delivery_money,
+    0,
+  );
 
   return (
     <>
@@ -122,8 +123,14 @@ export function DriverOrdersModal({
                   {t("clearSelection")}
                 </button>
                 <button
-                  onClick={() => setBulkModalOpen(true)}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium bg-green-500 text-white hover:bg-green-600 transition"
+                  onClick={() => selectedCount > 1 && setBulkModalOpen(true)}
+                  disabled={selectedCount <= 1}
+                  className={cn(
+                    "inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition",
+                    selectedCount > 1
+                      ? "bg-green-500 text-white hover:bg-green-600"
+                      : "bg-gray-200 text-gray-400 cursor-not-allowed",
+                  )}
                 >
                   <HandCoins size={15} />
                   {t("deliverSelected")}
@@ -230,6 +237,7 @@ export function DriverOrdersModal({
                       <TableCell>
                         {order.invoice_picture ? (
                           <a
+                          
                             href={order.invoice_picture}
                             target="_blank"
                             download
@@ -301,14 +309,18 @@ export function DriverOrdersModal({
         </DialogContent>
       </Dialog>
 
-      {/* 💰 Single Deliver Modal */}
+      {/* Single Deliver Modal */}
       <DeliverBonusModal
         open={!!selectedOrder}
         onOpenChange={(open) => !open && setSelectedOrder(null)}
         driverName={driverName}
+        driverId={driverId}
+        totalBonus={selectedOrder?.delivery_money}
+        ordersCount={1}
+        orderId={selectedOrder?.id}
       />
 
-      {/* 💰 Bulk Deliver Modal */}
+      {/* Bulk Deliver Modal */}
       <DeliverBonusModal
         open={bulkModalOpen}
         onOpenChange={(open) => {
@@ -318,6 +330,10 @@ export function DriverOrdersModal({
           }
         }}
         driverName={driverName}
+        driverId={driverId}
+        totalBonus={bulkTotalBonus}
+        ordersCount={selectedCount}
+        orderIds={[...selectedIds]}
       />
     </>
   );

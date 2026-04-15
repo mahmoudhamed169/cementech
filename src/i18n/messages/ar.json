@@ -1134,7 +1134,16 @@
         "uploadDocument": "اضغط للرفع",
         "cancel": "الغاء",
         "confirm": "إضافة",
-        "uploaded": "تم الرفع"
+        "uploaded": "تم الرفع",
+        "totalBonus": "إجمالي المكافآت",
+        "singleOrder": "طلب واحد",
+        "multipleOrders": "طلبات",
+        "note": "ملاحظة",
+        "notePlaceholder": "اكتب ملاحظة...",
+        "toast": {
+          "success": "تم تسليم المكافأة بنجاح",
+          "error": "حدث خطأ أثناء تسليم المكافأة"
+        }
       },
       "ordersModal": {
         "title": "تفاصيل مكافآت السائق",
