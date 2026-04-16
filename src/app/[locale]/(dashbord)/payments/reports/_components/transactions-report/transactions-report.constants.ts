@@ -1,7 +1,7 @@
 import { Transaction } from "@/src/lib/services/payments/get-transactions-report";
 
 export const TABLE_HEADERS = [
-  "كود الفاتورة",
+  " ",
   "الكود",
   "النوع",
   "الحالة",

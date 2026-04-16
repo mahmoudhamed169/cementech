@@ -8,7 +8,7 @@ interface Props {
 const CARDS = (summary: ReturnType<typeof calcSummary>) => [
   {
     label: "إجمالي المعاملات",
-    value: String(summary.totalTransactions),
+    value: summary.totalTransactions.toFixed(2),
     sub: "كل الأنواع",
     bg: "from-blue-400/30 to-blue-200/20",
     text: "text-blue-700",
@@ -24,7 +24,7 @@ const CARDS = (summary: ReturnType<typeof calcSummary>) => [
   },
   {
     label: "تكلفة الأسمنت",
-    value: String(summary.totalCement),
+    value: summary.totalCement.toFixed(2),
     sub: "الطلبات فقط",
     bg: "from-orange-400/30 to-orange-200/20",
     text: "text-orange-700",
@@ -32,7 +32,7 @@ const CARDS = (summary: ReturnType<typeof calcSummary>) => [
   },
   {
     label: "تكلفة التوصيل",
-    value: String(summary.totalDelivery),
+    value: summary.totalDelivery.toFixed(2),
     sub: "الطلبات فقط",
     bg: "from-purple-400/30 to-purple-200/20",
     text: "text-purple-700",
@@ -40,7 +40,7 @@ const CARDS = (summary: ReturnType<typeof calcSummary>) => [
   },
   {
     label: "رسوم البنك",
-    value: String(summary.totalBankFees),
+    value: summary.totalBankFees.toFixed(2),
     sub: "الطلبات فقط",
     bg: "from-red-400/30 to-red-200/20",
     text: "text-red-700",
@@ -48,7 +48,7 @@ const CARDS = (summary: ReturnType<typeof calcSummary>) => [
   },
   {
     label: "عمولة المنصة",
-    value: String(summary.totalPlatformFees),
+    value: summary.totalPlatformFees.toFixed(2),
     sub: "الطلبات فقط",
     bg: "from-cyan-400/30 to-cyan-200/20",
     text: "text-cyan-700",
@@ -61,7 +61,7 @@ export function TransactionsSummaryCards({ transactions }: Props) {
   const cards = CARDS(summary);
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-6 print:grid-cols-3">
       {cards.map((card) => (
         <SummaryCard key={card.label} {...card} />
       ))}
@@ -69,21 +69,7 @@ export function TransactionsSummaryCards({ transactions }: Props) {
   );
 }
 
-function SummaryCard({
-  label,
-  value,
-  sub,
-  bg,
-  text,
-  dot,
-}: {
-  label: string;
-  value: string;
-  sub: string;
-  bg: string;
-  text: string;
-  dot: string;
-}) {
+function SummaryCard({ label, value, sub, bg, text, dot }: any) {
   return (
     <div
       className={`w-full rounded-2xl p-[1px] bg-gradient-to-br ${bg}
@@ -98,7 +84,6 @@ function SummaryCard({
 
         <div className="mt-3 flex items-center justify-between">
           <p className="text-[11px] text-muted-foreground">{sub}</p>
-
           <div className={`h-2 w-2 rounded-full ${dot} opacity-60`} />
         </div>
       </div>

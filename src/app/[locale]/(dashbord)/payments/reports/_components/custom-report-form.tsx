@@ -10,7 +10,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { TransactionsReportTable } from "./transactions-report-table";
 import { Transaction } from "@/src/lib/services/payments/get-transactions-report";
 import { getTransactionsReportAction } from "../get-transactions-report-action";
 import { TransactionsReport } from "./transactions-report";
@@ -51,12 +50,10 @@ export function CustomReportForm() {
 
   return (
     <div className="space-y-5" dir="rtl">
-      {/* ── Form Card (ستايل قديم) ── */}
       <div className="rounded-2xl border border-gray-100 bg-white p-5 space-y-4">
         <h3 className="text-base font-bold text-gray-800">إنشاء تقرير مخصص</h3>
 
         <div className="flex flex-wrap items-end gap-4">
-          {/* نوع التقرير */}
           <div className="flex flex-col gap-1.5 flex-1 min-w-[160px]">
             <label className="text-sm text-gray-500">نوع التقرير</label>
             <Select
@@ -67,25 +64,23 @@ export function CustomReportForm() {
                 <SelectValue placeholder="اختر نوع التقرير" />
               </SelectTrigger>
               <SelectContent className="bg-white border-0">
-                <SelectItem value="all">الكل (طلبات + تحميل)</SelectItem>
+                <SelectItem value="all">الكل</SelectItem>
                 <SelectItem value="order">طلبات فقط</SelectItem>
                 <SelectItem value="request">طلبات تحميل فقط</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
-          {/* تاريخ البداية */}
           <div className="flex flex-col gap-1.5 flex-1 min-w-[160px]">
             <label className="text-sm text-gray-500">تاريخ البداية</label>
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="h-12 w-full rounded-xl border border-gray-200 bg-white px-4 text-sm text-gray-400 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              className="h-12 rounded-xl border border-gray-200 px-4 text-sm"
             />
           </div>
 
-          {/* تاريخ النهاية */}
           <div className="flex flex-col gap-1.5 flex-1 min-w-[160px]">
             <label className="text-sm text-gray-500">تاريخ النهاية</label>
             <input
@@ -93,41 +88,38 @@ export function CustomReportForm() {
               value={endDate}
               min={startDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="h-12 w-full rounded-xl border border-gray-200 bg-white px-4 text-sm text-gray-400 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              className="h-12 rounded-xl border border-gray-200 px-4 text-sm"
             />
           </div>
 
-          {/* زرار */}
           <Button
             onClick={handleFetch}
             disabled={!isValid || isPending}
-            className="h-12 px-6 rounded-xl bg-green-600 hover:bg-green-700 text-white gap-2 whitespace-nowrap"
+            className="h-12 px-6 rounded-xl bg-green-600 hover:bg-green-700 text-white gap-2"
           >
             {isPending ? (
               <Loader2 size={16} className="animate-spin" />
             ) : (
               <Download size={16} />
             )}
-            {isPending ? "جاري الجلب…" : "إنشاء و تحميل التقرير"}
+            {isPending ? "جاري الجلب…" : "إنشاء التقرير"}
           </Button>
         </div>
       </div>
 
-      {/* Error */}
-      {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
-          {error}
-        </div>
-      )}
+      {error && <div className="text-red-600 text-sm">{error}</div>}
 
-      {/* Table */}
       {transactions !== null &&
         (transactions.length === 0 ? (
-          <div className="rounded-xl border border-gray-100 bg-white px-4 py-8 text-center text-sm text-gray-500">
-            لا توجد معاملات في هذه الفترة
+          <div className="text-center text-gray-500">
+            لا توجد معاملات
           </div>
         ) : (
-          <TransactionsReport transactions={transactions} />
+          <TransactionsReport
+            transactions={transactions}
+            startDate={startDate}
+            endDate={endDate}
+          />
         ))}
     </div>
   );
