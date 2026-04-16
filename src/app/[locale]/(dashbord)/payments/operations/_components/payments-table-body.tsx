@@ -1,9 +1,8 @@
+import { Fragment } from "react";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { InvoiceReportItem } from "@/src/lib/services/payments/get-invoice-report";
 import { InvoiceStatusBadge } from "./invoice-status-badge";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
-import OrdersTableEmpty from "../../../orders/_components/order-table/orders-table-empty";
-
 import EmptyTableState from "@/src/components/shared/empty-tablestate";
 
 interface Props {
@@ -14,12 +13,10 @@ export function PaymentsTableBody({ payments }: Props) {
   if (payments.length === 0)
     return (
       <TableBody>
-        <EmptyTableState
-          colSpan={9}
-          
-        />
+        <EmptyTableState colSpan={9} />
       </TableBody>
     );
+
   return (
     <TableBody>
       {payments.map((payment, index) => {
@@ -33,41 +30,44 @@ export function PaymentsTableBody({ payments }: Props) {
         );
 
         return (
-          <TableRow
-            key={payment.id}
-            className="text-center h-16 border-b border-gray-100"
-          >
-            <TableCell className="text-gray-500">{index + 1}</TableCell>
-            <TableCell className="font-medium">{payment.order_code}</TableCell>
-            <TableCell className="text-gray-500 text-xs">
-              {payment.invoice_id}
-            </TableCell>
-            <TableCell className="font-medium text-gray-800">
-              {payment.customer_name}
-            </TableCell>
-            <TableCell>
-              <div className="flex items-center justify-center gap-1">
-                <span>{payment.total}</span>
-                <CurrencyIcon />
-              </div>
-            </TableCell>
-            <TableCell>
-              <div className="flex items-center justify-center gap-1">
-                <span>{payment.bank_fee}</span>
-                <CurrencyIcon />
-              </div>
-            </TableCell>
-            <TableCell>
-              <div className="flex items-center justify-center gap-1">
-                <span>{payment.platform_fee}</span>
-                <CurrencyIcon />
-              </div>
-            </TableCell>
-            <TableCell>
-              <InvoiceStatusBadge status={payment.invoice_status} />
-            </TableCell>
-            <TableCell className="text-gray-500">{formattedDate}</TableCell>
-          </TableRow>
+          <Fragment key={payment.id}>
+            {" "}
+            {/* ← الإصلاح هنا */}
+            <TableRow className="text-center h-16 border-b border-gray-100">
+              <TableCell className="text-gray-500">{index + 1}</TableCell>
+              <TableCell className="font-medium">
+                {payment.order_code}
+              </TableCell>
+              <TableCell className="text-gray-500 text-xs">
+                {payment.invoice_id}
+              </TableCell>
+              <TableCell className="font-medium text-gray-800">
+                {payment.customer_name}
+              </TableCell>
+              <TableCell>
+                <div className="flex items-center justify-center gap-1">
+                  <span>{payment.total}</span>
+                  <CurrencyIcon />
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex items-center justify-center gap-1">
+                  <span>{payment.bank_fee}</span>
+                  <CurrencyIcon />
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex items-center justify-center gap-1">
+                  <span>{payment.platform_fee}</span>
+                  <CurrencyIcon />
+                </div>
+              </TableCell>
+              <TableCell>
+                <InvoiceStatusBadge status={payment.invoice_status} />
+              </TableCell>
+              <TableCell className="text-gray-500">{formattedDate}</TableCell>
+            </TableRow>
+          </Fragment>
         );
       })}
     </TableBody>
