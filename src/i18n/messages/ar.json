@@ -171,6 +171,7 @@
     "customerInfo": "معلومات العميل",
     "name": "الاسم",
     "phone": "رقم الجوال",
+    "driver": "السائق",
     "driverInfo": "معلومات السائق ",
     "notAssigned": "غير مخصص لسائق",
     "assignDriver": "تخصيص لسائق",
@@ -187,6 +188,7 @@
     "cancelSuccess": "تم إلغاء الطلب بنجاح",
     "cancelError": "فشل إلغاء الطلب، حاول مرة أخرى",
     "assignDriverToOrder": "تخصيص سائق للطلب رقم",
+    "unassignDriver": "إلغاء التخصيص",
     "shipmentLabel": {
       "one": "شحنة واحدة",
       "many": "عدة شحنات"

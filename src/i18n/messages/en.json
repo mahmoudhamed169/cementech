@@ -169,6 +169,7 @@
     "assignDriver": "Assign Driver",
     "name": "Name",
     "phone": "Phone Number",
+    "driver": "Driver",
     "deliveryDetails": "Delivery Details",
     "deliveryLocation": "Cement Delivery Location",
     "loadingLocation": "Cement Loading Location",
@@ -182,13 +183,12 @@
     "cancelSuccess": "Order cancelled successfully",
     "cancelError": "Failed to cancel order, please try again",
     "truck_quantity": "Number of Shipments",
-
     "assignDriverToOrder": "Assign Driver to Order",
+    "unassignDriver": "Unassign Driver",
     "shipmentLabel": {
       "one": "One shipment",
       "many": "Multiple shipments"
     },
-
     "driverId": "ID",
     "distance": "Distance",
     "quantity": "Quantity",
