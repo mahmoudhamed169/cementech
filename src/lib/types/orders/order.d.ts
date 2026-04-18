@@ -5,6 +5,14 @@ interface Driver {
   phone: string;
 }
 
+interface DriversCount {
+  pending: number;
+  accepted: number;
+  rejected: number;
+  delivered: number;
+  total_assigned: number;
+}
+
 export interface Order {
   id: string;
   code: string;
@@ -36,41 +44,20 @@ export interface Order {
   truck_quantity: number;
   total: number;
 
-  created_at: string; // ISO date string
+  created_at: string;
+  updated_at: string;
 
   has_drivers: boolean;
   drivers: Driver[];
+  drivers_counts: DriversCount; // ✅ الجديد
+
+  invoice_id: string;
+  invoice_status: string;
+  invoice: {
+    id: string;
+    qr_token: string;
+  };
 
   customer_name: string | null;
   phone: string;
 }
-
-/* =========================
-   Pagination
-========================= */
-
-export interface PaginationMeta {
-  page: number;
-  limit: number;
-  itemCount: number;
-  pageCount: number;
-  hasPreviousPage: boolean;
-  hasNextPage: boolean;
-}
-
-/* =========================
-   Generic API Response
-========================= */
-
-export interface ApiResponse<T> {
-  success: boolean;
-  message: string;
-  data: T;
-  meta?: PaginationMeta;
-}
-
-/* =========================
-   Specific Response Type
-========================= */
-
-export type OrdersResponse = ApiResponse<Order[]>;

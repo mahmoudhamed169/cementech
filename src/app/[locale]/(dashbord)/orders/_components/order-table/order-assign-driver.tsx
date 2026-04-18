@@ -1,12 +1,11 @@
 "use client";
-
 import { Button } from "@/components/ui/button";
 import { AssigneDriver } from "@/src/components/shared/assigne-driver-dialog";
 import { UserRoundPlus } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 interface OrderAssignDriverProps {
-  hasDrivers: boolean;
+  remainingDrivers: number; // بدل hasDrivers
   truckQuantity: number;
   orderCode: string;
   orderId: string;
@@ -15,7 +14,7 @@ interface OrderAssignDriverProps {
 }
 
 export default function OrderAssignDriver({
-  hasDrivers,
+  remainingDrivers,
   truckQuantity,
   orderCode,
   orderId,
@@ -24,14 +23,14 @@ export default function OrderAssignDriver({
 }: OrderAssignDriverProps) {
   const t = useTranslations("recentOrders");
 
-  if (hasDrivers)
+  if (remainingDrivers <= 0)
     return <div className="w-5 h-5 flex items-center justify-center"></div>;
 
   return (
     <div className="w-5 h-5 flex items-center justify-center">
       <div title={t("driverStatus.notAssigned")}>
         <AssigneDriver
-          numOfShipments={truckQuantity}
+          numOfShipments={remainingDrivers} // بعث الباقي مش الكل
           orderCode={orderCode}
           orderId={orderId}
           productId={productId}

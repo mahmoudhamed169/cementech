@@ -1,4 +1,3 @@
-// getOrderById - spacific-order.ts
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/src/auth";
 import { ApiOrderStatus } from "@/src/lib/utils/order-status";
@@ -13,9 +12,41 @@ export interface OrderLog {
 
 export interface Driver {
   id: string;
+  driver_id: string;
   driver_name: string;
   code: string;
   phone: string;
+  status: "ACCEPTED" | "PENDING" | "REJECTED" | "DELIVERED";
+}
+
+export interface DriversCount {
+  pending: number;
+  accepted: number;
+  rejected: number;
+  delivered: number;
+  total_assigned: number;
+}
+
+export interface ExtraFee {
+  id: string;
+  name_en: string;
+  name_ar: string;
+  amount: number;
+  fee_type: string;
+}
+
+export interface Invoice {
+  id: string;
+  code: string;
+  order_id: string;
+  request_id: string | null;
+  total_amount: number;
+  extra_fees: ExtraFee[];
+  qr_token: string;
+  is_verified: boolean;
+  verified_at: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface OrderData {
@@ -30,19 +61,27 @@ export interface OrderData {
   product_id: string;
   product_name: string;
   factory_name: string;
+  factory_address: string;
   address_name: string;
+  address_lat: string;
+  address_lng: string;
   address_title: string;
   order_status: ApiOrderStatus;
   quantity: number;
   truck_quantity: number;
   total: number;
   created_at: string;
+  updated_at: string;
+  invoice_id: string;
+  invoice_status: string;
   has_drivers: boolean;
-  factory_address: string;
+  drivers_counts: DriversCount;
   orderLogs: OrderLog[];
   drivers: Driver[];
+  invoice: Invoice;
   customer_name?: string | null;
   phone?: string;
+  payment_deeplink?: string;
 }
 
 export interface OrderResponse {

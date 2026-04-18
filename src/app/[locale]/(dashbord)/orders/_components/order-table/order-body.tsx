@@ -21,92 +21,94 @@ import { Eye } from "lucide-react";
 dayjs.extend(relativeTime);
 
 export default function OrderTableBody({ orders }: { orders: Order[] }) {
-  // console.log(orders);
   if (orders.length === 0) return <OrdersTableEmpty />;
   return (
     <TableBody>
-      {orders.map((order, index) => (
-        <TableRow
-          key={order.id}
-          className="border-b border-[#E5E7EB] last:border-b-0 hover:bg-muted/40 h-14 text-center"
-        >
-          {/* index */}
-          <TableCell className="text-center">{index + 1}</TableCell>
+      {orders.map((order, index) => {
+        const remainingDrivers =
+          order.truck_quantity - order.drivers_counts.accepted;
 
-          {/* orderId */}
-          <TableCell className="text-center font-medium">
-            {order.code}
-          </TableCell>
+        return (
+          <TableRow
+            key={order.id}
+            className="border-b border-[#E5E7EB] last:border-b-0 hover:bg-muted/40 h-14 text-center"
+          >
+            {/* index */}
+            <TableCell className="text-center">{index + 1}</TableCell>
 
-          {/* customer Phone Number */}
-          <TableCell className="text-center">
-            {order.customer_name ? order.customer_name : "-"}
-            <p className="text-[#6A7282]">{order.phone}</p>
-          </TableCell>
+            {/* orderId */}
+            <TableCell className="text-center font-medium">
+              {order.code}
+            </TableCell>
 
-          {/* driver Status ( has or not ) */}
-          <DriverStatusCell hasDrivers={order.has_drivers} />
+            {/* customer Phone Number */}
+            <TableCell className="text-center">
+              {order.customer_name ? order.customer_name : "-"}
+              <p className="text-[#6A7282]">{order.phone}</p>
+            </TableCell>
 
-          {/* Order Status */}
-          <OrderStatusCell status={order.order_status} />
-          {/* <TableCell className="text-center">-</TableCell> */}
+            {/* driver Status ( has or not ) */}
+            <DriverStatusCell order={order} />
 
-       <TableCell>
-            <p className="text-base font-bold text-gray-800">
-              {order.product_name}
-            </p>
-            <p className="text-sm text-gray-500">{order.factory_name}</p>
-          </TableCell>
+            {/* Order Status */}
+            <OrderStatusCell status={order.order_status} />
 
-          {/* order Shipment */}
-          <OrderShipmentCell truckQuantity={order.truck_quantity} />
+            <TableCell>
+              <p className="text-base font-bold text-gray-800">
+                {order.product_name}
+              </p>
+              <p className="text-sm text-gray-500">{order.factory_name}</p>
+            </TableCell>
 
-          {/* order Quantatity */}
-          <OrderQuantityCell quantity={order.quantity} />
+            {/* order Shipment */}
+            <OrderShipmentCell truckQuantity={order.truck_quantity} />
 
-          {/* order price */}
-          <TableCell className="text-center flex items-center justify-center gap-1 mt-3.5">
-            <span className="text-sm leading-none">{order.total}</span>
-            <CurrencyIcon />
-          </TableCell>
+            {/* order Quantity */}
+            <OrderQuantityCell quantity={order.quantity} />
 
-          {/* الوقت النسبي */}
-          <TableCell className="text-center">
-            <TimeAgo time={order.created_at} />
-          </TableCell>
+            {/* order price */}
+            <TableCell className="text-center flex items-center justify-center gap-1 mt-3.5">
+              <span className="text-sm leading-none">{order.total}</span>
+              <CurrencyIcon />
+            </TableCell>
 
-          {/* options actions */}
-          <TableCell className="text-center">
-            <div className="flex items-center justify-center space-x-2">
-              <div
-                className={
-                  order.order_status === "canceled" ||
-                  order.order_status === "ملغي"
-                    ? "invisible"
-                    : ""
-                }
-              >
-                <OrderAssignDriver
-                  hasDrivers={order.has_drivers}
-                  truckQuantity={order.truck_quantity}
-                  orderCode={order.code}
-                  orderId={order.id}
-                  productId={order.product_id}
-                  quantity={order.quantity}
-                />
+            {/* الوقت النسبي */}
+            <TableCell className="text-center">
+              <TimeAgo time={order.created_at} />
+            </TableCell>
+
+            {/* options actions */}
+            <TableCell className="text-center">
+              <div className="flex items-center justify-center space-x-2">
+                <div
+                  className={
+                    order.order_status === "canceled" ||
+                    order.order_status === "ملغي"
+                      ? "invisible"
+                      : ""
+                  }
+                >
+                  <OrderAssignDriver
+                    remainingDrivers={remainingDrivers}
+                    truckQuantity={order.truck_quantity}
+                    orderCode={order.code}
+                    orderId={order.id}
+                    productId={order.product_id}
+                    quantity={order.quantity}
+                  />
+                </div>
+
+                <Link
+                  href={`/orders/${order.id}`}
+                  className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
+                >
+                  <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
+                </Link>
               </div>
-
-              <Link
-                href={`/orders/${order.id}`}
-                className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
-              >
-                <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
-              </Link>
-              {/* <OrderActionsWrapper orderId={order.id} /> */}
-            </div>
-          </TableCell>
-        </TableRow>
-      ))}
+            </TableCell>
+          </TableRow>
+        );
+      })}
     </TableBody>
   );
 }
