@@ -1093,6 +1093,7 @@
         "invoiceId": "رقم الفاتورة",
         "clientName": "اسم العميل",
         "total": "المبلغ الكلي",
+        "deliveryFee": "رسوم التوصيل",
         "bankFee": "رسوم البنك",
         "platformFee": "رسوم المنصة",
         "paymentStatus": "حالة الدفع",

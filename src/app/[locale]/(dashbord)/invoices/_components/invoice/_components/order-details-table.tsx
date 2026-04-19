@@ -25,6 +25,9 @@ export default function OrderDetailsTable({
     "الكمية",
     "نوع الأسمنت",
     "السعر ( الطن )",
+    "سعر التوصيل",
+    "رسوم البنك",
+    "رسوم سيمنتك",
     "اجمالي السعر",
   ] as const;
 
@@ -34,6 +37,9 @@ export default function OrderDetailsTable({
       quantity: order.quantity,
       cementType: product.name,
       pricePerTon: product.price,
+      deliveryFee: order.delivery_fee,
+      bankFee: order.bank_fee,
+      platformFee: order.platform_fee,
       totalPrice: order.total,
     },
   ];
@@ -61,11 +67,35 @@ export default function OrderDetailsTable({
             <TableCell className="text-center">{row.description}</TableCell>
             <TableCell className="text-center">{row.quantity} طن</TableCell>
             <TableCell className="text-center">{row.cementType}</TableCell>
+
             <TableCell className="text-center">
               <div className="flex justify-center items-center gap-1">
                 {row.pricePerTon} <CurrencyIcon />
               </div>
             </TableCell>
+
+            {/* سعر التوصيل */}
+            <TableCell className="text-center">
+              <div className="flex justify-center items-center gap-1">
+                {row.deliveryFee} <CurrencyIcon />
+              </div>
+            </TableCell>
+
+            {/* رسوم البنك */}
+            <TableCell className="text-center">
+              <div className="flex justify-center items-center gap-1">
+                {row.bankFee} <CurrencyIcon />
+              </div>
+            </TableCell>
+
+            {/* رسوم المنصة */}
+            <TableCell className="text-center">
+              <div className="flex justify-center items-center gap-1">
+                {row.platformFee} <CurrencyIcon />
+              </div>
+            </TableCell>
+
+            {/* الإجمالي */}
             <TableCell className="text-center font-semibold">
               <div className="flex justify-center items-center gap-1">
                 {row.totalPrice} <CurrencyIcon />
