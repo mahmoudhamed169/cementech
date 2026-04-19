@@ -14,6 +14,7 @@ import { cookies } from "next/headers";
 import OrderPageTitle from "./_components/order-page-title";
 import OrderdetailsStatusCell from "../_components/order-table/order-actions/_components/order-details-status-cell";
 import OrderFetchError from "./_components/order-fetch-error";
+import OrderLogsSection from "./_components/order-logs-section";
 
 export default async function page({
   params,
@@ -52,6 +53,8 @@ export default async function page({
       <DriverInfoSection order={order} />
       <OrderLocationSection order={order} />
       <OrderInfoCards order={order} />
+
+      <OrderLogsSection order={order} />
 
       {!["canceled", "ملغي"].includes(order.order_status) && (
         <div className="pt-6 border-t border-gray-100 flex justify-end">

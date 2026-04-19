@@ -161,7 +161,8 @@
     "orderDetails": "تفاصيل الطلب",
     "orderNumber": "رقم الطلب",
     "fetchError": "حدث خطأ أثناء تحميل الطلب",
-    "fetchErrorSub": "يرجى المحاولة مرة أخرى لاحقاً"
+    "fetchErrorSub": "يرجى المحاولة مرة أخرى لاحقاً",
+    "orderLogs": "سجل الطلب"
   },
 
   "orderActions": {
@@ -1093,6 +1094,7 @@
         "invoiceId": "رقم الفاتورة",
         "clientName": "اسم العميل",
         "total": "المبلغ الكلي",
+        "deliveryFee": "رسوم التوصيل",
         "bankFee": "رسوم البنك",
         "platformFee": "رسوم المنصة",
         "paymentStatus": "حالة الدفع",

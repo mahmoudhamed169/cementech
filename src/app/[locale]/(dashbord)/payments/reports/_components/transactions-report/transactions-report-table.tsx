@@ -96,7 +96,7 @@ export function TransactionsReportTable({ transactions }: Props) {
                   </TableCell>
 
                   <TableCell className={`${tdClass} font-medium `}>
-                    {shortId(tx.order?.code || tx.request?.code || "")}
+                    {tx.order?.code || tx.request?.code || ""}
                   </TableCell>
 
                   <TableCell className={tdClass}>

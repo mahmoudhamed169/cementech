@@ -157,7 +157,8 @@
     "orderDetails": "Order Details",
     "orderNumber": "Order Number",
     "fetchError": "Failed to load order",
-    "fetchErrorSub": "Please try again later"
+    "fetchErrorSub": "Please try again later" , 
+    "orderLogs": "Order Logs"
   },
   "orderActions": {
     "orderNumber": "Order Number",
@@ -1089,6 +1090,7 @@
         "invoiceId": "Invoice ID",
         "clientName": "Customer Name",
         "total": "Total Amount",
+         "deliveryFee": "Delivery Fee",
         "bankFee": "Bank Fee",
         "platformFee": "Platform Fee",
         "paymentStatus": "Status",

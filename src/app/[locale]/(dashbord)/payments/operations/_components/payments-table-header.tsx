@@ -9,6 +9,7 @@ export default function PaymentsTableHeader() {
     "invoiceId",
     "clientName",
     "total",
+    "deliveryFee",
     "bankFee",
     "platformFee",
     "paymentStatus",

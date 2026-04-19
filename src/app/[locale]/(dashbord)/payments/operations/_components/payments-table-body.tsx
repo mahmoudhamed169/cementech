@@ -39,7 +39,7 @@ export function PaymentsTableBody({ payments }: Props) {
                 {payment.order_code}
               </TableCell>
               <TableCell className="text-gray-500 text-xs">
-                {payment.invoice_id}
+                {payment.invoice_code}
               </TableCell>
               <TableCell className="font-medium text-gray-800">
                 {payment.customer_name}
@@ -47,6 +47,14 @@ export function PaymentsTableBody({ payments }: Props) {
               <TableCell>
                 <div className="flex items-center justify-center gap-1">
                   <span>{payment.total}</span>
+                  <CurrencyIcon />
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex items-center justify-center gap-1">
+                  <span>
+                    {payment.delivery_fee ? payment.delivery_fee : "-"}
+                  </span>
                   <CurrencyIcon />
                 </div>
               </TableCell>
