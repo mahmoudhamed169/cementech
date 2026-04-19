@@ -157,7 +157,8 @@
     "orderDetails": "Order Details",
     "orderNumber": "Order Number",
     "fetchError": "Failed to load order",
-    "fetchErrorSub": "Please try again later"
+    "fetchErrorSub": "Please try again later" , 
+    "orderLogs": "Order Logs"
   },
   "orderActions": {
     "orderNumber": "Order Number",
