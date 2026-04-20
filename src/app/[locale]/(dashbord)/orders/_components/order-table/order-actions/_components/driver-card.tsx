@@ -53,7 +53,7 @@ export default function DriverCard({
         </div>
       </div>
 
-      {driver.status === "PENDING" && !isCanceled && (
+      {driver.status !== "DELIVERED" && !isCanceled && (
         <div className="pt-1 border-t border-green-100 flex justify-end">
           <Button
             variant="ghost"
