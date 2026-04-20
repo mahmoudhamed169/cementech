@@ -52,21 +52,14 @@ export function AssigneDriver({
   } = useNearbyDrivers(open ? productId : "", quantity, orderId);
 
   const handleSelect = (driverId: string) => {
-    if (numOfShipments === 1) {
-      setSelectedDrivers([driverId]);
+    if (selectedDrivers.includes(driverId)) {
+      setSelectedDrivers(selectedDrivers.filter((id) => id !== driverId));
     } else {
-      if (selectedDrivers.includes(driverId)) {
-        setSelectedDrivers(selectedDrivers.filter((id) => id !== driverId));
-      } else if (selectedDrivers.length < numOfShipments) {
-        setSelectedDrivers([...selectedDrivers, driverId]);
-      }
+      setSelectedDrivers([...selectedDrivers, driverId]);
     }
   };
 
-  const isValidSelection =
-    numOfShipments === 1
-      ? selectedDrivers.length === 1
-      : selectedDrivers.length === numOfShipments;
+  const isValidSelection = selectedDrivers.length > 0;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
