@@ -9,6 +9,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/src/i18n/navigation";
 import { Eye } from "lucide-react";
 import { Driver } from "@/src/lib/types/users";
+import { PendingDriverEye } from "@/src/components/shared/pending-driver-eye";
 
 interface Props {
   drivers: Driver[];
@@ -38,7 +39,7 @@ export default function DriversTableBody({ drivers }: Props) {
         >
           <TableCell>{index + 1}</TableCell>
           <TableCell>{driver.code}</TableCell>
-          <TableCell>{driver.name}</TableCell>
+          <TableCell>{driver.name || "-"}</TableCell>
           <TableCell>{driver.phone}</TableCell>
           <TableCell>
             {driver.driver_status ? (
@@ -61,13 +62,13 @@ export default function DriversTableBody({ drivers }: Props) {
           {/* actions */}
           <TableCell className="text-center">
             <div className="flex items-center justify-center">
-              {/* <UserActions user={user} /> */}
-              <Link
-                href={`/drivers/${driver.id}` as any}
-                className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
-              >
-                <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
-              </Link>
+              {driver.driver_status === null ? (
+                <PendingDriverEye />
+              ) : (
+                <Link href={`/drivers/${driver.id}` as any}>
+                  <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
+                </Link>
+              )}
             </div>
           </TableCell>
         </TableRow>

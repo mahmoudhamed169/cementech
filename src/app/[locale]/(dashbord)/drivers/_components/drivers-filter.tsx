@@ -43,7 +43,7 @@ export default function DriversFilter() {
     "offline",
     "pending",
     "blocked",
-    "waiting_order", 
+  
     "delivering",
   ];
   const loadingStatuses: LoadingStatus[] = ["loaded", "not loaded", "pending"];

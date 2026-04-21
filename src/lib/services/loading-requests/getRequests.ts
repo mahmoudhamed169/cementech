@@ -20,6 +20,7 @@ export interface GetRequestsParams {
     | "pending_payment";
 
   time?: "today" | "this_week" | "this_month" | "all";
+  request_type?: string;
 }
 
 export async function getRequests(

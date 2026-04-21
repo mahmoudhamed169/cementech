@@ -50,12 +50,7 @@ export function MatchingTableBody({ matching }: Props) {
             <TableCell className="text-gray-500">
               {row.lastPayment ?? "—"}
             </TableCell>
-            {/* Document download - سيبناه زي ما هو للشغل التاني */}
-            <TableCell>
-              <button className="text-gray-400 hover:text-gray-600 transition-colors">
-                <Download size={18} />
-              </button>
-            </TableCell>
+           
             {/* Actions */}
             <TableCell>
               <button

@@ -14,7 +14,7 @@ export default function MatchingTableHeader() {
     "pendingBonus",
     "bonusStatus",
     "lastBonusDate",
-    "document",
+
     "actions",
   ] as const;
 

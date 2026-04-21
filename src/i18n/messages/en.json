@@ -157,7 +157,7 @@
     "orderDetails": "Order Details",
     "orderNumber": "Order Number",
     "fetchError": "Failed to load order",
-    "fetchErrorSub": "Please try again later" , 
+    "fetchErrorSub": "Please try again later",
     "orderLogs": "Order Logs"
   },
   "orderActions": {
@@ -1090,7 +1090,7 @@
         "invoiceId": "Invoice ID",
         "clientName": "Customer Name",
         "total": "Total Amount",
-         "deliveryFee": "Delivery Fee",
+        "deliveryFee": "Delivery Fee",
         "bankFee": "Bank Fee",
         "platformFee": "Platform Fee",
         "paymentStatus": "Status",
@@ -1189,5 +1189,8 @@
         "platformFee": "Platform Fee"
       }
     }
+  },
+  "pendingDriver": {
+    "tooltip": " has not completed registration"
   }
 }

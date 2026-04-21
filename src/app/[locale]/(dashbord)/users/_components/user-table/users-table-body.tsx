@@ -8,6 +8,7 @@ import { CurrencyIcon } from "@/src/components/shared/currency-icon";
 import { Eye } from "lucide-react";
 import { Link } from "@/src/i18n/navigation";
 import { Customer } from "@/src/lib/types/users";
+import { PendingDriverEye } from "@/src/components/shared/pending-driver-eye";
 
 interface Props {
   users: Customer[];
@@ -37,46 +38,39 @@ export default function UsersTableBody({ users }: Props) {
         >
           {/* index */}
           <TableCell className="text-center">{index + 1}</TableCell>
-
           {/* user id */}
           <TableCell className="text-center font-medium">{user.code}</TableCell>
           {/* userName */}
           <TableCell className="text-center font-medium">{user.name}</TableCell>
-
           {/* organizationName */}
           <TableCell className="text-center font-medium">
             {user.company_name ?? "-"}
           </TableCell>
-
           {/* phoneNumber */}
           <TableCell className="text-center font-medium">
             {user.phone}
           </TableCell>
-
           {/* status */}
           <TableCell className="text-center">
             <UserStatusBadge status={user.status} />
           </TableCell>
-
           {/* order count */}
           <TableCell className="text-center">{user.order_count}</TableCell>
-
           {/* totalPaid */}
           <TableCell className="text-center flex items-center justify-center gap-1 mt-3">
-            <span>{user.total_payments}</span>
+            <span>{user.total_payments.toFixed(2)}</span>
             <CurrencyIcon />
           </TableCell>
-
           {/* actions */}
           <TableCell className="text-center">
             <div className="flex items-center justify-center">
-              {/* <UserActions user={user} /> */}
-              <Link
-                href={`/users/${user.id}` as any}
-                className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
-              >
-                <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
-              </Link>
+              {user.name === null ? (
+                <PendingDriverEye />
+              ) : (
+                <Link href={`/users/${user.id}` as any}>
+                  <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
+                </Link>
+              )}
             </div>
           </TableCell>
         </TableRow>

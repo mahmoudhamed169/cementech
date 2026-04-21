@@ -1193,5 +1193,8 @@
         "platformFee": "رسوم المنصة"
       }
     }
+  },
+  "pendingDriver": {
+    "tooltip": " لم يكمل التسجيل"
   }
 }
