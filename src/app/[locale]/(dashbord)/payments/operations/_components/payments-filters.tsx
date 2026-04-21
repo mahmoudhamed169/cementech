@@ -71,11 +71,6 @@ export function PaymentsFilters({
     router.push(`${pathname}?${params.toString()}`);
   };
 
-  // decode الـ status من الـ URL عشان يطابق الـ Select value
-  const decodedStatus = currentStatus
-    ? decodeURIComponent(currentStatus)
-    : "all";
-
   return (
     <div dir="rtl" className="space-y-4">
       <div className="flex items-center justify-between">
@@ -91,7 +86,7 @@ export function PaymentsFilters({
             placeholder={t("pickDate")}
           />
 
-          {/* Time range */}
+          {/* Time Range */}
           <div className="flex items-center gap-1.5">
             <label className="text-xs text-gray-500 whitespace-nowrap">
               {t("byTime")}
@@ -114,7 +109,7 @@ export function PaymentsFilters({
           </div>
 
           {/* Status */}
-          {/* <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5">
             <label className="text-xs text-gray-500 whitespace-nowrap">
               {t("byStatus")}
             </label>
@@ -125,24 +120,18 @@ export function PaymentsFilters({
               }
             >
               <SelectTrigger className="min-h-12 py-1 ps-12 rounded-2xl w-40 border-gray-200 bg-white text-sm">
-                <SelectValue />
+                <SelectValue placeholder={t("allStatuses")} />
               </SelectTrigger>
-
               <SelectContent className="bg-white border-0">
                 <SelectItem value="all">{t("allStatuses")}</SelectItem>
-                <SelectItem value="pending_payment">
-                  {t("pendingPayment")}
-                </SelectItem>
-                <SelectItem value="under_review">{t("underReview")}</SelectItem>
-                <SelectItem value="canceled">{t("canceled")}</SelectItem>
-                <SelectItem value="delivered">{t("delivered")}</SelectItem>
-                <SelectItem value="delivery">{t("delivery")}</SelectItem>
-                <SelectItem value="in_preparation">
-                  {t("inPreparation")}
-                </SelectItem>
+                <SelectItem value="fully_paid">{t("fullyPaid")}</SelectItem>
+                <SelectItem value="partially_paid">{t("partiallyPaid")}</SelectItem>
+                <SelectItem value="not_paid">{t("notPaid")}</SelectItem>
+                <SelectItem value="refunded">{t("refunded")}</SelectItem>
               </SelectContent>
             </Select>
-          </div> */}
+          </div>
+
         </div>
       </div>
     </div>

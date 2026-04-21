@@ -7,6 +7,36 @@ import { FactoryDataFormValues } from "../_schema/factory.schema";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+// ✅ Helper function لطباعة الـ request والـ response
+async function loggedFetch(url: string, options: RequestInit, actionName: string) {
+  console.log(`\n========== [${actionName}] REQUEST ==========`);
+  console.log("URL:", url);
+  console.log("Method:", options.method);
+  console.log("Headers:", options.headers);
+  if (options.body) {
+    console.log("Body:", JSON.parse(options.body as string));
+  }
+  console.log("=============================================\n");
+
+  const res = await fetch(url, options);
+
+  // ✅ نسخ الـ response عشان نقدر نقرأه مرتين (مرة للـ log ومرة للـ return)
+  const cloned = res.clone();
+  let responseBody: unknown;
+  try {
+    responseBody = await cloned.json();
+  } catch {
+    responseBody = await cloned.text();
+  }
+
+  console.log(`\n========== [${actionName}] RESPONSE ==========`);
+  console.log("Status:", res.status, res.statusText);
+  console.log("Body:", responseBody);
+  console.log("==============================================\n");
+
+  return res;
+}
+
 export async function addFactoryAction(data: FactoryDataFormValues) {
   const session = await getServerSession(authOptions);
 
@@ -27,15 +57,19 @@ export async function addFactoryAction(data: FactoryDataFormValues) {
     })),
   };
 
-  const res = await fetch(`${API_URL}/factories`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "factory_permissions",
+  const res = await loggedFetch(
+    `${API_URL}/factories`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.user.accessToken}`,
+        system_screen: "factory_permission",
+      },
+      body: JSON.stringify(body),
     },
-    body: JSON.stringify(body),
-  });
+    "addFactoryAction"
+  );
 
   if (!res.ok) {
     throw new Error("Failed to add factory");
@@ -46,7 +80,7 @@ export async function addFactoryAction(data: FactoryDataFormValues) {
 }
 
 export async function editFactoryAction(
-  data: FactoryDataFormValues & { id: string },
+  data: FactoryDataFormValues & { id: string }
 ) {
   const session = await getServerSession(authOptions);
   const { id, ...rest } = data;
@@ -68,15 +102,19 @@ export async function editFactoryAction(
     })),
   };
 
-  const res = await fetch(`${API_URL}/factories/${id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "factory_permissions",
+  const res = await loggedFetch(
+    `${API_URL}/factories/${id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${session?.user.accessToken}`,
+        system_screen: "factory_permission",
+      },
+      body: JSON.stringify(body),
     },
-    body: JSON.stringify(body),
-  });
+    "editFactoryAction"
+  );
 
   if (!res.ok) {
     throw new Error("Failed to update factory");
@@ -89,13 +127,17 @@ export async function editFactoryAction(
 export async function deleteFactoryAction(id: string) {
   const session = await getServerSession(authOptions);
 
-  const res = await fetch(`${API_URL}/factories/${id}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "management",
+  const res = await loggedFetch(
+    `${API_URL}/factories/${id}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${session?.user.accessToken}`,
+        system_screen: "management",
+      },
     },
-  });
+    "deleteFactoryAction"
+  );
 
   if (!res.ok) {
     throw new Error("Failed to delete factory");
