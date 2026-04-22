@@ -6,15 +6,20 @@ import UserOrdersWrapper from "./user-orders-wrapper";
 
 interface IProps {
   userId: string;
-  page?: number; // ✅
+  page?: number;
+  systemScreen?: "user_permission" | "driver_permission"; // ✅
 }
 
-export default function UserOrdersList({ userId, page }: IProps) {
+export default function UserOrdersList({ userId, page, systemScreen }: IProps) {
   return (
     <Table>
       <UserOrdersTableHeader />
       <Suspense fallback={<TableLoading colSpan={6} />}>
-        <UserOrdersWrapper userId={userId} page={page} />
+        <UserOrdersWrapper
+          userId={userId}
+          page={page}
+          systemScreen={systemScreen}
+        />
       </Suspense>
     </Table>
   );

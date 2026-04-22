@@ -1,5 +1,6 @@
 import "next-auth";
 import "next-auth/jwt";
+import { Permissions } from "@/src/lib/types/permissions"; // ← عدّل الـ path حسب مشروعك
 
 declare module "next-auth" {
   interface User {
@@ -11,6 +12,7 @@ declare module "next-auth" {
     verified: boolean;
     firstTime: boolean;
     accessToken: string;
+    permissions: Permissions | null; // ✅
   }
 
   interface Session {
@@ -24,6 +26,7 @@ declare module "next-auth" {
       verified: boolean;
       firstTime: boolean;
       accessToken: string;
+      permissions: Permissions | null; // ✅
     };
   }
 }
@@ -38,5 +41,6 @@ declare module "next-auth/jwt" {
     verified: boolean;
     firstTime: boolean;
     accessToken: string;
+    permissions: Permissions | null; // ✅
   }
 }

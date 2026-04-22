@@ -1,3 +1,4 @@
+// important-notes.tsx
 import { Square } from "lucide-react";
 
 const Notes = [
@@ -9,7 +10,8 @@ const Notes = [
 
 export default function ImportantNotes() {
   return (
-    <div className="space-y-5">
+    // ✅ flex-1 عشان ياخد النص التاني جنب الدفع
+    <div className="space-y-5 flex-1">
       <h2 className="font-semibold text-[#0A0A0A] text-xl">ملاحظات هامة</h2>
       <div className="space-y-2">
         {Notes.map((item, index) => (
@@ -22,9 +24,9 @@ export default function ImportantNotes() {
 
 function NoteItem({ note }: { note: string }) {
   return (
-    <div className="flex  items-center  gap-2 text-[#1A1A1A] font-bold ">
-      <Square size={16}  />
-      <p>{note}</p>{" "}
+    <div className="flex items-center gap-2 text-[#1A1A1A] font-bold">
+      <Square size={16} />
+      <p>{note}</p>
     </div>
   );
 }

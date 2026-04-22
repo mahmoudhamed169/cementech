@@ -7,7 +7,7 @@ async function getTermsData(token: string): Promise<TermsPolicy[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/policies`, {
     headers: {
       Authorization: `Bearer ${token}`,
-      system_screen: "",
+      systemscreen: "terms_permission",
       lang: "all",
     },
     cache: "no-store",

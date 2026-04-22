@@ -24,13 +24,13 @@ export default function RequestDetails({
           />
           <InfoItem
             label="تاريخ الإنشاء"
-            value={new Date(request.created_at).toLocaleDateString("ar-SA")}
+            value={new Date(request.created_at).toLocaleDateString("en-SA")}
           />
           <InfoItem
             label="تاريخ التحميل"
             value={
               request.loaded_at
-                ? new Date(request.loaded_at).toLocaleDateString("ar-SA")
+                ? new Date(request.loaded_at).toLocaleDateString("en-SA")
                 : "-"
             }
           />

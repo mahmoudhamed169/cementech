@@ -41,7 +41,7 @@ export async function fetchCustomerProfile(
   const res = await fetch(`${API_URL}/users/${id}/customerProfile`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "user_permission",
+      systemscreen: "user_permission",
     },
     cache: "no-store",
   });

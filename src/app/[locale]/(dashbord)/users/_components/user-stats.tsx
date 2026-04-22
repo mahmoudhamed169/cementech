@@ -38,7 +38,7 @@ export default function UserStats({
     },
     {
       title: t("totalPaid"),
-      value: totalPaid,
+      value: totalPaid.toFixed(2),
       currency: <CurrencyIcon height={20} width={20} />,
       bgColor: "bg-[#F0FDF4]",
       icon: <DollarSign size={20} />,

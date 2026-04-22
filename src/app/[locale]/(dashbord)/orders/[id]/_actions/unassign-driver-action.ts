@@ -15,7 +15,7 @@ export async function unassignDriverAction(orderId: string, driverId: string) {
       method: "POST",
       headers: {
         Authorization: `Bearer ${session?.user.accessToken}`,
-        system_screen: "order_permission",
+        systemscreen: "order_permission",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ driver_ids: [driverId] }),

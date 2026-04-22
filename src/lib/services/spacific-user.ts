@@ -18,7 +18,7 @@ export async function fetchDriver(id: string): Promise<DriverUser> {
   const res = await fetch(`${API_URL}/users/${id}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "driver",
+      systemscreen: "driver",
     },
     cache: "no-store",
   });
@@ -38,7 +38,7 @@ export async function fetchCustomer(id: string): Promise<CustomerUser> {
   const res = await fetch(`${API_URL}/users/${id}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "customer",
+      systemscreen: "customer",
     },
     cache: "no-store",
   });

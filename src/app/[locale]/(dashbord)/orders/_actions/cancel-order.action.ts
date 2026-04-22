@@ -14,7 +14,7 @@ export async function cancelOrderAction(id: string) {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "order_permission",
+      systemscreen: "order_permission",
     },
     body: JSON.stringify({ status: "canceled" }),
   });

@@ -1,3 +1,5 @@
+"use client";
+
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 
 import dayjs from "dayjs";
@@ -13,14 +15,33 @@ import OrderStatusCell from "./order-status-cell";
 import OrderShipmentCell from "./order-shipment-cell";
 import OrderQuantityCell from "./order-quantity-cell";
 import OrderAssignDriver from "./order-assign-driver";
-import OrderActionsWrapper from "./order-actions/_components/order-actions-wrapper";
+
 import OrdersTableEmpty from "./orders-table-empty";
 import { Link } from "@/src/i18n/navigation";
 import { Eye } from "lucide-react";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
+import { useTranslations } from "next-intl";
 
 dayjs.extend(relativeTime);
 
 export default function OrderTableBody({ orders }: { orders: Order[] }) {
+  const t = useTranslations("noAccess");
+  const can = usePermissionsStore((s) => s.can);
+
+  if (!can("order_permission", "GET"))
+    return (
+      <TableBody>
+        <TableRow>
+          <TableCell colSpan={12} className="h-40 text-center">
+            <div className="flex flex-col items-center justify-center gap-2">
+              <span className="text-3xl">🔒</span>
+              <p className="text-gray-600 font-medium">{t("message")}</p>
+            </div>
+          </TableCell>
+        </TableRow>
+      </TableBody>
+    );
+
   if (orders.length === 0) return <OrdersTableEmpty />;
   return (
     <TableBody>

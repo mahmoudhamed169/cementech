@@ -21,7 +21,6 @@ export default function OrderDetailsTable({
   product: Product;
 }) {
   const headers = [
-    "الوصف",
     "الكمية",
     "نوع الأسمنت",
     "السعر ( الطن )",
@@ -64,7 +63,6 @@ export default function OrderDetailsTable({
       <TableBody>
         {rows.map((row, index) => (
           <TableRow key={index} className="text-[#364153] border-[#F3F4F6]">
-            <TableCell className="text-center">{row.description}</TableCell>
             <TableCell className="text-center">{row.quantity} طن</TableCell>
             <TableCell className="text-center">{row.cementType}</TableCell>
 

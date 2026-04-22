@@ -66,7 +66,7 @@ export default function DriverDetails({ driver }: { driver: DriverProfile }) {
           <FormInputField
             id="user-id"
             label={t("driverId")}
-            value={driver.id}
+            value={driver.code}
             readOnly
           />
           <FormInputField

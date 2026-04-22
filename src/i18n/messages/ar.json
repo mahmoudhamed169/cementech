@@ -55,7 +55,7 @@
     "activeDrivers": "السائقين النشطين"
   },
   "driversStatus": {
-    "title": "...",
+    "title": "حالة السائقين",
     "available": "متاح",
     "inDelivery": "جاري التوصيل",
     "waiting": "في انتظار طلب",
@@ -82,6 +82,7 @@
     "title": "الطلبات الأخيرة",
     "viewAll": "كل الطلبات",
     "caption": "الطلبات الأخيرة",
+
     "header": {
       "index": "#",
       "orderId": "رقم الطلب",
@@ -1033,7 +1034,8 @@
       "description": "ارسال رسالة الى {recipientType} {recipientName}",
       "recipientType": {
         "driver": "السائق",
-        "user": "المستخدم"
+        "customer": "المستخدم",
+        "admin": "المشرف"
       },
       "titleField": {
         "label_ar": "عنوان الرسالة بالعربي",
@@ -1193,5 +1195,17 @@
         "platformFee": "رسوم المنصة"
       }
     }
+  },
+  "pendingDriver": {
+    "tooltip": " لم يكمل التسجيل"
+  },
+  "forbiddenPage": {
+    "title": "غير مصرح لك بالدخول",
+    "description": "ليس لديك الصلاحية للوصول إلى هذه الصفحة. تواصل مع المسؤول لطلب الصلاحيات المطلوبة.",
+    "back": "رجوع",
+    "home": "الرئيسية"
+  } ,
+  "noAccess": {
+    "message": "You do not have access to this section"
   }
 }

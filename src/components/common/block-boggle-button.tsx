@@ -4,6 +4,7 @@ import { Ban, ShieldCheck, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { useBlockUser } from "@/src/lib/hooks/use-block-user";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 interface BlockToggleButtonProps {
   id: string;
@@ -23,6 +24,8 @@ export default function BlockToggleButton({
 
   const { toggleBlock, isPending } = useBlockUser();
 
+  const can = usePermissionsStore((s) => s.can);
+
   const handleToggleBlock = () => {
     toggleBlock({
       id,
@@ -36,6 +39,8 @@ export default function BlockToggleButton({
       onSuccess,
     });
   };
+
+  if (!can("driver_permission", "PATCH")) return null;
 
   return (
     <Button

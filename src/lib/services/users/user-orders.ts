@@ -35,6 +35,7 @@ export interface GetUserOrdersParams {
   id: string;
   page?: number;
   limit?: number;
+  systemScreen?: "user_permission" | "driver_permission"; // ✅ ديناميك
 }
 
 export async function fetchUserOrders(
@@ -51,7 +52,7 @@ export async function fetchUserOrders(
   const res = await fetch(url, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "user_permission",
+      systemScreen: params.systemScreen ?? "user_permission", // ✅
       lang: "en",
     },
     cache: "no-store",

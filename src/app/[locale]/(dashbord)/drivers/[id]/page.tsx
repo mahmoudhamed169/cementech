@@ -54,9 +54,12 @@ export default async function page({ params, searchParams }: Props) {
       />
       {driver.document_verify !== "rejected" &&
         driver.document_verify !== "pending" && (
-          <UserOrders userId={id} page={page ? Number(page) : 1} />
+          <UserOrders
+            userId={id}
+            page={page ? Number(page) : 1}
+            systemScreen="driver_permission"
+          />
         )}{" "}
-      *
       {driver.document_verify !== "rejected" && (
         <DriverActions driver={driver} />
       )}

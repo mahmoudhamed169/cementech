@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { AssigneDriver } from "@/src/components/shared/assigne-driver-dialog";
 import { UserRoundPlus } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 interface OrderAssignDriverProps {
-  remainingDrivers: number; // بدل hasDrivers
+  remainingDrivers: number;
   truckQuantity: number;
   orderCode: string;
   orderId: string;
@@ -22,6 +23,10 @@ export default function OrderAssignDriver({
   quantity,
 }: OrderAssignDriverProps) {
   const t = useTranslations("recentOrders");
+  const can = usePermissionsStore((s) => s.can);
+
+  // مش عنده POST على الطلبات → مش بيظهر خالص
+  if (!can("order_permission", "POST")) return null;
 
   if (remainingDrivers <= 0)
     return <div className="w-5 h-5 flex items-center justify-center"></div>;
@@ -30,7 +35,7 @@ export default function OrderAssignDriver({
     <div className="w-5 h-5 flex items-center justify-center">
       <div title={t("driverStatus.notAssigned")}>
         <AssigneDriver
-          numOfShipments={remainingDrivers} // بعث الباقي مش الكل
+          numOfShipments={remainingDrivers}
           orderCode={orderCode}
           orderId={orderId}
           productId={productId}

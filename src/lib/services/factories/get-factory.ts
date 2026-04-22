@@ -41,7 +41,7 @@ export async function getFactoryById(
   const res = await fetch(`${API_URL}/factories/${id}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "factories_permissions",
+      systemscreen: "factories_permission",
       lang: "all",
     },
     cache: "no-store",

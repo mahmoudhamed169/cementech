@@ -19,7 +19,7 @@ export async function getDriverStats(): Promise<ApiDriverStats> {
   const res = await fetch(`${API_URL}/users/driverProfile/driverStats`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      screen: "home_permissions",
+      systemscreen: "home_permissions",
     },
     next: { tags: ["driver-stats"] },
   });

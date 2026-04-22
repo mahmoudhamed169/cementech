@@ -17,7 +17,7 @@ export default async function LoadingReqsTableWrapper({
     search?: string;
     status?: string;
     time?: string;
-    // type?: string;
+    type?: string;
   };
 }) {
   const page = Number(searchParams.page ?? 1);
@@ -25,13 +25,13 @@ export default async function LoadingReqsTableWrapper({
   const status =
     (searchParams.status as GetRequestsParams["status"]) ?? undefined;
   const time = (searchParams.time as GetRequestsParams["time"]) ?? undefined;
-  // const type = (searchParams.type as GetRequestsParams["type"]) ?? undefined;
+  const type = (searchParams.type as GetRequestsParams["type"]) ?? undefined;
 
   const cookieStore = await cookies();
   const locale = cookieStore.get("NEXT_LOCALE")?.value ?? "ar";
 
   const data = await getRequests(
-    { page, limit: 10, search, status, time },
+    { page, limit: 10, search, status, time, request_type: type },
     locale as "ar" | "en",
   );
 

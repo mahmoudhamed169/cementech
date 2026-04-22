@@ -8,15 +8,21 @@ import PaginationInfo from "@/src/components/shared/pagination-info";
 interface IProps {
   userId: string;
   page?: number;
+  systemScreen?: "user_permission" | "driver_permission"; // ✅
 }
 
 const LIMIT = 5;
 
-export default async function UserOrdersWrapper({ userId, page = 1 }: IProps) {
+export default async function UserOrdersWrapper({
+  userId,
+  page = 1,
+  systemScreen = "user_permission", // ✅ default للـ users
+}: IProps) {
   const { data: orders, meta } = await fetchUserOrders({
     id: userId,
     page,
     limit: LIMIT,
+    systemScreen, // ✅
   });
 
   if (orders.length === 0) return <UserOrdersEmpty />;

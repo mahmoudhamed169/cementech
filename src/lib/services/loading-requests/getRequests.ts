@@ -20,6 +20,7 @@ export interface GetRequestsParams {
     | "pending_payment";
 
   time?: "today" | "this_week" | "this_month" | "all";
+  request_type?: string;
 }
 
 export async function getRequests(
@@ -38,7 +39,7 @@ export async function getRequests(
   const res = await fetch(`${API_URL}/requests?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "loading_request_permission",
+      systemscreen: "loading_request_permission",
       lang,
     },
     next: { tags: ["requests"] },

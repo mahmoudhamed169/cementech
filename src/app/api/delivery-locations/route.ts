@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   const res = await fetch(`${API_URL}/settings/delivery-locations`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "settings_permissions",
+      systemscreen: "settings_permission",
       lang,
     },
   });

@@ -52,7 +52,7 @@ export async function getRequestById(
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "loading_request_permission",
+      systemscreen: "loading_request_permission",
       lang,
     },
   });

@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { OrderData } from "@/src/lib/services/orders/spacific-order";
 import { AssigneDriver } from "@/src/components/shared/assigne-driver-dialog";
 import { Button } from "@/components/ui/button";
-import { UserPlus } from "lucide-react";
+import { UserPlus, Truck } from "lucide-react";
 import DriverCard from "./driver-card";
 
 interface DriverInfoSectionProps {
@@ -13,10 +13,7 @@ interface DriverInfoSectionProps {
 
 const statusConfig: Record<string, { label: string; className: string }> = {
   ACCEPTED: { label: "مقبول", className: "bg-green-100 text-green-700" },
-  PENDING: {
-    label: "قيد الانتظار",
-    className: "bg-yellow-100 text-yellow-700",
-  },
+  PENDING: { label: "قيد الانتظار", className: "bg-yellow-100 text-yellow-700" },
   REJECTED: { label: "مرفوض", className: "bg-red-100 text-red-700" },
   DELIVERED: { label: "تم التسليم", className: "bg-blue-100 text-blue-700" },
 };
@@ -31,55 +28,50 @@ export default function DriverInfoSection({ order }: DriverInfoSectionProps) {
 
   return (
     <div>
-      <h2 className="text-[#101828] font-bold text-xl">{t("driverInfo")}</h2>
-
-      <div className="mt-2 space-y-3">
-        {drivers.length > 0 && (
-          <div className="grid grid-cols-2 gap-4 text-[#364153]">
-            {drivers.map((driver, index) => {
-              const suffix = drivers.length > 1 ? ` ${index + 1}` : "";
-              const status = statusConfig[driver.status] ?? {
-                label: driver.status,
-                className: "bg-gray-100 text-gray-700",
-              };
-
-              return (
-                <DriverCard
-                  key={driver.id}
-                  driver={driver}
-                  orderId={order.id}
-                  suffix={suffix}
-                  isCanceled={isCanceled}
-                  status={status}
-                />
-              );
-            })}
-          </div>
-        )}
-
-        {drivers.length === 0 && remaining <= 0 && (
-          <div className="rounded-xl min-h-[68px] p-4 flex justify-between items-center bg-[#FEFCE8]">
-            <h6 className="text-[#894B00]">{t("notAssigned")}</h6>
-          </div>
-        )}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <h2 className="text-[#101828] font-bold text-xl">{t("driverInfo")}</h2>
+          {drivers.length > 0 && (
+            <span className="text-xs font-medium text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
+              {drivers.length}
+            </span>
+          )}
+        </div>
 
         {remaining > 0 && !isCanceled && (
-          <div className="rounded-xl p-4 flex justify-between items-center bg-[#FEFCE8]">
-            <h6 className="text-[#894B00]">
-              {t("notAssigned")} ({remaining})
-            </h6>
-            <AssigneDriver
-              numOfShipments={remaining}
-              orderId={order.id}
-              orderCode={order.code}
-              productId={order.product_id}
-              quantity={order.quantity}
-            >
-              <Button className="min-w-[130px] min-h-[42px] bg-[#D08700] rounded-xl p-2.5 text-white flex items-center gap-2">
-                <UserPlus />
-                {t("assignDriver")}
-              </Button>
-            </AssigneDriver>
+          <AssigneDriver
+            numOfShipments={remaining}
+            orderId={order.id}
+            orderCode={order.code}
+            productId={order.product_id}
+            quantity={order.quantity}
+          >
+            <Button className="h-9 bg-[#D08700] hover:bg-[#b87600] rounded-lg px-4 text-sm text-white flex items-center gap-2 shadow-sm">
+              <UserPlus size={15} />
+              {t("assignDriver")} ({remaining})
+            </Button>
+          </AssigneDriver>
+        )}
+      </div>
+
+      <div className="mt-3">
+        {drivers.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+            {drivers.map((driver, index) => (
+              <DriverCard
+                key={driver.id}
+                driver={driver}
+                orderId={order.id}
+                suffix={drivers.length > 1 ? ` ${index + 1}` : ""}
+                isCanceled={isCanceled}
+                status={statusConfig[driver.status] ?? { label: driver.status, className: "bg-gray-100 text-gray-700" }}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-xl p-4 flex items-center gap-3 bg-amber-50/80 border border-amber-100">
+            <Truck size={18} className="text-amber-500 shrink-0" />
+            <p className="text-sm font-medium text-amber-700">{t("notAssigned")}</p>
           </div>
         )}
       </div>

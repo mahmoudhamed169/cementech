@@ -13,7 +13,7 @@ export async function togglePaymentMethod(id: string, is_active: boolean) {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
       "Content-Type": "application/json",
-      system_screen: "settings_permissions",
+      systemscreen: "settings_permission",
     },
     body: JSON.stringify({ is_active }),
   });

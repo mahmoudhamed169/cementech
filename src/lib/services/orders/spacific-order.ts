@@ -103,7 +103,7 @@ export async function getOrderById(
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "order_permission",
+      systemscreen: "order_permission",
       lang,
     },
     next: { tags: ["ordersId"] },

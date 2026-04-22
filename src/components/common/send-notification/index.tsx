@@ -15,6 +15,7 @@ import { SendNotificationProps } from "./_types";
 import { useSendNotificationForm } from "./_hooks/use-send-notification-form";
 import { useSendNotification } from "./_hooks/use-send-notification";
 import SendNotificationForm from "./_components/notification-form-fields";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 interface Props extends SendNotificationProps {
   open?: boolean; // optional - لو مش موجود هيشتغل بالـ trigger
@@ -36,7 +37,7 @@ export default function SendNotification({
   const open = isControlled ? controlledOpen : internalOpen;
 
   const form = useSendNotificationForm();
-  const { mutate, isPending } = useSendNotification(recipientId);
+  const { mutate, isPending } = useSendNotification(recipientId , recipientType);
 
   function handleSubmit(values: Parameters<typeof mutate>[0]) {
     mutate(values, {
@@ -52,6 +53,9 @@ export default function SendNotification({
       setInternalOpen(false);
     }
   }
+
+  const can = usePermissionsStore((s) => s.can);
+  if (!can("notification_permission", "POST")) return null;
 
   return (
     <>

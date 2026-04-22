@@ -16,6 +16,7 @@ import { CircleX, TriangleAlert } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { useCancelOrder } from "../../../../_hooks/use-cancel-order";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 export default function OrderCancelButton({ id }: { id: string }) {
   const t = useTranslations("orderActions");
@@ -27,6 +28,9 @@ export default function OrderCancelButton({ id }: { id: string }) {
       onError: () => toast.error(t("cancelError")),
     });
   };
+
+  const can = usePermissionsStore((s) => s.can);
+  if (!can("order_permission", "PATCH")) return null;
 
   return (
     <AlertDialog>

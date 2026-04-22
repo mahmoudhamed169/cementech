@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { CheckCircle, XCircle, Loader2 } from "lucide-react";
 import { useVerifyDocuments } from "../_hooks/use-verify-documents";
 import { Button } from "@/components/ui/button";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 export default function DocumentVerifyActions({
   driver,
@@ -14,6 +15,9 @@ export default function DocumentVerifyActions({
   const t = useTranslations("driverPage.driverDocuments.verifyDocuments");
   const { acceptDocuments, rejectDocuments, isAccepting, isRejecting } =
     useVerifyDocuments(driver.user_id);
+
+  const can = usePermissionsStore((s) => s.can);
+  if (!can("driver_permission", "PATCH")) return null;
 
   return (
     <div className="flex w-full gap-3 px-4 py-5 border-t border-[#E5E7EB]">

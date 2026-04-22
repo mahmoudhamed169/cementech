@@ -1,7 +1,7 @@
 export interface SendNotificationProps {
   recipientId: string;
   recipientName: string;
-  recipientType: "driver" | "user";
+  recipientType: "driver" | "customer" | "admin";
 }
 
 export interface SendNotificationFormValues {

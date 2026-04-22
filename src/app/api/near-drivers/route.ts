@@ -24,7 +24,7 @@ export async function GET(req: NextRequest) {
   const res = await fetch(`${API_URL}/users/near-drivers?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "order_permission",
+      systemscreen: "order_permission",
       lang: "en",
     },
   });

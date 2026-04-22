@@ -14,7 +14,7 @@ export async function createPermissionAction(data: CreatePermissionSchema) {
     method: "POST",
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "management_permission",
+      systemscreen: "management_permission",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
@@ -39,7 +39,7 @@ export async function updatePermissionAction(
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "management_permission",
+      systemscreen: "management_permission",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
@@ -61,7 +61,7 @@ export async function deletePermissionAction(id: string) {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "management_permission",
+      systemscreen: "management_permission",
     },
   });
 

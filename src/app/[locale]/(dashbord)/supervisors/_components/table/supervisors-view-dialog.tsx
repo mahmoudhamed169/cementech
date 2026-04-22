@@ -75,7 +75,7 @@ export default function SupervisorsViewDialog({
   const BackIcon = isRtl ? ArrowLeft : ArrowRight;
 
   const form = useSendNotificationForm();
-  const { mutate, isPending } = useSendNotification(supervisor.id);
+  const { mutate, isPending } = useSendNotification(supervisor.id, "admin");
 
   const formattedDate = new Date(supervisor.created_at).toLocaleDateString(
     locale === "ar" ? "ar-SA" : "en-US",

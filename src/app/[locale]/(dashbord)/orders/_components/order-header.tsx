@@ -13,11 +13,7 @@ export default function OrderHeader() {
         <p>{t("description")}</p>
       </div>
 
-      <div className="flex items-center gap-3">
-        <h6>{t("autoAssign")}</h6>
-        <Switch />
-        <h6>{t("enabled")}</h6>
-      </div>
+     
     </div>
   );
 }

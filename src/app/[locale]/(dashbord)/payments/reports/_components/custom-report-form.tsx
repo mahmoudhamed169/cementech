@@ -28,9 +28,7 @@ export function CustomReportForm() {
 
   function handleFetch() {
     if (!isValid) return;
-
     setError(null);
-
     startTransition(async () => {
       const result = await getTransactionsReportAction({
         from_date: startDate,
@@ -50,17 +48,23 @@ export function CustomReportForm() {
 
   return (
     <div className="space-y-5" dir="rtl">
-      <div className="rounded-2xl border border-gray-100 bg-white p-5 space-y-4">
-        <h3 className="text-base font-bold text-gray-800">إنشاء تقرير مخصص</h3>
+      <div className="rounded-2xl border border-gray-100 bg-white p-6">
+        <h3 className="text-base font-bold text-gray-800 mb-5">
+          إنشاء تقرير مخصص
+        </h3>
 
-        <div className="flex flex-wrap items-end gap-4">
-          <div className="flex flex-col gap-1.5 flex-1 min-w-[160px]">
+        {/* ✅ grid بـ 4 أعمدة متساوية */}
+        <div className="grid grid-cols-4 items-end gap-4">
+          {/* نوع التقرير */}
+          <div className="flex flex-col gap-2">
             <label className="text-sm text-gray-500">نوع التقرير</label>
             <Select
               value={reportType}
               onValueChange={(v) => setReportType(v as ReportType)}
+            
             >
-              <SelectTrigger className="h-12 rounded-xl border-gray-200 bg-white text-sm">
+              <SelectTrigger className="min-h-12 rounded-xl border-gray-200 bg-white text-sm w-full">
+            
                 <SelectValue placeholder="اختر نوع التقرير" />
               </SelectTrigger>
               <SelectContent className="bg-white border-0">
@@ -71,31 +75,34 @@ export function CustomReportForm() {
             </Select>
           </div>
 
-          <div className="flex flex-col gap-1.5 flex-1 min-w-[160px]">
+          {/* تاريخ البداية */}
+          <div className="flex flex-col gap-2">
             <label className="text-sm text-gray-500">تاريخ البداية</label>
             <input
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="h-12 rounded-xl border border-gray-200 px-4 text-sm"
+              className="h-12 rounded-xl border border-gray-200 px-4 text-sm w-full"
             />
           </div>
 
-          <div className="flex flex-col gap-1.5 flex-1 min-w-[160px]">
+          {/* تاريخ النهاية */}
+          <div className="flex flex-col gap-2">
             <label className="text-sm text-gray-500">تاريخ النهاية</label>
             <input
               type="date"
               value={endDate}
               min={startDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="h-12 rounded-xl border border-gray-200 px-4 text-sm"
+              className="h-12 rounded-xl border border-gray-200 px-4 text-sm w-full"
             />
           </div>
 
+          {/* الزر */}
           <Button
             onClick={handleFetch}
             disabled={!isValid || isPending}
-            className="h-12 px-6 rounded-xl bg-green-600 hover:bg-green-700 text-white gap-2"
+            className="h-12 w-full rounded-xl bg-green-600 hover:bg-green-700 text-white gap-2"
           >
             {isPending ? (
               <Loader2 size={16} className="animate-spin" />
@@ -107,12 +114,18 @@ export function CustomReportForm() {
         </div>
       </div>
 
-      {error && <div className="text-red-600 text-sm">{error}</div>}
+      {/* Error */}
+      {error && (
+        <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-600">
+          {error}
+        </div>
+      )}
 
+      {/* Results */}
       {transactions !== null &&
         (transactions.length === 0 ? (
-          <div className="text-center text-gray-500">
-            لا توجد معاملات
+          <div className="rounded-2xl border border-gray-100 bg-white py-16 text-center text-gray-400 text-sm">
+            لا توجد معاملات في هذه الفترة
           </div>
         ) : (
           <TransactionsReport

@@ -41,7 +41,7 @@ export async function getOrderStats(
   const res = await fetch(`${API_URL}/orders/stats?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "order",
+      systemscreen: "order_permission",
     },
     next: { tags: ["orders/orderstatus"] },
   });

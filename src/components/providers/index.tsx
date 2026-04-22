@@ -5,6 +5,7 @@ import ReactQueryProvider from "./shared/_components/react-query.prodvider";
 import NextAuthProvider from "./shared/_components/next-auth.provider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
 import NextIntlProvider from "./shared/_components/next-intl.provider";
+import { PermissionsProvider } from "./shared/_components/PermissionsProvider";
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -22,7 +23,9 @@ export default function Providers({
       <ReactQueryProvider>
         {/* react query dev tools */}
 
-        <NextAuthProvider>{children}</NextAuthProvider>
+        <NextAuthProvider>
+          <PermissionsProvider>{children}</PermissionsProvider>
+        </NextAuthProvider>
       </ReactQueryProvider>
     </NextIntlProvider>
   );
