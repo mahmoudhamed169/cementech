@@ -28,7 +28,7 @@ export default function DeliveryDetails({
               <div className="space-y-1">
                 <p className="text-xs text-[#6B7280]">اسم السائق</p>
                 <p className="font-medium text-[#0A0A0A] leading-snug">
-                  {driver.name}
+                  {driver.driver_name}
                 </p>
               </div>
 
@@ -38,14 +38,6 @@ export default function DeliveryDetails({
                   {driver.plate_number}
                 </p>
               </div>
-            </div>
-
-            {/* Arrival Time */}
-            <div className="space-y-1">
-              <p className="text-xs text-[#6B7280]">تاريخ ووقت الوصول</p>
-              <p className="font-semibold text-[#0A0A0A]">
-                {driver.arrival_time}
-              </p>
             </div>
           </div>
         ))}

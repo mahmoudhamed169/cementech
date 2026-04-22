@@ -1,3 +1,4 @@
+// payment-details.tsx
 import { Payment } from "@/src/lib/types/invoices/invoice-details";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
 
@@ -5,9 +6,10 @@ export default function PaymentDetails({ payment }: { payment: Payment }) {
   const { summary } = payment;
 
   return (
-    <div className="space-y-5">
+    // ✅ flex-1 عشان ياخد نص العرض جنب الملاحظات
+    <div className="space-y-5 flex-1">
       <h2 className="font-semibold text-[#0A0A0A] text-xl">تفاصيل الدفع</h2>
-      <div className="bg-[#29303D] rounded-xl p-4 w-108 min-h-36 print:w-full">
+      <div className="bg-[#29303D] rounded-xl p-4 w-full min-h-36">
         <div className="grid grid-cols-2 gap-4 text-[#A2A2A2]">
           <div className="flex flex-col gap-1 text-sm">
             <span>إجمالي المبلغ</span>
@@ -20,7 +22,7 @@ export default function PaymentDetails({ payment }: { payment: Payment }) {
           <div className="flex flex-col gap-1 text-sm">
             <span>المبلغ المدفوع</span>
             <span className="font-medium flex items-center gap-0.5 text-[#00A63E]">
-              {summary.total_paid}{" "}
+              {summary.total_paid}
               <CurrencyIcon className="stroke-[#00A63E]" fill="#00A63E" />
             </span>
           </div>
