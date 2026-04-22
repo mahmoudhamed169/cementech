@@ -20,7 +20,7 @@ export async function sendNotificationAction(
     description_en: data.description_en,
     description_ar: data.description_ar,
     user_id: data.user_id,
-    target: data.targert,
+    target: "specific",
   };
 
   // console.log("📢 Sending notification with payload:", payload);
