@@ -28,10 +28,10 @@ export default function DriversStatus({ data }: Props) {
   const t = useTranslations("driversStatus");
 
   return (
-    <div className="w-2xl p-6 rounded-xl min-h-85 bg-white border border-[#E5E7EB]">
-      <h2 className="font-bold text-lg text-[#101828] mb-4">{t("title")}</h2>
-
-      <div className="flex flex-col gap-6 border-b pb-8 border-[#E5E7EB]">
+    <div className="w-2xl p-6 rounded-xl bg-white border border-[#E5E7EB] flex flex-col self-stretch">
+      {" "}
+      <h2 className="font-bold text-lg text-[#101828] mb-7">{t("title")}</h2>
+      <div className="flex flex-col gap-11 border-b pb-8 border-[#E5E7EB] flex-1">
         {data.statuses.map((item) => (
           <StatsProgress
             key={item.status}
@@ -42,7 +42,6 @@ export default function DriversStatus({ data }: Props) {
           />
         ))}
       </div>
-
       <div className="mt-6">
         <h6 className="text-[#4A5565]">{t("totalDrivers")}</h6>
         <h5 className="font-bold text-2xl text-[#101828]">

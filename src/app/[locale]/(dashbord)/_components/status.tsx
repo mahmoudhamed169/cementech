@@ -19,7 +19,8 @@ export default async function Status() {
     .slice(0, 4);
 
   return (
-    <section className="flex gap-8">
+    // items-stretch هو السر — بيخلي الـ children كلهم نفس الـ height
+    <section className="flex gap-8 items-stretch min-h-0">
       <DriversStatus data={driverStats} />
       <SystemWarnings notifications={notifications} />
     </section>

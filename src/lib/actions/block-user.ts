@@ -20,7 +20,7 @@ export async function toggleBlockUser(
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
       "Content-Type": "application/json",
-      system_screen:
+      systemscreen:
         type === "customer" ? "user_permission" : "driver_permission",
     },
   });

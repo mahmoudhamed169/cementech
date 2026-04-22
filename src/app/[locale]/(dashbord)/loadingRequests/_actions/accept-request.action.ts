@@ -36,7 +36,7 @@ export async function acceptRequestAction(
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "loading_request_permission",
+      systemscreen: "loading_request_permission",
       lang: "en",
     },
     body: formData,

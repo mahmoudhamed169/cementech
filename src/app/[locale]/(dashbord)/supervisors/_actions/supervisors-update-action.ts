@@ -39,7 +39,7 @@ export async function updateSupervisorAction(
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
       "Content-Type": "application/json",
-      system_screen: "supervisors_permissions",
+      systemscreen: "supervisors_permission",
     },
     body: JSON.stringify(payload),
   });

@@ -50,7 +50,7 @@ export async function getPermissions(): Promise<PermissionsResponse> {
   const res = await fetch(`${API_URL}/permissions`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "permissions",
+      systemscreen: "management_permission",
       lang: "all",
     },
     next: { tags: ["permissions"] },

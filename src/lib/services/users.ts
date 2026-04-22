@@ -38,7 +38,7 @@ export async function getUsers<T extends Driver | Customer>(
   const res = await fetch(`${API_URL}/users?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: screen ?? params.type ?? "user_permission",
+      systemscreen: screen ?? params.type ?? "user_permission",
       ...(lang && { lang }), // ✅
     },
     next: { tags: ["supervisors"] },

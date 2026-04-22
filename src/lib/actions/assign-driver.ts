@@ -26,7 +26,7 @@ export async function assignDriverAction(
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "orders_permission",
+      systemscreen: "orders_permission",
       lang: "en",
     },
     body: JSON.stringify(requestBody),

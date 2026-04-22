@@ -11,7 +11,7 @@ export async function GET() {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
       "Content-Type": "application/json",
-      system_screen: "settings_permissions",
+      systemscreen: "settings_permission",
     },
   });
 

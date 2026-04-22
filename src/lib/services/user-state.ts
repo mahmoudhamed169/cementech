@@ -32,7 +32,7 @@ export async function getUsersStats(
   const res = await fetch(`${API_URL}/users/stats?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: params.screen ?? params.type ?? "user_permission",
+      systemscreen: params.screen ?? params.type ?? "user_permission",
     },
     next: { tags: ["supervisors_stats"] },
   });

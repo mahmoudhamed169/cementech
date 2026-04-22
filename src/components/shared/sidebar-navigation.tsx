@@ -1,6 +1,8 @@
 "use client";
 import { useTranslations } from "next-intl";
 import SidebarLinkItem from "./sidebar-item";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
+import { PermissionKey } from "@/src/lib/types/permissions";
 import {
   Bell,
   CarFront,
@@ -17,76 +19,102 @@ import {
   UserCog,
 } from "lucide-react";
 
-const SidebarLinks = [
+const SidebarLinks: {
+  href: string;
+  labelKey: string;
+  icon: React.ReactNode;
+  permissionKey: PermissionKey | null; // null = متاح للكل
+}[] = [
   {
     href: "/",
     labelKey: "home",
     icon: <LayoutDashboard size={24} strokeWidth={1.75} />,
+    permissionKey: "home_permission",
   },
   {
     href: "/orders",
     labelKey: "orders",
     icon: <ShoppingBag size={24} strokeWidth={1.75} />,
+    permissionKey: "order_permission",
   },
   {
     href: "/drivers",
     labelKey: "drivers",
     icon: <CarFront size={24} strokeWidth={1.75} />,
+    permissionKey: "driver_permission",
   },
   {
     href: "/loadingRequests",
     labelKey: "loadingRequests",
     icon: <ScrollText size={24} strokeWidth={1.75} />,
+    permissionKey: "loading_request_permission",
   },
   {
     href: "/users",
     labelKey: "users",
     icon: <Users size={24} strokeWidth={1.75} />,
+    permissionKey: "user_permission",
   },
   {
     href: "/payments",
     labelKey: "payments",
     icon: <CircleDollarSign size={24} strokeWidth={1.75} />,
+    permissionKey: "payment_permission",
   },
   {
     href: "/invoices",
     labelKey: "invoices",
     icon: <ReceiptText size={24} strokeWidth={1.75} />,
+    permissionKey: "invoice_permission",
   },
   {
     href: "/notifications",
     labelKey: "notifications",
     icon: <Bell size={24} strokeWidth={1.75} />,
+    permissionKey: "notification_permission",
   },
   {
     href: "/permissions",
     labelKey: "permissions",
     icon: <Key size={24} strokeWidth={1.75} />,
+    permissionKey: "management_permission",
   },
   {
     href: "/supervisors",
     labelKey: "supervisors",
     icon: <UserCog size={24} strokeWidth={1.75} />,
+    permissionKey: "supervisor_permission",
   },
   {
     href: "/suppliers",
     labelKey: "suppliers",
     icon: <Factory size={24} strokeWidth={1.75} />,
+    permissionKey: "supplier_permission",
   },
   {
     href: "/terms",
     labelKey: "terms",
     icon: <FileText size={24} strokeWidth={1.75} />,
+    permissionKey: "terms_permission",
   },
   {
     href: "/settings",
     labelKey: "settings",
     icon: <Settings size={24} strokeWidth={1.75} />,
+    permissionKey: "setting_permission",
   },
 ];
 
 export default function SideBarNavigation() {
   const t = useTranslations("sidebar");
+  const can = usePermissionsStore((s) => s.can);
+  const isAdmin = usePermissionsStore((s) => s.isAdmin);
+
+  const visibleLinks = SidebarLinks.filter((link) => {
+    if (!link.permissionKey) return true; // متاح للكل
+    if (isAdmin()) return true; // admin يشوف كل حاجة
+    return can(link.permissionKey, "GET"); // فحص الصلاحية
+  });
 
   return (
     <nav
@@ -94,7 +122,7 @@ export default function SideBarNavigation() {
       style={{ scrollbarWidth: "thin", scrollbarColor: "#374151 transparent" }}
     >
       <ul>
-        {SidebarLinks.map((link) => (
+        {visibleLinks.map((link) => (
           <SidebarLinkItem
             key={link.href}
             href={link.href}

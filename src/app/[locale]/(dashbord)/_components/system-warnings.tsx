@@ -9,24 +9,11 @@ interface Props {
   notifications?: Notification[];
 }
 
-function severityToWarningType(
-  severity: string,
-): "urgent" | "warning" | "info" {
-  switch (severity) {
-    case "error":
-      return "urgent";
-    case "alert":
-      return "warning";
-    default:
-      return "info";
-  }
-}
-
 export default function SystemWarnings({ notifications = [] }: Props) {
   const t = useTranslations("systemWarnings");
 
   return (
-    <div className="min-h-85 bg-white flex-1 border border-[#E5E7EB] rounded-xl px-6 pt-6 flex flex-col gap-4">
+    <div className="h-full bg-white flex-1 border border-[#E5E7EB] rounded-xl px-6 py-6 flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <h3 className="font-bold text-lg">{t("title")}</h3>
         <Link
@@ -37,7 +24,7 @@ export default function SystemWarnings({ notifications = [] }: Props) {
         </Link>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-3 flex-1 overflow-y-auto">
         {notifications.map((n) => (
           <NotificationCard key={n.id} notification={n} />
         ))}

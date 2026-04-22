@@ -19,7 +19,7 @@ export async function toggleDeliveryLocationStatus(
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${session?.user.accessToken}`,
-        System_Screen: "settings_permissions",
+        systemscreen: "settings_permission",
       },
       body: JSON.stringify({ is_active }),
     },

@@ -29,7 +29,7 @@ export async function updatePolicyAction(
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
       "Content-Type": "application/json",
-      system_screen: "",
+      systemscreen: "terms_permission",
     },
     body: JSON.stringify(payload),
   });

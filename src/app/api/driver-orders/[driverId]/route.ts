@@ -18,7 +18,7 @@ export async function GET(
       headers: {
         Authorization: `Bearer ${session?.user.accessToken}`,
         "Content-Type": "application/json",
-        system_screen: "payments_permissions",
+        systemscreen: "payments_permission",
         lang: "en",
       },
       cache: "no-store",

@@ -8,14 +8,44 @@ import {
 import { ArrowRight } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, getSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { PermissionKey } from "@/src/lib/types/permissions";
 
 interface OtpStepProps {
   phone: string;
   transactionId: string;
   onBack: () => void;
+}
+
+// الصفحات مرتبة حسب الأولوية — أول صفحة عنده صلاحية عليها هيروح ليها
+const ORDERED_ROUTES: { path: string; resource: PermissionKey }[] = [
+  { path: "/",                 resource: "home_permission"            },
+  { path: "/orders",           resource: "order_permission"           },
+  { path: "/drivers",          resource: "driver_permission"          },
+  { path: "/loadingRequests",  resource: "loading_request_permission" },
+  { path: "/users",            resource: "user_permission"            },
+  { path: "/payments",         resource: "payment_permission"         },
+  { path: "/invoices",         resource: "invoice_permission"         },
+  { path: "/supervisors",      resource: "supervisor_permission"      },
+  { path: "/suppliers",        resource: "supplier_permission"        },
+  { path: "/settings",         resource: "setting_permission"         },
+];
+
+function getFirstAllowedRoute(permissions: any, locale: string): string {
+  // Admin يروح للـ home مباشرة
+  if (permissions?.is_admin) return `/${locale}`;
+
+  for (const route of ORDERED_ROUTES) {
+    const perms = permissions?.[route.resource];
+    if (Array.isArray(perms) && perms.includes("GET")) {
+      return `/${locale}${route.path === "/" ? "" : route.path}`;
+    }
+  }
+
+  // مفيش أي صلاحية → صفحة 403
+  return `/${locale}/403`;
 }
 
 export default function OtpStep({
@@ -48,8 +78,12 @@ export default function OtpStep({
         return;
       }
 
+      // ── جيب الـ session بعد الـ login عشان تاخد الـ permissions ──
+      const session = await getSession();
+      const redirectTo = getFirstAllowedRoute(session?.user?.permissions, locale);
+
       toast.success(tCommon("loginSuccess"));
-      router.push(`/${locale}`);
+      router.push(redirectTo);
     } catch {
       toast.error(tCommon("loginError"));
     } finally {

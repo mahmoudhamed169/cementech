@@ -8,7 +8,11 @@ import { FactoryDataFormValues } from "../_schema/factory.schema";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // ✅ Helper function لطباعة الـ request والـ response
-async function loggedFetch(url: string, options: RequestInit, actionName: string) {
+async function loggedFetch(
+  url: string,
+  options: RequestInit,
+  actionName: string,
+) {
   console.log(`\n========== [${actionName}] REQUEST ==========`);
   console.log("URL:", url);
   console.log("Method:", options.method);
@@ -64,11 +68,11 @@ export async function addFactoryAction(data: FactoryDataFormValues) {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${session?.user.accessToken}`,
-        system_screen: "factory_permission",
+        systemscreen: "factory_permission",
       },
       body: JSON.stringify(body),
     },
-    "addFactoryAction"
+    "addFactoryAction",
   );
 
   if (!res.ok) {
@@ -80,7 +84,7 @@ export async function addFactoryAction(data: FactoryDataFormValues) {
 }
 
 export async function editFactoryAction(
-  data: FactoryDataFormValues & { id: string }
+  data: FactoryDataFormValues & { id: string },
 ) {
   const session = await getServerSession(authOptions);
   const { id, ...rest } = data;
@@ -109,11 +113,11 @@ export async function editFactoryAction(
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${session?.user.accessToken}`,
-        system_screen: "factory_permission",
+        systemscreen: "factory_permission",
       },
       body: JSON.stringify(body),
     },
-    "editFactoryAction"
+    "editFactoryAction",
   );
 
   if (!res.ok) {
@@ -133,10 +137,10 @@ export async function deleteFactoryAction(id: string) {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${session?.user.accessToken}`,
-        system_screen: "management",
+        systemscreen: "management",
       },
     },
-    "deleteFactoryAction"
+    "deleteFactoryAction",
   );
 
   if (!res.ok) {

@@ -32,7 +32,7 @@ export async function deliverSingleBonusAction(data: {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${session?.user.accessToken}`,
-        system_screen: "payments_permissions",
+        systemscreen: "payments_permission",
       },
       body: formData,
     },
@@ -92,7 +92,7 @@ export async function deliverBulkBonusAction(data: {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "payments_permissions",
+      systemscreen: "payments_permission",
     },
     body: formData,
   });

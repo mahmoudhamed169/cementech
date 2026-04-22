@@ -10,7 +10,7 @@ export async function fetchDriver(id: string): Promise<DriverProfile> {
   const res = await fetch(`${API_URL}/users/${id}/driverProfile`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "driver_permission",
+      systemscreen: "driver_permission",
     },
     cache: "no-store",
   });

@@ -27,7 +27,7 @@ export async function getInvoices(params: GetInvoicesParams = {}) {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
-      system_screen: "invoices_permission",
+      systemscreen: "invoices_permission",
     },
     cache: "no-store",
   });

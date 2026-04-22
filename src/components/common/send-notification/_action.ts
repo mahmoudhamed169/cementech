@@ -7,7 +7,10 @@ import { SendNotificationSchema } from "./_schema";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export async function sendNotificationAction(
-  data: SendNotificationSchema & { user_id: string },
+  data: SendNotificationSchema & {
+    user_id: string;
+    targert: "customer" | "driver" | "admin";
+  },
 ) {
   const session = await getServerSession(authOptions);
 
@@ -17,14 +20,16 @@ export async function sendNotificationAction(
     description_en: data.description_en,
     description_ar: data.description_ar,
     user_id: data.user_id,
+    target: data.targert,
   };
 
+  // console.log("📢 Sending notification with payload:", payload);
 
   const res = await fetch(`${API_URL}/notifications`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "notification_permission",
+      systemscreen: "notification_permission",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
@@ -32,7 +37,6 @@ export async function sendNotificationAction(
 
   if (!res.ok) {
     const errorBody = await res.json();
- 
     throw new Error(`Failed to send notification: ${res.status}`);
   }
 

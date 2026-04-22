@@ -16,12 +16,15 @@ export async function getStats(): Promise<ApiStats> {
   const res = await fetch(`${API_URL}/stats`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
+      systemscreen: "home_permission",
     },
     next: { tags: ["stats"] },
   });
 
   if (!res.ok) {
-    throw new Error(`Failed to fetch stats: ${res.status}`);
+    const body = await res.text();
+    console.error("stats error:", res.status, body);
+    throw new Error("Failed to fetch order stats");
   }
 
   const json = await res.json();

@@ -20,7 +20,7 @@ export async function updatePricing(
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "settings_permissions",
+      systemscreen: "settings_permission",
     },
     body: JSON.stringify(input),
   });

@@ -29,7 +29,7 @@ export async function getOrders(
   const res = await fetch(`${API_URL}/orders?${query.toString()}`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      system_screen: "order_permission",
+      systemscreen: "order_permission",
       lang,
     },
     next: { tags: ["orders"] },
@@ -37,11 +37,9 @@ export async function getOrders(
 
   if (!res.ok) {
     const errorBody = await res.text();
-    console.error("Orders error:", {
-      status: res.status,
-      body: errorBody,
-      url: `${API_URL}/orders?${query.toString()}`,
-    });
+    console.error("Orders error status:", res.status);
+    console.error("Orders error body:", errorBody);
+    console.error("Orders token:", session?.user.accessToken);
     throw new Error(`Failed to fetch orders: ${res.status}`);
   }
 

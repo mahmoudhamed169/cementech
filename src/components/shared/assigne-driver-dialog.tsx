@@ -15,6 +15,7 @@ import { CircleCheck, Loader2, CarFront } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useNearbyDrivers } from "@/src/lib/hooks/useNearbyDrivers";
 import { useAssignDriver } from "@/src/lib/hooks/use-assign-driver";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 export function AssigneDriver({
   orderCode,
@@ -60,6 +61,10 @@ export function AssigneDriver({
   };
 
   const isValidSelection = selectedDrivers.length > 0;
+
+  const can = usePermissionsStore((s) => s.can);
+
+  if (!can("order_permission", "POST")) return null;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

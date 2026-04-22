@@ -55,7 +55,7 @@
     "activeDrivers": "Active Drivers"
   },
   "driversStatus": {
-    "title": "...",
+    "title": "Drivers Status",
     "available": "Available",
     "inDelivery": "In Delivery",
     "waiting": "Waiting for Order",
@@ -1029,7 +1029,8 @@
       "description": "Send a message to {recipientType} {recipientName}",
       "recipientType": {
         "driver": "driver",
-        "user": "user"
+        "customer": "customer",
+        "admin": "admin"
       },
       "titleField": {
         "label_ar": "Title in Arabic",
@@ -1192,5 +1193,11 @@
   },
   "pendingDriver": {
     "tooltip": " has not completed registration"
+  },
+  "forbiddenPage": {
+    "title": "Access Denied",
+    "description": "You don't have permission to access this page. Contact your administrator to request the required permissions.",
+    "back": "Go Back",
+    "home": "Home"
   }
 }

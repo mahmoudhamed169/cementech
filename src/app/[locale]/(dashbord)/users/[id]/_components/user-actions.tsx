@@ -19,7 +19,7 @@ export default function UserActions({ user }: { user: CustomerProfileData }) {
         <SendNotification
           recipientId={user.user_id}
           recipientName={user.customer_name}
-          recipientType="user"
+          recipientType="customer"
         />
       </div>
     </div>
