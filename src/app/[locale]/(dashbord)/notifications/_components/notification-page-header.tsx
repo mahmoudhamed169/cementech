@@ -5,10 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
 import { useTranslations } from "next-intl";
 import SendNotificationModal from "./send-notification-modal"; // ← الـ import
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 export default function NotificationPageHeader() {
   const t = useTranslations("NotificationPage.header");
   const [open, setOpen] = useState(false); // ← الـ state
+
+  const can = usePermissionsStore((s) => s.can);
 
   return (
     <>
@@ -17,15 +20,18 @@ export default function NotificationPageHeader() {
           <h2 className="text-2xl font-bold">{t("title")}</h2>
           <p className="text-sm text-white/80">{t("description")}</p>
         </div>
-        <Button
-          onClick={() => setOpen(true)} // ← بس كده
-          className="min-w-46 min-h-12 rounded-xl bg-[#00A63E] text-white p-3 flex justify-center items-center hover:bg-[#00A63E]/90 hover:scale-105 transition-all"
-        >
-          <Send />
-          {t("btn")}
-        </Button>
+        {can("notification_permission", "POST") && (
+          <Button
+            onClick={() => setOpen(true)} // ← بس كده
+            className="min-w-46 min-h-12 rounded-xl bg-[#00A63E] text-white p-3 flex justify-center items-center hover:bg-[#00A63E]/90 hover:scale-105 transition-all"
+          >
+            <Send />
+            {t("btn")}
+          </Button>
+        )}
       </div>
-      <SendNotificationModal open={open} onOpenChange={setOpen} /> 
+
+      <SendNotificationModal open={open} onOpenChange={setOpen} />
     </>
   );
 }
