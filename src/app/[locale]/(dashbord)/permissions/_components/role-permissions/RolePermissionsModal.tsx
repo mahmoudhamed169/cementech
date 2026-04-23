@@ -254,8 +254,8 @@ export function RolePermissionsModal({
 
   const isValid =
     nameAr.trim() !== "" &&
-    nameEn.trim() !== "" &&
-    selectedPages.size > lockedCount;
+    nameEn.trim() !== "" ;
+    
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
