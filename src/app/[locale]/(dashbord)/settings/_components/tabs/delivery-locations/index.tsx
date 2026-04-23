@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import DeliveryZoneRow from "./delivery-zone-row";
@@ -7,6 +6,7 @@ import AddZoneButton from "./add-zone-button";
 import EmptyZones from "./empty-zones";
 import ZoneModal from "./zone-modal";
 import { useDeliveryLocations } from "../../../_hooks/delivery/use-delivery-locations";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 import { Loader2 } from "lucide-react";
 
 export type DeliveryZone = {
@@ -21,8 +21,13 @@ export type DeliveryZone = {
 
 export default function DeliveryLocationsTab() {
   const t = useTranslations("settingsPage.tabs.delivery");
-
   const { data, isLoading, isError } = useDeliveryLocations();
+
+  const can = usePermissionsStore((s) => s.can);
+  const canAdd = can("setting_permission", "POST");
+  const canEdit = can("setting_permission", "PATCH");
+  const canDelete = can("setting_permission", "DELETE");
+  const showActions = canEdit || canDelete;
 
   const zones: DeliveryZone[] = (data?.data ?? []).map((loc) => ({
     id: loc.id,
@@ -64,9 +69,8 @@ export default function DeliveryLocationsTab() {
             <p className="text-sm text-gray-500">{t("subtitle")}</p>
           </div>
         </div>
-
         <div className="rounded-xl border border-gray-100 py-16 flex flex-col items-center justify-center gap-3">
-          <Loader2 size={28} className="text-gray-400 animate-spin" />{" "}
+          <Loader2 size={28} className="text-gray-400 animate-spin" />
           <p className="text-sm text-gray-400">{t("loading")}</p>
         </div>
       </div>
@@ -96,20 +100,23 @@ export default function DeliveryLocationsTab() {
           <h3 className="text-base font-bold text-gray-800">{t("title")}</h3>
           <p className="text-sm text-gray-500">{t("subtitle")}</p>
         </div>
-        <AddZoneButton label={t("addZone")} onClick={handleAdd} />
+        {canAdd && <AddZoneButton label={t("addZone")} onClick={handleAdd} />}
       </div>
 
       {zones.length === 0 ? (
-        <EmptyZones onAdd={handleAdd} />
+        <EmptyZones />
       ) : (
         <div className="rounded-xl border border-gray-100 overflow-hidden">
-          <div className="grid grid-cols-4 bg-gray-50 px-4 py-3 text-sm font-medium text-gray-500 border-b border-gray-100">
+          <div
+            className={`grid ${showActions ? "grid-cols-4" : "grid-cols-3"} bg-gray-50 px-4 py-3 text-sm font-medium text-gray-500 border-b border-gray-100`}
+          >
             <span>{t("table.zone")}</span>
             <span className="text-center">{t("table.radius")}</span>
             <span className="text-center">{t("table.status")}</span>
-            <span className="text-end">{t("table.actions")}</span>
+            {showActions && (
+              <span className="text-end">{t("table.actions")}</span>
+            )}
           </div>
-
           {zones.map((zone) => (
             <DeliveryZoneRow
               key={zone.id}
@@ -117,6 +124,7 @@ export default function DeliveryLocationsTab() {
               editLabel={t("edit")}
               onToggle={(val) => handleToggle(zone.id, val)}
               onEdit={() => handleEdit(zone.id)}
+              showActions={showActions}
             />
           ))}
         </div>

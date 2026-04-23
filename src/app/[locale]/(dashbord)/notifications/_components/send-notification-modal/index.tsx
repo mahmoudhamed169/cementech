@@ -14,6 +14,7 @@ import { useSendNotification } from "./_hooks/use-send-notification";
 import RecipientSelector from "./_components/recipient-selector";
 import NotificationFormFields from "./_components/notification-form-fields";
 import ModalActions from "./_components/modal-actions";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 interface SendNotificationModalProps {
   open: boolean;
@@ -38,6 +39,10 @@ export default function SendNotificationModal({
     form.reset();
     onOpenChange(false);
   }
+
+  const can = usePermissionsStore((s) => s.can);
+
+  if (!can("notification_permission", "POST")) return null;
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>

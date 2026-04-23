@@ -35,7 +35,11 @@ export default async function Page({ params, searchParams }: Props) {
         }
       />
       {/* USER ORDERS */}
-      <UserOrders userId={id} page={page ? Number(page) : 1} />
+      <UserOrders
+        userId={id}
+        page={page ? Number(page) : 1}
+        systemScreen="user_permission"
+      />
       {/* USER ACTIONS */}
       <UserActions user={user} />
     </main>

@@ -29,6 +29,7 @@ import { useSendNotification } from "@/src/components/common/send-notification/_
 import SendNotificationForm from "@/src/components/common/send-notification/_components/notification-form-fields";
 import { useLocale as useCurrentLocale } from "next-intl";
 import BlockToggleButton from "@/src/components/common/block-boggle-button";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 interface Props {
   open: boolean;
@@ -69,6 +70,7 @@ export default function SupervisorsViewDialog({
   const tNotif = useTranslations("SendNotification");
   const locale = useLocale();
   const [view, setView] = useState<"details" | "notification">("details");
+  const can = usePermissionsStore((s) => s.can);
 
   const isActive = supervisor.status === "active";
   const isRtl = locale === "ar";
@@ -166,14 +168,16 @@ export default function SupervisorsViewDialog({
 
           {/* Action Buttons */}
           <div className="flex items-center gap-3 px-6 py-5">
-            <Button
-              type="button"
-              onClick={() => setView("notification")}
-              className="flex-1 h-11 bg-[#155DFC] hover:bg-[#1449CC] text-white rounded-xl font-medium flex items-center justify-center gap-2 text-sm"
-            >
-              <Bell size={15} />
-              {t("sendNotification")}
-            </Button>
+            {can("notification_permission", "POST") && (
+              <Button
+                type="button"
+                onClick={() => setView("notification")}
+                className="flex-1 h-11 bg-[#155DFC] hover:bg-[#1449CC] text-white rounded-xl font-medium flex items-center justify-center gap-2 text-sm"
+              >
+                <Bell size={15} />
+                {t("sendNotification")}
+              </Button>
+            )}
 
             <div className="flex-1">
               <BlockToggleButton

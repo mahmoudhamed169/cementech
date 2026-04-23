@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslations } from "next-intl";
@@ -9,24 +8,30 @@ import SaveButton from "./save-button";
 import { usePricing } from "../../../_hooks/pricing/use-pricing";
 import { useUpdatePricing } from "../../../_hooks/pricing/use-update-pricing";
 import { UpdatePricingInput } from "@/src/lib/types/settings/pricing/pricing";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 export default function PricingTab() {
   const t = useTranslations("settingsPage.tabs.pricing");
-
   const { data, isLoading } = usePricing();
   const { mutate: savePricing, isPending } = useUpdatePricing();
 
-  const { register, handleSubmit, reset, formState: { isDirty } } =
-    useForm<UpdatePricingInput>({
-      defaultValues: {
-        kilometric_price: 0,
-        commission_percentage: 0,
-        cancellation_fee: 0,
-        bank_percentage: 0,
-      },
-    });
+  const can = usePermissionsStore((s) => s.can);
+  const canEdit = can("setting_permission", "PATCH");
 
-  // حدّث الـ form لما تيجي الداتا
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isDirty },
+  } = useForm<UpdatePricingInput>({
+    defaultValues: {
+      kilometric_price: 0,
+      commission_percentage: 0,
+      cancellation_fee: 0,
+      bank_percentage: 0,
+    },
+  });
+
   useEffect(() => {
     if (data?.data) {
       reset({
@@ -39,6 +44,7 @@ export default function PricingTab() {
   }, [data, reset]);
 
   const onSubmit = (values: UpdatePricingInput) => {
+    if (!canEdit) return; // ← حماية إضافية
     savePricing(values);
   };
 
@@ -57,40 +63,47 @@ export default function PricingTab() {
         <h3 className="text-base font-bold text-gray-800">{t("title")}</h3>
         <p className="text-sm text-gray-500">{t("subtitle")}</p>
       </div>
-
       <div className="grid grid-cols-2 gap-6">
         <PricingField
           label={t("fields.pricePerKm")}
           unit="₾"
           registration={register("kilometric_price", { valueAsNumber: true })}
+          disabled={!canEdit} // ← معطل لو مفيش صلاحية
         />
         <PricingField
           label={t("fields.commission")}
           unit="%"
-          registration={register("commission_percentage", { valueAsNumber: true })}
+          registration={register("commission_percentage", {
+            valueAsNumber: true,
+          })}
+          disabled={!canEdit}
         />
       </div>
-
       <div className="grid grid-cols-2 gap-6">
         <PricingField
           label={t("fields.cancellationFee")}
           unit="₾"
           registration={register("cancellation_fee", { valueAsNumber: true })}
+          disabled={!canEdit}
         />
         <PricingField
           label={t("fields.bankPercentage")}
           unit="%"
           registration={register("bank_percentage", { valueAsNumber: true })}
+          disabled={!canEdit}
         />
       </div>
 
-      <div className="flex justify-end">
-        <SaveButton
-          label={t("save")}
-          isPending={isPending}
-          disabled={!isDirty || isPending}
-        />
-      </div>
+      {/* ← إخفاء زر الحفظ لو مفيش صلاحية */}
+      {canEdit && (
+        <div className="flex justify-end">
+          <SaveButton
+            label={t("save")}
+            isPending={isPending}
+            disabled={!isDirty || isPending}
+          />
+        </div>
+      )}
     </form>
   );
 }

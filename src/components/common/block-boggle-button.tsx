@@ -5,6 +5,14 @@ import { Button } from "@/components/ui/button";
 import { useTranslations } from "next-intl";
 import { useBlockUser } from "@/src/lib/hooks/use-block-user";
 import { usePermissionsStore } from "@/src/store/permissionsStore";
+import { PermissionKey } from "@/src/lib/types/permissions";
+
+// ─── mapping من الـ type للـ permissionKey ────────────────────────────────────
+const TYPE_PERMISSION_MAP: Record<string, PermissionKey> = {
+  driver: "driver_permission",
+  customer: "user_permission",
+  admin: "supervisor_permission",
+};
 
 interface BlockToggleButtonProps {
   id: string;
@@ -21,10 +29,12 @@ export default function BlockToggleButton({
 }: BlockToggleButtonProps) {
   const t = useTranslations("userPage.userActions");
   const tToast = useTranslations("common.toast");
-
   const { toggleBlock, isPending } = useBlockUser();
-
   const can = usePermissionsStore((s) => s.can);
+
+  const permissionKey = TYPE_PERMISSION_MAP[type];
+
+  if (!can(permissionKey, "PATCH")) return null;
 
   const handleToggleBlock = () => {
     toggleBlock({
@@ -39,8 +49,6 @@ export default function BlockToggleButton({
       onSuccess,
     });
   };
-
-  if (!can("driver_permission", "PATCH")) return null;
 
   return (
     <Button

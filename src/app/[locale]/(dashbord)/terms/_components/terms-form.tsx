@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 import { updatePolicyAction } from "../_actions/update-policy-action";
+import { usePermissionsStore } from "@/src/store/permissionsStore"; // ← add
 
 interface TermsFormProps {
   policies: TermsPolicy[];
@@ -73,6 +74,9 @@ export default function TermsForm({ policies }: TermsFormProps) {
   const t = useTranslations("termsPage.form");
   const tTabs = useTranslations("termsPage.tabs");
 
+  const can = usePermissionsStore((s) => s.can); // ← add
+  const canEdit = can("terms_permission", "PATCH"); // ← add
+
   const [activeType, setActiveType] =
     useState<TermsPolicyType>("terms_conditions");
   const [activeTarget, setActiveTarget] = useState<TermsTarget>("customer");
@@ -84,7 +88,6 @@ export default function TermsForm({ policies }: TermsFormProps) {
     buildInitialContent(policies),
   );
 
-  // مزامنة مع الـ policies بعد revalidatePath
   useEffect(() => {
     setContents(buildInitialContent(policies));
   }, [policies]);
@@ -100,7 +103,6 @@ export default function TermsForm({ policies }: TermsFormProps) {
     setContents((prev) => ({ ...prev, [currentKey]: value }));
   };
 
-  // الـ API call المشترك بين publish و draft
   const executeSave = (status: "published" | "draft") => {
     if (!activePolicy) return;
 
@@ -125,7 +127,6 @@ export default function TermsForm({ policies }: TermsFormProps) {
     });
   };
 
-  // لو الـ policy published → اظهر confirmation، غير كده احفظ مباشرة
   const handleSaveDraft = () => {
     if (!activePolicy) return;
     if (activePolicy.status === "published") {
@@ -139,7 +140,6 @@ export default function TermsForm({ policies }: TermsFormProps) {
 
   return (
     <>
-      {/* Confirmation Dialog */}
       <AlertDialog open={showDraftConfirm} onOpenChange={setShowDraftConfirm}>
         <AlertDialogContent className="bg-white border-none">
           <AlertDialogHeader>
@@ -164,7 +164,6 @@ export default function TermsForm({ policies }: TermsFormProps) {
       </AlertDialog>
 
       <div className="space-y-5">
-        {/* Policy Type Tabs — Cards style */}
         <div className="flex items-center gap-3">
           {policyTypeTabs.map(({ value }) => {
             const isActive = activeType === value;
@@ -184,7 +183,6 @@ export default function TermsForm({ policies }: TermsFormProps) {
           })}
         </div>
 
-        {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Sidebar */}
           <div className="space-y-4">
@@ -193,28 +191,31 @@ export default function TermsForm({ policies }: TermsFormProps) {
               onChange={setActiveTarget}
             />
             <TermsVersionInfo policy={activePolicy} />
-            <div className="space-y-2">
-              <Button
-                className="w-full h-12 bg-[#155DFC] hover:bg-[#193CB8] text-white font-medium"
-                onClick={handlePublish}
-                disabled={isPending}
-              >
-                ✓ {t("publish")}
-              </Button>
-              <Button
-                variant="outline"
-                className="w-full h-12 font-medium border-gray-300"
-                onClick={handleSaveDraft}
-                disabled={isPending}
-              >
-                {t("saveDraft")}
-              </Button>
-            </div>
+
+            {/* ← إخفاء الأزرار لو مفيش صلاحية */}
+            {canEdit && (
+              <div className="space-y-2">
+                <Button
+                  className="w-full h-12 bg-[#155DFC] hover:bg-[#193CB8] text-white font-medium"
+                  onClick={handlePublish}
+                  disabled={isPending}
+                >
+                  ✓ {t("publish")}
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full h-12 font-medium border-gray-300"
+                  onClick={handleSaveDraft}
+                  disabled={isPending}
+                >
+                  {t("saveDraft")}
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Editor */}
           <div className="lg:col-span-2 space-y-4">
-            {/* Lang Tabs */}
             <div className="flex items-center gap-1 bg-gray-100 rounded-xl p-1 w-fit">
               {(["ar", "en"] as LangTab[]).map((lang) => (
                 <button
