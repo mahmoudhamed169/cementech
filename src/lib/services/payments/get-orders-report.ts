@@ -37,7 +37,7 @@ export async function getOrdersReport(): Promise<OrdersReportResponse> {
   const res = await fetch(url, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      systemscreen: "payments_permissions",
+      systemscreen: "payment_permissions",
       lang: "en",
     },
     cache: "no-store",

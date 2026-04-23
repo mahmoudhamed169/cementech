@@ -92,7 +92,7 @@ export async function deliverBulkBonusAction(data: {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      systemscreen: "payments_permission",
+      systemscreen: "payment_permission",
     },
     body: formData,
   });

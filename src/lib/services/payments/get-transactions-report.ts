@@ -78,7 +78,7 @@ export async function getTransactionsReport(
   const res = await fetch(url, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      systemscreen: "payments_permission",
+      systemscreen: "payment_permission",
       lang: "ar",
     },
     cache: "no-store",

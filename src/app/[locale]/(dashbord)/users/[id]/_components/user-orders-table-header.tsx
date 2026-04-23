@@ -1,9 +1,12 @@
 "use client";
 import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useTranslations } from "next-intl";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 export default function UserOrdersTableHeader() {
   const t = useTranslations("userPage.userOrderTable.colums");
+  const can = usePermissionsStore((s) => s.can);
+  const canViewOrder = can("order_permission", "GET");
 
   const headers = [
     "index",
@@ -11,7 +14,7 @@ export default function UserOrdersTableHeader() {
     "data",
     "quantity",
     "orderState",
-    "actions",
+    ...(canViewOrder ? ["actions"] : []),
   ] as const;
 
   return (

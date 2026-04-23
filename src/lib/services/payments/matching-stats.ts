@@ -49,6 +49,7 @@ export async function getDriverFinancialStats(params?: {
     {
       headers: {
         Authorization: `Bearer ${session?.user.accessToken}`,
+        systemScreen: "payment_permission",
       },
       next: { tags: ["driver-financial-stats"] },
     },

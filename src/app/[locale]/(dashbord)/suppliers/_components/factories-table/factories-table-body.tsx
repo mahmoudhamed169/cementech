@@ -1,15 +1,22 @@
+"use client";
 import { Factory } from "@/src/lib/types/factories/factory";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import StatusBadge from "./status-badge";
 import { DeleteFactoryDialog } from "./delete-factory-dialog";
-import EditFactoryWrapper from "./edit-factory-wrapper";
 import EmptyFactories from "./empty-factories";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 interface Props {
   factories: Factory[];
+  editActions?: Record<string, React.ReactNode>; // ← changed from function to map
 }
 
-export default function FactoriesTableBody({ factories }: Props) {
+export default function FactoriesTableBody({ factories, editActions }: Props) {
+  const can = usePermissionsStore((s) => s.can);
+  const canEdit = can("supplier_permission", "PATCH");
+  const canDelete = can("supplier_permission", "DELETE");
+  const showActions = canEdit || canDelete;
+
   if (!factories || factories.length === 0) {
     return <EmptyFactories />;
   }
@@ -32,15 +39,19 @@ export default function FactoriesTableBody({ factories }: Props) {
           <TableCell>
             <StatusBadge isActive={factory.is_active} />
           </TableCell>
-          <TableCell>
-            <div className="flex items-center justify-center gap-2">
-              <EditFactoryWrapper id={factory.id} />
-              <DeleteFactoryDialog
-                factoryId={factory.id}
-                factoryName={factory.name}
-              />
-            </div>
-          </TableCell>
+          {showActions && (
+            <TableCell>
+              <div className="flex items-center justify-center gap-2">
+                {canEdit && editActions?.[factory.id]} {/* ← lookup by id */}
+                {canDelete && (
+                  <DeleteFactoryDialog
+                    factoryId={factory.id}
+                    factoryName={factory.name}
+                  />
+                )}
+              </div>
+            </TableCell>
+          )}
         </TableRow>
       ))}
     </TableBody>

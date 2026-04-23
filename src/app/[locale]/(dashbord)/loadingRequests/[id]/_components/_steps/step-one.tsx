@@ -11,6 +11,8 @@ interface StepOneProps {
   request: Request;
   onApprove: () => void;
   onReject: () => void;
+  canApprove: boolean; // ✅ POST
+  canReject: boolean; // ✅ PATCH
 }
 
 function InfoItem({ label, value }: { label: string; value: string }) {
@@ -28,6 +30,8 @@ export default function StepOne({
   request,
   onApprove,
   onReject,
+  canApprove,
+  canReject,
 }: StepOneProps) {
   const t = useTranslations("loadingRequestsPage.approveModal.stepOne");
   const { rejectRequest, isPending } = useRejectRequest();
@@ -58,10 +62,9 @@ export default function StepOne({
           <InfoItem label={t("phone")} value={request.phone_number} />
           <InfoItem label={t("driverName")} value={request.driver_name} />
           <InfoItem label={t("driverCode")} value={request.car_plates} />
-          <InfoItem label={" المصنع"} value={request.factory_name} />
-          <InfoItem label={" المنتج"} value={request.product_name} />
-          <InfoItem label={" الكمية"} value={request.quantity} />
-
+          <InfoItem label={"المصنع"} value={request.factory_name} />
+          <InfoItem label={"المنتج"} value={request.product_name} />
+          <InfoItem label={"الكمية"} value={request.quantity} />
           <InfoItem label={t("carPlates")} value={request.car_plates} />
           <InfoItem
             label={t("createdAt")}
@@ -70,24 +73,30 @@ export default function StepOne({
         </div>
       </div>
 
-      {/* الأزرار */}
-      <div className="flex items-center gap-3 pt-2">
-        <Button
-          onClick={onApprove}
-          className="flex-1 h-12 bg-[#155DFC] hover:bg-[#1249d4] text-white rounded-2xl font-semibold flex items-center justify-center gap-2"
-        >
-          <Check className="w-4 h-4" />
-          {t("approve")}
-        </Button>
-        <Button
-          onClick={handleReject}
-          disabled={isPending}
-          className="flex-1 h-12 bg-red-500 hover:bg-red-600 text-white rounded-2xl font-semibold flex items-center justify-center gap-2"
-        >
-          <X className="w-4 h-4" />
-          {isPending ? t("rejecting") : t("reject")}
-        </Button>
-      </div>
+      {/* الأزرار — بتظهر حسب الصلاحية */}
+      {(canApprove || canReject) && (
+        <div className="flex items-center gap-3 pt-2">
+          {canApprove && (
+            <Button
+              onClick={onApprove}
+              className="flex-1 h-12 bg-[#155DFC] hover:bg-[#1249d4] text-white rounded-2xl font-semibold flex items-center justify-center gap-2"
+            >
+              <Check className="w-4 h-4" />
+              {t("approve")}
+            </Button>
+          )}
+          {canReject && (
+            <Button
+              onClick={handleReject}
+              disabled={isPending}
+              className="flex-1 h-12 bg-red-500 hover:bg-red-600 text-white rounded-2xl font-semibold flex items-center justify-center gap-2"
+            >
+              <X className="w-4 h-4" />
+              {isPending ? t("rejecting") : t("reject")}
+            </Button>
+          )}
+        </div>
+      )}
     </div>
   );
 }

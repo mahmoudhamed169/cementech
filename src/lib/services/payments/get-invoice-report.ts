@@ -89,7 +89,7 @@ export async function getInvoiceReport({
   const res = await fetch(url, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      systemscreen: "payments_permission",
+      systemscreen: "payment_permission",
       lang: "en",
     },
     cache: "no-store",

@@ -2,8 +2,16 @@
 
 import { TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { useTranslations } from "next-intl";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 export default function FactoriesTableHead() {
+  const t = useTranslations("suppliersPage.table.columns");
+  const can = usePermissionsStore((s) => s.can);
+
+  const canEdit = can("supplier_permission", "PATCH");
+  const canDelete = can("supplier_permission", "DELETE");
+  const showActions = canEdit || canDelete;
+
   const headers = [
     "index",
     "factoryNumber",
@@ -12,10 +20,8 @@ export default function FactoriesTableHead() {
     "region",
     "productsCount",
     "status",
-    "actions",
+    ...(showActions ? ["actions"] : []),
   ] as const;
-
-  const t = useTranslations("suppliersPage.table.columns");
 
   return (
     <TableHeader>

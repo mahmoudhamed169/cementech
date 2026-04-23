@@ -1,16 +1,19 @@
+"use client";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { EllipsisVertical, Eye } from "lucide-react";
+import { Eye } from "lucide-react";
 import { UserOrder } from "@/src/lib/services/users/user-orders";
 import OrderStatusCell from "../../../orders/_components/order-table/order-status-cell";
-import OrderActionsWrapper from "../../../orders/_components/order-table/order-actions/_components/order-actions-wrapper";
 import { Link } from "@/src/i18n/navigation";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 interface IProps {
   orders: UserOrder[];
 }
 
 export default function UserOrdersBody({ orders }: IProps) {
+  const can = usePermissionsStore((s) => s.can);
+  const canViewOrder = can("order_permission", "GET");
+
   return (
     <TableBody>
       {orders.map((order, index) => (
@@ -31,19 +34,18 @@ export default function UserOrdersBody({ orders }: IProps) {
 
           <OrderStatusCell status={order.order_status} />
 
-          <TableCell className="text-center">
-            {/* <div className="flex items-center justify-center">
-              <OrderActionsWrapper orderId={order.id} />
-            </div> */}
-            <div className="flex items-center justify-center">
-              <Link
-                href={`/orders/${order.id}`}
-                className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
-              >
-                <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
-              </Link>
-            </div>
-          </TableCell>
+          {canViewOrder && (
+            <TableCell className="text-center">
+              <div className="flex items-center justify-center">
+                <Link
+                  href={`/orders/${order.id}`}
+                  className="w-5 h-5 text-[#5E5C5C] cursor-pointer"
+                >
+                  <Eye className="w-5 h-5 text-[#5E5C5C] cursor-pointer hover:text-blue-800" />
+                </Link>
+              </div>
+            </TableCell>
+          )}
         </TableRow>
       ))}
     </TableBody>

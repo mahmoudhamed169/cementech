@@ -4,6 +4,7 @@ import PaginationInfo from "@/src/components/shared/pagination-info";
 import { getFactories } from "@/src/lib/services/factories/factories";
 import { cookies } from "next/headers";
 import FactoriesTableBody from "./factories-table-body";
+import EditFactoryWrapper from "./edit-factory-wrapper";
 
 interface Props {
   page: number;
@@ -20,7 +21,6 @@ export default async function FacotoriesTableWrapper({
 }: Props) {
   const cookieStore = await cookies();
   const locale = (cookieStore.get("NEXT_LOCALE")?.value ?? "ar") as "ar" | "en";
-
   const factories = await getFactories({
     lang: locale,
     page,
@@ -29,9 +29,20 @@ export default async function FacotoriesTableWrapper({
     is_active,
   });
 
+  // Pre-render on server as a map of ReactNode (not a function)
+  const editActions: Record<string, React.ReactNode> = Object.fromEntries(
+    factories.data.map((factory) => [
+      factory.id,
+      <EditFactoryWrapper key={factory.id} id={factory.id} />,
+    ])
+  );
+
   return (
     <>
-      <FactoriesTableBody factories={factories.data} />
+      <FactoriesTableBody
+        factories={factories.data}
+        editActions={editActions}
+      />
       {factories.data.length > 0 && (
         <TableFooter>
           <TableRow className="border-t border-b-0 border-[#E5E7EB] h-14 text-start">

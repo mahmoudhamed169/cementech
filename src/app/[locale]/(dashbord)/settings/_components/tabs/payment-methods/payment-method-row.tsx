@@ -1,8 +1,8 @@
 "use client";
-
 import { Switch } from "@/components/ui/switch";
 import { LucideIcon } from "lucide-react";
 import { useLocale } from "next-intl";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 type PaymentMethodRowProps = {
   label: string;
@@ -20,6 +20,9 @@ export default function PaymentMethodRow({
   const locale = useLocale();
   const isRTL = locale === "ar";
 
+  const can = usePermissionsStore((s) => s.can);
+  const canEdit = can("setting_permission", "PATCH"); //       
+
   return (
     <div
       dir={isRTL ? "rtl" : "ltr"}
@@ -29,7 +32,11 @@ export default function PaymentMethodRow({
         <Icon size={16} className="text-gray-400" />
         <span>{label}</span>
       </div>
-      <Switch checked={enabled} onCheckedChange={onToggle} />
+      <Switch
+        checked={enabled}
+        onCheckedChange={onToggle}
+        disabled={!canEdit} // ← مش هيقدر يضغط
+      />
     </div>
   );
 }

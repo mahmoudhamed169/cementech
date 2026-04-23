@@ -11,12 +11,16 @@ interface ApproveRequestModalProps {
   request: Request;
   open: boolean;
   onClose: () => void;
+  canApprove: boolean; // ✅
+  canReject: boolean;  // ✅
 }
 
 export default function ApproveRequestModal({
   request,
   open,
   onClose,
+  canApprove,
+  canReject,
 }: ApproveRequestModalProps) {
   const t = useTranslations("loadingRequestsPage.approveModal");
   const [step, setStep] = useState<1 | 2>(1);
@@ -38,6 +42,8 @@ export default function ApproveRequestModal({
             request={request}
             onApprove={() => setStep(2)}
             onReject={handleClose}
+            canApprove={canApprove} // ✅
+            canReject={canReject}   // ✅
           />
         ) : (
           <StepTwo request={request} onClose={handleClose} />
