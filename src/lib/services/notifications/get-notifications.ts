@@ -14,7 +14,7 @@ export async function getNotifications(
   const res = await fetch(`${API_URL}/notifications`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
-      screen: "home_permissions",
+      screen: "notification_permission",
       lang,
     },
     next: { tags: ["notifications"] },
