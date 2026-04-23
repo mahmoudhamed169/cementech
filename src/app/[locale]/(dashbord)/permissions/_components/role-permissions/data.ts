@@ -4,6 +4,7 @@ export interface Page {
   id: string;
   label: string;
 }
+
 export interface PageGroup {
   groupId: string;
   groupLabel: string;
@@ -11,7 +12,6 @@ export interface PageGroup {
 }
 
 export type Permission = "preview" | "create" | "edit" | "delete";
-
 
 export const PERMISSIONS: { key: Permission; label: string }[] = [
   { key: "preview", label: "معاينة" },
@@ -29,6 +29,28 @@ export const DEFAULT_PAGE_PERMISSIONS: PagePermissions = {
   edit: false,
   delete: false,
 };
+
+// الصفحات المقفلة: دايماً موجودة في كل دور ولا يمكن حذفها
+export const LOCKED_PAGES: Record<string, PagePermissions> = {
+  notifications: {
+    preview: true,
+    create: false, // القيمة الافتراضية — قابلة للتغيير
+    edit: true,
+    delete: true,
+  },
+};
+
+// مصفوفة بـ IDs الصفحات المقفلة للاستخدام مع includes()
+export const LOCKED_PAGE_IDS: string[] = Object.keys(LOCKED_PAGES);
+
+// الصلاحيات المقفلة لكل صفحة (لا يمكن تغييرها)
+// notifications: preview + edit + delete مقفلة، create حرة
+export const LOCKED_FIXED_PERMISSIONS: Record<string, Permission[]> = {
+  notifications: ["preview", "edit", "delete"],
+};
+
+// لا يوجد صلاحيات مخفية — كل الأعمدة تظهر
+export const LOCKED_HIDDEN_PERMISSIONS: Record<string, Permission[]> = {};
 
 export const PAGE_GROUPS: PageGroup[] = [
   {
@@ -75,7 +97,6 @@ export const PAGE_GROUPS: PageGroup[] = [
 ];
 
 /*
-
 {
   "name": "",
   "description": "",
@@ -93,7 +114,7 @@ export const PAGE_GROUPS: PageGroup[] = [
   "terms_permission": ["GET"],          // الشروط والأحكام
   "setting_permission": ["GET"]         // الإعدادات
 }
-  */
+*/
 
 export const PAGE_ID_TO_PERMISSION_KEY: Record<string, string> = {
   home: "home_permission",

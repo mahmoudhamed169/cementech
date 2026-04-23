@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import SidebarLinkItem from "./sidebar-item";
 import { usePermissionsStore } from "@/src/store/permissionsStore";
@@ -23,7 +24,7 @@ const SidebarLinks: {
   href: string;
   labelKey: string;
   icon: React.ReactNode;
-  permissionKey: PermissionKey | null; // null = متاح للكل
+  permissionKey: PermissionKey | null;
 }[] = [
   {
     href: "/",
@@ -109,12 +110,20 @@ export default function SideBarNavigation() {
   const t = useTranslations("sidebar");
   const can = usePermissionsStore((s) => s.can);
   const isAdmin = usePermissionsStore((s) => s.isAdmin);
+  const [mounted, setMounted] = useState(false);
 
-  const visibleLinks = SidebarLinks.filter((link) => {
-    if (!link.permissionKey) return true; // متاح للكل
-    if (isAdmin()) return true; // admin يشوف كل حاجة
-    return can(link.permissionKey, "GET"); // فحص الصلاحية
-  });
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // قبل التحميل: نعرض كل الروابط بدون فلترة لتجنب Hydration Mismatch
+  const visibleLinks = mounted
+    ? SidebarLinks.filter((link) => {
+        if (!link.permissionKey) return true;
+        if (isAdmin()) return true;
+        return can(link.permissionKey, "GET");
+      })
+    : SidebarLinks;
 
   return (
     <nav

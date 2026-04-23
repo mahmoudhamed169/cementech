@@ -12,16 +12,18 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { CirclePlus, Shield } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { PageGroupSection } from "./PageGroupSection";
 import { PermissionsTable } from "./PermissionsTable";
 import {
   PAGE_GROUPS,
   DEFAULT_PAGE_PERMISSIONS,
+  LOCKED_PAGES,
+  LOCKED_PAGE_IDS,
   Permission,
   SelectedPermissions,
   PAGE_ID_TO_PERMISSION_KEY,
   PERMISSION_TO_HTTP,
+  LOCKED_FIXED_PERMISSIONS,
 } from "./data";
 import { useCreatePermission, useUpdatePermission } from "./_hooks";
 import { CreatePermissionSchema } from "./_schema";
@@ -30,6 +32,12 @@ import { Permission as PermissionType } from "@/src/lib/services/permissions/get
 const PAGE_LABELS: Record<string, string> = Object.fromEntries(
   PAGE_GROUPS.flatMap((g) => g.pages.map((p) => [p.id, p.label])),
 );
+
+// الـ state الافتراضي للصفحات المقفولة
+const LOCKED_INITIAL_STATE = {
+  selectedPages: new Set<string>(LOCKED_PAGE_IDS),
+  permissions: { ...LOCKED_PAGES } as SelectedPermissions,
+};
 
 function permissionToState(permission: PermissionType) {
   const selectedPages = new Set<string>();
@@ -46,6 +54,12 @@ function permissionToState(permission: PermissionType) {
         delete: methods.includes("DELETE"),
       };
     }
+  });
+
+  // نضمن دايماً وجود الصفحات المقفولة بقيمها الثابتة
+  LOCKED_PAGE_IDS.forEach((pageId) => {
+    selectedPages.add(pageId);
+    permissions[pageId] = { ...LOCKED_PAGES[pageId] };
   });
 
   return { selectedPages, permissions };
@@ -83,7 +97,10 @@ function stateToPayload(
     const permKey = PAGE_ID_TO_PERMISSION_KEY[
       pageId
     ] as keyof CreatePermissionSchema;
-    const perms = permissions[pageId] ?? DEFAULT_PAGE_PERMISSIONS;
+
+    // الصفحات المقفولة: نرسل قيمها الثابتة دايماً
+    const perms =
+      LOCKED_PAGES[pageId] ?? permissions[pageId] ?? DEFAULT_PAGE_PERMISSIONS;
     const methods: string[] = [];
 
     (Object.keys(PERMISSION_TO_HTTP) as Permission[]).forEach((p) => {
@@ -112,7 +129,10 @@ export function RolePermissionsModal({
 
   const getInitialState = () => {
     if (isEdit && initialData) return permissionToState(initialData);
-    return { selectedPages: new Set<string>(), permissions: {} };
+    return {
+      selectedPages: new Set<string>(LOCKED_PAGE_IDS),
+      permissions: { ...LOCKED_PAGES } as SelectedPermissions,
+    };
   };
 
   const [nameAr, setNameAr] = useState(initialData?.name_ar ?? "");
@@ -126,16 +146,22 @@ export function RolePermissionsModal({
     () => getInitialState().permissions,
   );
 
-  // أضف هذا
   useEffect(() => {
-    if (open && isEdit && initialData) {
-      setNameAr(initialData.name_ar);
-      setNameEn(initialData.name_en);
-      setDescAr(initialData.description_ar);
-      setDescEn(initialData.description_en);
-      const { selectedPages, permissions } = permissionToState(initialData);
-      setSelectedPages(selectedPages);
-      setPermissions(permissions);
+    if (open) {
+      if (isEdit && initialData) {
+        setNameAr(initialData.name_ar);
+        setNameEn(initialData.name_en);
+        setDescAr(initialData.description_ar);
+        setDescEn(initialData.description_en);
+        const { selectedPages: sp, permissions: perms } =
+          permissionToState(initialData);
+        setSelectedPages(sp);
+        setPermissions(perms);
+      } else {
+        // create mode: نبدأ بالصفحات المقفولة فقط
+        setSelectedPages(new Set<string>(LOCKED_PAGE_IDS));
+        setPermissions({ ...LOCKED_PAGES } as SelectedPermissions);
+      }
     }
   }, [open]);
 
@@ -147,14 +173,24 @@ export function RolePermissionsModal({
   const isPending = createMutation.isPending || updateMutation.isPending;
 
   const togglePage = (id: string) => {
+    // الصفحات المقفولة لا تُشال أبداً
+    if (LOCKED_PAGE_IDS.includes(id)) return;
+
     setSelectedPages((prev) => {
       const next = new Set(prev);
       if (next.has(id)) {
+        // إزالة الصفحة وحذف بيانات permissions الخاصة بها
         next.delete(id);
+        setPermissions((p) => {
+          const updated = { ...p };
+          delete updated[id];
+          return updated;
+        });
       } else {
         next.add(id);
         setPermissions((p) => ({
           ...p,
+          // لما تُضاف صفحة جديدة، GET يكون مفعّل افتراضياً
           [id]: p[id] ?? { ...DEFAULT_PAGE_PERMISSIONS },
         }));
       }
@@ -163,6 +199,15 @@ export function RolePermissionsModal({
   };
 
   const togglePermission = (pageId: string, permission: Permission) => {
+    // الصفحات المقفولة: لا يمكن تغيير أي permission
+    if (LOCKED_FIXED_PERMISSIONS[pageId]?.includes(permission)) return;
+
+    if (permission === "preview") {
+      // لو حاول يشيل GET → نشيل الصفحة بالكامل
+      togglePage(pageId);
+      return;
+    }
+
     setPermissions((prev) => ({
       ...prev,
       [pageId]: {
@@ -195,15 +240,22 @@ export function RolePermissionsModal({
       setNameEn("");
       setDescAr("");
       setDescEn("");
-      setSelectedPages(new Set());
-      setPermissions({});
+      // نرجع للحالة الافتراضية مع الصفحات المقفولة
+      setSelectedPages(new Set<string>(LOCKED_PAGE_IDS));
+      setPermissions({ ...LOCKED_PAGES } as SelectedPermissions);
     }
   };
 
+  // نحسب totalSelected بدون الصفحات المقفولة عشان المؤشر يكون أوضح
+  const lockedCount = LOCKED_PAGE_IDS.length;
   const totalSelected = selectedPages.size;
   const totalPages = PAGE_GROUPS.reduce((acc, g) => acc + g.pages.length, 0);
+
+  // الفورم صالح: الاسمين مكتوبين + فيه صفحة مختارة (غير الـ locked)
   const isValid =
-    nameAr.trim() !== "" && nameEn.trim() !== "" && totalSelected > 0;
+    nameAr.trim() !== "" &&
+    nameEn.trim() !== "" &&
+    selectedPages.size > lockedCount;
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -346,7 +398,7 @@ export function RolePermissionsModal({
             ) : (
               <>
                 {isEdit ? "حفظ التعديلات" : "إنشاء الدور"}
-                {totalSelected > 0 && (
+                {totalSelected > lockedCount && (
                   <span className="mr-2 bg-white/20 text-white text-xs px-1.5 py-0.5 rounded-md">
                     {totalSelected}
                   </span>
