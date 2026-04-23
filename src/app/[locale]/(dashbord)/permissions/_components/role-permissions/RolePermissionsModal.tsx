@@ -19,11 +19,11 @@ import {
   DEFAULT_PAGE_PERMISSIONS,
   LOCKED_PAGES,
   LOCKED_PAGE_IDS,
+  LOCKED_FIXED_PERMISSIONS,
   Permission,
   SelectedPermissions,
   PAGE_ID_TO_PERMISSION_KEY,
   PERMISSION_TO_HTTP,
-  LOCKED_FIXED_PERMISSIONS,
 } from "./data";
 import { useCreatePermission, useUpdatePermission } from "./_hooks";
 import { CreatePermissionSchema } from "./_schema";
@@ -32,12 +32,6 @@ import { Permission as PermissionType } from "@/src/lib/services/permissions/get
 const PAGE_LABELS: Record<string, string> = Object.fromEntries(
   PAGE_GROUPS.flatMap((g) => g.pages.map((p) => [p.id, p.label])),
 );
-
-// الـ state الافتراضي للصفحات المقفولة
-const LOCKED_INITIAL_STATE = {
-  selectedPages: new Set<string>(LOCKED_PAGE_IDS),
-  permissions: { ...LOCKED_PAGES } as SelectedPermissions,
-};
 
 function permissionToState(permission: PermissionType) {
   const selectedPages = new Set<string>();
@@ -56,10 +50,20 @@ function permissionToState(permission: PermissionType) {
     }
   });
 
-  // نضمن دايماً وجود الصفحات المقفولة بقيمها الثابتة
+  // نضمن دايماً وجود الصفحات المقفولة
+  // الصلاحيات المقفلة تأتي من LOCKED_PAGES، الحرة تأتي من الباك اند
   LOCKED_PAGE_IDS.forEach((pageId) => {
     selectedPages.add(pageId);
-    permissions[pageId] = { ...LOCKED_PAGES[pageId] };
+    const existingPerms = permissions[pageId];
+    permissions[pageId] = {
+      ...LOCKED_PAGES[pageId], // القيم الثابتة كـ base
+      ...existingPerms,        // نحافظ على قيم الباك اند (بما فيها POST)
+      // نعيد تطبيق الصلاحيات المقفلة فوق كل شيء
+      ...(LOCKED_FIXED_PERMISSIONS[pageId]?.reduce(
+        (acc, p) => ({ ...acc, [p]: LOCKED_PAGES[pageId][p] }),
+        {} as Partial<Record<Permission, boolean>>,
+      ) ?? {}),
+    };
   });
 
   return { selectedPages, permissions };
@@ -98,13 +102,17 @@ function stateToPayload(
       pageId
     ] as keyof CreatePermissionSchema;
 
-    // الصفحات المقفولة: نرسل قيمها الثابتة دايماً
-    const perms =
-      LOCKED_PAGES[pageId] ?? permissions[pageId] ?? DEFAULT_PAGE_PERMISSIONS;
+    const userPerms = permissions[pageId] ?? DEFAULT_PAGE_PERMISSIONS;
     const methods: string[] = [];
 
     (Object.keys(PERMISSION_TO_HTTP) as Permission[]).forEach((p) => {
-      if (perms[p]) methods.push(PERMISSION_TO_HTTP[p]);
+      // الصلاحيات المقفلة: خذ من LOCKED_PAGES
+      if (LOCKED_FIXED_PERMISSIONS[pageId]?.includes(p)) {
+        if (LOCKED_PAGES[pageId][p]) methods.push(PERMISSION_TO_HTTP[p]);
+      } else {
+        // الصلاحيات الحرة: خذ من اختيار المستخدم
+        if (userPerms[p]) methods.push(PERMISSION_TO_HTTP[p]);
+      }
     });
 
     (payload as Record<string, unknown>)[permKey] = methods;
@@ -158,7 +166,6 @@ export function RolePermissionsModal({
         setSelectedPages(sp);
         setPermissions(perms);
       } else {
-        // create mode: نبدأ بالصفحات المقفولة فقط
         setSelectedPages(new Set<string>(LOCKED_PAGE_IDS));
         setPermissions({ ...LOCKED_PAGES } as SelectedPermissions);
       }
@@ -173,13 +180,11 @@ export function RolePermissionsModal({
   const isPending = createMutation.isPending || updateMutation.isPending;
 
   const togglePage = (id: string) => {
-    // الصفحات المقفولة لا تُشال أبداً
     if (LOCKED_PAGE_IDS.includes(id)) return;
 
     setSelectedPages((prev) => {
       const next = new Set(prev);
       if (next.has(id)) {
-        // إزالة الصفحة وحذف بيانات permissions الخاصة بها
         next.delete(id);
         setPermissions((p) => {
           const updated = { ...p };
@@ -190,7 +195,6 @@ export function RolePermissionsModal({
         next.add(id);
         setPermissions((p) => ({
           ...p,
-          // لما تُضاف صفحة جديدة، GET يكون مفعّل افتراضياً
           [id]: p[id] ?? { ...DEFAULT_PAGE_PERMISSIONS },
         }));
       }
@@ -199,11 +203,10 @@ export function RolePermissionsModal({
   };
 
   const togglePermission = (pageId: string, permission: Permission) => {
-    // الصفحات المقفولة: لا يمكن تغيير أي permission
+    // فقط الصلاحيات المقفلة لا تتغير
     if (LOCKED_FIXED_PERMISSIONS[pageId]?.includes(permission)) return;
 
     if (permission === "preview") {
-      // لو حاول يشيل GET → نشيل الصفحة بالكامل
       togglePage(pageId);
       return;
     }
@@ -240,18 +243,15 @@ export function RolePermissionsModal({
       setNameEn("");
       setDescAr("");
       setDescEn("");
-      // نرجع للحالة الافتراضية مع الصفحات المقفولة
       setSelectedPages(new Set<string>(LOCKED_PAGE_IDS));
       setPermissions({ ...LOCKED_PAGES } as SelectedPermissions);
     }
   };
 
-  // نحسب totalSelected بدون الصفحات المقفولة عشان المؤشر يكون أوضح
   const lockedCount = LOCKED_PAGE_IDS.length;
   const totalSelected = selectedPages.size;
   const totalPages = PAGE_GROUPS.reduce((acc, g) => acc + g.pages.length, 0);
 
-  // الفورم صالح: الاسمين مكتوبين + فيه صفحة مختارة (غير الـ locked)
   const isValid =
     nameAr.trim() !== "" &&
     nameEn.trim() !== "" &&
