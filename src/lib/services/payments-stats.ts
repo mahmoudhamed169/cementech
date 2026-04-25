@@ -17,6 +17,7 @@ export async function getInvoiceStats(): Promise<InvoiceStats> {
   const res = await fetch(`${API_URL}/orders/invoice-report/stats`, {
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
+      systemscreen: "payment_permission",
     },
     next: { tags: ["invoice-stats"] },
   });
