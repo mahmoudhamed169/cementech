@@ -235,6 +235,10 @@
       "inactive": "المستخدمين الغير نشطين",
       "blocked": "المستخدمين المحظورين"
     },
+    "userHeaderList": {
+      "title": "المستخدمين",
+      "searchPlaceholder": "ابحث عن اسم او رقم جوال ..."
+    },
     "usersTable": {
       "columns": {
         "index": "#",
@@ -316,6 +320,10 @@
       "active": "السائقين النشطين",
       "inactive": "السائقين الغير نشطين",
       "blocked": "السائقين المحظورين"
+    },
+    "driversHeaderList": {
+      "title": "السائقين",
+      "searchPlaceholder": "ابحث عن اسم او رقم جوال ..."
     },
     "driversTable": {
       "columns": {
@@ -563,6 +571,7 @@
       "description": "متابعة و طباعة الفواتير لكل الطلبات.",
       "btn": "طباعة كل الفواتير"
     },
+    "searchPlaceholder": "ابحث عن رقم الطلب او رقم الفاتورة ...",
     "invoicesTable": {
       "title": "الفواتير",
       "columns": {
@@ -794,6 +803,85 @@
       "description": "حدد أدوارًا مخصصة مع أذونات مرنة على مستوى الصفحة والإجراءات",
       "addBtn": "إضافة دور جديد"
     },
+    "modal": {
+      "createTitle": "إنشاء دور جديد",
+      "editTitle": "تعديل الدور",
+      "subtitle": "حدد الصلاحيات المناسبة لهذا الدور",
+      "createBtn": "إنشاء دور جديد",
+      "nameAr": "اسم الدور (عربي)",
+      "nameEn": "اسم الدور (إنجليزي)",
+      "nameArPlaceholder": "مثل: مدير مبيعات",
+      "nameEnPlaceholder": "e.g. Sales Manager",
+      "descAr": "الوصف (عربي)",
+      "descEn": "الوصف (إنجليزي)",
+      "descArPlaceholder": "وصف مختصر للدور",
+      "descEnPlaceholder": "Brief role description",
+      "pagesTitle": "حدد الصفحات التي يمكن الوصول إليها",
+      "pagesCount": "{selected} / {total} صفحة",
+      "permissionsTitle": "تفاصيل الصلاحيات",
+      "saving": "جاري الحفظ...",
+      "saveEdit": "حفظ التعديلات",
+      "saveCreate": "إنشاء الدور",
+      "cancel": "إلغاء",
+      "selectAll": "تحديد الكل",
+      "deselectAll": "إلغاء الكل"
+    },
+    "data": {
+      "permissions": {
+        "preview": "معاينة",
+        "create": "إنشاء",
+        "edit": "تعديل",
+        "delete": "حذف"
+      },
+      "groups": {
+        "general": "الصفحات العامة",
+        "operations": "صفحات العمليات",
+        "finance": "صفحات المالية",
+        "management": "الإدارة",
+        "other": "أخرى"
+      },
+      "pages": {
+        "home": "الصفحة الرئيسية",
+        "orders": "إدارة الطلبات",
+        "users": "إدارة المستخدمين",
+        "drivers": "السائقين",
+        "loadingRequests": "طلبات التحميل",
+        "payments": "المدفوعات",
+        "invoices": "الفواتير",
+        "permissions": "الإدارة والصلاحيات",
+        "supervisors": "إدارة المشرفين",
+        "suppliers": "المصانع والمنتجات",
+        "notifications": "الإشعارات",
+        "terms": "الشروط والأحكام",
+        "settings": "الإعدادات"
+      }
+    },
+
+    "permissionsTable": {
+      "pages": "الصفحات",
+      "fixed": "ثابت"
+    },
+    "pagesModal": {
+      "morePage": "+{count} صفحة"
+    },
+    "roleCard": {
+      "system": "النظام",
+      "protected": "محمي",
+      "assignedSupervisors": "المشرفون المعينون",
+      "supervisorsCount": "{count} مشرفين",
+      "availablePages": "الصفحات المتاحة"
+    },
+    "deleteDialog": {
+      "title": "هل أنت متأكد من حذف الدور؟",
+      "description": "سيتم حذف دور {name} نهائياً ولا يمكن التراجع عن هذا الإجراء.",
+      "confirm": "حذف الدور",
+      "deleting": "جاري الحذف...",
+      "cancel": "رجوع"
+    },
+    "roleDetails": {
+      "btn": "رؤية التفاصيل",
+      "permissionsList": "قايمة الأذونات"
+    },
     "guidelines": {
       "badge": "تنبيه مهم",
       "title": "إرشادات إدارة الأدوار",
@@ -962,7 +1050,7 @@
             "mapPreview": "معاينة نطاق التغطية",
             "readyToSave": "جاهز للحفظ"
           }
-        }
+        } 
       },
       "pricing": {
         "trigger": "التسعير والعمولة",
@@ -1077,6 +1165,8 @@
     },
     "operations": {
       "filters": {
+        "title": "المدفوعات",
+        "searchPlaceholder": "ابحث عن رقم الطلب أو اسم السائق...",
         "byTime": "حسب الوقت",
         "byStatus": "حسب الحالة",
         "today": "اليوم",
@@ -1112,6 +1202,8 @@
     },
     "matching": {
       "filters": {
+        "searchPlaceholder": "ابحث عن اسم السائق او رقم الطلب ....",
+
         "title": "المكافآت",
         "byStatus": "فلتر حسب الحالة",
         "all": "الكل",
@@ -1193,6 +1285,62 @@
         "bankFee": "رسوم البنك",
         "totalCommission": "إجمالي العمولات",
         "platformFee": "رسوم المنصة"
+      },
+      "customReport": {
+        "title": "إنشاء تقرير مخصص",
+        "reportType": "نوع التقرير",
+        "reportTypePlaceholder": "اختر نوع التقرير",
+        "all": "الكل",
+        "ordersOnly": "طلبات فقط",
+        "loadingOrdersOnly": "طلبات تحميل فقط",
+        "startDate": "تاريخ البداية",
+        "endDate": "تاريخ النهاية",
+        "generate": "إنشاء التقرير",
+        "generating": "جاري الجلب…",
+        "noTransactions": "لا توجد معاملات في هذه الفترة",
+        "fetchError": "حدث خطأ أثناء جلب البيانات"
+      },
+
+      "transactionsReport": {
+        "print": "طباعة / PDF",
+        "transactionsCount": "{count} معاملة",
+        "total": "الإجمالي ({count} معاملة)",
+        "printTitle": "تقرير المعاملات",
+        "printDate": "تاريخ الطباعة",
+        "dateRange": "من {from} إلى {to}",
+        "noTransactions": "لا توجد معاملات في هذه الفترة",
+        "summaryCards": {
+          "totalTransactions": "إجمالي المعاملات",
+          "allTypes": "كل الأنواع",
+          "totalCaptured": "المبالغ المحصلة",
+          "capturedOnly": "captured فقط",
+          "cementCost": "تكلفة الأسمنت",
+          "deliveryCost": "تكلفة التوصيل",
+          "bankFees": "رسوم البنك",
+          "platformFees": "عمولة المنصة",
+          "ordersOnly": "الطلبات فقط"
+        },
+        "tableHeaders": {
+          "index": " ",
+          "code": "الكود",
+          "type": "النوع",
+          "status": "الحالة",
+          "cementCost": "تكلفة الأسمنت",
+          "deliveryCost": "تكلفة التوصيل",
+          "platformFees": "عمولة المنصة",
+          "bankFees": "رسوم البنك",
+          "total": "الإجمالي",
+          "date": "التاريخ"
+        },
+        "status": {
+          "captured": "مكتمل",
+          "pending": "معلق",
+          "refunded": "مسترجع"
+        },
+        "type": {
+          "order": "طلب",
+          "request": "طلب تحميل"
+        }
       }
     }
   },
@@ -1204,7 +1352,7 @@
     "description": "ليس لديك الصلاحية للوصول إلى هذه الصفحة. تواصل مع المسؤول لطلب الصلاحيات المطلوبة.",
     "back": "رجوع",
     "home": "الرئيسية"
-  } ,
+  },
   "noAccess": {
     "message": "You do not have access to this section"
   }

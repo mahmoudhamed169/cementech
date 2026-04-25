@@ -28,6 +28,7 @@ import {
 import { useCreatePermission, useUpdatePermission } from "./_hooks";
 import { CreatePermissionSchema } from "./_schema";
 import { Permission as PermissionType } from "@/src/lib/services/permissions/get-permissions";
+import { useTranslations } from "next-intl";
 
 const PAGE_LABELS: Record<string, string> = Object.fromEntries(
   PAGE_GROUPS.flatMap((g) => g.pages.map((p) => [p.id, p.label])),
@@ -50,15 +51,12 @@ function permissionToState(permission: PermissionType) {
     }
   });
 
-  // نضمن دايماً وجود الصفحات المقفولة
-  // الصلاحيات المقفلة تأتي من LOCKED_PAGES، الحرة تأتي من الباك اند
   LOCKED_PAGE_IDS.forEach((pageId) => {
     selectedPages.add(pageId);
     const existingPerms = permissions[pageId];
     permissions[pageId] = {
-      ...LOCKED_PAGES[pageId], // القيم الثابتة كـ base
-      ...existingPerms,        // نحافظ على قيم الباك اند (بما فيها POST)
-      // نعيد تطبيق الصلاحيات المقفلة فوق كل شيء
+      ...LOCKED_PAGES[pageId],
+      ...existingPerms,
       ...(LOCKED_FIXED_PERMISSIONS[pageId]?.reduce(
         (acc, p) => ({ ...acc, [p]: LOCKED_PAGES[pageId][p] }),
         {} as Partial<Record<Permission, boolean>>,
@@ -106,11 +104,9 @@ function stateToPayload(
     const methods: string[] = [];
 
     (Object.keys(PERMISSION_TO_HTTP) as Permission[]).forEach((p) => {
-      // الصلاحيات المقفلة: خذ من LOCKED_PAGES
       if (LOCKED_FIXED_PERMISSIONS[pageId]?.includes(p)) {
         if (LOCKED_PAGES[pageId][p]) methods.push(PERMISSION_TO_HTTP[p]);
       } else {
-        // الصلاحيات الحرة: خذ من اختيار المستخدم
         if (userPerms[p]) methods.push(PERMISSION_TO_HTTP[p]);
       }
     });
@@ -132,6 +128,7 @@ export function RolePermissionsModal({
   initialData,
   trigger,
 }: RolePermissionsModalProps) {
+  const t = useTranslations("permissionsPage.modal");
   const isEdit = !!permissionId;
   const [open, setOpen] = useState(false);
 
@@ -203,7 +200,6 @@ export function RolePermissionsModal({
   };
 
   const togglePermission = (pageId: string, permission: Permission) => {
-    // فقط الصلاحيات المقفلة لا تتغير
     if (LOCKED_FIXED_PERMISSIONS[pageId]?.includes(permission)) return;
 
     if (permission === "preview") {
@@ -252,10 +248,7 @@ export function RolePermissionsModal({
   const totalSelected = selectedPages.size;
   const totalPages = PAGE_GROUPS.reduce((acc, g) => acc + g.pages.length, 0);
 
-  const isValid =
-    nameAr.trim() !== "" &&
-    nameEn.trim() !== "" ;
-    
+  const isValid = nameAr.trim() !== "" && nameEn.trim() !== "";
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -263,7 +256,7 @@ export function RolePermissionsModal({
         {trigger ?? (
           <Button className="min-w-46 min-h-12 rounded-xl bg-[#00A63E] text-white p-3 flex justify-center items-center gap-2">
             <CirclePlus />
-            إنشاء دور جديد
+            {t("createBtn")}
           </Button>
         )}
       </DialogTrigger>
@@ -275,11 +268,9 @@ export function RolePermissionsModal({
             </div>
             <div>
               <DialogTitle className="text-[#101828] text-lg font-bold">
-                {isEdit ? "تعديل الدور" : "إنشاء دور جديد"}
+                {isEdit ? t("editTitle") : t("createTitle")}
               </DialogTitle>
-              <p className="text-xs text-[#6B7280] mt-0.5">
-                حدد الصلاحيات المناسبة لهذا الدور
-              </p>
+              <p className="text-xs text-[#6B7280] mt-0.5">{t("subtitle")}</p>
             </div>
           </div>
         </DialogHeader>
@@ -289,7 +280,7 @@ export function RolePermissionsModal({
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-[#374151]">
-                اسم الدور (عربي) <span className="text-red-500">*</span>
+                {t("nameAr")} <span className="text-red-500">*</span>
               </label>
               <Input
                 value={nameAr}
@@ -303,12 +294,12 @@ export function RolePermissionsModal({
             </div>
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-[#374151]">
-                اسم الدور (إنجليزي) <span className="text-red-500">*</span>
+                {t("nameEn")} <span className="text-red-500">*</span>
               </label>
               <Input
                 value={nameEn}
                 onChange={(e) => setNameEn(e.target.value)}
-                placeholder="e.g. Sales Manager"
+                placeholder={t("nameEnPlaceholder")}
                 className={cn(
                   "py-2.5 px-4 rounded-xl w-full transition-all duration-200 border border-[#D1D5DC] text-right",
                   "focus-visible:ring-0 focus-visible:border-[#00A63E] focus-visible:shadow-[0_0_0_3px_rgba(0,166,62,0.12)]",
@@ -317,7 +308,7 @@ export function RolePermissionsModal({
             </div>
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-[#374151]">
-                الوصف (عربي)
+                {t("descAr")}
               </label>
               <Input
                 value={descAr}
@@ -331,12 +322,12 @@ export function RolePermissionsModal({
             </div>
             <div className="space-y-1.5">
               <label className="text-sm font-medium text-[#374151]">
-                الوصف (إنجليزي)
+                {t("descEn")}
               </label>
               <Input
                 value={descEn}
                 onChange={(e) => setDescEn(e.target.value)}
-                placeholder="Brief role description"
+                placeholder={t("descEnPlaceholder")}
                 className={cn(
                   "py-2.5 px-4 rounded-xl w-full transition-all duration-200 border border-[#D1D5DC] text-right",
                   "focus-visible:ring-0 focus-visible:border-[#00A63E] focus-visible:shadow-[0_0_0_3px_rgba(0,166,62,0.12)]",
@@ -349,10 +340,13 @@ export function RolePermissionsModal({
           <div>
             <div className="flex items-center justify-between mb-4">
               <h5 className="text-sm font-semibold text-[#101828]">
-                حدد الصفحات التي يمكن الوصول إليها
+                {t("pagesTitle")}
               </h5>
               <span className="text-xs text-[#6B7280] bg-[#F9FAFB] border border-[#E5E7EB] px-2.5 py-1 rounded-lg">
-                {totalSelected} / {totalPages} صفحة
+                {t("pagesCount", {
+                  selected: totalSelected,
+                  total: totalPages,
+                })}
               </span>
             </div>
             {PAGE_GROUPS.map((group) => (
@@ -369,7 +363,7 @@ export function RolePermissionsModal({
           {totalSelected > 0 && (
             <div>
               <h5 className="text-sm font-semibold text-[#101828] mb-3">
-                تفاصيل الصلاحيات
+                {t("permissionsTitle")}
               </h5>
               <PermissionsTable
                 selectedPages={selectedPages}
@@ -394,10 +388,10 @@ export function RolePermissionsModal({
             )}
           >
             {isPending ? (
-              "جاري الحفظ..."
+              t("saving")
             ) : (
               <>
-                {isEdit ? "حفظ التعديلات" : "إنشاء الدور"}
+                {isEdit ? t("saveEdit") : t("saveCreate")}
                 {totalSelected > lockedCount && (
                   <span className="mr-2 bg-white/20 text-white text-xs px-1.5 py-0.5 rounded-md">
                     {totalSelected}
@@ -411,7 +405,7 @@ export function RolePermissionsModal({
             onClick={() => handleOpenChange(false)}
             className="rounded-xl border-[#D1D5DC] text-[#374151] hover:bg-[#F9FAFB] px-6 flex-1"
           >
-            إلغاء
+            {t("cancel")}
           </Button>
         </div>
       </DialogContent>

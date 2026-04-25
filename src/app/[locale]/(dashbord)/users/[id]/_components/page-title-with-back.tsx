@@ -1,8 +1,7 @@
 "use client";
 import { Link } from "@/src/i18n/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useLocale } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface PageTitleWithBackProps {
   title: string;

@@ -1,7 +1,8 @@
-import { getTranslations } from "next-intl/server";
+"use client";
+import { useTranslations } from "next-intl";
 
-export async function PageHeader() {
-  const t = await getTranslations("PaymentsPage.header");
+export function PageHeader() {
+  const t = useTranslations("PaymentsPage.header");
 
   return (
     <div className="h-28 flex items-center text-white rounded-2xl p-6 bg-linear-to-r from-[#155DFC] to-[#193CB8]">

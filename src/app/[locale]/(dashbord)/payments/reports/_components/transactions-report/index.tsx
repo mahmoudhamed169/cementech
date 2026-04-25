@@ -5,6 +5,7 @@ import { Printer, Loader2 } from "lucide-react";
 import { Transaction } from "@/src/lib/services/payments/get-transactions-report";
 import { TransactionsSummaryCards } from "./transactions-summary-cards";
 import { TransactionsReportTable } from "./transactions-report-table";
+import { useTranslations } from "next-intl";
 
 interface Props {
   transactions: Transaction[];
@@ -17,6 +18,7 @@ export function TransactionsReport({
   startDate,
   endDate,
 }: Props) {
+  const t = useTranslations("PaymentsPage.reports.transactionsReport");
   const [isPrinting, startPrint] = useTransition();
 
   function handleExportPDF() {
@@ -34,13 +36,12 @@ export function TransactionsReport({
 
       const rangeText =
         startDate && endDate
-          ? `من ${formatDate(startDate)} إلى ${formatDate(endDate)}`
+          ? `${t("dateRange", { from: formatDate(startDate), to: formatDate(endDate) })}`
           : "";
 
       const printArea = document.getElementById("reportprintarea");
       if (!printArea) return;
 
-      // ✅ HEADER احترافي باللوجو
       const header = document.createElement("div");
       header.innerHTML = `
 <div style="
@@ -52,84 +53,38 @@ export function TransactionsReport({
   margin-bottom:22px;
   font-family: Arial, sans-serif;
 ">
-  
-  <!-- RIGHT (TITLE) -->
   <div style="text-align:right; display:flex; flex-direction:column; gap:4px;">
-    
     <p style="margin:0; font-size:20px; font-weight:800; color:#1f2937;">
-      تقرير المعاملات
+      ${t("printTitle")}
     </p>
-
-    ${
-      rangeText
-        ? `<p style="margin:0; font-size:12px; color:#374151;">
-            ${rangeText}
-          </p>`
-        : ""
-    }
-
+    ${rangeText ? `<p style="margin:0; font-size:12px; color:#374151;">${rangeText}</p>` : ""}
     <p style="margin:0; font-size:11px; color:#6b7280;">
-      تاريخ الطباعة: ${printDate}
+      ${t("printDate")}: ${printDate}
     </p>
   </div>
-
-  <!-- LEFT (LOGO BIG & CLEAN) -->
-  <div style="
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    min-width:110px;
-  ">
-    <img
-      src="/images/logo2.webp"
-      style="
-        width:150px;
-        height:150px;
-        object-fit:contain;
-        display:block;
-      "
-    />
+  <div style="display:flex; align-items:center; justify-content:center; min-width:110px;">
+    <img src="/images/logo2.webp" style="width:150px; height:150px; object-fit:contain; display:block;" />
   </div>
-
 </div>
       `;
 
       printArea.prepend(header);
 
-      // ✅ PRINT STYLE
       const style = document.createElement("style");
       style.textContent = `
         @media print {
           body * { visibility: hidden; }
-
-          #printwrapper, #printwrapper * {
-            visibility: visible;
-          }
-
-          #printwrapper {
-            position: absolute;
-            inset: 0;
-            padding: 24px;
-            background: white;
-          }
-
-          .print\\:hidden {
-            display: none !important;
-          }
-
-          @page {
-            size: A4 landscape;
-            margin: 12mm;
-          }
+          #printwrapper, #printwrapper * { visibility: visible; }
+          #printwrapper { position: absolute; inset: 0; padding: 24px; background: white; }
+          .print\\:hidden { display: none !important; }
+          @page { size: A4 landscape; margin: 12mm; }
         }
       `;
 
       document.head.appendChild(style);
-
       await new Promise((res) => setTimeout(res, 300));
       window.print();
 
-      // cleanup
       style.remove();
       header.remove();
     });
@@ -137,7 +92,6 @@ export function TransactionsReport({
 
   return (
     <div id="printwrapper">
-      {/* ✅ زرار الطباعة (رجعناه ستايل حلو) */}
       <div className="flex justify-end mb-4 print:hidden">
         <button
           onClick={handleExportPDF}
@@ -151,11 +105,10 @@ export function TransactionsReport({
           ) : (
             <Printer size={14} />
           )}
-          طباعة / PDF
+          {t("print")}
         </button>
       </div>
 
-      {/* المحتوى */}
       <div id="reportprintarea" dir="rtl">
         <TransactionsSummaryCards transactions={transactions} />
         <TransactionsReportTable transactions={transactions} />

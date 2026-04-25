@@ -4,20 +4,22 @@ import UserActions from "./_components/user-actions";
 import UserDetails from "./_components/user-details";
 import UserOrders from "./_components/user-order";
 import UserPageTitle from "./_components/user-page-title";
+import { getTranslations } from "next-intl/server";
 
 interface Props {
   params: Promise<{
     id: string;
   }>;
   searchParams: Promise<{
-    page?: string; // ✅ بدل orderPage
+    page?: string;
   }>;
 }
 
 export default async function Page({ params, searchParams }: Props) {
   const { id } = await params;
-  const { page } = await searchParams; // ✅
+  const { page } = await searchParams;
   const user = await fetchCustomerProfile(id);
+  const t = await getTranslations("userPage.userStats");
 
   return (
     <main className="bg-white min-h-132.5 border border-[#E5E7EB] rounded-xl p-6 flex flex-col space-y-6">
@@ -29,10 +31,9 @@ export default async function Page({ params, searchParams }: Props) {
         totalOrderCount={user.stats.totalOrders}
         totalPaid={user.stats.totalPaid}
         lastOrderDate={
-          user.stats.lastOrderDate
-            ? new Date(user.stats.lastOrderDate).toLocaleDateString("ar-EG")
-            : "لا توجد طلبات بعد"
+          user.stats.lastOrderDate ? new Date(user.stats.lastOrderDate) : ""
         }
+        noOrdersText={t("noOrders")}
       />
       {/* USER ORDERS */}
       <UserOrders

@@ -13,7 +13,7 @@ export default function InvoicesListHeader() {
       <div className="flex flex-wrap items-center gap-4">
         <InvoiceTypeFilter />
         <div className="w-65">
-          <SearchInput placeholder="ابحث عن رقم الطلب او رقم الفاتورة ..." />
+          <SearchInput placeholder={t("searchPlaceholder")} />
         </div>
       </div>
     </div>

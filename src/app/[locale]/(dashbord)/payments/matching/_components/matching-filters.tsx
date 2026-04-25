@@ -42,8 +42,7 @@ export function MatchingFilters({ currentStatus }: Props) {
         <h3 className="text-lg font-semibold text-gray-800">{t("title")}</h3>
 
         <div className="flex items-center gap-3">
-          <SearchInput placeholder="ابحث عن اسم السائق او رقم الطلب ...." />
-
+          <SearchInput placeholder={t("searchPlaceholder")} />
           <div className="flex items-center gap-1.5">
             <label className="text-xs text-gray-500 whitespace-nowrap">
               {t("byStatus")}

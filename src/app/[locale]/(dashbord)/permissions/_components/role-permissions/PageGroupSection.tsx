@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { PageCard } from "./PageCard";
 import { PageGroup } from "./data";
+import { useTranslations } from "next-intl";
 
 interface PageGroupSectionProps {
   group: PageGroup;
@@ -16,6 +17,7 @@ export function PageGroupSection({
   selectedPages,
   onToggle,
 }: PageGroupSectionProps) {
+  const t = useTranslations("permissionsPage.modal");
   const [open, setOpen] = useState(true);
   const selectedCount = group.pages.filter((p) =>
     selectedPages.has(p.id),
@@ -57,7 +59,7 @@ export function PageGroupSection({
           onClick={toggleAll}
           className="text-xs text-[#6B7280] hover:text-[#00A63E] transition-colors underline underline-offset-2"
         >
-          {allSelected ? "إلغاء الكل" : "تحديد الكل"}
+          {allSelected ? t("deselectAll") : t("selectAll")}
         </button>
       </div>
       {open && (

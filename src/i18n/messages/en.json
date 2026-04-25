@@ -146,6 +146,7 @@
         "this_month": "This Month"
       },
       "status": {
+        "all": "All",
         "pending_payment": "Pending Payment",
         "under_review": "Under Review",
         "in_preparation": "In Preparation",
@@ -230,6 +231,10 @@
       "inactive": "Inactive users",
       "blocked": "Blocked users"
     },
+    "userHeaderList": {
+      "title": "Users",
+      "searchPlaceholder": "Search by name or phone number..."
+    },
     "usersTable": {
       "columns": {
         "index": "#",
@@ -242,6 +247,10 @@
         "totalPaid": "Total Paid",
         "lastLogin": "Last Login",
         "actions": "Actions"
+      },
+      "empty": {
+        "title": "No users found",
+        "description": "Users will appear here once they register in the app."
       }
     },
     "userStatus": {
@@ -306,6 +315,10 @@
       "active": "Active Drivers",
       "inactive": "Inactive Drivers",
       "blocked": "Blocked Drivers"
+    },
+    "driversHeaderList": {
+      "title": "Drivers",
+      "searchPlaceholder": "Search by name or phone number..."
     },
     "driversTable": {
       "columns": {
@@ -555,6 +568,7 @@
       "description": "Track and print invoices for all orders.",
       "btn": "Print All Invoices"
     },
+    "searchPlaceholder": "Search by order number or invoice number...",
     "invoicesTable": {
       "title": "Invoices",
       "columns": {
@@ -796,6 +810,84 @@
         "1": "Role changes will affect all admins assigned to that role.",
         "2": "All role and permission changes are logged for security audit purposes."
       }
+    },
+    "modal": {
+      "createTitle": "Create New Role",
+      "editTitle": "Edit Role",
+      "subtitle": "Set the appropriate permissions for this role",
+      "createBtn": "Create New Role",
+      "nameAr": "Role Name (Arabic)",
+      "nameEn": "Role Name (English)",
+      "nameArPlaceholder": "e.g. Sales Manager",
+      "nameEnPlaceholder": "e.g. Sales Manager",
+      "descAr": "Description (Arabic)",
+      "descEn": "Description (English)",
+      "descArPlaceholder": "Brief role description",
+      "descEnPlaceholder": "Brief role description",
+      "pagesTitle": "Select accessible pages",
+      "pagesCount": "{selected} / {total} pages",
+      "permissionsTitle": "Permission Details",
+      "saving": "Saving...",
+      "saveEdit": "Save Changes",
+      "saveCreate": "Create Role",
+      "cancel": "Cancel",
+      "selectAll": "Select All",
+      "deselectAll": "Deselect All"
+    },
+    "data": {
+      "permissions": {
+        "preview": "Preview",
+        "create": "Create",
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "groups": {
+        "general": "General Pages",
+        "operations": "Operations Pages",
+        "finance": "Finance Pages",
+        "management": "Management",
+        "other": "Other"
+      },
+      "pages": {
+        "home": "Home Page",
+        "orders": "Orders Management",
+        "users": "Users Management",
+        "drivers": "Drivers",
+        "loadingRequests": "Loading Requests",
+        "payments": "Payments",
+        "invoices": "Invoices",
+        "permissions": "Management & Permissions",
+        "supervisors": "Supervisors Management",
+        "suppliers": "Factories & Products",
+        "notifications": "Notifications",
+        "terms": "Terms & Conditions",
+        "settings": "Settings"
+      }
+    },
+    "permissionsTable": {
+      "pages": "Pages",
+      "fixed": "Fixed"
+    },
+    "pagesModal": {
+      "morePage": "+{count} more"
+    },
+    "roleCard": {
+      "system": "System",
+      "protected": "Protected",
+      "assignedSupervisors": "Assigned Supervisors",
+      "supervisorsCount": "{count} supervisors",
+      "availablePages": "Available Pages"
+    },
+    "deleteDialog": {
+      "title": "Are you sure you want to delete this role?",
+      "description": "The role {name} will be permanently deleted and this action cannot be undone.",
+      "confirm": "Delete Role",
+      "deleting": "Deleting...",
+      "cancel": "Cancel"
+    },
+    "roleDetails": {
+      "btn": "View Details",
+      "permissionsList": "Permissions List"
     }
   },
   "supervisorsPage": {
@@ -1072,6 +1164,8 @@
     },
     "operations": {
       "filters": {
+        "title": "Payments",
+        "searchPlaceholder": "Search by order code, invoice ID, or driver name...",
         "byTime": "By Time",
         "byStatus": "By Status",
         "today": "Today",
@@ -1106,6 +1200,8 @@
     },
     "matching": {
       "filters": {
+        "searchPlaceholder": "Search by driver name or order number...",
+
         "title": "Bonuses",
         "byStatus": "Filter by Status",
         "all": "All",
@@ -1188,6 +1284,61 @@
         "bankFee": "Bank Fee",
         "totalCommission": "Total Commission",
         "platformFee": "Platform Fee"
+      },
+      "customReport": {
+        "title": "Generate Custom Report",
+        "reportType": "Report Type",
+        "reportTypePlaceholder": "Select report type",
+        "all": "All",
+        "ordersOnly": "Orders Only",
+        "loadingOrdersOnly": "Loading Orders Only",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "generate": "Generate Report",
+        "generating": "Fetching...",
+        "noTransactions": "No transactions found in this period",
+        "fetchError": "An error occurred while fetching data"
+      },
+      "transactionsReport": {
+        "print": "Print / PDF",
+        "transactionsCount": "{count} transactions",
+        "total": "Total ({count} transactions)",
+        "printTitle": "Transactions Report",
+        "printDate": "Print Date",
+        "dateRange": "From {from} to {to}",
+        "noTransactions": "No transactions found in this period",
+        "summaryCards": {
+          "totalTransactions": "Total Transactions",
+          "allTypes": "All types",
+          "totalCaptured": "Captured Amount",
+          "capturedOnly": "Captured only",
+          "cementCost": "Cement Cost",
+          "deliveryCost": "Delivery Cost",
+          "bankFees": "Bank Fees",
+          "platformFees": "Platform Commission",
+          "ordersOnly": "Orders only"
+        },
+        "tableHeaders": {
+          "index": " ",
+          "code": "Code",
+          "type": "Type",
+          "status": "Status",
+          "cementCost": "Cement Cost",
+          "deliveryCost": "Delivery Cost",
+          "platformFees": "Platform Commission",
+          "bankFees": "Bank Fees",
+          "total": "Total",
+          "date": "Date"
+        },
+        "status": {
+          "captured": "Captured",
+          "pending": "Pending",
+          "refunded": "Refunded"
+        },
+        "type": {
+          "order": "Order",
+          "request": "Loading Order"
+        }
       }
     }
   },

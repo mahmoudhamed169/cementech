@@ -11,10 +11,7 @@ import {
 import { Permission } from "@/src/lib/services/permissions/get-permissions";
 import { permissionPagesMap } from "@/src/lib/services/permissions/permission-pages-map";
 import { CircleCheck, CircleX } from "lucide-react";
-
 import { useTranslations } from "next-intl";
-
-const headers = ["الصفحات", "معاينة", "إنشاء", "تعديل", "حذف"];
 
 const Cell = ({ value }: { value: boolean }) =>
   value ? (
@@ -25,6 +22,15 @@ const Cell = ({ value }: { value: boolean }) =>
 
 export default function TableRoles({ permission }: { permission: Permission }) {
   const t = useTranslations("sidebar");
+  const tTable = useTranslations("permissionsPage");
+
+  const headers = [
+    tTable("permissionsTable.pages"),
+    tTable("data.permissions.preview"),
+    tTable("data.permissions.create"),
+    tTable("data.permissions.edit"),
+    tTable("data.permissions.delete"),
+  ];
 
   const rows = Object.entries(permissionPagesMap)
     .map(([key, translationKey]) => {
@@ -37,7 +43,8 @@ export default function TableRoles({ permission }: { permission: Permission }) {
         delete: methods.includes("DELETE"),
       };
     })
-    .filter((row) => row.preview || row.create || row.edit || row.delete); // ← هنا
+    .filter((row) => row.preview || row.create || row.edit || row.delete);
+
   return (
     <Table className="mt-4">
       <TableHeader>
