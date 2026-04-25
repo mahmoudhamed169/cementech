@@ -573,7 +573,6 @@
     },
     "invoicesTable": {
       "searchPlaceholder": "ابحث عن رقم الطلب او رقم الفاتورة ...",
-
       "title": "الفواتير",
       "columns": {
         "index": "#",
