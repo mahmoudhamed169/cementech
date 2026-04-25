@@ -13,6 +13,7 @@ export async function markNotificationAsReadAction(id: string) {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
+      systemscreen: "notification_permission",
       "Content-Type": "application/json",
     },
   });
@@ -32,6 +33,7 @@ export async function markAllNotificationsAsReadAction() {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
+      systemscreen: "notification_permission",
       "Content-Type": "application/json",
     },
   });
@@ -43,7 +45,6 @@ export async function markAllNotificationsAsReadAction() {
 
   return res.json();
 }
-
 
 export async function deleteNotificationAction(id: string) {
   const session = await getServerSession(authOptions);
