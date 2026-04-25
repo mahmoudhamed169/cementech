@@ -13,10 +13,12 @@ import {
 import { Transaction } from "@/src/lib/services/payments/get-transactions-report";
 import { getTransactionsReportAction } from "../get-transactions-report-action";
 import { TransactionsReport } from "./transactions-report";
+import { useTranslations } from "next-intl";
 
 type ReportType = "order" | "request" | "all";
 
 export function CustomReportForm() {
+  const t = useTranslations("PaymentsPage.reports.customReport");
   const [reportType, setReportType] = useState<ReportType>("all");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -37,7 +39,7 @@ export function CustomReportForm() {
       });
 
       if (!result.success) {
-        setError(result.error ?? "حدث خطأ أثناء جلب البيانات");
+        setError(result.error ?? t("fetchError"));
         setTransactions(null);
         return;
       }
@@ -47,37 +49,34 @@ export function CustomReportForm() {
   }
 
   return (
-    <div className="space-y-5" dir="rtl">
+    <div className="space-y-5">
       <div className="rounded-2xl border border-gray-100 bg-white p-6">
         <h3 className="text-base font-bold text-gray-800 mb-5">
-          إنشاء تقرير مخصص
+          {t("title")}
         </h3>
 
-        {/* ✅ grid بـ 4 أعمدة متساوية */}
         <div className="grid grid-cols-4 items-end gap-4">
           {/* نوع التقرير */}
           <div className="flex flex-col gap-2">
-            <label className="text-sm text-gray-500">نوع التقرير</label>
+            <label className="text-sm text-gray-500">{t("reportType")}</label>
             <Select
               value={reportType}
               onValueChange={(v) => setReportType(v as ReportType)}
-            
             >
               <SelectTrigger className="min-h-12 rounded-xl border-gray-200 bg-white text-sm w-full">
-            
-                <SelectValue placeholder="اختر نوع التقرير" />
+                <SelectValue placeholder={t("reportTypePlaceholder")} />
               </SelectTrigger>
               <SelectContent className="bg-white border-0">
-                <SelectItem value="all">الكل</SelectItem>
-                <SelectItem value="order">طلبات فقط</SelectItem>
-                <SelectItem value="request">طلبات تحميل فقط</SelectItem>
+                <SelectItem value="all">{t("all")}</SelectItem>
+                <SelectItem value="order">{t("ordersOnly")}</SelectItem>
+                <SelectItem value="request">{t("loadingOrdersOnly")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           {/* تاريخ البداية */}
           <div className="flex flex-col gap-2">
-            <label className="text-sm text-gray-500">تاريخ البداية</label>
+            <label className="text-sm text-gray-500">{t("startDate")}</label>
             <input
               type="date"
               value={startDate}
@@ -88,7 +87,7 @@ export function CustomReportForm() {
 
           {/* تاريخ النهاية */}
           <div className="flex flex-col gap-2">
-            <label className="text-sm text-gray-500">تاريخ النهاية</label>
+            <label className="text-sm text-gray-500">{t("endDate")}</label>
             <input
               type="date"
               value={endDate}
@@ -109,23 +108,21 @@ export function CustomReportForm() {
             ) : (
               <Download size={16} />
             )}
-            {isPending ? "جاري الجلب…" : "إنشاء التقرير"}
+            {isPending ? t("generating") : t("generate")}
           </Button>
         </div>
       </div>
 
-      {/* Error */}
       {error && (
         <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-600">
           {error}
         </div>
       )}
 
-      {/* Results */}
       {transactions !== null &&
         (transactions.length === 0 ? (
           <div className="rounded-2xl border border-gray-100 bg-white py-16 text-center text-gray-400 text-sm">
-            لا توجد معاملات في هذه الفترة
+            {t("noTransactions")}
           </div>
         ) : (
           <TransactionsReport

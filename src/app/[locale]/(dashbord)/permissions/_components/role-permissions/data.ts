@@ -13,11 +13,11 @@ export interface PageGroup {
 
 export type Permission = "preview" | "create" | "edit" | "delete";
 
-export const PERMISSIONS: { key: Permission; label: string }[] = [
-  { key: "preview", label: "معاينة" },
-  { key: "create", label: "إنشاء" },
-  { key: "edit", label: "تعديل" },
-  { key: "delete", label: "حذف" },
+export const PERMISSIONS: { key: Permission }[] = [
+  { key: "preview" },
+  { key: "create" },
+  { key: "edit" },
+  { key: "delete" },
 ];
 
 export type PagePermissions = Record<Permission, boolean>;
@@ -30,91 +30,66 @@ export const DEFAULT_PAGE_PERMISSIONS: PagePermissions = {
   delete: false,
 };
 
-// الصفحات المقفلة: دايماً موجودة في كل دور ولا يمكن حذفها
 export const LOCKED_PAGES: Record<string, PagePermissions> = {
   notifications: {
     preview: true,
-    create: false, // القيمة الافتراضية — قابلة للتغيير
+    create: false,
     edit: true,
     delete: true,
   },
 };
 
-// مصفوفة بـ IDs الصفحات المقفلة للاستخدام مع includes()
 export const LOCKED_PAGE_IDS: string[] = Object.keys(LOCKED_PAGES);
 
-// الصلاحيات المقفلة لكل صفحة (لا يمكن تغييرها)
-// notifications: preview + edit + delete مقفلة، create حرة
 export const LOCKED_FIXED_PERMISSIONS: Record<string, Permission[]> = {
   notifications: ["preview", "edit", "delete"],
 };
 
-// لا يوجد صلاحيات مخفية — كل الأعمدة تظهر
 export const LOCKED_HIDDEN_PERMISSIONS: Record<string, Permission[]> = {};
 
 export const PAGE_GROUPS: PageGroup[] = [
   {
     groupId: "general",
-    groupLabel: "الصفحات العامة",
-    pages: [{ id: "home", label: "الصفحة الرئيسية" }],
+    groupLabel: "general",
+    pages: [{ id: "home", label: "home" }],
   },
   {
     groupId: "operations",
-    groupLabel: "صفحات العمليات",
+    groupLabel: "operations",
     pages: [
-      { id: "orders", label: "إدارة الطلبات" },
-      { id: "users", label: "إدارة المستخدمين" },
-      { id: "drivers", label: "السائقين" },
-      { id: "loadingRequests", label: "طلبات التحميل" },
+      { id: "orders", label: "orders" },
+      { id: "users", label: "users" },
+      { id: "drivers", label: "drivers" },
+      { id: "loadingRequests", label: "loadingRequests" },
     ],
   },
   {
     groupId: "finance",
-    groupLabel: "صفحات المالية",
+    groupLabel: "finance",
     pages: [
-      { id: "payments", label: "المدفوعات" },
-      { id: "invoices", label: "الفواتير" },
+      { id: "payments", label: "payments" },
+      { id: "invoices", label: "invoices" },
     ],
   },
   {
     groupId: "management",
-    groupLabel: "الإدارة",
+    groupLabel: "management",
     pages: [
-      { id: "permissions", label: "الإدارة والصلاحيات" },
-      { id: "supervisors", label: "إدارة المشرفين" },
-      { id: "suppliers", label: "المصانع والمنتجات" },
+      { id: "permissions", label: "permissions" },
+      { id: "supervisors", label: "supervisors" },
+      { id: "suppliers", label: "suppliers" },
     ],
   },
   {
     groupId: "other",
-    groupLabel: "أخرى",
+    groupLabel: "other",
     pages: [
-      { id: "notifications", label: "الإشعارات" },
-      { id: "terms", label: "الشروط والأحكام" },
-      { id: "settings", label: "الإعدادات" },
+      { id: "notifications", label: "notifications" },
+      { id: "terms", label: "terms" },
+      { id: "settings", label: "settings" },
     ],
   },
 ];
-
-/*
-{
-  "name": "",
-  "description": "",
-  "home_permission": ["GET"],           // الصفحة الرئيسية
-  "order_permission": ["GET"],          // إدارة الطلبات
-  "driver_permission": ["GET"],         // السائقين
-  "loading_request_permission": ["GET"],// طلبات التحميل
-  "user_permission": ["GET"],           // إدارة المستخدمين
-  "payment_permission": ["GET"],        // المدفوعات
-  "invoice_permission": ["GET"],        // الفواتير
-  "notification_permission": ["GET"],   // الإشعارات
-  "management_permission": ["GET"],     // الإدارة والصلاحيات
-  "supervisor_permission": ["GET"],     // إدارة المشرفين
-  "supplier_permission": ["GET"],       // المصانع والمنتجات
-  "terms_permission": ["GET"],          // الشروط والأحكام
-  "setting_permission": ["GET"]         // الإعدادات
-}
-*/
 
 export const PAGE_ID_TO_PERMISSION_KEY: Record<string, string> = {
   home: "home_permission",

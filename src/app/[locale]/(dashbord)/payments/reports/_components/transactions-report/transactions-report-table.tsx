@@ -19,20 +19,30 @@ import {
 
 import { Transaction } from "@/src/lib/services/payments/get-transactions-report";
 import { Badge } from "./badge";
-import {
-  TABLE_HEADERS,
-  STATUS_CLASS,
-  TYPE_CLASS,
-} from "./transactions-report.constants";
-
+import { STATUS_CLASS, TYPE_CLASS } from "./transactions-report.constants";
 import { CurrencyIcon } from "@/src/components/shared/currency-icon";
+import { useTranslations } from "next-intl";
 
 interface Props {
   transactions: Transaction[];
 }
 
 export function TransactionsReportTable({ transactions }: Props) {
+  const t = useTranslations("PaymentsPage.reports.transactionsReport");
   const summary = calcSummary(transactions);
+
+  const TABLE_HEADERS = [
+    t("tableHeaders.index"),
+    t("tableHeaders.code"),
+    t("tableHeaders.type"),
+    t("tableHeaders.status"),
+    t("tableHeaders.cementCost"),
+    t("tableHeaders.deliveryCost"),
+    t("tableHeaders.platformFees"),
+    t("tableHeaders.bankFees"),
+    t("tableHeaders.total"),
+    t("tableHeaders.date"),
+  ];
 
   const thClass =
     "text-center text-[#364153] font-bold whitespace-nowrap h-[50px] border border-gray-200 bg-gray-50 px-3";
@@ -42,7 +52,6 @@ export function TransactionsReportTable({ transactions }: Props) {
 
   const formatDate = (date: string) => {
     const d = new Date(date);
-
     return {
       day: d.toLocaleDateString("en-GB"),
       time: d.toLocaleTimeString("en-GB", {
@@ -54,14 +63,12 @@ export function TransactionsReportTable({ transactions }: Props) {
 
   return (
     <div dir="rtl">
-      {/* count */}
       <div className="flex items-center justify-between mb-4 flex-wrap gap-2 print:hidden">
         <p className="text-sm text-muted-foreground whitespace-nowrap">
-          {transactions.length} معاملة
+          {t("transactionsCount", { count: transactions.length })}
         </p>
       </div>
 
-      {/* table */}
       <div className="rounded-xl border border-gray-200 overflow-x-auto">
         <Table className="border-collapse w-full print:text-[10px]">
           <TableHeader>
@@ -79,8 +86,6 @@ export function TransactionsReportTable({ transactions }: Props) {
               const isOrder = tx.transaction_Type === "order";
               const ord = tx.order;
               const req = tx.request;
-              const code = isOrder ? ord?.code : req?.code;
-
               const date = formatDate(tx.created_at);
 
               return (
@@ -88,21 +93,20 @@ export function TransactionsReportTable({ transactions }: Props) {
                   key={tx.id}
                   className="hover:bg-gray-50/60 transition-colors"
                 >
-                  {/* ✅ SERIAL NUMBER */}
                   <TableCell className={tdClass}>
                     <span className="text-[11px] text-gray-500">
                       {index + 1}
                     </span>
                   </TableCell>
 
-                  <TableCell className={`${tdClass} font-medium `}>
+                  <TableCell className={`${tdClass} font-medium`}>
                     {tx.order?.code || tx.request?.code || ""}
                   </TableCell>
 
                   <TableCell className={tdClass}>
                     <div className="flex justify-center">
                       <Badge
-                        label={TYPE_LABEL[tx.transaction_Type]}
+                        label={t(`type.${tx.transaction_Type}`)}
                         cls={TYPE_CLASS[tx.transaction_Type]}
                       />
                     </div>
@@ -111,7 +115,7 @@ export function TransactionsReportTable({ transactions }: Props) {
                   <TableCell className={tdClass}>
                     <div className="flex justify-center">
                       <Badge
-                        label={STATUS_LABEL[tx.status]}
+                        label={t(`status.${tx.status}`)}
                         cls={STATUS_CLASS[tx.status]}
                       />
                     </div>
@@ -137,7 +141,6 @@ export function TransactionsReportTable({ transactions }: Props) {
                     {tx.amount.toFixed(2)}
                   </TableCell>
 
-                  {/* DATE */}
                   <TableCell className={`${tdClass} print:w-[120px]`}>
                     <div className="flex flex-col items-center leading-tight">
                       <span className="text-[11px] print:text-[9px]">
@@ -153,14 +156,13 @@ export function TransactionsReportTable({ transactions }: Props) {
             })}
           </TableBody>
 
-          {/* ✅ UI FOOTER (NORMAL) */}
           <TableFooter className="print:hidden">
             <TableRow>
               <TableCell
                 colSpan={4}
                 className={`${tdClass} text-muted-foreground font-semibold`}
               >
-                الإجمالي ({transactions.length} معاملة)
+                {t("total", { count: transactions.length })}
               </TableCell>
 
               <TableCell className={`${tdClass} font-semibold`}>
@@ -179,11 +181,11 @@ export function TransactionsReportTable({ transactions }: Props) {
                 {summary.totalBankFees}
               </TableCell>
 
-              <TableCell className={`${tdClass} font-bold flex items-center justify-center`}>
+              <TableCell
+                className={`${tdClass} font-bold flex items-center justify-center`}
+              >
                 {summary.totalCaptured.toFixed(2)} <CurrencyIcon />
               </TableCell>
-
-             
             </TableRow>
           </TableFooter>
         </Table>

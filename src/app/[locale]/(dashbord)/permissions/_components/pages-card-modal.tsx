@@ -7,9 +7,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
 import { ChevronLeft } from "lucide-react";
 import { colors } from "./role-card";
+import { useTranslations } from "next-intl";
 
 export default function PagesModal({
   title,
@@ -20,18 +20,20 @@ export default function PagesModal({
   pages: string[];
   c: ReturnType<typeof colors>;
 }) {
+  const t = useTranslations("permissionsPage.pagesModal");
+
   return (
     <Dialog>
       <DialogTrigger asChild>
         <button
           className={`inline-flex items-center gap-1 text-xs font-semibold px-3 py-1.5 rounded-lg transition-all ${c.more}`}
         >
-          <ChevronLeft size={11} />+{pages.length - 3} صفحة
+          <ChevronLeft size={11} />
+          {t("morePage", { count: pages.length - 3 })}
         </button>
       </DialogTrigger>
 
       <DialogContent
-        dir="rtl"
         className={`max-w-sm rounded-2xl ${c.card}`}
         style={{ fontFamily: "Tajawal, sans-serif" }}
       >

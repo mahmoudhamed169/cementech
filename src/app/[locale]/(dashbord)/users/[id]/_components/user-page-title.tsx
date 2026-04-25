@@ -1,3 +1,4 @@
+"use client";
 import { useTranslations } from "next-intl";
 import PageTitleWithBack from "./page-title-with-back";
 

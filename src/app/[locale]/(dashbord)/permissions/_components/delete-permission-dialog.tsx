@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Trash2, TriangleAlert } from "lucide-react";
 import { useDeletePermission } from "./role-permissions/_hooks";
-
+import { useTranslations } from "next-intl";
 
 interface DeletePermissionDialogProps {
   permissionId: string;
@@ -24,6 +24,7 @@ export function DeletePermissionDialog({
   permissionId,
   permissionName,
 }: DeletePermissionDialogProps) {
+  const t = useTranslations("permissionsPage.deleteDialog");
   const { mutate: deletePermission, isPending } = useDeletePermission();
 
   return (
@@ -35,7 +36,6 @@ export function DeletePermissionDialog({
       </AlertDialogTrigger>
 
       <AlertDialogContent
-        dir="rtl"
         style={{ fontFamily: "Tajawal, sans-serif" }}
         className="max-w-sm rounded-2xl p-0 overflow-hidden shadow-xl border-0 bg-white"
       >
@@ -45,14 +45,15 @@ export function DeletePermissionDialog({
           </div>
           <AlertDialogHeader className="space-y-2 items-center">
             <AlertDialogTitle className="text-xl font-bold text-gray-900 text-center">
-              هل أنت متأكد من حذف الدور؟
+              {t("title")}
             </AlertDialogTitle>
             <AlertDialogDescription className="text-sm text-gray-500 text-center leading-relaxed">
-              سيتم حذف دور{" "}
-              <span className="font-semibold text-gray-700">
-                {permissionName}
-              </span>{" "}
-              نهائياً ولا يمكن التراجع عن هذا الإجراء.
+              {t.rich("description", {
+                name: permissionName,
+                span: (chunks) => (
+                  <span className="font-semibold text-gray-700">{chunks}</span>
+                ),
+              })}
             </AlertDialogDescription>
           </AlertDialogHeader>
         </div>
@@ -63,13 +64,13 @@ export function DeletePermissionDialog({
             disabled={isPending}
             className="flex-1 bg-red-600 hover:bg-red-700 text-white rounded-xl h-11 font-semibold transition-colors shadow-sm"
           >
-            {isPending ? "جاري الحذف..." : "حذف الدور"}
+            {isPending ? t("deleting") : t("confirm")}
           </AlertDialogAction>
           <AlertDialogCancel
             disabled={isPending}
             className="flex-1 rounded-xl h-11 bg-white border-gray-200 text-gray-700 hover:bg-gray-50 font-medium transition-colors"
           >
-            رجوع
+            {t("cancel")}
           </AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>

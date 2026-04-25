@@ -1,18 +1,5 @@
 import { Transaction } from "@/src/lib/services/payments/get-transactions-report";
 
-export const TABLE_HEADERS = [
-  " ",
-  "الكود",
-  "النوع",
-  "الحالة",
-  "تكلفة الأسمنت",
-  "تكلفة التوصيل",
-  "عمولة المنصة",
-  "رسوم البنك",
-  "الإجمالي",
-  "التاريخ",
-];
-
 export const STATUS_CLASS: Record<Transaction["status"], string> = {
   captured: "bg-green-50 text-green-700 ring-green-200",
   pending: "bg-amber-50  text-amber-700  ring-amber-200",

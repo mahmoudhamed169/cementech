@@ -17,13 +17,15 @@ interface StatItemProps {
 type IProps = {
   totalOrderCount: number;
   totalPaid: number;
-  lastOrderDate: string;
+  lastOrderDate: Date | string;
+  noOrdersText: string;
 };
 
 export default function DriverStats({
   totalOrderCount,
   totalPaid,
   lastOrderDate,
+  noOrdersText,
 }: IProps) {
   const t = useTranslations("driverPage.driverStats");
 
@@ -45,7 +47,12 @@ export default function DriverStats({
     },
     {
       title: t("lastOrderDate"),
-      value: lastOrderDate,
+      value:
+        lastOrderDate instanceof Date
+          ? new Intl.DateTimeFormat("en-GB", {
+              numberingSystem: "latn",
+            }).format(lastOrderDate)
+          : noOrdersText,
       bgColor: "bg-[#FAF5FF]",
       icon: <Calendar size={20} />,
       iconColor: "text-[#9810FA]",

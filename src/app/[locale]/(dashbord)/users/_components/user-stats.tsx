@@ -18,13 +18,15 @@ interface StatItemProps {
 type IProps = {
   totalOrderCount: number;
   totalPaid: number;
-  lastOrderDate: string;
+  lastOrderDate: Date | string;
+  noOrdersText: string;
 };
 
 export default function UserStats({
   totalOrderCount,
   totalPaid,
   lastOrderDate,
+  noOrdersText,
 }: IProps) {
   const t = useTranslations("userPage.userStats");
 
@@ -46,7 +48,10 @@ export default function UserStats({
     },
     {
       title: t("lastOrder"),
-      value: lastOrderDate,
+      value:
+        lastOrderDate instanceof Date
+          ? lastOrderDate.toLocaleDateString("en-GB")
+          : noOrdersText,
       bgColor: "bg-[#FAF5FF]",
       icon: <Calendar size={20} />,
       iconColor: "text-[#9810FA]",

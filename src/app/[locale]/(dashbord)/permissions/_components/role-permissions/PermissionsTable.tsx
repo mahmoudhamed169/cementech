@@ -20,6 +20,7 @@ import {
   Permission,
   SelectedPermissions,
 } from "./data";
+import { useTranslations } from "next-intl";
 
 interface PermissionsTableProps {
   selectedPages: Set<string>;
@@ -69,6 +70,8 @@ export function PermissionsTable({
   permissions,
   onToggle,
 }: PermissionsTableProps) {
+  const t = useTranslations("permissionsPage");
+
   if (selectedPages.size === 0) return null;
 
   return (
@@ -77,14 +80,14 @@ export function PermissionsTable({
         <TableHeader>
           <TableRow className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
             <TableHead className="text-right text-[#364153] font-bold h-11 text-sm pr-4 align-middle">
-              الصفحات
+              {t("permissionsTable.pages")}
             </TableHead>
             {PERMISSIONS.map((p) => (
               <TableHead
                 key={p.key}
                 className="text-center text-[#364153] font-bold h-11 text-sm align-middle"
               >
-                {p.label}
+                {t(`data.permissions.${p.key}`)}
               </TableHead>
             ))}
           </TableRow>
@@ -108,19 +111,17 @@ export function PermissionsTable({
                     {isLockedPage && (
                       <span className="flex items-center gap-1 text-xs text-[#6B7280] bg-[#E5E7EB] px-2 py-0.5 rounded-md">
                         <Lock className="w-3 h-3" />
-                        ثابت
+                        {t("permissionsTable.fixed")}
                       </span>
                     )}
                     {pageLabels[pageId]}
                   </div>
                 </TableCell>
                 {PERMISSIONS.map((p) => {
-                  // هل هذه الخلية بالذات مقفلة؟
                   const isCellFixed =
                     isLockedPage &&
                     LOCKED_FIXED_PERMISSIONS[pageId]?.includes(p.key);
 
-                  // هل هذه الخلية مخفية؟
                   const isHidden =
                     isLockedPage &&
                     LOCKED_HIDDEN_PERMISSIONS[pageId]?.includes(p.key);

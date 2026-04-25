@@ -5,6 +5,7 @@ import { Permission } from "@/src/lib/services/permissions/get-permissions";
 import { RolePermissionsModal } from "./role-permissions";
 import { DeletePermissionDialog } from "./delete-permission-dialog";
 import { usePermissionsStore } from "@/src/store/permissionsStore";
+import { useTranslations } from "next-intl";
 
 interface RoleCardProps {
   title: string;
@@ -50,15 +51,16 @@ export default function RoleCard({
   variant = "default",
   permission,
 }: RoleCardProps) {
+  const t = useTranslations("permissionsPage.roleCard");
   const p = variant === "primary";
   const c = colors(p);
   const can = usePermissionsStore((s) => s.can);
 
-  const canEdit   = can("management_permission", "PATCH");
+  const canEdit = can("management_permission", "PATCH");
   const canDelete = can("management_permission", "DELETE");
 
   return (
-    <div dir="rtl" style={{ fontFamily: "Tajawal, sans-serif" }} className="w-full h-full">
+    <div style={{ fontFamily: "Tajawal, sans-serif" }} className="w-full h-full">
       <div className={`relative w-full h-full flex flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${c.card}`}>
         <div className={`absolute top-5 left-5 w-2 h-2 rounded-full ${c.dot}`} />
 
@@ -67,7 +69,7 @@ export default function RoleCard({
           <div className="space-y-1">
             {p && (
               <span className="inline-flex items-center bg-[#FFDF20] text-[#78350F] text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide">
-                النظام
+                {t("system")}
               </span>
             )}
             <h2 className="text-[#0F172A] font-bold text-xl">{title}</h2>
@@ -76,7 +78,7 @@ export default function RoleCard({
 
           {isProtected && (
             <div className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold ${c.badge}`}>
-              <Lock size={11} /> محمي
+              <Lock size={11} /> {t("protected")}
             </div>
           )}
         </div>
@@ -89,8 +91,8 @@ export default function RoleCard({
             <Users size={16} className={c.iconClr} />
           </div>
           <div>
-            <p className="text-[#94A3B8] text-[11px] font-medium">المشرفون المعينون</p>
-            <p className={`text-sm font-bold ${c.count}`}>{assignedCount} مشرفين</p>
+            <p className="text-[#94A3B8] text-[11px] font-medium">{t("assignedSupervisors")}</p>
+            <p className={`text-sm font-bold ${c.count}`}>{t("supervisorsCount", { count: assignedCount })}</p>
           </div>
         </div>
 
@@ -100,7 +102,7 @@ export default function RoleCard({
         <div className="mt-auto space-y-5">
           <div>
             <p className={`text-[11px] font-semibold mb-3 tracking-wider uppercase ${c.label}`}>
-              الصفحات المتاحة
+              {t("availablePages")}
             </p>
             <div className="flex flex-wrap gap-2">
               {pages.map((page, i) => (
@@ -124,7 +126,6 @@ export default function RoleCard({
                 <RoleDetails title={title} description={description} permission={permission} />
               </div>
 
-              {/* تعديل — PATCH */}
               {canEdit && (
                 <RolePermissionsModal
                   permissionId={permission.id}
@@ -137,7 +138,6 @@ export default function RoleCard({
                 />
               )}
 
-              {/* حذف — DELETE */}
               {canDelete && (
                 <DeletePermissionDialog
                   permissionId={permission.id}
