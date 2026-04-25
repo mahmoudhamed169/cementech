@@ -53,6 +53,7 @@ export async function deleteNotificationAction(id: string) {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${session?.user.accessToken}`,
+      systemscreen: "notification_permission",
     },
   });
 
