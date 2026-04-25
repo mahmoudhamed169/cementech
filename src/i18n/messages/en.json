@@ -568,8 +568,9 @@
       "description": "Track and print invoices for all orders.",
       "btn": "Print All Invoices"
     },
-    "searchPlaceholder": "Search by order number or invoice number...",
+   
     "invoicesTable": {
+       "searchPlaceholder": "Search by order number or invoice number...",
       "title": "Invoices",
       "columns": {
         "index": "#",
