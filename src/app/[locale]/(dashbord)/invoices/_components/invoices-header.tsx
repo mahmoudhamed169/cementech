@@ -12,10 +12,10 @@ export default function InvoicesHeader() {
         <h2 className="text-2xl font-bold">{t("title")}</h2>
         <p>{t("description")}</p>
       </div>
-      <Button className="min-w-46  min-h-12 rounded-xl bg-[#00A63E] text-white p-3 flex justify-center items-center">
+      {/* <Button className="min-w-46  min-h-12 rounded-xl bg-[#00A63E] text-white p-3 flex justify-center items-center">
         <Printer />
         {t("btn")}
-      </Button>
+      </Button> */}
     </div>
   );
 }
