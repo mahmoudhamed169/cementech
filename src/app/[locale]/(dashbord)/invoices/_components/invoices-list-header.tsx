@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import InvoiceTypeFilter from "./invoice-type-filter";
 
 export default function InvoicesListHeader() {
-  const t = useTranslations("InvoicesPage.");
+  const t = useTranslations("InvoicesPagegit.invoicesTable");
 
   return (
     <div className="flex flex-wrap justify-between items-center gap-4">
