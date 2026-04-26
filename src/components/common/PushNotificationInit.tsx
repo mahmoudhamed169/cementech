@@ -2,7 +2,6 @@
 
 import { usePushNotifications } from "@/src/hooks/usePushNotifications";
 
-
 export function PushNotificationInit({ interests }: { interests: string[] }) {
   const { isReady, error } = usePushNotifications(interests);
 

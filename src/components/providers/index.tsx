@@ -26,7 +26,7 @@ export default function Providers({
 
         <NextAuthProvider>
           <PermissionsProvider>
-            <PushNotificationInit interests={["role-admin"]} />
+            {/* <PushNotificationInit interests={["role-admin"]} /> */}
 
             {children}
           </PermissionsProvider>

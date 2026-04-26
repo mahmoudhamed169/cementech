@@ -1,28 +1,47 @@
 import { useEffect, useState } from "react";
-import { getBeamsClient } from "../lib/beamsClient";
 
+import { toast } from "sonner";
+import { getPusherClient } from "../lib/pusherClient";
+import { revalidateNotifications } from "../lib/actions/revalidate-notifications";
 
-export function usePushNotifications(interests: string[]) {
-  const [isReady, setIsReady] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+export type Notification = {
+  id: string;
+  title: string;
+  body: string;
+};
+
+export function usePushNotifications() {
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
   useEffect(() => {
-    const client = getBeamsClient();
-    if (!client) return;
+    const pusher = getPusherClient();
+    if (!pusher) return;
 
-    client
-      .start()
-      .then((c) => c.getDeviceId())
-      .then(() =>
-        Promise.all(interests.map((i) => client.addDeviceInterest(i))),
-      )
-      .then(() => setIsReady(true))
-      .catch((err) => setError(err.message));
+    const channel = pusher.subscribe("role-admin");
 
+    channel.bind(
+      "new_notification",
+      async (data: { title_ar: string; description_ar: string }) => {
+        const newNotif: Notification = {
+          id: crypto.randomUUID(),
+          title: data.title_ar,
+          body: data.description_ar,
+        };
+
+        toast(data.title_ar, { description: data.description_ar });
+        setNotifications((prev) => [newNotif, ...prev]);
+
+        // revalidate
+        await revalidateNotifications();
+      },
+    );
     return () => {
-      client.stop().catch(console.error);
+      channel.unbind_all();
+      pusher.unsubscribe("role-admin");
     };
   }, []);
 
-  return { isReady, error };
+  const clearNotifications = () => setNotifications([]);
+
+  return { notifications, clearNotifications };
 }
