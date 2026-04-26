@@ -6,6 +6,7 @@ import NextAuthProvider from "./shared/_components/next-auth.provider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools/production";
 import NextIntlProvider from "./shared/_components/next-intl.provider";
 import { PermissionsProvider } from "./shared/_components/PermissionsProvider";
+import { PushNotificationInit } from "../common/PushNotificationInit";
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -24,7 +25,11 @@ export default function Providers({
         {/* react query dev tools */}
 
         <NextAuthProvider>
-          <PermissionsProvider>{children}</PermissionsProvider>
+          <PermissionsProvider>
+            <PushNotificationInit interests={["role-admin"]} />
+
+            {children}
+          </PermissionsProvider>
         </NextAuthProvider>
       </ReactQueryProvider>
     </NextIntlProvider>
