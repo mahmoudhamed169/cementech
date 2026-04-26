@@ -1355,5 +1355,10 @@
   },
   "noAccess": {
     "message": "You do not have access to this section"
+  },
+  "notifications-bill": {
+    "title": "الإشعارات",
+    "clearAll": "مسح الكل",
+    "empty": "لا توجد إشعارات"
   }
 }

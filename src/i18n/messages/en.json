@@ -568,9 +568,9 @@
       "description": "Track and print invoices for all orders.",
       "btn": "Print All Invoices"
     },
-   
+
     "invoicesTable": {
-       "searchPlaceholder": "Search by order number or invoice number...",
+      "searchPlaceholder": "Search by order number or invoice number...",
       "title": "Invoices",
       "columns": {
         "index": "#",
@@ -1351,5 +1351,13 @@
     "description": "You don't have permission to access this page. Contact your administrator to request the required permissions.",
     "back": "Go Back",
     "home": "Home"
+  },
+  "noAccess": {
+    "message": "You do not have access to this section"
+  },
+  "notifications-bill": {
+    "title": "Notifications",
+    "clearAll": "Clear all",
+    "empty": "No notifications"
   }
 }
