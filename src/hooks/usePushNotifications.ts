@@ -22,6 +22,11 @@ export function usePushNotifications() {
     channel.bind(
       "new_notification",
       async (data: { title_ar: string; description_ar: string }) => {
+        // Sound effect
+        const audio = new Audio("/notification.mp3");
+        audio.play();
+
+        // باقي الكود
         const newNotif: Notification = {
           id: crypto.randomUUID(),
           title: data.title_ar,
@@ -30,8 +35,6 @@ export function usePushNotifications() {
 
         toast(data.title_ar, { description: data.description_ar });
         setNotifications((prev) => [newNotif, ...prev]);
-
-        // revalidate
         await revalidateNotifications();
       },
     );
