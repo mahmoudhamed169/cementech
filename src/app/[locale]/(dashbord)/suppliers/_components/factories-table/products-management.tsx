@@ -1,10 +1,12 @@
 "use client";
 
-import { useFieldArray, useFormContext } from "react-hook-form";
+import { useFieldArray, useFormContext, Controller } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 import { CirclePlus } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utils";
 import NpProducts from "./no-product";
 
 export default function ProductsManagement() {
@@ -29,15 +31,14 @@ export default function ProductsManagement() {
         </h3>
         <Button
           type="button"
-          onClick={
-            () =>
-              append({
-                nameAr: "",
-                nameEn: "",
-                price: "",
-                driver_price: "",
-                isActive: true,
-              }) // ✅ أضفنا driver_price
+          onClick={() =>
+            append({
+              nameAr: "",
+              nameEn: "",
+              price: "",
+              driver_price: "",
+              isActive: true,
+            })
           }
           className="min-w-46 min-h-12 rounded-xl bg-[#00A63E] text-white p-3 flex justify-center items-center gap-2"
         >
@@ -50,18 +51,17 @@ export default function ProductsManagement() {
         <NpProducts />
       ) : (
         <div className="border border-[#E5E7EB] rounded-xl bg-gray-50 overflow-hidden">
-          {/* ✅ عدّلنا grid-cols عشان نضيف عمود driver_price */}
-          <div className="grid grid-cols-[48px_1fr_1fr_1fr_1fr_48px] gap-x-3 px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-600 text-right">
+          <div className="grid grid-cols-[48px_1fr_1fr_1fr_1fr_80px_48px] gap-x-3 px-4 py-2 bg-gray-100 text-sm font-semibold text-gray-600 text-right">
             <div className="text-center">
               {t("addFactory.productsManagement.columns.index")}
             </div>
             <div>{t("addFactory.productsManagement.columns.nameAr")}</div>
             <div>{t("addFactory.productsManagement.columns.nameEn")}</div>
             <div>{t("addFactory.productsManagement.columns.price")}</div>
-            <div>
-              {t("addFactory.productsManagement.columns.driverPrice")}
-            </div>{" "}
-            {/* ✅ */}
+            <div>{t("addFactory.productsManagement.columns.driverPrice")}</div>
+            <div className="text-center">
+              {t("addFactory.productsManagement.columns.isActive")}
+            </div>
             <div />
           </div>
 
@@ -69,7 +69,7 @@ export default function ProductsManagement() {
             {fields.map((field, index) => (
               <div
                 key={field.id}
-                className="grid grid-cols-[48px_1fr_1fr_1fr_1fr_48px] gap-x-3 px-4 py-3 items-center" // ✅
+                className="grid grid-cols-[48px_1fr_1fr_1fr_1fr_80px_48px] gap-x-3 px-4 py-3 items-center"
               >
                 <div className="flex items-center justify-center">
                   <span className="w-7 h-7 rounded-full bg-[#00A63E]/10 text-[#00A63E] text-xs font-bold flex items-center justify-center">
@@ -77,6 +77,7 @@ export default function ProductsManagement() {
                   </span>
                 </div>
 
+                {/* nameAr */}
                 <div>
                   <Input
                     placeholder={t(
@@ -94,6 +95,7 @@ export default function ProductsManagement() {
                   )}
                 </div>
 
+                {/* nameEn */}
                 <div>
                   <Input
                     placeholder={t(
@@ -111,6 +113,7 @@ export default function ProductsManagement() {
                   )}
                 </div>
 
+                {/* price */}
                 <div>
                   <Input
                     type="number"
@@ -130,7 +133,7 @@ export default function ProductsManagement() {
                   )}
                 </div>
 
-                {/* ✅ حقل driver_price الجديد */}
+                {/* driver_price */}
                 <div>
                   <Input
                     type="number"
@@ -152,6 +155,36 @@ export default function ProductsManagement() {
                   )}
                 </div>
 
+                {/* isActive Switch */}
+                <div className="flex flex-col items-center justify-center gap-1">
+                  <Controller
+                    control={control}
+                    name={`products.${index}.isActive`}
+                    render={({ field }) => (
+                      <>
+                        <Switch
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          className="data-[state=checked]:bg-[#00A63E]"
+                        />
+                        <span
+                          className={cn(
+                            "text-[10px] font-medium px-2 py-0.5 rounded-full",
+                            field.value
+                              ? "bg-[#DCFCE7] text-[#00A63E]"
+                              : "bg-[#FEE2E2] text-red-500",
+                          )}
+                        >
+                          {field.value
+                            ? t("status.active")
+                            : t("status.inactive")}
+                        </span>
+                      </>
+                    )}
+                  />
+                </div>
+
+                {/* delete */}
                 <div className="flex items-center justify-center">
                   <button
                     type="button"
