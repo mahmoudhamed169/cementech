@@ -58,6 +58,7 @@ export async function addFactoryAction(data: FactoryDataFormValues) {
       name_ar: p.nameAr,
       price: Number(p.price),
       driver_price: Number(p.driver_price),
+      is_active: p.isActive, // ✅
     })),
   };
 
@@ -103,6 +104,7 @@ export async function editFactoryAction(
       name_ar: p.nameAr,
       price: Number(p.price),
       driver_price: Number(p.driver_price),
+      is_active: p.isActive,
     })),
   };
 
