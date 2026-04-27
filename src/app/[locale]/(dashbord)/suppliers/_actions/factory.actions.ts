@@ -100,6 +100,7 @@ export async function editFactoryAction(
     lat: String(rest.location?.lat ?? ""),
     lng: String(rest.location?.lng ?? ""),
     products: rest.products?.map((p) => ({
+      ...(p.id && { id: p.id }), // ✅ بيبعت الـ id بس لو موجود
       name_en: p.nameEn,
       name_ar: p.nameAr,
       price: Number(p.price),

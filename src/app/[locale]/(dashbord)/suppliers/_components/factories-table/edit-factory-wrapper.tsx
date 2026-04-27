@@ -25,11 +25,12 @@ export default async function EditFactoryWrapper({
         ? { lat: Number(data.lat), lng: Number(data.lng) }
         : undefined,
     products: data.products.map((p) => ({
+      id: p.id, // ✅
       nameAr: p.name_ar,
       nameEn: p.name_en,
       price: String(p.price),
       driver_price: String(p.driver_price),
-      isActive: true,
+      isActive: p.is_active,
     })),
   };
 
