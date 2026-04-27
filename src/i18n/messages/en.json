@@ -784,7 +784,8 @@
           "nameAr": "Product Name (Arabic)",
           "nameEn": "Product Name (English)",
           "price": "Product Price (SAR)",
-          "driverPrice": "Driver Price"
+          "driverPrice": "Driver Price",
+          "isActive": "Status"
         },
         "fields": {
           "nameAr": {
