@@ -33,6 +33,7 @@ export const factoryDataSchema = (t: (key: string) => string) =>
     products: z
       .array(
         z.object({
+             id: z.string().optional(), // ✅
           nameAr: z
             .string()
             .min(
