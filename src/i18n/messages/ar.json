@@ -163,7 +163,35 @@
     "orderNumber": "رقم الطلب",
     "fetchError": "حدث خطأ أثناء تحميل الطلب",
     "fetchErrorSub": "يرجى المحاولة مرة أخرى لاحقاً",
-    "orderLogs": "سجل الطلب"
+    "orderLogs": "سجل الطلب",
+    "tracking": {
+      "title": "تتبع السواق",
+      "subtitle": "يتحدث كل ~10 ثوانٍ",
+      "loading": "جاري التحميل...",
+      "error": "تعذّر تحميل بيانات التتبع",
+      "noDrivers": "لا يوجد سواق مخصصون لهذا الأوردر",
+      "waitingLocation": "في انتظار بيانات الموقع...",
+      "customerLocation": "موقع العميل",
+      "driverCount": "{count} سائق",
+      "badge": {
+        "live": "{live} من {total} مباشر",
+        "waiting": "في انتظار الموقع"
+      },
+      "driver": {
+        "live": "مباشر",
+        "offline": "غير متصل"
+      },
+      "legend": {
+        "driver": "موقع السائق",
+        "customer": "موقع العميل"
+      },
+      "lastSeen": {
+        "now": "الآن",
+        "seconds": "منذ {count}ث",
+        "minutes": "منذ {count}د",
+        "hours": "منذ {count}س"
+      }
+    }
   },
 
   "orderActions": {
