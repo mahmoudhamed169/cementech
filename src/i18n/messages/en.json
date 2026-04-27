@@ -159,7 +159,35 @@
     "orderNumber": "Order Number",
     "fetchError": "Failed to load order",
     "fetchErrorSub": "Please try again later",
-    "orderLogs": "Order Logs"
+    "orderLogs": "Order Logs",
+    "tracking": {
+      "title": "Driver Tracking",
+      "subtitle": "Updates every ~10 seconds",
+      "loading": "Loading...",
+      "error": "Failed to load tracking data",
+      "noDrivers": "No drivers assigned to this order",
+      "waitingLocation": "Waiting for location data...",
+      "customerLocation": "Customer Location",
+      "driverCount": "{count} driver(s)",
+      "badge": {
+        "live": "{live} of {total} live",
+        "waiting": "Waiting for location"
+      },
+      "driver": {
+        "live": "Live",
+        "offline": "Offline"
+      },
+      "legend": {
+        "driver": "Driver location",
+        "customer": "Customer location"
+      },
+      "lastSeen": {
+        "now": "Just now",
+        "seconds": "{count}s ago",
+        "minutes": "{count}m ago",
+        "hours": "{count}h ago"
+      }
+    }
   },
   "orderActions": {
     "orderNumber": "Order Number",
