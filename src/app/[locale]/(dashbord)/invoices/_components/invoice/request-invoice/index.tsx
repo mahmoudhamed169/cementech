@@ -115,7 +115,7 @@ function InvoiceContent({ invoiceData }: any) {
           requestCode={invoiceData.request_details.code}
         />
 
-        <div className="flex gap-6 w-full print:flex-col print:gap-4">
+        <div className="flex gap-6 w-full print:flex-row print:gap-4">
           <div className="flex-1">
             <DriverDetails driver={invoiceData.driver} />
           </div>
