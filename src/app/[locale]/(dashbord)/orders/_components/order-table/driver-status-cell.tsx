@@ -11,7 +11,8 @@ interface DriverStatusCellProps {
 export default function DriverStatusCell({ order }: DriverStatusCellProps) {
   const t = useTranslations("recentOrders");
 
-  const accepted = order.drivers_counts.accepted;
+  const accepted =
+    order.drivers_counts.accepted + order.drivers_counts.delivered;
   const needed = order.truck_quantity;
   const isComplete = accepted >= needed;
 
@@ -27,7 +28,6 @@ export default function DriverStatusCell({ order }: DriverStatusCellProps) {
         </span>
       )}
 
-      {/* Indicator */}
       <p className="text-xs text-[#6A7282] mt-0.5">
         {accepted} / {needed}
       </p>

@@ -31,10 +31,24 @@ export function RequestInvoiceModalContent({ id }: Props) {
   const { data, isLoading, isError } = useRequestInvoiceDetails(id);
   const invoiceData = data?.data;
 
-  // ✅ react-to-print (الحل الصح)
   const handlePrint = useReactToPrint({
     contentRef: invoiceRef,
     documentTitle: `request-invoice-${invoiceData?.invoice_details.code ?? id}`,
+    pageStyle: `
+      @page {
+        size: A4;
+        margin: 10mm;
+      }
+      @media print {
+        body {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        * {
+          visibility: visible !important;
+        }
+      }
+    `,
   });
 
   return (
@@ -78,27 +92,15 @@ export function RequestInvoiceModalContent({ id }: Props) {
               </div>
             )}
 
+            {/* ✅ الـ ref هنا على المحتوى الفعلي جوه الـ Dialog */}
             {invoiceData && (
-              <InvoiceContent invoiceData={invoiceData} />
+              <div ref={invoiceRef}>
+                <InvoiceContent invoiceData={invoiceData} />
+              </div>
             )}
           </div>
         </DialogContent>
       </Dialog>
-
-      {/* ================== نسخة الطباعة (خارج الـ Dialog) ================== */}
-      <div
-        style={{
-          position: "absolute",
-          top: "-9999px",
-          left: "-9999px",
-        }}
-      >
-        {invoiceData && (
-          <div ref={invoiceRef}>
-            <InvoiceContent invoiceData={invoiceData} />
-          </div>
-        )}
-      </div>
     </>
   );
 }
