@@ -47,7 +47,9 @@ export default function OrderTableBody({ orders }: { orders: Order[] }) {
     <TableBody>
       {orders.map((order, index) => {
         const remainingDrivers =
-          order.truck_quantity - order.drivers_counts.accepted;
+          order.truck_quantity -
+          order.drivers_counts.accepted -
+          order.drivers_counts.delivered;
 
         return (
           <TableRow

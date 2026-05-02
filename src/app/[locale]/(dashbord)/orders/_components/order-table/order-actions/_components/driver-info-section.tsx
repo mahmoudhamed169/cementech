@@ -23,7 +23,8 @@ export default function DriverInfoSection({ order }: DriverInfoSectionProps) {
 
   const drivers = order.drivers ?? [];
   const accepted = order.drivers_counts.accepted;
-  const remaining = order.truck_quantity - accepted;
+  const delivered = order.drivers_counts.delivered;
+  const remaining = order.truck_quantity - accepted - delivered;
   const isCanceled = ["canceled", "ملغي"].includes(order.order_status);
 
   return (
