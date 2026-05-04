@@ -1,4 +1,3 @@
-// app/orders/_components/order-tracking-section.tsx
 "use client";
 
 import dynamic from "next/dynamic";
@@ -134,22 +133,21 @@ function LiveMap({
         </Popup>
       </Marker>
 
-      {drivers.map((driver) => {
-        const pos = positions[driver.driver_id];
-        if (!pos) return null;
+      {Object.entries(positions).map(([driverId, pos]) => {
+        const driver = drivers.find((d) => d.driver_id === driverId);
         return (
           <Marker
-            key={driver.driver_id}
+            key={driverId}
             position={[pos.lat, pos.lng]}
-            icon={makeDriverIcon(driver.driver_name, true)}
+            icon={makeDriverIcon(driver?.driver_name ?? "Driver", true)}
           >
             <Popup>
               <div className="text-sm space-y-1 min-w-[150px]">
                 <p className="font-semibold text-gray-900">
-                  {driver.driver_name}
+                  {driver?.driver_name ?? driverId}
                 </p>
-                <p className="text-gray-500">{driver.code}</p>
-                <p className="text-gray-500">{driver.phone}</p>
+                {driver && <p className="text-gray-500">{driver.code}</p>}
+                {driver && <p className="text-gray-500">{driver.phone}</p>}
                 <p className="text-xs text-gray-400 pt-1">
                   {formatLastSeen(pos.timestamp, t)}
                 </p>
@@ -291,7 +289,11 @@ export default function OrderTrackingSection({ order }: Props) {
           <p className="text-xs text-gray-500">{t("tracking.subtitle")}</p>
         </div>
         {!isLoading && !isError && (
-          <StatusBadge live={liveDrivers.length} total={drivers.length} t={t} />
+          <StatusBadge
+            live={Object.keys(positions).length}
+            total={drivers.length}
+            t={t}
+          />
         )}
       </div>
 
@@ -328,7 +330,11 @@ export default function OrderTrackingSection({ order }: Props) {
             </div>
             <div className="flex-1 overflow-y-auto">
               {drivers.map((driver) => {
-                const pos = positions[driver.driver_id];
+                const pos =
+                  positions[driver.driver_id] ??
+                  (drivers.length === 1
+                    ? Object.values(positions)[0]
+                    : undefined);
                 return (
                   <DriverCard
                     key={driver.driver_id}
@@ -387,7 +393,7 @@ export default function OrderTrackingSection({ order }: Props) {
             </MapContainer>
 
             {/* Overlay: waiting for driver location */}
-            {liveDrivers.length === 0 && (
+            {Object.keys(positions).length === 0 && (
               <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] flex items-center justify-center z-[400] pointer-events-none">
                 <div className="text-center space-y-1">
                   <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse mx-auto" />
