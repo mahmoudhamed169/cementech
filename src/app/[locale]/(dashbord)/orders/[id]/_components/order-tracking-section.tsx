@@ -122,7 +122,6 @@ function LiveMap({
 
   return (
     <>
-      {/* Customer marker */}
       <Marker position={[customerLat, customerLng]} icon={makeCustomerIcon()}>
         <Popup>
           <div className="text-sm space-y-1 min-w-[140px]">
@@ -134,7 +133,6 @@ function LiveMap({
         </Popup>
       </Marker>
 
-      {/* Driver markers — keyed by position, not driver list */}
       {Object.entries(positions).map(([driverId, pos]) => {
         const driver = drivers.find((d) => d.driver_id === driverId);
         return (
@@ -332,7 +330,6 @@ export default function OrderTrackingSection({ order }: Props) {
             </div>
             <div className="flex-1 overflow-y-auto">
               {drivers.map((driver) => {
-                // fallback: لو في position واحدة بس نعرضها حتى لو الـ id مختلف
                 const pos =
                   positions[driver.driver_id] ??
                   (drivers.length === 1

@@ -32,6 +32,38 @@ interface PusherLocationEvent {
   timestamp: string;
 }
 
+// ─── Cache helpers ────────────────────────────────────────────────────────────
+
+const CACHE_TTL_MS = 10 * 60 * 1000;
+const cacheKey = (id: string) => `tracking_positions_${id}`;
+
+function loadCachedPositions(orderId: string): Record<string, DriverPosition> {
+  try {
+    const raw = localStorage.getItem(cacheKey(orderId));
+    if (!raw) return {};
+    const { positions, savedAt } = JSON.parse(raw);
+    if (Date.now() - savedAt > CACHE_TTL_MS) {
+      localStorage.removeItem(cacheKey(orderId));
+      return {};
+    }
+    return positions;
+  } catch {
+    return {};
+  }
+}
+
+function saveCachedPositions(
+  orderId: string,
+  positions: Record<string, DriverPosition>,
+) {
+  try {
+    localStorage.setItem(
+      cacheKey(orderId),
+      JSON.stringify({ positions, savedAt: Date.now() }),
+    );
+  } catch {}
+}
+
 // ─── Fetch tracking info ──────────────────────────────────────────────────────
 
 async function fetchOrderTracking(orderId: string): Promise<TrackingData> {
@@ -42,8 +74,6 @@ async function fetchOrderTracking(orderId: string): Promise<TrackingData> {
   if (!res.ok) throw new Error("Failed to fetch tracking data");
 
   const json = await res.json();
-
- 
   return json.data as TrackingData;
 }
 
@@ -54,7 +84,7 @@ const PUSHER_CLUSTER = process.env.NEXT_PUBLIC_PUSHER_CLUSTER ?? "eu";
 
 export function useOrderTracking(orderId: string, enabled = true) {
   const [positions, setPositions] = useState<Record<string, DriverPosition>>(
-    {},
+    () => loadCachedPositions(orderId),
   );
 
   const pusherRef = useRef<Pusher | null>(null);
@@ -73,15 +103,12 @@ export function useOrderTracking(orderId: string, enabled = true) {
     const data = query.data;
     if (!data || !PUSHER_KEY) return;
 
-    // Avoid re-subscribing to the same channel
     if (channelNameRef.current === data.channel) return;
 
-    // Clean up previous subscription
     if (pusherRef.current && channelNameRef.current) {
       pusherRef.current.unsubscribe(channelNameRef.current);
     }
 
-    // Init Pusher once
     if (!pusherRef.current) {
       pusherRef.current = new Pusher(PUSHER_KEY, { cluster: PUSHER_CLUSTER });
     }
@@ -89,24 +116,19 @@ export function useOrderTracking(orderId: string, enabled = true) {
     channelNameRef.current = data.channel;
     const channel = pusherRef.current.subscribe(data.channel);
 
-
-
     channel.bind(data.event, (payload: PusherLocationEvent) => {
-  
-
-      setPositions((prev) => ({
-        ...prev,
-        [payload.driver_id]: {
-          lat: payload.lat,
-          lng: payload.lng,
-          timestamp: payload.timestamp,
-        },
-      }));
-    });
-
-    // Listen to ALL events on the channel for debugging
-    channel.bind_global((eventName: string, data: unknown) => {
-      console.log("🌐 Pusher Global Event:", eventName, data);
+      setPositions((prev) => {
+        const next = {
+          ...prev,
+          [payload.driver_id]: {
+            lat: payload.lat,
+            lng: payload.lng,
+            timestamp: payload.timestamp,
+          },
+        };
+        saveCachedPositions(orderId, next);
+        return next;
+      });
     });
 
     return () => {
@@ -114,7 +136,7 @@ export function useOrderTracking(orderId: string, enabled = true) {
       pusherRef.current?.unsubscribe(data.channel);
       channelNameRef.current = null;
     };
-  }, [query.data]);
+  }, [query.data, orderId]);
 
   // 3. Disconnect on unmount
   useEffect(() => {
