@@ -1230,12 +1230,11 @@
     },
     "matching": {
       "filters": {
-        "searchPlaceholder": "Search by driver name or order number...",
-
-        "title": "Bonuses",
-        "byStatus": "Filter by Status",
+        "title": "Matching",
+        "searchPlaceholder": "Search by order number or driver name...",
+        "byStatus": "By Status",
         "all": "All",
-        "completed": "Completed",
+        "paid": "Paid",
         "pending": "Pending"
       },
       "tableHeaders": {

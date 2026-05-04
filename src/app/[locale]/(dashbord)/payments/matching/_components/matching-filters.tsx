@@ -1,4 +1,3 @@
-// matching/_components/matching-filters.tsx
 "use client";
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
@@ -58,7 +57,7 @@ export function MatchingFilters({ currentStatus }: Props) {
               </SelectTrigger>
               <SelectContent className="bg-white border-0">
                 <SelectItem value="all">{t("all")}</SelectItem>
-                <SelectItem value="completed">{t("completed")}</SelectItem>
+                <SelectItem value="paid">{t("paid")}</SelectItem>
                 <SelectItem value="pending">{t("pending")}</SelectItem>
               </SelectContent>
             </Select>
