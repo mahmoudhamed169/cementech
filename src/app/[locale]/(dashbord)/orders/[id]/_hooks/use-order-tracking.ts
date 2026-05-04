@@ -1,4 +1,3 @@
-// hooks/use-order-tracking.ts
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -43,6 +42,8 @@ async function fetchOrderTracking(orderId: string): Promise<TrackingData> {
   if (!res.ok) throw new Error("Failed to fetch tracking data");
 
   const json = await res.json();
+
+ 
   return json.data as TrackingData;
 }
 
@@ -88,7 +89,11 @@ export function useOrderTracking(orderId: string, enabled = true) {
     channelNameRef.current = data.channel;
     const channel = pusherRef.current.subscribe(data.channel);
 
+
+
     channel.bind(data.event, (payload: PusherLocationEvent) => {
+  
+
       setPositions((prev) => ({
         ...prev,
         [payload.driver_id]: {
@@ -97,6 +102,11 @@ export function useOrderTracking(orderId: string, enabled = true) {
           timestamp: payload.timestamp,
         },
       }));
+    });
+
+    // Listen to ALL events on the channel for debugging
+    channel.bind_global((eventName: string, data: unknown) => {
+      console.log("🌐 Pusher Global Event:", eventName, data);
     });
 
     return () => {
