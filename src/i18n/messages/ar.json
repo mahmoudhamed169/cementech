@@ -1231,12 +1231,11 @@
     },
     "matching": {
       "filters": {
-        "searchPlaceholder": "ابحث عن اسم السائق او رقم الطلب ....",
-
-        "title": "المكافآت",
-        "byStatus": "فلتر حسب الحالة",
+        "title": "المطابقة",
+        "searchPlaceholder": "ابحث...",
+        "byStatus": "حسب الحالة",
         "all": "الكل",
-        "completed": "مكتمل",
+        "paid": "مدفوع",
         "pending": "قيد الانتظار"
       },
       "tableHeaders": {
