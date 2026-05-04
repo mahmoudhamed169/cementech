@@ -37,12 +37,18 @@ export async function getDriverFinancialStats(params?: {
   status?: string;
 }): Promise<DriverFinancialStatsResponse> {
   const session = await getServerSession(authOptions);
-
   const searchParams = new URLSearchParams();
   if (params?.page) searchParams.set("page", String(params.page));
   if (params?.limit) searchParams.set("limit", String(params.limit));
   if (params?.search) searchParams.set("search", params.search);
-  if (params?.status) searchParams.set("status", params.status);
+  if (params?.status) searchParams.set("earningStatus", params.status);
+
+  // مؤقت للـ debugging
+  console.log(
+    "API Request:",
+    `${API_URL}/users/driverProfile/financialStats?${searchParams.toString()}`,
+  );
+  console.log("Params sent:", Object.fromEntries(searchParams));
 
   const res = await fetch(
     `${API_URL}/users/driverProfile/financialStats?${searchParams.toString()}`,
