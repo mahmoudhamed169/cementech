@@ -7,7 +7,6 @@ import { FactoryDataFormValues } from "../_schema/factory.schema";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// ✅ Helper function لطباعة الـ request والـ response
 async function loggedFetch(
   url: string,
   options: RequestInit,
@@ -16,15 +15,16 @@ async function loggedFetch(
   console.log(`\n========== [${actionName}] REQUEST ==========`);
   console.log("URL:", url);
   console.log("Method:", options.method);
-  console.log("Headers:", options.headers);
-  if (options.body) {
-    console.log("Body:", JSON.parse(options.body as string));
+  if (options.body instanceof FormData) {
+    console.log("Body: [FormData]");
+    (options.body as FormData).forEach((value, key) => {
+      console.log(`  ${key}:`, value instanceof File ? `File(${value.name})` : value);
+    });
   }
   console.log("=============================================\n");
 
   const res = await fetch(url, options);
 
-  // ✅ نسخ الـ response عشان نقدر نقرأه مرتين (مرة للـ log ومرة للـ return)
   const cloned = res.clone();
   let responseBody: unknown;
   try {
@@ -41,44 +41,61 @@ async function loggedFetch(
   return res;
 }
 
-export async function addFactoryAction(data: FactoryDataFormValues) {
-  const session = await getServerSession(authOptions);
+function buildFormData(
+  data: FactoryDataFormValues,
+  session: Awaited<ReturnType<typeof getServerSession>>,
+): { body: FormData; headers: Record<string, string> } {
+  const headers: Record<string, string> = {
+    Authorization: `Bearer ${session?.user.accessToken}`,
+    systemscreen: "factory_permission",
+  };
 
-  const body = {
-    name_en: data.nameEn,
-    name_ar: data.nameAr,
-    contact_number: data.phone,
-    is_active: data.status,
-    location_en: data.locationEn,
-    location_ar: data.locationAr,
-    lat: String(data.location?.lat ?? ""),
-    lng: String(data.location?.lng ?? ""),
-    products: data.products?.map((p) => ({
+  const formData = new FormData();
+
+  formData.append("name_en", data.nameEn);
+  formData.append("name_ar", data.nameAr);
+  formData.append("contact_number", data.phone);
+  formData.append("location_en", data.locationEn);
+  formData.append("location_ar", data.locationAr);
+  formData.append("lat", String(data.location?.lat ?? ""));
+  formData.append("lng", String(data.location?.lng ?? ""));
+
+  // ✅ NestJS @Transform بيقبل "true"/"false" كـ string
+  formData.append("is_active", data.status ? "true" : "false");
+
+  // ✅ products - price ودriver_price كـ numbers حقيقية مش strings
+  // NestJS مش بيعرف يـ parse الـ nested objects من FormData brackets
+  // → الحل: نبعت كـ JSON string وعلى الـ backend يعمل @Transform
+  if (data.products && data.products.length > 0) {
+    const products = data.products.map((p) => ({
+      ...(p.id && { id: p.id }),
       name_en: p.nameEn,
       name_ar: p.nameAr,
       price: Number(p.price),
       driver_price: Number(p.driver_price),
-      is_active: p.isActive, // ✅
-    })),
-  };
+      is_active: p.isActive, // boolean حقيقي جوه الـ JSON
+    }));
+    formData.append("products", JSON.stringify(products));
+  }
+
+  if (data.logo instanceof File) {
+    formData.append("logo", data.logo);
+  }
+
+  return { body: formData, headers };
+}
+
+export async function addFactoryAction(data: FactoryDataFormValues) {
+  const session = await getServerSession(authOptions);
+  const { body, headers } = buildFormData(data, session);
 
   const res = await loggedFetch(
     `${API_URL}/factories`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${session?.user.accessToken}`,
-        systemscreen: "factory_permission",
-      },
-      body: JSON.stringify(body),
-    },
+    { method: "POST", headers, body },
     "addFactoryAction",
   );
 
-  if (!res.ok) {
-    throw new Error("Failed to add factory");
-  }
+  if (!res.ok) throw new Error("Failed to add factory");
 
   revalidateTag("factories");
   return res.json();
@@ -89,43 +106,15 @@ export async function editFactoryAction(
 ) {
   const session = await getServerSession(authOptions);
   const { id, ...rest } = data;
-
-  const body = {
-    name_en: rest.nameEn,
-    name_ar: rest.nameAr,
-    contact_number: rest.phone,
-    is_active: rest.status,
-    location_en: rest.locationEn,
-    location_ar: rest.locationAr,
-    lat: String(rest.location?.lat ?? ""),
-    lng: String(rest.location?.lng ?? ""),
-    products: rest.products?.map((p) => ({
-      ...(p.id && { id: p.id }), // ✅ بيبعت الـ id بس لو موجود
-      name_en: p.nameEn,
-      name_ar: p.nameAr,
-      price: Number(p.price),
-      driver_price: Number(p.driver_price),
-      is_active: p.isActive,
-    })),
-  };
+  const { body, headers } = buildFormData(rest, session);
 
   const res = await loggedFetch(
     `${API_URL}/factories/${id}`,
-    {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${session?.user.accessToken}`,
-        systemscreen: "factory_permission",
-      },
-      body: JSON.stringify(body),
-    },
+    { method: "PATCH", headers, body },
     "editFactoryAction",
   );
 
-  if (!res.ok) {
-    throw new Error("Failed to update factory");
-  }
+  if (!res.ok) throw new Error("Failed to update factory");
 
   revalidateTag("factories");
   return res.json();
@@ -146,9 +135,7 @@ export async function deleteFactoryAction(id: string) {
     "deleteFactoryAction",
   );
 
-  if (!res.ok) {
-    throw new Error("Failed to delete factory");
-  }
+  if (!res.ok) throw new Error("Failed to delete factory");
 
   revalidateTag("factories");
   return res.json();
