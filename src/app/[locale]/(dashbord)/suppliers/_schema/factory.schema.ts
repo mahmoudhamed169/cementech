@@ -24,6 +24,8 @@ export const factoryDataSchema = (t: (key: string) => string) =>
         message: t("addFactory.validation.phoneInvalid"),
       }),
     status: z.boolean().default(true),
+    // ✅ logo: File = new upload, string = existing URL from server, null = removed/no logo
+    logo: z.union([z.instanceof(File), z.string(), z.null()]).optional(),
     location: z
       .object({
         lat: z.number(),
@@ -33,37 +35,24 @@ export const factoryDataSchema = (t: (key: string) => string) =>
     products: z
       .array(
         z.object({
-             id: z.string().optional(), // ✅
+          id: z.string().optional(),
           nameAr: z
             .string()
-            .min(
-              1,
-              t("addFactory.productsManagement.validation.nameArRequired"),
-            ),
+            .min(1, t("addFactory.productsManagement.validation.nameArRequired")),
           nameEn: z
             .string()
-            .min(
-              1,
-              t("addFactory.productsManagement.validation.nameEnRequired"),
-            ),
+            .min(1, t("addFactory.productsManagement.validation.nameEnRequired")),
           price: z
             .string()
             .min(1, t("addFactory.productsManagement.validation.priceRequired"))
             .refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
-              message: t(
-                "addFactory.productsManagement.validation.priceInvalid",
-              ),
+              message: t("addFactory.productsManagement.validation.priceInvalid"),
             }),
           driver_price: z
             .string()
-            .min(
-              1,
-              t("addFactory.productsManagement.validation.driverPriceRequired"),
-            )
+            .min(1, t("addFactory.productsManagement.validation.driverPriceRequired"))
             .refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
-              message: t(
-                "addFactory.productsManagement.validation.driverPriceInvalid",
-              ),
+              message: t("addFactory.productsManagement.validation.driverPriceInvalid"),
             }),
           isActive: z.boolean(),
         }),

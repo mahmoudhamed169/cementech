@@ -756,6 +756,12 @@
           "locating": "Locating...",
           "noGeolocation": "Your browser does not support geolocation",
           "geolocationError": "Could not get your location, please check browser permissions"
+        },
+        "logo": {
+          "label": "Factory Logo",
+          "upload": "Upload Logo",
+          "change": "Change Logo",
+          "remove": "Remove Logo"
         }
       },
       "validation": {

@@ -23,6 +23,7 @@ import {
   factoryDataSchema,
 } from "../_schema/factory.schema";
 import { RegionSelect } from "./factories-table/region-select";
+import { LogoUploadField } from "./logo-upload-field"; // ✅ import الجديد
 
 const LocationPicker = dynamic(
   () => import("./location-picker").then((m) => m.LocationPicker),
@@ -61,6 +62,7 @@ export default function FactoryDataForm({
       locationEn: "",
       phone: "",
       status: true,
+      logo: null, // ✅ default للـ logo
       location: undefined,
       products: [],
       ...defaultValues,
@@ -74,6 +76,21 @@ export default function FactoryDataForm({
         className="mt-5"
         dir={resolvedDir}
       >
+        {/* ✅ Logo - centered above the fields grid */}
+        <div className="flex justify-center mb-6">
+          <FormField
+            control={form.control}
+            name="logo"
+            render={({ field, fieldState }) => (
+              <LogoUploadField
+                value={field.value}
+                onChange={field.onChange}
+                hasError={!!fieldState.error}
+              />
+            )}
+          />
+        </div>
+
         <div className="grid grid-cols-2 gap-x-6 gap-y-5">
           <FormField
             control={form.control}

@@ -14,6 +14,7 @@ export default async function EditFactoryWrapper({
   const { data } = await getFactoryById(id);
 
   const defaultValues = {
+    logo: data.logo,
     nameAr: data.name_ar,
     nameEn: data.name_en,
     locationAr: data.location_ar,
