@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CreditCard, MapPin, DollarSign } from "lucide-react";
+import { CreditCard, MapPin, DollarSign, Megaphone } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 import PaymentMethodsTab from "./tabs/payment-methods";
 import DeliveryLocationsTab from "./tabs/delivery-locations";
 import PricingTab from "./tabs/pricing";
+import BannersTab from "./tabs/banners/banners-tab";
 
 export default function SettingsTabs() {
   const t = useTranslations("settingsPage.tabs");
@@ -32,6 +33,12 @@ export default function SettingsTabs() {
       label: t("pricing.trigger"),
       icon: DollarSign,
       content: <PricingTab />,
+    },
+    {
+      value: "banners",
+      label: t("banners.trigger"), // أضف المفتاح في ملفات الترجمة
+      icon: Megaphone,
+      content: <BannersTab />,
     },
   ];
 

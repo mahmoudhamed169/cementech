@@ -1098,6 +1098,26 @@
           "bankPercentage": "Bank Percentage"
         },
         "save": "Save Settings"
+      },
+      "banners": {
+        "trigger": "Ads & Banners",
+        "title": "Ads & Banners",
+        "subtitle": "Manage promotional banners displayed in your store",
+        "addBanner": "Add Banner",
+        "uploading": "Uploading...",
+        "dropzone": "Drag and drop your image here",
+        "dropzoneHint": "PNG, JPG or WEBP — Recommended size: 1200×400px",
+        "chooseFile": "Choose a file",
+        "loading": "Loading...",
+        "empty": "No banners yet",
+        "active": "Active",
+        "inactive": "Inactive",
+        "delete": "Delete",
+        "previewImage": "Preview image",
+        "confirmDeleteTitle": "Are you sure?",
+        "confirmDeleteDesc": "This banner will be permanently deleted and cannot be undone.",
+        "confirmDelete": "Yes, Delete",
+        "cancel": "Cancel"
       }
     }
   },

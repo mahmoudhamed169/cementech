@@ -1102,6 +1102,26 @@
           "bankPercentage": "نسبة البنك"
         },
         "save": "حفظ الإعدادات"
+      },
+      "banners": {
+        "trigger": "الإعلانات",
+        "title": "الإعلانات والبانرز",
+        "subtitle": "إدارة البانرات الإعلانية المعروضة في المتجر",
+        "addBanner": "إضافة بانر",
+        "uploading": "جاري الرفع...",
+        "dropzone": "اسحب وأفلت الصورة هنا",
+        "dropzoneHint": "PNG, JPG أو WEBP — الحجم الموصى به: 1200×400px",
+        "chooseFile": "اختر ملفًا",
+        "loading": "جاري التحميل...",
+        "empty": "لا توجد بانرات بعد",
+        "active": "مفعّل",
+        "inactive": "موقوف",
+        "delete": "حذف",
+        "previewImage": "معاينة الصورة",
+        "confirmDeleteTitle": "هل أنت متأكد من الحذف؟",
+        "confirmDeleteDesc": "سيتم حذف هذا الإعلان نهائيًا ولا يمكن التراجع عن هذا الإجراء.",
+        "confirmDelete": "نعم، احذف",
+        "cancel": "إلغاء"
       }
     }
   },
