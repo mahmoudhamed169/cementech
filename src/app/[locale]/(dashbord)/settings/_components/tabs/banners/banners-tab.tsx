@@ -12,22 +12,26 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-
 import { useAds } from "../../../_hooks/ads/use-ads";
 import { useAddAd } from "../../../_hooks/ads/use-add-ad";
 import { useDeleteAd } from "../../../_hooks/ads/use-delete-ad";
 import { useTranslations } from "next-intl";
 import { Ad } from "@/src/lib/types/ads";
+import { usePermissionsStore } from "@/src/store/permissionsStore";
 
 export default function BannersTab() {
   const t = useTranslations("settingsPage.tabs.banners");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  const can = usePermissionsStore((s) => s.can);
+  const canAdd = can("setting_permission", "POST");
+  const canDelete = can("setting_permission", "DELETE");
+
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [confirmAd, setConfirmAd] = useState<Ad | null>(null);
   const [previewAd, setPreviewAd] = useState<Ad | null>(null);
 
-  const { data, isLoading } = useAds();
+  const { data, isLoading, isError } = useAds();
   const { mutate: addAd, isPending: isAdding } = useAddAd();
   const { mutate: deleteAd, isPending: isConfirmDeleting } = useDeleteAd();
 
@@ -68,29 +72,64 @@ export default function BannersTab() {
     });
   };
 
+  // ── Loading state ──
+  if (isLoading) {
+    return (
+      <div className="space-y-4">
+        <div className="flex items-start justify-between">
+          <div className="text-start">
+            <h2 className="text-base font-bold text-gray-800">{t("title")}</h2>
+            <p className="text-sm text-gray-500">{t("subtitle")}</p>
+          </div>
+        </div>
+        <div className="rounded-xl border border-gray-100 py-16 flex flex-col items-center justify-center gap-3">
+          <Loader2 size={28} className="text-gray-400 animate-spin" />
+          <p className="text-sm text-gray-400">{t("loading")}</p>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Error state ──
+  if (isError) {
+    return (
+      <div className="space-y-4">
+        <div className="flex items-start justify-between">
+          <div className="text-start">
+            <h2 className="text-base font-bold text-gray-800">{t("title")}</h2>
+            <p className="text-sm text-gray-500">{t("subtitle")}</p>
+          </div>
+        </div>
+        <div className="rounded-xl border border-red-100 bg-red-50 px-4 py-6 text-center text-sm text-red-500">
+          {t("errorLoading")}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-gray-800">
-              {t("title")}
-            </h2>
+            <h2 className="text-lg font-semibold text-gray-800">{t("title")}</h2>
             <p className="text-sm text-gray-500 mt-0.5">{t("subtitle")}</p>
           </div>
-          <Button
-            onClick={handleDropZoneClick}
-            disabled={isAdding}
-            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-2 text-sm"
-          >
-            {isAdding ? (
-              <Loader2 size={16} className="animate-spin" />
-            ) : (
-              <Plus size={16} />
-            )}
-            {t("addBanner")}
-          </Button>
+          {canAdd && (
+            <Button
+              onClick={handleDropZoneClick}
+              disabled={isAdding}
+              className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-2 text-sm"
+            >
+              {isAdding ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                <Plus size={16} />
+              )}
+              {t("addBanner")}
+            </Button>
+          )}
         </div>
 
         {/* Hidden file input */}
@@ -102,47 +141,44 @@ export default function BannersTab() {
           onChange={handleFileChange}
         />
 
-        {/* Upload / Drop Zone */}
-        <div
-          onClick={handleDropZoneClick}
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center gap-3 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer"
-        >
-          <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center">
-            {isAdding ? (
-              <Loader2 size={22} className="text-blue-600 animate-spin" />
-            ) : (
-              <Upload size={22} className="text-blue-600" />
-            )}
-          </div>
-          <div className="text-center">
-            <p className="text-sm font-medium text-gray-700">
-              {isAdding ? t("uploading") : t("dropzone")}
-            </p>
-            <p className="text-xs text-gray-400 mt-1">{t("dropzoneHint")}</p>
-          </div>
-          <Button
-            variant="outline"
-            disabled={isAdding}
-            className="text-sm mt-1 rounded-lg border-gray-300"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleDropZoneClick();
-            }}
+        {/* Upload / Drop Zone — only for canAdd */}
+        {canAdd && (
+          <div
+            onClick={handleDropZoneClick}
+            onDrop={handleDrop}
+            onDragOver={handleDragOver}
+            className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center gap-3 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer"
           >
-            {t("chooseFile")}
-          </Button>
-        </div>
+            <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center">
+              {isAdding ? (
+                <Loader2 size={22} className="text-blue-600 animate-spin" />
+              ) : (
+                <Upload size={22} className="text-blue-600" />
+              )}
+            </div>
+            <div className="text-center">
+              <p className="text-sm font-medium text-gray-700">
+                {isAdding ? t("uploading") : t("dropzone")}
+              </p>
+              <p className="text-xs text-gray-400 mt-1">{t("dropzoneHint")}</p>
+            </div>
+            <Button
+              variant="outline"
+              disabled={isAdding}
+              className="text-sm mt-1 rounded-lg border-gray-300"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDropZoneClick();
+              }}
+            >
+              {t("chooseFile")}
+            </Button>
+          </div>
+        )}
 
         {/* Ads List */}
         <div className="space-y-3">
-          {isLoading ? (
-            <div className="flex items-center justify-center py-12 text-gray-400 gap-2">
-              <Loader2 size={20} className="animate-spin" />
-              <span className="text-sm">{t("loading")}</span>
-            </div>
-          ) : ads.length === 0 ? (
+          {ads.length === 0 ? (
             <div className="text-center py-12 text-gray-400">
               <Image size={36} className="mx-auto mb-3 opacity-40" />
               <p className="text-sm">{t("empty")}</p>
@@ -191,19 +227,21 @@ export default function BannersTab() {
                   </p>
                 </div>
 
-                {/* Delete */}
-                <button
-                  onClick={() => setConfirmAd(ad)}
-                  disabled={deletingId === ad.id}
-                  className="text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-lg hover:bg-red-50 disabled:opacity-50 flex-shrink-0"
-                  title={t("delete")}
-                >
-                  {deletingId === ad.id ? (
-                    <Loader2 size={16} className="animate-spin" />
-                  ) : (
-                    <Trash2 size={16} />
-                  )}
-                </button>
+                {/* Delete — only for canDelete */}
+                {canDelete && (
+                  <button
+                    onClick={() => setConfirmAd(ad)}
+                    disabled={deletingId === ad.id}
+                    className="text-gray-400 hover:text-red-500 transition-colors p-1.5 rounded-lg hover:bg-red-50 disabled:opacity-50 flex-shrink-0"
+                    title={t("delete")}
+                  >
+                    {deletingId === ad.id ? (
+                      <Loader2 size={16} className="animate-spin" />
+                    ) : (
+                      <Trash2 size={16} />
+                    )}
+                  </button>
+                )}
               </div>
             ))
           )}
@@ -245,14 +283,12 @@ export default function BannersTab() {
             className="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6 space-y-5"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Icon */}
             <div className="flex items-center justify-center">
               <div className="w-14 h-14 bg-red-50 rounded-full flex items-center justify-center">
                 <AlertTriangle size={26} className="text-red-500" />
               </div>
             </div>
 
-            {/* Text */}
             <div className="text-center space-y-1.5">
               <h3 className="text-base font-semibold text-gray-800">
                 {t("confirmDeleteTitle")}
@@ -260,7 +296,6 @@ export default function BannersTab() {
               <p className="text-sm text-gray-500">{t("confirmDeleteDesc")}</p>
             </div>
 
-            {/* Preview thumb */}
             <div className="w-full h-24 rounded-xl overflow-hidden bg-gray-100">
               <img
                 src={confirmAd.image_url}
@@ -269,7 +304,6 @@ export default function BannersTab() {
               />
             </div>
 
-            {/* Actions */}
             <div className="flex gap-3">
               <Button
                 variant="outline"
